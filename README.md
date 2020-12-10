@@ -1,1 +1,2 @@
-# After-Diagnosis-CS-102-Project
+# After Diagnosis CS 102 Project
+
