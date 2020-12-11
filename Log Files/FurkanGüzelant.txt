@@ -1,0 +1,7 @@
+.LOG
+Furkan Güzelant
+7.12.2020
+Database connecetion is implemented.
+9.12.2020
+Database is connected to server.
+
