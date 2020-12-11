@@ -1,1 +1,9 @@
 .LOG
+
+
+15:22 07.12.2020
+SO FAR
+- Made comprehensive reseach for the database, mysql and server.
+- Learned SQL language.
+- Constructed a connection between database and java application.
+ 
