@@ -9,6 +9,10 @@ public class Day {
     private ArrayList<Date> allDates;
     private ArrayList<Date> freeDates;
 
+    /**
+     * Creates a day and fills it with empty dates.
+     * @param num Day's number.
+     */
     public Day( int num ){
         dayNum = num;
         allDates = new ArrayList<Date>();
@@ -16,7 +20,10 @@ public class Day {
         createADay();
     }
 
-    public void createADay(){
+    /**
+     * An internal method used in ctor to create dates in the day.
+     */
+    private void createADay(){
         initializeDates();
         createDates();
     }
@@ -24,7 +31,7 @@ public class Day {
     /**
      * Creates the dates for the arraylist.
      */
-    public void initializeDates(){
+    private void initializeDates(){
         for(int i = 0; i < 19; i++){
             allDates.add( new Date(i, "" ) );
         }
@@ -42,6 +49,11 @@ public class Day {
         }
     }
 
+    /**
+     *
+     * @param d
+     * @return
+     */
     public String toString( ArrayList<Date> d ){
         String str = "";
         String isFull = "";
@@ -56,6 +68,10 @@ public class Day {
 
         }
         return str;
+    }
+
+    public String toString(){
+        return String.valueOf( this.dayNum );
     }
 
     /**
@@ -79,6 +95,10 @@ public class Day {
 
     public ArrayList<Date> getAllDates(){
         return allDates;
+    }
+
+    public int getDayNum(){
+        return dayNum;
     }
 
     public Date getDate(int dateNum){
