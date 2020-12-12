@@ -1,4 +1,10 @@
 package Appointment;
+/**
+ * Constructs a day.
+ * Dates according to their numbers:
+ * First Num 0 is the date of 8:00 - 8:30
+ * Last Num 17 is the date of 17:00 - 17:30
+ */
 
 import java.util.ArrayList;
 
@@ -42,10 +48,10 @@ public class Day {
      */
     public  void createDates() {
         for(int i = 8, j = 0; j < allDates.size(); i++, j += 2){
-            allDates.set(j, new Date(j ,(i + ":00") ) );
+            allDates.set(j, new Date(j ,(i + ":00 - " + i + ":30") ) );
         }
         for(int i = 8, j = 1; j < allDates.size(); i++, j += 2){
-            allDates.set(j, new Date(j ,(i + ":30") ) );
+            allDates.set(j, new Date(j ,(i + ":30 - " + ( i + 1) + ":00") ) );
         }
     }
 
@@ -71,8 +77,19 @@ public class Day {
     }
 
     public String toString(){
-        return String.valueOf( this.dayNum );
-    }
+        String str = "";
+        String isFull = "";
+        for( int i = 0; i < allDates.size(); i++){
+            if( allDates.get(i).isFull() ){
+                isFull = "Full|";
+            }
+            else {
+                isFull = "Empty|";
+            }
+            str = str  + allDates.get(i).getInterval() + " " + isFull + " ";
+
+        }
+        return str;    }
 
     /**
      * Updates freedates by checking every element.

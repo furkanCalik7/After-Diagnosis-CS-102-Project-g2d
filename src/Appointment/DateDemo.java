@@ -24,5 +24,11 @@ public class DateDemo {
         System.out.println( y2020.toString() );
 //        System.out.println(  "Free dates: " +day1.toString( day1.getFreeDates()));
 
+        /**
+         * Calendar trial
+         */
+        Calendar calendar = new Calendar();
+        calendar.getAppointment( 18, 1, 1, y2020 );
+        System.out.println( y2020.getMonth(1).getDay(1).toString());;
     }
 }

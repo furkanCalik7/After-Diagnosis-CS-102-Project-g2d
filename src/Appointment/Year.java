@@ -21,18 +21,18 @@ public class Year {
      */
     public void createMonths(){
         //Add all the months to the year.
-        allMonths.add( new Month( "January"));
-        allMonths.add( new Month( "February"));
-        allMonths.add( new Month( "March"));
-        allMonths.add( new Month( "April"));
-        allMonths.add( new Month( "May"));
-        allMonths.add( new Month( "June"));
-        allMonths.add( new Month( "July"));
-        allMonths.add( new Month( "August"));
-        allMonths.add( new Month( "September"));
-        allMonths.add( new Month( "October"));
-        allMonths.add( new Month( "November"));
-        allMonths.add( new Month( "December"));
+        allMonths.add( new Month( "January", 0));
+        allMonths.add( new Month( "February", 1));
+        allMonths.add( new Month( "March", 2));
+        allMonths.add( new Month( "April", 3));
+        allMonths.add( new Month( "May", 4));
+        allMonths.add( new Month( "June", 5));
+        allMonths.add( new Month( "July", 6));
+        allMonths.add( new Month( "August", 7));
+        allMonths.add( new Month( "September", 8));
+        allMonths.add( new Month( "October", 9));
+        allMonths.add( new Month( "November", 10));
+        allMonths.add( new Month( "December", 11));
 
         //Fills all the months accordingly
         monthFill( allMonths.get(0), 31);
@@ -72,5 +72,9 @@ public class Year {
     //Getters
     public ArrayList<Month> getAllMonths(){
         return allMonths;
+    }
+
+    public Month getMonth( int num){
+        return allMonths.get(num);
     }
 }

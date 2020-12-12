@@ -1,7 +1,13 @@
 Berkay Çalmaz
-7.11
+7.12
+
 UML Diagram for the appointment part is constructed
 Estimated Time: 1-2 Hours
-8.11
+
+8.12
 Date and Day classes are coded.
 Estimated Time: 3 Hours
+
+12.12
+Month, Year and Calendar classes are finished.
+Estimated time: 2 Hours

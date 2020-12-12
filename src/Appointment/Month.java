@@ -4,9 +4,10 @@ import java.util.ArrayList;
 public class Month {
     ArrayList<Day> days;
     String monthName;
-
-   public Month(String name ){
+    int monthNum;
+   public Month(String name, int monthNum ){
        monthName = name;
+       this.monthNum = monthNum;
        days = new ArrayList<Day>();
     }
 
@@ -36,4 +37,7 @@ public class Month {
        return monthName;
     }
 
+    public Day getDay( int num){
+       return days.get(num);
+    }
 }
