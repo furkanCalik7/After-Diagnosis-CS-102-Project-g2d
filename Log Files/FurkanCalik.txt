@@ -7,3 +7,5 @@ SO FAR
 - Learned SQL language.
 - Constructed a connection between database and java application.
  
+18:27 12.12.2020
+-Designed the most of database and started to write quaries with Furkan Guzelalt about 4 hours
