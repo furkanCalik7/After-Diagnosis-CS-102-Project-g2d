@@ -9,3 +9,10 @@ SO FAR
  
 18:27 12.12.2020
 -Designed the most of database and started to write quaries with Furkan Guzelalt about 4 hours
+20:44 12.12.2020
+-Nearly all tables in the database are created.
+05:20 13.12.2020
+-Diagram is drawn for the database.
+23:23 13.12.2020
+-Message class, Many method on mysql class, user class, doctor class, lab tech class is completed.
+-Estimated 3 hours
