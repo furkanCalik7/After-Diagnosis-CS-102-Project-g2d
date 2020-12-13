@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
+    <data-source source="LOCAL" name="hospitalInttelij" uuid="4258b9b8-bece-4f4f-95d2-a0277bb59768">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://88.211.101.188:3306/qqkbztev_Hospital</jdbc-url>
+    </data-source>
+  </component>
+</project>
