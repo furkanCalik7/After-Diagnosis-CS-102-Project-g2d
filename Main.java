@@ -1,8 +1,8 @@
 public class Main {
 
     public static void main(String[] args) throws Exception {
-        MySQLAccess access = new MySQLAccess();
-        User u = new User("fguzelant", "password", "fguzelant@hotmailcom", "Furkan", "Güzelant");
-        access.readDataBase(u);
+        LoginModel lm = new LoginModel();
+        Patient p = new Patient("FurkanGuzelant", "12345", "dff@dsf.com", "Furkan", "Güzelant", "M");
+            System.out.println(p);
     }
 }
