@@ -1,11 +1,9 @@
 package JDBC;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
+
+import Appointment.Appointment;
 import Doctor.Model.*;
 import Patient.Model.Patient;
 
@@ -277,6 +275,35 @@ public class MySQLAccess {
         }
     }
 
+//    public ArrayList<Appointment> getAppointmentOfDoctor(Doctor doctor){
+//        try{
+//            int doctor_id = getUserId(doctor.getUsername());
+//            ArrayList<Appointment> appointments = new ArrayList<>();
+//
+//
+//            connect = dbConnection.getConnection();
+//            String sql = "SELECT patient_id, date, start_time, end_time, is_approved " +
+//                    "FROM appointment WHERE doctor_id = ?";
+//            preparedStatement = connect.prepareStatement(sql);
+//            preparedStatement.setInt(1, doctor_id);
+//            resultSet = preparedStatement.executeQuery();
+//
+//            Patient patient;
+//            Date date;
+//            Time start_time;
+//            Time end_time;
+//            int is_approved;
+//
+//            while(resultSet.next()){
+//
+//                //Todo wait the patient class
+//            }
+//
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }
+//        return null;
+//    }
 
 
     public void deleteUser(User u) {

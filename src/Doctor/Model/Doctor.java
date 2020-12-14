@@ -9,8 +9,9 @@ import java.util.ArrayList;
 public class Doctor extends User{
 
      private String speciality;
-     private ArrayList<PatientSlot> patientSlots;
-     private MySQLAccess;
+//     private ArrayList<PatientSlot> patientSlots;
+     private MySQLAccess mySQLAccess;
+     // private ArrayList<Appointment> appointments;
 
     public Doctor(String username, String password, String email, String name, String surname, String sex, String speciality){
         super(username,password,email,name,surname,sex,"Doctor");
