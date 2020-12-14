@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import Doctor.Model.*;
+import Patient.Model.Patient;
 
 public class MySQLAccess {
     private Connection connect = null;
@@ -101,10 +102,25 @@ public class MySQLAccess {
         return null;
     }
 
+    public int getUserId(String username){
+        try{
+            connect = dbConnection.getConnection();
+            String sql = "SELECT user_id FROM user WHERE username = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1,username);
+            resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()){
+                return resultSet.getInt("user_id");
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return -1;
+    }
+
     public User getUserByName(String username){
         try{
-            int user_id = 0;
-
             connect = dbConnection.getConnection();
             String sql ="SELECT user_id, user_type, username, password, name, surname, email, sex FROM user WHERE username = ?";
             preparedStatement = connect.prepareStatement(sql);
@@ -208,6 +224,22 @@ public class MySQLAccess {
             System.out.println("Sex: " + sex);
         }
     }
+    //TODO user_id yi eklemenin bir yolunu bul
+    //TODO patient in olusturulmasini bekle
+
+//    public ArrayList<Patient> getPatientsOfDoctor(Doctor doctor) throws SQLException {
+//        connect = dbConnection.getConnection();
+//        int doctor_id = getUserId(doctor.getUsername());
+//        String sql = "SELECT * FROM doctor_patient WHERE doctor_id = ?";
+//        preparedStatement = connect.prepareStatement(sql);
+//        preparedStatement.setInt(1, doctor_id);
+//        resultSet = preparedStatement.executeQuery();
+//
+//
+//
+//    }
+
+
 
     private void addDoctor(Doctor d) {
         try {
