@@ -6,18 +6,18 @@ public class Admin extends User {
         super(username, "Admin", password, email, name, surname, sex);
     }
 
-    public boolean addDoctor(String name, String surname, String email, String sex, String speciality) {
+    public Doctor addDoctor(String name, String surname, String email, String sex, String speciality) {
         //generate code
         String password = "123";
         Doctor d = new Doctor(name + surname, password, email, name, surname, sex, speciality);
         MySQLAccess access = new MySQLAccess();
         try {
             access.readDataBase(d);
-            return true;
+            return d;
         } catch (Exception e) {
             System.out.print(e);
         }
-        return false;
+        return null;
     }
 
     /*public boolean addLabTech(String name, String surname, String email) {

@@ -5,16 +5,16 @@ import java.util.ArrayList;
 
 public class Patient extends User {
 
-    ArrayList<Doctor> doctors;
-    ArrayList<Appointment> appointments;
-    ArrayList<Message> inbox;
-    ArrayList<Message> outBox;
+    private ArrayList<Doctor> doctors;
+    private ArrayList<Appointment> appointments;
+    private ArrayList<Message> inbox;
+    private ArrayList<Message> outBox;
     //ArrayList<Drug> drugs:
-    int age;
-    Date dob;
-    String bloodType;
-    String allergies;
-    String surgeries;
+    private int age;
+    private Date dob;
+    private String bloodType;
+    private String allergies;
+    private String surgeries;
 
 
     public Patient(String username, String password, String email, String name, String surname, String sex) {
@@ -27,6 +27,7 @@ public class Patient extends User {
     }
 
     public void updatePatientInfo() {
+        //TODO PatientInfoCard oluştur
         MySQLAccess access = new MySQLAccess();
         ArrayList<Object> dataList = access.getPatientInfo(username);
         if(dataList.size() > 0) {
@@ -70,9 +71,9 @@ public class Patient extends User {
 
     public void addAppointment(Doctor d, Date date, Time start_time, Time end_time) {
         MySQLAccess access = new MySQLAccess();
-        Appointment app = new Appointment(d, this, date, start_time, end_time);
+        Appointment app = new Appointment(d.username, username, date, start_time, end_time);
         appointments.add(app);
-        access.readAppointment(username, d, date, start_time, end_time);
+        access.readAppointment(username, d.username, date, start_time, end_time);
 
     }
 
