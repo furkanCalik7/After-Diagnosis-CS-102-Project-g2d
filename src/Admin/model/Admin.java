@@ -4,7 +4,6 @@ import JDBC.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
-import Doctor.Model.*;
 
 public class Admin extends User {
 

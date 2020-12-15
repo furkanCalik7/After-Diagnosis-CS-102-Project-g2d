@@ -7,48 +7,50 @@ import java.time.LocalTime;
 import java.util.Calendar;
 
 public class Message {
-    public final int ABSTRACT_MESSAGE = 0;
-    public final int INCOMING_MESSAGE = 1;
-    public final int OUTGOING_MESSAGE = 2;
-
-    private User receiver_user;
-    private User sender_user;
+    private String receiver_username;
+    private String sender_username;
     private String subject;
     private String content;
     private Date sent_date;
     private Time sent_time;
-    private int message_type;
     private boolean is_read;
 
-    public Message(User receiver_user, User sender_user, String subject, String content, int message_type) {
-        this.receiver_user = receiver_user;
-        this.sender_user = sender_user;
+
+    public Message(String receiver_username, String sender_username, String subject, String content, Date sent_date, Time sent_time,  boolean is_read) {
+        this.receiver_username = receiver_username;
+        this.sender_username = sender_username;
         this.subject = subject;
         this.content = content;
-        this.sent_date = new Date(Calendar.getInstance().getTime().getTime());
-        this.sent_time = java.sql.Time.valueOf(LocalTime.now());
-        this.message_type = message_type;
-    }
-    public Message sendMessage(User receiver_user, User sender_user, String subject, String content){
-        Message message = new Message(receiver_user,sender_user,subject,content,OUTGOING_MESSAGE);
-
-        return new Message(receiver_user,sender_user,subject,content,OUTGOING_MESSAGE);
+        this.sent_date = sent_date;
+        this.sent_time = sent_time;
+        this.is_read = is_read;
     }
 
-    public User getReceiver_user() {
-        return receiver_user;
+    public static Message newMessage(String receiver_username, String sender_username, String subject, String content){
+        Date currentDate = new Date(Calendar.getInstance().getTime().getTime());
+        Time currentTime = java.sql.Time.valueOf(LocalTime.now());
+        return new Message(receiver_username,sender_username,subject,content,currentDate, currentTime,false);
     }
 
-    public void setReceiver_user(User receiver_user) {
-        this.receiver_user = receiver_user;
+    public static boolean sendMessage(Message message){
+        MySQLAccess mySQLAccess = new MySQLAccess();
+        return mySQLAccess.addMessage(message);
     }
 
-    public User getSender_user() {
-        return sender_user;
+    public String getReceiver_username() {
+        return receiver_username;
     }
 
-    public void setSender_user(User sender_user) {
-        this.sender_user = sender_user;
+    public void setReceiver_username(String receiver_username) {
+        this.receiver_username = receiver_username;
+    }
+
+    public String getSender_username() {
+        return sender_username;
+    }
+
+    public void setSender_username(String sender_username) {
+        this.sender_username = sender_username;
     }
 
     public String getSubject() {
@@ -83,14 +85,6 @@ public class Message {
         this.sent_time = sent_time;
     }
 
-    public int getMessage_type() {
-        return message_type;
-    }
-
-    public void setMessage_type(int message_type) {
-        this.message_type = message_type;
-    }
-
     public boolean isIs_read() {
         return is_read;
     }
@@ -101,14 +95,12 @@ public class Message {
 
     @Override
     public String toString() {
-        return "JDBC.Message{" +
-                ", receiver_user=" + receiver_user.getUsername() +
-                ", sender_user=" + sender_user.getUsername() +
+        return "JDBC.Message{ receiver_user=" + receiver_username +
+                ", sender_user=" + sender_username+
                 ", subject='" + subject + '\'' +
                 ", content='" + content + '\'' +
                 ", sent_date=" + sent_date +
                 ", sent_time=" + sent_time +
-                ", message_type=" + message_type +
                 ", is_read=" + is_read +
                 '}';
     }
