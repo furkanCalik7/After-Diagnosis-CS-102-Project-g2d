@@ -11,17 +11,17 @@ public class Doctor extends User {
      private String speciality;
      //private ArrayList<PatientSlot> patientSlots;
      private MySQLAccess mySQLAccess;
-   //  private ArrayList<Appointment> appointments;
-    private ArrayList<Message> inbox;
-    private ArrayList<Message> outBox;
+     //private ArrayList<Appointment> appointments;
+     private ArrayList<Message> inbox;
+     private ArrayList<Message> outbox;
 
 
     public Doctor(String username, String password, String email, String name, String surname, String sex, String speciality){
-        super(username,password,email,name,surname,sex,"Doctor");
+        super(username,"Doctor",password,email,name,surname,sex);
         this.speciality = speciality;
         mySQLAccess = new MySQLAccess();
         inbox = mySQLAccess.getIncomingMessage(this.getUsername());
-        outBox = mySQLAccess.getOutGoingMgessage(this.getUsername());
+        outbox = mySQLAccess.getOutGoingMgessage(this.getUsername());
     }
 
 
@@ -29,17 +29,16 @@ public class Doctor extends User {
         return inbox;
     }
 
-    public ArrayList<Message> getOutBox() {
-        return outBox;
+    public ArrayList<Message> getOutbox() {
+        return outbox;
     }
 
     public void updateInbox(){
         inbox = mySQLAccess.getIncomingMessage(this.getUsername());
     }
     public void updateOutbox(){
-        outBox = mySQLAccess.getOutGoingMgessage(this.getUsername());
+        outbox = mySQLAccess.getOutGoingMgessage(this.getUsername());
     }
-
 
     public String getSpeciality() {
         return speciality;

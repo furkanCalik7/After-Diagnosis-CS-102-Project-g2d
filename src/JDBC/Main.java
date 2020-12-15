@@ -14,7 +14,6 @@ public class Main {
         MySQLAccess mySQLAccess = new MySQLAccess();
 
 
-        // TODO message birden fazla olabilir tabloyu duzenle
        // Message message = Message.newMessage("JamesQueen","JohnSmith","TrialSubject", "2.mesaj");
        // Message.sendMessage(message);
 

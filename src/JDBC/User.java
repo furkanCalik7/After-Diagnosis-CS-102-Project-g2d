@@ -2,16 +2,15 @@ package JDBC;
 
 public class User {
 
-     String username;
-     String password;
-     String email;
-     String name;
-     String surname;
-     String sex;
-     String userType;
+     private String username;
+     private String password;
+     private String email;
+     private String name;
+     private String surname;
+     private String sex;
+     private String userType;
 
-
-    public User(String username, String password, String email, String name, String surname, String sex, String userType){
+    public User(String username, String userType, String password, String email, String name, String surname, String sex){
         this.username = username;
         this.password = password;
         this.email  = email;

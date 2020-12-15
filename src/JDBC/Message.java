@@ -32,9 +32,9 @@ public class Message {
         return new Message(receiver_username,sender_username,subject,content,currentDate, currentTime,false);
     }
 
-    public static boolean sendMessage(Message message){
+    public boolean sendMessage(){
         MySQLAccess mySQLAccess = new MySQLAccess();
-        return mySQLAccess.addMessage(message);
+        return mySQLAccess.addMessage(this);
     }
 
     public String getReceiver_username() {
