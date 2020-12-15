@@ -1,24 +1,32 @@
 import java.sql.Date;
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Patient extends User {
 
     ArrayList<Doctor> doctors;
-    // ArrayList<Appointment> appointments;
-    // ArrayList<Drug> drugs:
+    ArrayList<Appointment> appointments;
+    ArrayList<Message> inbox;
+    ArrayList<Message> outBox;
+    //ArrayList<Drug> drugs:
     int age;
     Date dob;
     String bloodType;
     String allergies;
     String surgeries;
 
+
     public Patient(String username, String password, String email, String name, String surname, String sex) {
         super(username, "Patient", password, email, name, surname, sex);
         updateDoctors();
-        updatePatient();
+        updatePatientInfo();
+        updateAppointments();
+        updateInbox();
+        updateOutbox();
     }
 
-    public void updatePatient() {
+    public void updatePatientInfo() {
         MySQLAccess access = new MySQLAccess();
         ArrayList<Object> dataList = access.getPatientInfo(username);
         if(dataList.size() > 0) {
@@ -30,12 +38,15 @@ public class Patient extends User {
         }
     }
 
-    public void setBloodType(String bloodType) {
+    public void setPatientInfo(Date dob, String bloodType, int age, String allergies, String surgeries) {
         MySQLAccess access = new MySQLAccess();
-        access.readBloodType(username, bloodType);
+        access.readPatientInfo(username, dob, bloodType, age, allergies, surgeries);
+        this.dob = dob;
         this.bloodType = bloodType;
+        this.age = age;
+        this.allergies = allergies;
+        this.surgeries = surgeries;
     }
-
 
     public boolean addDoctor() {
         //Code will be passed
@@ -55,28 +66,50 @@ public class Patient extends User {
     public void updateDoctors() {
         MySQLAccess access = new MySQLAccess();
         doctors = access.getDoctors(username);
-        System.out.println(doctors);
     }
 
-    /*public addAppointment(Doctor d, Date date, Time start_time, Time end_time) {
-       // appointment yarat
-       // arrayliste ekle
-
+    public void addAppointment(Doctor d, Date date, Time start_time, Time end_time) {
+        MySQLAccess access = new MySQLAccess();
+        Appointment app = new Appointment(d, this, date, start_time, end_time);
+        appointments.add(app);
+        access.readAppointment(username, d, date, start_time, end_time);
 
     }
 
-    public seeAppointmentDates():
+    public ArrayList<Appointment> getAppointmentDates() {
+        return appointments;
+    }
 
-    sendMessages():void
+    public void updateAppointments() {
+        MySQLAccess access = new MySQLAccess();
+        appointments = access.getAppointments(this);
+    }
 
+    public ArrayList<Timestamp> seeAvailableDates(Doctor d) {
+        MySQLAccess access = new MySQLAccess();
+        return access.getAvailableDates(d);
+    }
 
-    setName(name):String
-    setActivity(int):void*/
+    public void updateInbox(){
+        MySQLAccess access = new MySQLAccess();
+        inbox = access.getIncomingMessage(username);
+    }
 
+    public void updateOutbox(){
+        MySQLAccess access = new MySQLAccess();
+        outBox = access.getOutGoingMgessage(username);
+    }
 
-    public boolean sendChangeAppointmentRequest(Doctor d) {
+    public void sendMessages(Doctor d, String subject, String content) {
+        Message message = Message.newMessage(d.username, username, subject, content);
+        message.sendMessage();
+        updateOutbox();
+    }
+
+   /* public boolean sendChangeAppointmentRequest(Doctor d) {
         return true;
     }
+*/
 
     @Override
     public String toString() {
