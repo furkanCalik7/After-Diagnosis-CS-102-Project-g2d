@@ -5,6 +5,9 @@ import LabTechs.Model.Test;
 import Patient.Model.Patient;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Path;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -99,6 +102,9 @@ public class MySQLAccess {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        finally {
+            close();
+        }
         return null;
     }
 
@@ -116,7 +122,10 @@ public class MySQLAccess {
             return userID;
         } catch (Exception e) {
             e.printStackTrace();
+        } finally {
+            close();
         }
+
         return 0;
     }
 
@@ -137,6 +146,8 @@ public class MySQLAccess {
             return appList;
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            close();
         }
         return null;
     }
@@ -165,6 +176,8 @@ public class MySQLAccess {
             return data;
         } catch (Exception e) {
             System.out.println(e);
+        }finally {
+            close();
         }
         return null;
     }
@@ -183,6 +196,8 @@ public class MySQLAccess {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            close();
         }
         return availableTimes;
     }
@@ -201,6 +216,8 @@ public class MySQLAccess {
             }
         } catch (Exception e) {
             System.out.print(e);
+        }finally {
+            close();
         }
         return true;
     }
@@ -231,6 +248,8 @@ public class MySQLAccess {
             return true;
         } catch (Exception e) {
             System.out.println(e);
+        }finally {
+            close();
         }
         return false;
     }
@@ -264,6 +283,8 @@ public class MySQLAccess {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            close();
         }
         return null;
     }
@@ -300,6 +321,8 @@ public class MySQLAccess {
             return userList;
         } catch (Exception e) {
             System.out.print(e);
+        }finally {
+            close();
         }
         return null;
     }
@@ -392,6 +415,8 @@ public class MySQLAccess {
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            close();
         }
     }
 
@@ -430,9 +455,10 @@ public class MySQLAccess {
             return docList;
         } catch (Exception e) {
             System.out.println(e);
+        }finally {
+            close();
         }
         return null;
-
     }
 
     public boolean addMessage(Message message) {
@@ -544,6 +570,8 @@ public class MySQLAccess {
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
+        }finally {
+            close();
         }
     }
 
@@ -574,6 +602,85 @@ public class MySQLAccess {
         }
         return false;
     }
+    public ArrayList<Test> getTestOfDoctor(String doc_username){
+        try{
+            ArrayList<Test> tests = new ArrayList<>();
+
+            connect = dbConnection.getConnection();
+            String sql = "SELECT receiver_username,sender_username,test_name,patient_username,sent_date,sent_time FROM test WHERE receiver_username = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1,doc_username);
+            resultSet = preparedStatement.executeQuery();
+
+            String sender_username;
+            String test_name;
+            String patient_username;
+            Date sent_date;
+            Time sent_time;
+
+            while (resultSet.next()) {
+                sender_username = resultSet.getString("receiver_username");
+                test_name = resultSet.getString("test_name");
+                patient_username = resultSet.getString("patient_username");
+                sent_date = resultSet.getDate("sent_date");
+                sent_time = resultSet.getTime("sent_Time");
+                tests.add(new Test(doc_username,sender_username,test_name,patient_username,sent_date,sent_time));
+            }
+            return tests;
+        }catch(Exception e){
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+        return null;
+
+    }
+
+//
+//    public void getBlobObject() throws SQLException, IOException {
+//        connect = dbConnection.getConnection();
+//        String sql = "SELECT * from image";
+//        preparedStatement = connect.prepareStatement(sql);
+//        resultSet = preparedStatement.executeQuery();
+//        int i = 0;
+//        while(resultSet.next()){
+//            Blob blob = resultSet.getBlob("image");
+//            byte[] byteArray = blob.getBytes(1, (int)blob.length());
+//            FileOutputStream outputStream = new FileOutputStream("C:\\Users\\mpmcs\\Desktop\\deneme\\databaseden + " + i + ".jpg");
+//            outputStream.write(byteArray);
+//            System.out.println("C:\\Users\\mpmcs\\Desktop\\deneme\\databaseden + " + i + ".jpg");
+//            i++;
+//        }
+//    }
+public void writeTestResult(Test test, Path path){
+    try{
+        String pathWithExtension;
+
+        connect = dbConnection.getConnection();
+        String sql = "SELECT file FROM test WHERE receiver_username = ? AND sent_time = ?";
+        preparedStatement = connect.prepareStatement(sql);
+        preparedStatement.setString(1,test.getReceiver_username());
+        preparedStatement.setTime(2,test.getSent_time());
+        resultSet = preparedStatement.executeQuery();
+
+        pathWithExtension = path.toString() + "\\" + test.getPatient_username() +"_" +test.getTest_name() + "_" + test.getSent_date()+ ".pdf";
+
+        while(resultSet.next()){
+         Blob blob = resultSet.getBlob("file");
+         byte[] byteArray = blob.getBytes(1, (int)blob.length());
+         FileOutputStream outputStream = new FileOutputStream(pathWithExtension);
+         outputStream.write(byteArray);
+         outputStream.close();
+        }
+    }catch(Exception e){
+        e.printStackTrace();
+    }finally {
+        close();
+    }
+}
+
+
+
 
 //
 //        public ArrayList<Test> getTestOfLabTech(String sender_username){
@@ -627,6 +734,8 @@ public class MySQLAccess {
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             System.out.print(e);
+        }finally {
+            close();
         }
     }
 
@@ -645,7 +754,7 @@ public class MySQLAccess {
                 connect.close();
             }
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 

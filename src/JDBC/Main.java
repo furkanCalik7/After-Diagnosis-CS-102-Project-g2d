@@ -5,6 +5,8 @@ import Doctor.Model.Doctor;
 import LabTechs.Model.Test;
 
 import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -17,14 +19,15 @@ public class Main {
        // Message message = Message.newMessage("JamesQueen","JohnSmith","TrialSubject", "2.mesaj");
        // Message.sendMessage(message);
 
-        ArrayList<Message> messageArraylist = mySQLAccess.getIncomingMessage("JamesQueen");
-        ArrayList<Message> messages = mySQLAccess.getOutGoingMgessage("JohnSmith");
 
+        ArrayList<Test> tests = mySQLAccess.getTestOfDoctor("user123");
 
-        Doctor doctor = mySQLAccess.getDoctorByUsername("JamesQueen");
-        for(Message message1: doctor.getInbox()){
-            System.out.println(message1.toString());
+        for(Test test:tests){
+            System.out.println(test);
         }
+        Path path = Paths.get("C:\\Users\\mpmcs\\Desktop");
+        tests.get(0).downloadTest(path);
+
 
 
 //        File file = new File("C:\\Users\\mpmcs\\Desktop\\a.pdf");
