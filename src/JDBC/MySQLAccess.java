@@ -2,6 +2,7 @@ package JDBC;
 
 import Doctor.Model.Doctor;
 import Doctor.Model.Drug;
+import Doctor.Model.PatientSlot;
 import LabTechs.Model.Test;
 import Patient.Model.Patient;
 
@@ -232,6 +233,28 @@ public class MySQLAccess {
         return availableTimes;
     }
 
+    public boolean readAvailableTimes(Doctor d, Date date, Time time){
+        try {
+            int id = getID(d.getUsername());
+            connect = dbConnection.getConnection();
+            String sql = "INSERT INTO available_times VALUES(DEFAULT, ?,?,? )";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setInt(1,id);
+            preparedStatement.setDate(2,date);
+            preparedStatement.setTime(3,time);
+
+            int i = preparedStatement.executeUpdate();
+            if(i > 0){
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+        return false;
+    }
 
 
     public boolean isCodeUsed(String code) {
@@ -396,19 +419,32 @@ public class MySQLAccess {
             System.out.println("Sex: " + sex);
         }
     }
-    //TODO user_id yi eklemenin bir yolunu bul
-    //TODO patient in olusturulmasini bekle
 
-//    public ArrayList<Patient> getPatientsOfDoctor(Doctor doctor) throws SQLException {
-//        connect = dbConnection.getConnection();
-//        int doctor_id = getUserId(doctor.getUsername());
-//        String sql = "SELECT * FROM doctor_patient WHERE doctor_id = ?";
-//        preparedStatement = connect.prepareStatement(sql);
-//        preparedStatement.setInt(1, doctor_id);
-//        resultSet = preparedStatement.executeQuery();
+    //Todo create a new user info class
+//    public ArrayList<PatientSlot> getPatientsOfDoctor(Doctor doctor) throws SQLException {
+//        try{
+//            ArrayList<PatientSlot> patientSlots = new ArrayList<>();
+//            int doctor_id = getID(doctor.getUsername());
+//            connect =dbConnection.getConnection();
+//            String sql = "SELECT * FROM doctor_patient WHERE doctor_id = ?";
+//            preparedStatement = connect.prepareStatement(sql);
+//            preparedStatement.setInt(1,doctor_id);
+//            resultSet = preparedStatement.executeQuery();
 //
 //
 //
+//            while(resultSet.next()){
+//
+//
+//            }
+//
+//
+//        }catch(Exception e){
+//            e.printStackTrace();
+//        }finally{
+//            close();
+//        }
+//        return null;
 //    }
 
 

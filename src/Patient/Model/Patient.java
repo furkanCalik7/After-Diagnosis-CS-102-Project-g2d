@@ -10,13 +10,14 @@ import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+
 import Appointment.Appointment;
 
 public class Patient extends User {
 
     private ArrayList<Doctor> doctors;
     private ArrayList<Appointment> appointments;
-    private  ArrayList<Message> inbox;
+    private ArrayList<Message> inbox;
     private ArrayList<Message> outBox;
     //ArrayList<Drug> drugs:
 
@@ -41,7 +42,7 @@ public class Patient extends User {
     public void updatePatientInfo() {
         access = new MySQLAccess();
         ArrayList<Object> dataList = access.getPatientInfo(getUsername());
-        if(dataList.size() > 0) {
+        if (dataList.size() > 0) {
             dob = (Date) dataList.get(0);
             bloodType = (String) dataList.get(1);
             age = (Integer) dataList.get(2);
@@ -65,8 +66,8 @@ public class Patient extends User {
         String code = "ASDFGH";
         //
         access = new MySQLAccess();
-        if(!access.isCodeUsed(code)) {
-            if(access.connectToDoctor(getUsername(), code)) {
+        if (!access.isCodeUsed(code)) {
+            if (access.connectToDoctor(getUsername(), code)) {
                 updateDoctors();
                 return true;
             }
@@ -102,12 +103,12 @@ public class Patient extends User {
         return access.getAvailableDates(d);
     }
 
-    public void updateInbox(){
+    public void updateInbox() {
         MySQLAccess access = new MySQLAccess();
         inbox = access.getIncomingMessage(getUsername());
     }
 
-    public void updateOutbox(){
+    public void updateOutbox() {
         MySQLAccess access = new MySQLAccess();
         outBox = access.getOutGoingMgessage(getUsername());
     }

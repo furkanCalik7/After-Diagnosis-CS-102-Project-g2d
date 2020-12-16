@@ -25,7 +25,7 @@ public class PatientInfoCard extends User {
     public void updatePatientInfo() {
         access = new MySQLAccess();
         ArrayList<Object> dataList = access.getPatientInfo(getUsername());
-        if(dataList.size() > 0) {
+        if (dataList.size() > 0) {
             dob = (Date) dataList.get(0);
             bloodType = (String) dataList.get(1);
             age = (Integer) dataList.get(2);
