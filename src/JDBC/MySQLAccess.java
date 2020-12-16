@@ -4,6 +4,7 @@ import Doctor.Model.Doctor;
 import LabTechs.Model.Test;
 import Patient.Model.Patient;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -636,25 +637,11 @@ public class MySQLAccess {
 
     }
 
-//
-//    public void getBlobObject() throws SQLException, IOException {
-//        connect = dbConnection.getConnection();
-//        String sql = "SELECT * from image";
-//        preparedStatement = connect.prepareStatement(sql);
-//        resultSet = preparedStatement.executeQuery();
-//        int i = 0;
-//        while(resultSet.next()){
-//            Blob blob = resultSet.getBlob("image");
-//            byte[] byteArray = blob.getBytes(1, (int)blob.length());
-//            FileOutputStream outputStream = new FileOutputStream("C:\\Users\\mpmcs\\Desktop\\deneme\\databaseden + " + i + ".jpg");
-//            outputStream.write(byteArray);
-//            System.out.println("C:\\Users\\mpmcs\\Desktop\\deneme\\databaseden + " + i + ".jpg");
-//            i++;
-//        }
-//    }
 public void writeTestResult(Test test, Path path){
     try{
+        int i;
         String pathWithExtension;
+        File file;
 
         connect = dbConnection.getConnection();
         String sql = "SELECT file FROM test WHERE receiver_username = ? AND sent_time = ?";
@@ -663,7 +650,16 @@ public void writeTestResult(Test test, Path path){
         preparedStatement.setTime(2,test.getSent_time());
         resultSet = preparedStatement.executeQuery();
 
-        pathWithExtension = path.toString() + "\\" + test.getPatient_username() +"_" +test.getTest_name() + "_" + test.getSent_date()+ ".pdf";
+        pathWithExtension = path.toString() + "\\" + test.getPatient_username() +"_" +test.getTest_name()+ "_(" + test.getSent_date() +")"+ ".pdf";
+
+        file = new File(pathWithExtension);
+        i = 1;
+
+        while(file.exists()){
+            pathWithExtension = path.toString() + "\\" + test.getPatient_username() +"_" +test.getTest_name() + "_(" + test.getSent_date() +")("+ i + ")" + ".pdf";
+            file = new File(pathWithExtension);
+            i++;
+        }
 
         while(resultSet.next()){
          Blob blob = resultSet.getBlob("file");
