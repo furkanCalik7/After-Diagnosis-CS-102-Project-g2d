@@ -9,7 +9,7 @@ public class Patient extends User {
     private ArrayList<Appointment> appointments;
     private ArrayList<Message> inbox;
     private ArrayList<Message> outBox;
-    //ArrayList<Drug> drugs:
+    ArrayList<Drug> drugs;
     private int age;
     private Date dob;
     private String bloodType;
@@ -24,19 +24,57 @@ public class Patient extends User {
         updateAppointments();
         updateInbox();
         updateOutbox();
+        updateDrugs();
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public Date getDob() {
+        return dob;
+    }
+
+    public String getAllergies() {
+        return allergies;
+    }
+
+    public String getBloodType() {
+        return bloodType;
+    }
+
+    public String getSurgeries() {
+        return surgeries;
+    }
+
+    public ArrayList<Appointment> getAppointmentDates() {
+        return appointments;
+    }
+
+    public ArrayList<Drug> getDrugs() {
+        return drugs;
+    }
+
+    public ArrayList<Doctor> getDoctors() {
+        return doctors;
+    }
+
+    public ArrayList<Message> getInbox() {
+        return inbox;
+    }
+
+    public ArrayList<Message> getOutBox() {
+        return outBox;
     }
 
     public void updatePatientInfo() {
-        //TODO PatientInfoCard oluştur
         MySQLAccess access = new MySQLAccess();
-        ArrayList<Object> dataList = access.getPatientInfo(username);
-        if(dataList.size() > 0) {
-            dob = (Date) dataList.get(0);
-            bloodType = (String) dataList.get(1);
-            age = (Integer) dataList.get(2);
-            allergies = (String) dataList.get(3);
-            surgeries = (String) dataList.get(4);
-        }
+        PatientInfoCard infoCard = access.getPatientInfo(username);
+        dob = infoCard.getDob();
+        bloodType = infoCard.getBloodType();
+        age = infoCard.getAge();
+        allergies = infoCard.getAllergies();
+        surgeries = infoCard.getSurgeries();
     }
 
     public void setPatientInfo(Date dob, String bloodType, int age, String allergies, String surgeries) {
@@ -73,12 +111,8 @@ public class Patient extends User {
         MySQLAccess access = new MySQLAccess();
         Appointment app = new Appointment(d.username, username, date, start_time, end_time);
         appointments.add(app);
-        access.readAppointment(username, d.username, date, start_time, end_time);
+        access.readAppointment(username, d.getUserName(), date, start_time, end_time);
 
-    }
-
-    public ArrayList<Appointment> getAppointmentDates() {
-        return appointments;
     }
 
     public void updateAppointments() {
@@ -101,8 +135,15 @@ public class Patient extends User {
         outBox = access.getOutGoingMgessage(username);
     }
 
+    public void updateDrugs() {
+        MySQLAccess access = new MySQLAccess();
+        drugs = access.getDrugs(username);
+    }
+
+
+
     public void sendMessages(Doctor d, String subject, String content) {
-        Message message = Message.newMessage(d.username, username, subject, content);
+        Message message = Message.newMessage(d.getUserName(), username, subject, content);
         message.sendMessage();
         updateOutbox();
     }

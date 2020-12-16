@@ -99,9 +99,8 @@ public class MySQLAccess {
         }
     }
 
-    public ArrayList<Object> getPatientInfo(String username) {
+    public PatientInfoCard getPatientInfo(String username) {
         int user_id;
-        ArrayList<Object> data = new ArrayList();
         try {
             user_id = getID(username);
             preparedStatement = connect
@@ -114,13 +113,9 @@ public class MySQLAccess {
                 int age = resultSet.getInt("age");
                 String allergies = resultSet.getString("allergies");
                 String surgeries = resultSet.getString("preivous_surgeries");
-                data.add(birthDate);
-                data.add(bloodType);
-                data.add(age);
-                data.add(allergies);
-                data.add(surgeries);
+                PatientInfoCard infoCard = new PatientInfoCard(age, birthDate, bloodType, allergies, surgeries);
+                return infoCard;
             }
-            return data;
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -139,7 +134,7 @@ public class MySQLAccess {
                 user_id = resultSet.getInt("user_id");
             preparedStatement = connect.prepareStatement("insert into doctor values (?, ?)");
             preparedStatement.setInt(1, user_id);
-            preparedStatement.setString(2, d.speciality);
+            preparedStatement.setString(2, d.getSpeciality());
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
@@ -153,11 +148,11 @@ public class MySQLAccess {
             user_id = getID(p.getUserName());
             preparedStatement = connect.prepareStatement("insert into patient values (?, ?, ?, ?, ?, ?)");
             preparedStatement.setInt(1, user_id);
-            preparedStatement.setDate(2, p.dob);
-            preparedStatement.setString(3, p.bloodType);
-            preparedStatement.setInt(4, p.age);
-            preparedStatement.setString(5, p.allergies);
-            preparedStatement.setString(6, p.surgeries);
+            preparedStatement.setDate(2, p.getDob());
+            preparedStatement.setString(3, p.getBloodType());
+            preparedStatement.setInt(4, p.getAge());
+            preparedStatement.setString(5, p.getAllergies());
+            preparedStatement.setString(6, p.getSurgeries());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -283,9 +278,37 @@ public class MySQLAccess {
         return null;
     }
 
+    public ArrayList<Drug> getDrugs(String username) {
+        int patientID;
+        ArrayList<Drug> drugList = new ArrayList<Drug>();
+        try {
+            patientID = getID(username);
+            connect = dbConnection.getConnection();
+            String sql = "SELECT * FROM drug_patient WHERE patient_id = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setInt(1, patientID);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                boolean isMorning = resultSet.getBoolean("is_morning");
+                boolean isAfternoon = resultSet.getBoolean("is_afternoon");
+                boolean isEvening = resultSet.getBoolean("is_evening");
+                Date startDate = resultSet.getDate("start_date");
+                Date endDate = resultSet.getDate("final_date");
+                boolean isHungry = resultSet.getBoolean("is_hungry");
+                drugList.add(new Drug(username, name, isMorning, isAfternoon, isEvening, isHungry, startDate, endDate));
+            }
+            return drugList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public ArrayList<Appointment> getAppointments(Patient p) {
         ArrayList<Appointment> appList = new ArrayList<>();
         try {
+            connect = dbConnection.getConnection();
             preparedStatement = connect
                     .prepareStatement("SELECT * FROM appointment WHERE patient_username = ?");
             preparedStatement.setString(1, p.getUserName());
