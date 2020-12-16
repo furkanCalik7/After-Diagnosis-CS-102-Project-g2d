@@ -4,6 +4,8 @@ import JDBC.Message;
 import JDBC.MySQLAccess;
 import JDBC.User;
 
+import java.lang.reflect.Array;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 
 public class Doctor extends User {
@@ -14,16 +16,32 @@ public class Doctor extends User {
      //private ArrayList<Appointment> appointments;
      private ArrayList<Message> inbox;
      private ArrayList<Message> outbox;
+     private ArrayList<Timestamp> availableTimes;
 
 
     public Doctor(String username, String password, String email, String name, String surname, String sex, String speciality){
         super(username,"Doctor",password,email,name,surname,sex);
         this.speciality = speciality;
         mySQLAccess = new MySQLAccess();
-        inbox = mySQLAccess.getIncomingMessage(this.getUsername());
-        outbox = mySQLAccess.getOutGoingMgessage(this.getUsername());
+        updateInbox();
+        updateOutbox();
+        availableTimes = mySQLAccess.getAvailableDates(this);
     }
 
+    public ArrayList<Timestamp> getAvailableTimes() {
+        return availableTimes;
+    }
+
+    public void setAvailableTimes(ArrayList<Timestamp> availableTimes) {
+        this.availableTimes = availableTimes;
+    }
+
+
+    public void sendMessages(String username, String subject, String content) {
+        Message message = Message.newMessage(username, getUsername(), subject, content);
+        message.sendMessage();
+        updateOutbox();
+    }
 
     public ArrayList<Message> getInbox() {
         return inbox;

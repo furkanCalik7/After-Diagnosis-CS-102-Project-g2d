@@ -1,13 +1,13 @@
 package JDBC;
 
 import Doctor.Model.Doctor;
+import Doctor.Model.Drug;
 import LabTechs.Model.Test;
 import Patient.Model.Patient;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.nio.file.Path;
 import java.sql.*;
 import java.text.SimpleDateFormat;
@@ -109,6 +109,35 @@ public class MySQLAccess {
         return null;
     }
 
+    public ArrayList<Drug> getDrugs(String username) {
+        int patientID;
+        ArrayList<Drug> drugList = new ArrayList<Drug>();
+        try {
+            patientID = getID(username);
+            connect = dbConnection.getConnection();
+            String sql = "SELECT * FROM drug_patient WHERE patient_id = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setInt(1, patientID);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                String name = resultSet.getString("name");
+                boolean isMorning = resultSet.getBoolean("is_morning");
+                boolean isAfternoon = resultSet.getBoolean("is_afternoon");
+                boolean isEvening = resultSet.getBoolean("is_evening");
+                Date startDate = resultSet.getDate("start_date");
+                Date endDate = resultSet.getDate("final_date");
+                boolean isHungry = resultSet.getBoolean("is_hungry");
+                drugList.add(new Drug(username, name, isMorning, isAfternoon, isEvening, isHungry, startDate, endDate));
+            }
+            return drugList;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally{
+            close();
+        }
+        return null;
+    }
+
     private int getID(String username) {
         try {
             int userID = 0;
@@ -202,6 +231,8 @@ public class MySQLAccess {
         }
         return availableTimes;
     }
+
+
 
     public boolean isCodeUsed(String code) {
         try {
@@ -676,24 +707,9 @@ public void writeTestResult(Test test, Path path){
 }
 
 
-
-
-//
-//        public ArrayList<Test> getTestOfLabTech(String sender_username){
-//            try{
-//
-//
-//
-//            }catch(Exception e){
-//
-//            e.printStackTrace(); }
-//    return null;
-//
-//    }
-
 //    public ArrayList<Appointment> getAppointmentOfDoctor(Doctor doctor){
 //        try{
-//            int doctor_id = getUserId(doctor.getUsername());
+//            int doctor_id = getID(doctor.getUsername());
 //            ArrayList<Appointment> appointments = new ArrayList<>();
 //
 //
@@ -704,7 +720,7 @@ public void writeTestResult(Test test, Path path){
 //            preparedStatement.setInt(1, doctor_id);
 //            resultSet = preparedStatement.executeQuery();
 //
-//            Patient patient;
+//            Pati;
 //            Date date;
 //            Time start_time;
 //            Time end_time;
@@ -712,7 +728,7 @@ public void writeTestResult(Test test, Path path){
 //
 //            while(resultSet.next()){
 //
-//                //Todo wait the patient class
+//
 //            }
 //
 //        }catch(Exception e){
