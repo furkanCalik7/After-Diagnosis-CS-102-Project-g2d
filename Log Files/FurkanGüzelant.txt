@@ -4,6 +4,14 @@ Furkan Güzelant
 Database connection is implemented.
 9.12.2020
 Database is connected to server.
+11.12.2020 
+LoginModel is implemented
+14.12.2020
+Admin and patient classes are partially implemented
+15.12.2020
+Some updates in Patient and MySQLAccess class
+16.12.2020
+Drug class is implemented
 
-
-15:24 11.12.2020
+15:57 17.12.2020
+Helped to draw the UML Diagram and write detailed design report
