@@ -15,7 +15,7 @@ Modal classes are mostly build and near complete. GUI design is planned and is b
 # Group Members Information
 - TA Utku Gülgeç
 
-- Furkan Çalık 21802114
+- Furkan Çalık
 - Furkan Güzelant 
 - Emre Turhan
 - Berkay Çalmaz
