@@ -1,0 +1,5 @@
+.LOG
+21:33 17.12.2020
+Getter, setter and constructor methods of User, Doctor and Lab Technician added.
+11:48 18.12.2020
+Getter and setter methods of Drug class added, some samll changes in other classes
