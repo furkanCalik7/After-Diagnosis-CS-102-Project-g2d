@@ -1,6 +1,7 @@
 package JDBC;
 
 import Doctor.Model.Doctor;
+import Doctor.Model.DoctorInfoCard;
 import Doctor.Model.Drug;
 import Doctor.Model.PatientSlot;
 import LabTechs.Model.Test;
@@ -311,38 +312,38 @@ public class MySQLAccess {
 
 
 
-    public User getUserByName(String username) {
-        try {
-            connect = dbConnection.getConnection();
-            String sql = "SELECT user_id, user_type, username, password, name, surname, email, sex FROM user WHERE username = ?";
-            preparedStatement = connect.prepareStatement(sql);
-
-            preparedStatement.setString(1, username);
-            resultSet = preparedStatement.executeQuery();
-
-            String user_type;
-            String password;
-            String email;
-            String name;
-            String surname;
-            String sex;
-
-            if (resultSet.next()) {
-                user_type = resultSet.getString("user_type");
-                password = resultSet.getString("password");
-                email = resultSet.getString("email");
-                name = resultSet.getString("name");
-                surname = resultSet.getString("surname");
-                sex = resultSet.getString("sex");
-                return new User(username, user_type, password, email, name, surname, sex);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }finally {
-            close();
-        }
-        return null;
-    }
+//    public User getUserByName(String username) {
+//        try {
+//            connect = dbConnection.getConnection();
+//            String sql = "SELECT user_id, user_type, username, password, name, surname, email, sex FROM user WHERE username = ?";
+//            preparedStatement = connect.prepareStatement(sql);
+//
+//            preparedStatement.setString(1, username);
+//            resultSet = preparedStatement.executeQuery();
+//
+//            String user_type;
+//            String password;
+//            String email;
+//            String name;
+//            String surname;
+//            String sex;
+//
+//            if (resultSet.next()) {
+//                user_type = resultSet.getString("user_type");
+//                password = resultSet.getString("password");
+//                email = resultSet.getString("email");
+//                name = resultSet.getString("name");
+//                surname = resultSet.getString("surname");
+//                sex = resultSet.getString("sex");
+//                return new User(username, user_type, password, email, name, surname, sex);
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }finally {
+//            close();
+//        }
+//        return null;
+//    }
 
 
     public ArrayList<User> findWorkerByName(String nameSearched) {
@@ -486,47 +487,6 @@ public class MySQLAccess {
         }finally {
             close();
         }
-    }
-
-    public ArrayList<Doctor> getDoctors(String pUsername) {
-        try {
-            int patientID = 0;
-            int doctorID = 0;
-            ArrayList<Doctor> docList = new ArrayList<Doctor>();
-            ArrayList<Integer> doctorIDs = new ArrayList<Integer>();
-            String speciality = "";
-            connect = dbConnection.getConnection();
-            patientID = getID(pUsername);
-            preparedStatement = connect.prepareStatement("SELECT doctor_id FROM doctor_patient WHERE patient_id = ?");
-            preparedStatement.setInt(1, patientID);
-            resultSet = preparedStatement.executeQuery();
-            while (resultSet.next()) {
-                doctorID = resultSet.getInt("doctor_id");
-                preparedStatement = connect.prepareStatement("SELECT * FROM user WHERE user_id = ?");
-                preparedStatement.setInt(1, doctorID);
-                resultSet = preparedStatement.executeQuery();
-                while (resultSet.next()) {
-                    String username = resultSet.getString("username");
-                    String password = resultSet.getString("password");
-                    String email = resultSet.getString("email");
-                    String name = resultSet.getString("name");
-                    String surname = resultSet.getString("surname");
-                    String sex = resultSet.getString("sex");
-                    preparedStatement = connect.prepareStatement("SELECT speciality FROM doctor WHERE doctor_id = ?");
-                    preparedStatement.setInt(1, doctorID);
-                    if (resultSet.next()) {
-                        speciality = resultSet.getString("speciality");
-                    }
-                    docList.add(new Doctor(username, password, email, name, surname, sex, speciality));
-                }
-            }
-            return docList;
-        } catch (Exception e) {
-            System.out.println(e);
-        }finally {
-            close();
-        }
-        return null;
     }
 
     public boolean addMessage(Message message) {
@@ -741,6 +701,44 @@ public void writeTestResult(Test test, Path path){
         close();
     }
 }
+
+    public ArrayList<DoctorInfoCard> getDoctors(String pUsername) {
+        try {
+            int patientID = 0;
+            int doctorID = 0;
+            ArrayList<DoctorInfoCard> docList = new ArrayList<DoctorInfoCard>();
+            String speciality = "";
+            connect = dbConnection.getConnection();
+            patientID = getID(pUsername);
+            preparedStatement = connect.prepareStatement("SELECT doctor_id FROM doctor_patient WHERE patient_id = ?");
+            preparedStatement.setInt(1, patientID);
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                doctorID = resultSet.getInt("doctor_id");
+                preparedStatement = connect.prepareStatement("SELECT * FROM user WHERE user_id = ?");
+                preparedStatement.setInt(1, doctorID);
+                resultSet = preparedStatement.executeQuery();
+                while (resultSet.next()) {
+                    String username = resultSet.getString("username");
+                    String email = resultSet.getString("email");
+                    String name = resultSet.getString("name");
+                    String surname = resultSet.getString("surname");
+                    String sex = resultSet.getString("sex");
+                    preparedStatement = connect.prepareStatement("SELECT speciality FROM doctor WHERE doctor_id = ?");
+                    preparedStatement.setInt(1, doctorID);
+                    if (resultSet.next()) {
+                        speciality = resultSet.getString("speciality");
+                    }
+                    docList.add(new DoctorInfoCard(username, email, name, surname, sex, speciality));
+                }
+            }
+            return docList;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+
+    }
 
 
 //    public ArrayList<Appointment> getAppointmentOfDoctor(Doctor doctor){

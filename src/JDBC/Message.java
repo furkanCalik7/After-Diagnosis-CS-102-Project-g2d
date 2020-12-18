@@ -40,57 +40,23 @@ public class Message {
     public String getReceiver_username() {
         return receiver_username;
     }
-
-    public void setReceiver_username(String receiver_username) {
-        this.receiver_username = receiver_username;
-    }
-
     public String getSender_username() {
         return sender_username;
     }
-
-    public void setSender_username(String sender_username) {
-        this.sender_username = sender_username;
-    }
-
     public String getSubject() {
         return subject;
     }
-
-    public void setSubject(String subject) {
-        this.subject = subject;
-    }
-
     public String getContent() {
         return content;
     }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public Date getSent_date() {
         return sent_date;
     }
-
-    public void setSent_date(Date sent_date) {
-        this.sent_date = sent_date;
-    }
-
     public Time getSent_time() {
         return sent_time;
     }
-
-    public void setSent_time(Time sent_time) {
-        this.sent_time = sent_time;
-    }
-
-    public boolean isIs_read() {
+    public boolean is_read() {
         return is_read;
-    }
-
-    public void setIs_read(boolean is_read) {
-        this.is_read = is_read;
     }
 
     @Override

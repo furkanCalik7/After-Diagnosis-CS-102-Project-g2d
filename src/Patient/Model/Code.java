@@ -30,4 +30,12 @@ public class Code {
         }while(mySQLAccess.isCodeUsed(code_index));
         return new Code(code_index, doctor_username,false);
     }
+
+    public String getCode_id() {
+        return code_id;
+    }
+
+    public String getDoctor_username() {
+        return doctor_username;
+    }
 }
