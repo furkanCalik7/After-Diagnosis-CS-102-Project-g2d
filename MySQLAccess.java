@@ -12,7 +12,7 @@ public class MySQLAccess {
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
 
-    public void readDataBase(User u) throws Exception {
+    public void addUser(User u) throws Exception {
         try {
             // Setup the connection with the DB
             connect = dbConnection.getConnection();
@@ -353,6 +353,29 @@ public class MySQLAccess {
         return false;
     }
 
+    public boolean readAvailableTimes(Doctor d, Date date, Time time){
+        try {
+            int id = getID(d.getUserName());
+            connect = dbConnection.getConnection();
+            String sql = "INSERT INTO available_times VALUES(DEFAULT, ?,?,? )";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setInt(1,id);
+            preparedStatement.setDate(2,date);
+            preparedStatement.setTime(3,time);
+
+            int i = preparedStatement.executeUpdate();
+            if(i > 0){
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+        return false;
+    }
+
     public ArrayList<Timestamp> getAvailableDates(Doctor d) {
         ArrayList<Timestamp> availableTimes = new ArrayList<>();
         int doctor_id = getID(d.getUserName());
@@ -470,12 +493,11 @@ public class MySQLAccess {
         }
     }
 
-    public ArrayList<Doctor> getDoctors(String pUsername) {
+    public ArrayList<DoctorInfoCard> getDoctors(String pUsername) {
         try {
             int patientID = 0;
             int doctorID = 0;
-            ArrayList<Doctor> docList = new ArrayList<Doctor>();
-            ArrayList<Integer> doctorIDs = new ArrayList<Integer>();
+            ArrayList<DoctorInfoCard> docList = new ArrayList<DoctorInfoCard>();
             String speciality = "";
             connect = dbConnection.getConnection();
             patientID = getID(pUsername);
@@ -489,7 +511,6 @@ public class MySQLAccess {
                 resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
                     String username = resultSet.getString("username");
-                    String password = resultSet.getString("password");
                     String email = resultSet.getString("email");
                     String name = resultSet.getString("name");
                     String surname = resultSet.getString("surname");
@@ -499,7 +520,7 @@ public class MySQLAccess {
                     if (resultSet.next()) {
                         speciality = resultSet.getString("speciality");
                     }
-                    docList.add(new Doctor(username, password, email, name, surname, sex, speciality));
+                    docList.add(new DoctorInfoCard(username, email, name, surname, sex, speciality));
                 }
             }
             return docList;
