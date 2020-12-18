@@ -784,6 +784,43 @@ public class MySQLAccess {
         return null;
     }
 
+    public ArrayList<UserInfoCard> getAllWorkers() {
+        try {
+            ArrayList<UserInfoCard> workers = new ArrayList<UserInfoCard>();
+            connect = dbConnection.getConnection();
+            preparedStatement = connect.prepareStatement("SELECT * FROM user WHERE user_type = 'LabTechnician' " +
+                    "OR user_type = 'Doctor' ORDER BY name");
+            resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()) {
+                int userID = resultSet.getInt("user_id");
+                String username = resultSet.getString("username");
+                String email = resultSet.getString("email");
+                String name = resultSet.getString("name");
+                String surname = resultSet.getString("surname");
+                String sex = resultSet.getString("sex");
+                String userType = resultSet.getString("user_type");
+
+                if(userType.equals("Doctor")) {
+                    preparedStatement = connect.prepareStatement("SELECT speciality FROM doctor WHERE doctor_id = ?");
+                    preparedStatement.setInt(1, userID);
+                    ResultSet rs = preparedStatement.executeQuery();
+                    if(rs.next()) {
+                        String speciality = rs.getString("speciality");
+                        DoctorInfoCard d = new DoctorInfoCard(username, email, name, surname, sex, speciality);
+                        workers.add(d);
+                    }
+                }
+                else {
+                    workers.add(new UserInfoCard(username, email, name, surname, sex));
+                }
+            }
+            return  workers;
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return  null;
+    }
+
 
 //    public ArrayList<Appointment> getAppointmentOfDoctor(Doctor doctor){
 //        try{

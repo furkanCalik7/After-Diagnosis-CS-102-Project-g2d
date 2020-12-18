@@ -1,34 +1,29 @@
-public class DoctorInfoCard {
+package Doctor.Model;
 
-    private String doctorUsername;
-    private String doctorEmail;
-    private String doctorName;
-    private String doctorSurname;
-    private String doctorSex;
+import JDBC.UserInfoCard;
+
+public class DoctorInfoCard extends UserInfoCard {
+
     private String doctorSpeciality;
 
     public DoctorInfoCard(String doctorUsername, String doctorEmail, String doctorName, String doctorSurname,
                           String doctorSex, String doctorSpeciality) {
-        this.doctorUsername = doctorUsername;
-        this.doctorEmail = doctorEmail;
-        this.doctorName = doctorName;
-        this.doctorSurname = doctorSurname;
-        this.doctorSex = doctorSex;
+        super(doctorUsername, doctorEmail, doctorName, doctorSurname, doctorSex);
         this.doctorSpeciality = doctorSpeciality;
     }
 
     public String getDoctorUsername() {
-        return doctorUsername;
+        return username;
     }
 
     @Override
     public String toString() {
         return "DoctorInfoCard{" +
-                "doctorUsername='" + doctorUsername + '\'' +
-                ", doctorEmail='" + doctorEmail + '\'' +
-                ", doctorName='" + doctorName + '\'' +
-                ", doctorSurname='" + doctorSurname + '\'' +
-                ", doctorSex='" + doctorSex + '\'' +
+                "doctorUsername='" + username + '\'' +
+                ", doctorEmail='" + email + '\'' +
+                ", doctorName='" + name + '\'' +
+                ", doctorSurname='" + surname + '\'' +
+                ", doctorSex='" + sex + '\'' +
                 ", doctorSpeciality='" + doctorSpeciality + '\'' +
                 '}';
     }

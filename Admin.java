@@ -2,6 +2,7 @@ package Admin.model;
 
 import Doctor.Model.Doctor;
 import Doctor.Model.DoctorInfoCard;
+import JDBC.UserInfoCard;
 import LabTechs.Model.*;
 import JDBC.MySQLAccess;
 import JDBC.User;
@@ -58,7 +59,10 @@ public class Admin extends User {
         return access.getAllLabTechs();
     }
 
-
+    public ArrayList<UserInfoCard> seeAllWorkers() {
+        MySQLAccess access = new MySQLAccess();
+        return access.getAllWorkers();
+    }
 
 
 }

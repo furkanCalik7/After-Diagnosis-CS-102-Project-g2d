@@ -1,16 +1,19 @@
+package Patient.Model;
+import JDBC.UserInfoCard;
+
 import java.sql.Date;
 
-public class PatientInfoCard {
+public class PatientInfoCard extends UserInfoCard {
 
     private int age;
     private Date dob;
     private String bloodType;
     private String allergies;
     private String surgeries;
-    private String username;
 
-    public PatientInfoCard(String username, int age, Date dob, String bloodType, String allergies, String surgeries) {
-        this.username = username;
+    public PatientInfoCard(String username, String email, String name, String surname, String sex, int age,
+                           Date dob, String bloodType, String allergies, String surgeries) {
+        super(username, email, name, surname, sex);
         this.age = age;
         this.dob = dob;
         this.bloodType = bloodType;
@@ -19,6 +22,7 @@ public class PatientInfoCard {
     }
 
     public PatientInfoCard(int age, Date dob, String bloodType, String allergies, String surgeries) {
+        super("", "", "", "", "");
         this.age = age;
         this.dob = dob;
         this.bloodType = bloodType;
