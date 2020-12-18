@@ -5,7 +5,10 @@ import java.util.ArrayList;
 
 public class Patient extends User {
 
-    private ArrayList<Doctor> doctors;
+    private final int STATUS_GOOD = 1;
+    private final int STATUS_OK = 2;
+    private final int STATUS_SICK = 3;
+    private ArrayList<DoctorInfoCard> doctors;
     private ArrayList<Appointment> appointments;
     private ArrayList<Message> inbox;
     private ArrayList<Message> outBox;
@@ -55,7 +58,7 @@ public class Patient extends User {
         return drugs;
     }
 
-    public ArrayList<Doctor> getDoctors() {
+    public ArrayList<DoctorInfoCard> getDoctors() {
         return doctors;
     }
 
@@ -70,11 +73,13 @@ public class Patient extends User {
     public void updatePatientInfo() {
         MySQLAccess access = new MySQLAccess();
         PatientInfoCard infoCard = access.getPatientInfo(username);
-        dob = infoCard.getDob();
-        bloodType = infoCard.getBloodType();
-        age = infoCard.getAge();
-        allergies = infoCard.getAllergies();
-        surgeries = infoCard.getSurgeries();
+        if(infoCard != null) {
+            dob = infoCard.getDob();
+            bloodType = infoCard.getBloodType();
+            age = infoCard.getAge();
+            allergies = infoCard.getAllergies();
+            surgeries = infoCard.getSurgeries();
+        }
     }
 
     public void setPatientInfo(Date dob, String bloodType, int age, String allergies, String surgeries) {
@@ -87,10 +92,8 @@ public class Patient extends User {
         this.surgeries = surgeries;
     }
 
-    public boolean addDoctor() {
-        //Code will be passed
-        String code = "ASDFGH";
-        //
+    public boolean addDoctor(Code c) {
+        String code = c.getCode_id();
         MySQLAccess access = new MySQLAccess();
         if(!access.isCodeUsed(code)) {
             if(access.connectToDoctor(username, code)) {
@@ -141,6 +144,19 @@ public class Patient extends User {
     }
 
 
+    //blood
+
+    //feedback
+    public void giveFeedback(int status) {
+        if(status == STATUS_SICK) {
+            String subject = "Important: Health issue of a patient";
+            String content = "Your patient, " + name + " " + surname + " is feeling sick today.";
+            for(DoctorInfoCard d: doctors) {
+                Message message = Message.newMessage(d.getDoctorUsername(), username, subject, content);
+                message.sendMessage();
+            }
+        }
+    }
 
     public void sendMessages(Doctor d, String subject, String content) {
         Message message = Message.newMessage(d.getUserName(), username, subject, content);
