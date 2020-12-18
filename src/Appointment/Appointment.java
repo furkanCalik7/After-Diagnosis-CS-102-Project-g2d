@@ -12,6 +12,7 @@ public class Appointment {
     private Time start_time;
     private Time end_time;
 
+
     public Appointment(String doctorUsername, String patientUsername, Date date, Time start_time, Time end_time) {
         this.doctorUsername = doctorUsername;
         this.patientUsername = patientUsername;
@@ -20,16 +21,23 @@ public class Appointment {
         this.end_time = end_time;
     }
 
-    @Override
-    public String toString() {
-        return "Appointment{" +
-                "NOT_APPROVED=" + NOT_APPROVED +
-                ", APPROVED=" + APPROVED +
-                ", doctorUsername='" + doctorUsername + '\'' +
-                ", patientUsername='" + patientUsername + '\'' +
-                ", date=" + date +
-                ", start_time=" + start_time +
-                ", end_time=" + end_time +
-                '}';
+    public String getDoctorUsername() {
+        return doctorUsername;
+    }
+
+    public String getPatientUsername() {
+        return patientUsername;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public Time getStart_time() {
+        return start_time;
+    }
+
+    public Time getEnd_time() {
+        return end_time;
     }
 }

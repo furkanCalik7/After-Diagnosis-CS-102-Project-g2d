@@ -23,7 +23,7 @@ public class LabTechnician extends User {
         test.sendTest();
     }
 
-    public Test createANewTest(String receiver_username, String test_name, String patient_username, File file) {
+    public Test createNewTest(String receiver_username, String test_name, String patient_username, File file) {
         return Test.newTest(receiver_username, this.getUsername(), test_name, patient_username, file);
     }
 }

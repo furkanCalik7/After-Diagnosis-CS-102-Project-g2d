@@ -20,8 +20,6 @@ public class Patient extends User {
     private final int STATUS_SICK = 3;
     private ArrayList<DoctorInfoCard> doctors;
     private ArrayList<Appointment> appointments;
-    private ArrayList<Message> inbox;
-    private ArrayList<Message> outBox;
     ArrayList<Drug> drugs;
     private int age;
     private Date dob;
@@ -72,14 +70,6 @@ public class Patient extends User {
         return doctors;
     }
 
-    public ArrayList<Message> getInbox() {
-        return inbox;
-    }
-
-    public ArrayList<Message> getOutBox() {
-        return outBox;
-    }
-
     public void updatePatientInfo() {
         MySQLAccess access = new MySQLAccess();
         PatientInfoCard infoCard = access.getPatientInfo(getUsername());
@@ -120,12 +110,11 @@ public class Patient extends User {
         doctors = access.getDoctors(getUsername());
     }
 
-    public void addAppointment(Doctor d, Date date, Time start_time, Time end_time) {
+    public void addAppointment(DoctorInfoCard d, Date date, Time start_time, Time end_time) {
         MySQLAccess access = new MySQLAccess();
-        Appointment app = new Appointment(d.getUsername(), getUsername(), date, start_time, end_time);
+        Appointment app = new Appointment(d.getDoctorUsername(), getUsername(), date, start_time, end_time);
         appointments.add(app);
-        access.readAppointment(getUsername(), d.getUserName(), date, start_time, end_time);
-
+        access.readAppointment(getUsername(), d.getDoctorUsername(), date, start_time, end_time);
     }
 
     public void updateAppointments() {
@@ -138,23 +127,10 @@ public class Patient extends User {
         return access.getAvailableDates(d);
     }
 
-    public void updateInbox(){
-        MySQLAccess access = new MySQLAccess();
-        inbox = access.getIncomingMessage(getUsername());
-    }
-
-    public void updateOutbox(){
-        MySQLAccess access = new MySQLAccess();
-        outBox = access.getOutGoingMgessage(getUsername());
-    }
-
     public void updateDrugs() {
         MySQLAccess access = new MySQLAccess();
         drugs = access.getDrugs(getUsername());
     }
-
-
-    //blood
 
     //feedback
     public void giveFeedback(int status) {
@@ -167,17 +143,6 @@ public class Patient extends User {
             }
         }
     }
-
-    public void sendMessages(Doctor d, String subject, String content) {
-        Message message = Message.newMessage(d.getUserName(), getUsername(), subject, content);
-        message.sendMessage();
-        updateOutbox();
-    }
-
-   /* public boolean sendChangeAppointmentRequest(Doctor d) {
-        return true;
-    }
-*/
 
     @Override
     public String toString() {
