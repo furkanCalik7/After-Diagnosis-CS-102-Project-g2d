@@ -12,3 +12,9 @@ Modal classes are mostly build and near complete. GUI design is planned and is b
 - Bilgehan: Contributed to the discussion of the UML design.
 
 
+# Group Memmbers Information
+- Furkan Çalık 21802114
+- Furkan Güzelant 
+- Emre Turhan
+- Berkay Çalmaz
+- Bilgehan Sandıkçı 
