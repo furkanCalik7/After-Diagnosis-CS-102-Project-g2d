@@ -16,3 +16,15 @@ SO FAR
 23:23 13.12.2020
 -Message class, Many method on mysql class, user class, doctor class, lab tech class is completed.
 -Estimated 3 hours
+03:10 14.12.2020
+-Add some code to mysqlaccess class and learnt how to upload pdf and image to database.
+-Estimated 3 hours
+16:39 14.12.2020
+-More coded added and arrenged some codes
+-Database is rearrenged again.
+00:12 15.12.2020
+-More coded is added to models
+-Estimated 2 hours
+17:35 16.12.2020
+-At Yesterday and Today, more classes to added to model part but forgot to write log files.
+17:36 16.12.2020
