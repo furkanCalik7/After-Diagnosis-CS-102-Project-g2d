@@ -22,8 +22,6 @@ public class Appointment {
     @Override
     public String toString() {
         return "Appointment{" +
-                "NOT_APPROVED=" + NOT_APPROVED +
-                ", APPROVED=" + APPROVED +
                 ", doctorUsername='" + doctorUsername + '\'' +
                 ", patientUsername='" + patientUsername + '\'' +
                 ", date=" + date +

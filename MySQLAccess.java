@@ -1,10 +1,7 @@
 import JDBC.dbConnection;
-
-import java.lang.ref.WeakReference;
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class MySQLAccess {
     private Connection connect = null;

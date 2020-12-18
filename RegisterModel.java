@@ -13,7 +13,7 @@ public class RegisterModel {
     public boolean isRegister(String username, String password, String email, String name, String surname, String sex) {
         MySQLAccess access = new MySQLAccess();
         try {
-            access.readDataBase(new Patient(username, password, email, name, surname, sex));
+            access.addUser(new Patient(username, password, email, name, surname, sex));
             return true;
         } catch (Exception e) {
             System.out.println("Username already exists");

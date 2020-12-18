@@ -10,6 +10,7 @@ public class Drug {
     private boolean isAfternoon;
     private boolean isEvening;
     private boolean isHungry;
+    private int dose;
     private Date startDate;
     private Date finalDate;
 

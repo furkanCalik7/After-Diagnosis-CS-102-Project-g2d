@@ -17,6 +17,10 @@ public class DoctorInfoCard {
         this.doctorSpeciality = doctorSpeciality;
     }
 
+    public String getDoctorUsername() {
+        return doctorUsername;
+    }
+
     @Override
     public String toString() {
         return "DoctorInfoCard{" +
@@ -28,4 +32,5 @@ public class DoctorInfoCard {
                 ", doctorSpeciality='" + doctorSpeciality + '\'' +
                 '}';
     }
+
 }

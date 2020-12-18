@@ -8,6 +8,6 @@ public class Main {
         MySQLAccess access = new MySQLAccess();
         Patient p = new Patient("FurkanGüzelant", "12345",
                 "dff@asd.com", "Furkan", "Güzelant", "M");
-        System.out.println(p.getDrugs());
+        p.giveFeedback(3);
     }
 }

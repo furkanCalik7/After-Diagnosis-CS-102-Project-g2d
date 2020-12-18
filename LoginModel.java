@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 
 public class LoginModel {
 
-    Connection connect;
+    private Connection connect;
 
     public LoginModel() {
         connect = null;

@@ -60,6 +60,10 @@ public abstract class User {
         return surname;
     }
 
+    public String getSex() {
+        return sex;
+    }
+
     @Override
     public String toString() {
         return "User{" +
