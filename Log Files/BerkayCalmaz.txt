@@ -11,3 +11,11 @@ Estimated Time: 3 Hours
 12.12
 Month, Year and Calendar classes are finished.
 Estimated time: 2 Hours
+
+15.11
+GUI is planned. Eclipse IDE GUI Builder is learned and discussed with Emre.
+Estimated Time: 4 Hours
+
+17.11
+Created the main frame for the Doctor class. Created the homepage panel.
+Estimated Time: 3 Hours
