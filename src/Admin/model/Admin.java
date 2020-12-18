@@ -1,3 +1,5 @@
+package Admin.model;
+
 import Doctor.Model.Doctor;
 import JDBC.MySQLAccess;
 import JDBC.User;
