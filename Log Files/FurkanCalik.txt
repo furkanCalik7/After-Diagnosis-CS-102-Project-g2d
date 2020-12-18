@@ -31,3 +31,5 @@ SO FAR
 
 00:52 17.12.2020
 -UML diagram is created with new classes with Furkan Guzelant
+13.23 17.12.2020
+-Helped to draw database and model UML and write detailed design raport
