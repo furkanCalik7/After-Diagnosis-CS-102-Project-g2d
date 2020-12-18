@@ -14,7 +14,7 @@ public class LabTechnician extends User {
     private ArrayList<Message> inbox;
     private ArrayList<Message> outbox;
 
-    public LabTechnician(java.lang.String username, java.lang.String password, java.lang.String email, java.lang.String name, java.lang.String surname, java.lang.String sex, java.lang.String userType) {
+    public LabTechnician(String username,String password, String email,String name, String surname, String sex) {
         super(username, password, email, name, surname, sex, "LabTechnician");
     }
 

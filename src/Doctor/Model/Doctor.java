@@ -56,8 +56,8 @@ public class Doctor extends User {
     }
 
     public ArrayList<Message> getOutbox() {
-        return outbox;
-    }
+            return outbox;
+        }
 
     public void updateInbox() {
         inbox = mySQLAccess.getIncomingMessage(this.getUsername());

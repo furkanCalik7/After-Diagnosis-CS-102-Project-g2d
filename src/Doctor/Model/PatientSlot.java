@@ -5,8 +5,8 @@ import Patient.Model.Code;
 import java.sql.Date;
 
 public class PatientSlot {
-    public static final int CURRENT_PATIENT = 1;
-    public static final int EXPIRED_PATIENT = 0;
+     static final int CURRENT_PATIENT = 1;
+     static final int EXPIRED_PATIENT = 0;
 
     private PatientInfoCard patientInfo;
     private String doctor_username;
