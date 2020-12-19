@@ -1,7 +1,6 @@
 package Doctor.Model;
 
 import Patient.Model.Code;
-import Patient.Model.PatientInfoCard;
 
 import java.sql.Date;
 

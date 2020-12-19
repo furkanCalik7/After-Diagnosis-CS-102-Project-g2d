@@ -2,7 +2,7 @@ package Doctor.Model;
 
 import Appointment.Appointment;
 import JDBC.MySQLAccess;
-import JDBC.User;
+import Admin.model.User;
 import Patient.Model.Code;
 
 import java.sql.Date;
@@ -56,8 +56,13 @@ public class Doctor extends User {
         return code;
     }
 
+    public void updateDoctorInformation(){
+        mySQLAccess.updateDoctorInformationOnDatabase(this);
+    }
+
     public void approveAppointment(Appointment appointment){
         mySQLAccess.approveAppointment(appointment);
     }
+    public
 
 }

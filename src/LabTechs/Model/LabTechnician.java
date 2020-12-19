@@ -1,9 +1,8 @@
 package LabTechs.Model;
 
 
-import Doctor.Model.Doctor;
 import JDBC.Message;
-import JDBC.User;
+import Admin.model.User;
 
 import java.io.File;
 import java.util.ArrayList;

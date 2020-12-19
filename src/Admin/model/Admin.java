@@ -2,7 +2,6 @@ package Admin.model;
 
 import Doctor.Model.Doctor;
 import JDBC.MySQLAccess;
-import JDBC.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

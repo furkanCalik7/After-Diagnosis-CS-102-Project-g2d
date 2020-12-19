@@ -2,11 +2,10 @@ package Patient.Model;
 
 import Appointment.Appointment;
 import Doctor.Model.Doctor;
-import Doctor.Model.DoctorInfoCard;
 import Doctor.Model.Drug;
 import JDBC.Message;
 import JDBC.MySQLAccess;
-import JDBC.User;
+import Admin.model.User;
 
 import java.sql.Date;
 import java.sql.Time;

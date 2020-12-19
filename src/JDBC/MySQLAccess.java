@@ -1,7 +1,7 @@
 package JDBC;
 
+import Admin.model.User;
 import Doctor.Model.Doctor;
-import Doctor.Model.DoctorInfoCard;
 import Doctor.Model.Drug;
 import LabTechs.Model.Test;
 import Patient.Model.Code;
@@ -277,7 +277,7 @@ public class MySQLAccess {
     }
 
     public boolean connectToDoctor(String username, String code) {
-        int doctorID;
+        int doctorID = 0;
         int patientID;
         String code_id;
         try {
@@ -868,6 +868,50 @@ public class MySQLAccess {
             close();
         }
     }
+    public void updateDoctorInformationOnDatabase(Doctor d){
+        try {
+            int doctor_id = getID(d.getUsername());
+            connect = preparedStatement.getConnection();
+            String sql = "UPDATE doctor SET speciality = ? WHERE doctor_id = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1, d.getSpeciality());
+            preparedStatement.setInt(2, doctor_id);
+
+            preparedStatement.executeUpdate();
+
+            sql = "UPDATE user SET username = ?, password = ?, email = ?, name = ?, surname = ?, sex = ? WHERE user_id = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1, d.getUsername());
+            preparedStatement.setString(3,d.getPassword());
+            preparedStatement.setString(4,d.getEmail());
+            preparedStatement.setString(5,d.getName());
+            preparedStatement.setString(6,d.getSurname());
+            preparedStatement.setString(7,d.getSex());
+            preparedStatement.setInt(8,doctor_id);
+
+            preparedStatement.executeUpdate();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+    }
+//    public void addTestRequest(TestRequest testRequest){
+//        try {
+//            connect = dbConnection.getConnection();
+//            String sql = "INSERT INTO test_request VALUES(DEFAULT , ?, ?, ?)";
+//            preparedStatement = connect.prepareStatement(sql);
+//            preparedStatement.setString(1, testRequest.getTest_name());
+//            preparedStatement.setString(2, testRequest.getPatient().get);
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }finally {
+//            close();
+//        }
+//    }
 
     public void deleteUser(User u) {
         try {
