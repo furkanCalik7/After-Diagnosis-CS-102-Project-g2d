@@ -1,6 +1,7 @@
 package LabTechs.Model;
 
 import JDBC.MySQLAccess;
+import Patient.Model.PatientInfoCard;
 
 public class TestRequest {
     private String test_name;
@@ -16,10 +17,10 @@ public class TestRequest {
         return new TestRequest(test_name, patient, doctor_username);
 
     }
-    public boolean sendTestRequest (){
-        MySQLAccess mySQLAccess = new MySQLAccess();
-        return mySQLAccess.addTestRequest(this);
-    }
+//    public boolean sendTestRequest (){
+//        MySQLAccess mySQLAccess = new MySQLAccess();
+//        return mySQLAccess.addTestRequest(this);
+//    }
 
     public String getTest_name() {
         return test_name;

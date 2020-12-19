@@ -12,7 +12,7 @@ public class LoginModel {
     public boolean isLogin(String username, String password) {
         try {
             Connection connect = dbConnection.getConnection();
-            String sql = "SELECT user_id, username, password, email, name, surname FROM user WHERE username = ?" +
+            String sql = "SELECT username, password FROM user WHERE username = ?" +
                     "AND password = ?";
             PreparedStatement pr = connect.prepareStatement(sql);
             pr.setString(1, username);

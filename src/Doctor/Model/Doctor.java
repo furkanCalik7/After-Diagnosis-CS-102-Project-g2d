@@ -59,10 +59,20 @@ public class Doctor extends User {
     public void updateDoctorInformation(){
         mySQLAccess.updateDoctorInformationOnDatabase(this);
     }
-
     public void approveAppointment(Appointment appointment){
         mySQLAccess.approveAppointment(appointment);
     }
-    public
 
+    @Override
+    public String toString() {
+        System.out.println(super.toString());
+        return "Doctor{" +
+                "speciality='" + speciality + '\'' +
+                ", patientSlots=" + patientSlots +
+                ", mySQLAccess=" + mySQLAccess +
+                ", approvedAppointments=" + approvedAppointments +
+                ", waitingAppointments=" + waitingAppointments +
+                ", availableTimes=" + availableTimes +
+                '}';
+    }
 }

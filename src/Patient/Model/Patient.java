@@ -2,6 +2,7 @@ package Patient.Model;
 
 import Appointment.Appointment;
 import Doctor.Model.Doctor;
+import Doctor.Model.DoctorInfoCard;
 import Doctor.Model.Drug;
 import JDBC.Message;
 import JDBC.MySQLAccess;
@@ -30,7 +31,7 @@ public class Patient extends User {
     public Patient(String username, String password, String email, String name, String surname, String sex) {
         super(username, "Patient", password, email, name, surname, sex);
         updateDoctors();
-        updatePatientInfo();
+     //   updatePatientInfo();
         updateAppointments();
         updateInbox();
         updateOutbox();
@@ -69,17 +70,17 @@ public class Patient extends User {
         return doctors;
     }
 
-    public void updatePatientInfo() {
-        MySQLAccess access = new MySQLAccess();
-        PatientInfoCard infoCard = access.getPatientInfo(getUsername());
-        if(infoCard != null) {
-            dob = infoCard.getDob();
-            bloodType = infoCard.getBloodType();
-            age = infoCard.getAge();
-            allergies = infoCard.getAllergies();
-            surgeries = infoCard.getSurgeries();
-        }
-    }
+//    public void updatePatientInfo() {
+//        MySQLAccess access = new MySQLAccess();
+//        PatientInfoCard infoCard = access.getPatientInfo(getUsername());
+//        if(infoCard != null) {
+//            dob = infoCard.getDob();
+//            bloodType = infoCard.getBloodType();
+//            age = infoCard.getAge();
+//            allergies = infoCard.getAllergies();
+//            surgeries = infoCard.getSurgeries();
+//        }
+//    }
 
     public void setPatientInfo(Date dob, String bloodType, int age, String allergies, String surgeries) {
         MySQLAccess access = new MySQLAccess();

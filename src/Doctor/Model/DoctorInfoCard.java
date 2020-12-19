@@ -1,7 +1,6 @@
 package Doctor.Model;
 
 import Admin.model.UserInfoCard;
-import JDBC.UserInfoCard;
 
 public class DoctorInfoCard extends UserInfoCard {
 
