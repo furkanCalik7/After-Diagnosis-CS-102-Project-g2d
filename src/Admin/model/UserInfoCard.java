@@ -16,6 +16,26 @@ public class UserInfoCard {
         this.sex = sex;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
     @Override
     public String toString() {
         return "UserInfoCard{" +

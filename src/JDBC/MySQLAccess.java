@@ -4,6 +4,7 @@ import Admin.model.User;
 import Doctor.Model.Doctor;
 import Doctor.Model.DoctorInfoCard;
 import Doctor.Model.Drug;
+import Doctor.Model.PatientSlot;
 import LabTechs.Model.Test;
 import Patient.Model.Code;
 import Patient.Model.Patient;
@@ -186,6 +187,24 @@ public class MySQLAccess {
         PatientInfoCard patientInfo;
         try {
             connect = dbConnection.getConnection();
+            String sql = "SELECT * FROM user WHERE username = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            resultSet = preparedStatement.executeQuery();
+
+            String name = "";
+            String surname = "";
+            String email = "";
+            String sex = "";
+
+
+            while (resultSet.next()) {
+                name = resultSet.getString("name");
+                surname = resultSet.getString("surname");
+                email = resultSet.getString("email");
+                sex = resultSet.getString("sex");
+            }
+
             user_id = getID(username);
             preparedStatement = connect
                     .prepareStatement("SELECT birth_date, blood_type, age, allergies, preivous_surgeries FROM patient WHERE patient_id = ?");
@@ -197,7 +216,7 @@ public class MySQLAccess {
                 int age = resultSet.getInt("age");
                 String allergies = resultSet.getString("allergies");
                 String surgeries = resultSet.getString("preivous_surgeries");
-                patientInfo = new PatientInfoCard(age, birthDate, bloodType, allergies, surgeries);
+                patientInfo = new PatientInfoCard(username, email, name, surname, sex, age, birthDate, bloodType, allergies, surgeries);
                 return patientInfo;
             }
         } catch (Exception e) {
@@ -439,7 +458,7 @@ public class MySQLAccess {
             // It is possible to get the columns via name
             // also possible to get the columns via the column number
             // which starts at 1
-            // e.g. resultSet.getSTring(2);
+            // e.g. resultSet.getString(2);
             String id = resultSet.getString("user_id");
             String usertype = resultSet.getString("user_type");
             String username = resultSet.getString("username");
@@ -458,34 +477,6 @@ public class MySQLAccess {
             System.out.println("Sex: " + sex);
         }
     }
-
-    //Todo create a new user info class
-//    public ArrayList<PatientSlot> getPatientsOfDoctor(Doctor doctor) throws SQLException {
-//        try{
-//            ArrayList<PatientSlot> patientSlots = new ArrayList<>();
-//            int doctor_id = getID(doctor.getUsername());
-//            connect =dbConnection.getConnection();
-//            String sql = "SELECT * FROM doctor_patient WHERE doctor_id = ?";
-//            preparedStatement = connect.prepareStatement(sql);
-//            preparedStatement.setInt(1,doctor_id);
-//            resultSet = preparedStatement.executeQuery();
-//
-//
-//
-//            while(resultSet.next()){
-//
-//
-//            }
-//
-//
-//        }catch(Exception e){
-//            e.printStackTrace();
-//        }finally{
-//            close();
-//        }
-//        return null;
-//    }
-
 
     private void addDoctor(Doctor d) {
         try {
@@ -587,7 +578,7 @@ public class MySQLAccess {
         return null;
     }
 
-    public ArrayList<Message> getOutGoingMgessage(String sender_username) {
+    public ArrayList<Message> getOutGoingMessage(String sender_username) {
         try {
             ArrayList<Message> messages = new ArrayList<>();
             connect = dbConnection.getConnection();
@@ -750,6 +741,7 @@ public class MySQLAccess {
             String speciality = "";
             connect = dbConnection.getConnection();
             patientID = getID(pUsername);
+
             preparedStatement = connect.prepareStatement("SELECT doctor_id FROM doctor_patient WHERE patient_id = ?");
             preparedStatement.setInt(1, patientID);
             resultSet = preparedStatement.executeQuery();
@@ -757,16 +749,17 @@ public class MySQLAccess {
                 doctorID = resultSet.getInt("doctor_id");
                 preparedStatement = connect.prepareStatement("SELECT * FROM user WHERE user_id = ?");
                 preparedStatement.setInt(1, doctorID);
-                resultSet = preparedStatement.executeQuery();
+                ResultSet rs = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    String username = resultSet.getString("username");
-                    String email = resultSet.getString("email");
-                    String name = resultSet.getString("name");
-                    String surname = resultSet.getString("surname");
-                    String sex = resultSet.getString("sex");
+                    String username = rs.getString("username");
+                    String email = rs.getString("email");
+                    String name = rs.getString("name");
+                    String surname = rs.getString("surname");
+                    String sex = rs.getString("sex");
                     preparedStatement = connect.prepareStatement("SELECT speciality FROM doctor WHERE doctor_id = ?");
                     preparedStatement.setInt(1, doctorID);
-                    if (resultSet.next()) {
+                    rs = preparedStatement.executeQuery();
+                    if (rs.next()) {
                         speciality = resultSet.getString("speciality");
                     }
                     docList.add(new DoctorInfoCard(username, email, name, surname, sex, speciality));
@@ -777,7 +770,75 @@ public class MySQLAccess {
             System.out.println(e);
         }
         return null;
+    }
 
+    public ArrayList<PatientInfoCard> getPatientInfos(String dUsername) {
+        try {
+            int patientID = 0;
+            int doctorID = 0;
+            doctorID = getID(dUsername);
+            String patient_username;
+
+            ArrayList<PatientInfoCard> patientInfoCards = new ArrayList<>();
+
+            connect = dbConnection.getConnection();
+            String sql = "SELECT patient_id FROM doctor_patient WHERE doctor_id = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setInt(1, doctorID);
+            resultSet = preparedStatement.executeQuery();
+
+            while (resultSet.next()) {
+                patientID = resultSet.getInt("patient_id");
+                sql = "SELECT username FROM user WHERE user_id = ?";
+                preparedStatement = connect.prepareStatement(sql);
+                preparedStatement.setInt(1, patientID);
+
+                ResultSet rs = preparedStatement.executeQuery();
+                while (rs.next()) {
+                    patient_username = rs.getString("username");
+                    patientInfoCards.add(getPatientInfo(patient_username));
+                }
+            }
+            return patientInfoCards;
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
+    }
+
+    public ArrayList<PatientSlot> getPatientsOfDoctor(String dUsername) {
+        try {
+            ArrayList<PatientSlot> patientSlots = new ArrayList<>();
+            ArrayList<PatientInfoCard> patientInfos = getPatientInfos(dUsername);
+            int doctor_id = getID(dUsername);
+            int patient_id;
+            int status;
+            Date start_date;
+            String code_id;
+            connect = dbConnection.getConnection();
+
+            for(PatientInfoCard patientInfoCard: patientInfos){
+                patient_id = getID(patientInfoCard.getUsername());
+                String sql = "SELECT * FROM doctor_patient WHERE doctor_id = ? AND patient_id = ?";
+                preparedStatement = connect.prepareStatement(sql);
+                preparedStatement.setInt(1, doctor_id);
+                preparedStatement.setInt(2, patient_id);
+                resultSet = preparedStatement.executeQuery();
+
+                while(resultSet.next()){
+                    status = resultSet.getInt("status");
+                    start_date = resultSet.getDate("start_date");
+                    code_id = resultSet.getString("code");
+                    patientSlots.add(new PatientSlot(dUsername,patientInfoCard,status,code_id,start_date));
+                }
+            }
+
+            return patientSlots;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 
@@ -808,11 +869,12 @@ public class MySQLAccess {
             return appointments;
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close();
         }
         return null;
     }
+
     public ArrayList<Appointment> getApprovedAppointmentOfDoctor(Doctor doctor) {
         try {
             ArrayList<Appointment> appointments = new ArrayList<>();
@@ -840,13 +902,13 @@ public class MySQLAccess {
             return appointments;
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close();
         }
         return null;
     }
 
-    public void approveAppointment(Appointment appointment){
+    public void approveAppointment(Appointment appointment) {
         try {
             ArrayList<Appointment> appointments = new ArrayList<>();
             connect = dbConnection.getConnection();
@@ -858,11 +920,12 @@ public class MySQLAccess {
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close();
         }
     }
-    public void updateDoctorInformationOnDatabase(Doctor d){
+
+    public void updateDoctorInformationOnDatabase(Doctor d) {
         try {
             int doctor_id = getID(d.getUsername());
             connect = preparedStatement.getConnection();
@@ -876,18 +939,18 @@ public class MySQLAccess {
             sql = "UPDATE user SET username = ?, password = ?, email = ?, name = ?, surname = ?, sex = ? WHERE user_id = ?";
             preparedStatement = connect.prepareStatement(sql);
             preparedStatement.setString(1, d.getUsername());
-            preparedStatement.setString(3,d.getPassword());
-            preparedStatement.setString(4,d.getEmail());
-            preparedStatement.setString(5,d.getName());
-            preparedStatement.setString(6,d.getSurname());
-            preparedStatement.setString(7,d.getSex());
-            preparedStatement.setInt(8,doctor_id);
+            preparedStatement.setString(3, d.getPassword());
+            preparedStatement.setString(4, d.getEmail());
+            preparedStatement.setString(5, d.getName());
+            preparedStatement.setString(6, d.getSurname());
+            preparedStatement.setString(7, d.getSex());
+            preparedStatement.setInt(8, doctor_id);
 
             preparedStatement.executeUpdate();
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close();
         }
     }
@@ -908,23 +971,23 @@ public class MySQLAccess {
 //    }
 
 
-    public Doctor getDoctor(String doctor_username){
-        try{
+    public Doctor getDoctor(String doctor_username) {
+        try {
             connect = dbConnection.getConnection();
             String sql = "SELECT * FROM user WHERE username = ?";
             preparedStatement = connect.prepareStatement(sql);
             preparedStatement.setString(1, doctor_username);
             resultSet = preparedStatement.executeQuery();
 
-            String password  = "";
+            String password = "";
             String name = "";
             String surname = "";
             String email = "";
             String sex = "";
             String speciality = "";
 
-            while(resultSet.next()){
-                password = resultSet.getString("username");
+            while (resultSet.next()) {
+                password = resultSet.getString("password");
                 name = resultSet.getString("name");
                 surname = resultSet.getString("surname");
                 email = resultSet.getString("email");
@@ -933,17 +996,17 @@ public class MySQLAccess {
 
             sql = "SELECT * FROM doctor WHERE doctor_id = ?";
             preparedStatement = connect.prepareStatement(sql);
-            preparedStatement.setInt(1,getID(doctor_username));
+            preparedStatement.setInt(1, getID(doctor_username));
             resultSet = preparedStatement.executeQuery();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 speciality = resultSet.getString("speciality");
             }
-            return new Doctor(doctor_username,password,email,name,surname,sex,speciality);
+            return new Doctor(doctor_username, password, email, name, surname, sex, speciality);
 
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally{
+        } finally {
             close();
         }
         return null;

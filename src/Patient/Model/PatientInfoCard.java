@@ -72,6 +72,7 @@ public class PatientInfoCard extends UserInfoCard {
 
     @Override
     public String toString() {
+        System.out.println(super.toString());
         return "PatientInfoCard{" +
                 "age=" + age +
                 ", dob=" + dob +

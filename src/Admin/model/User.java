@@ -96,7 +96,7 @@ public abstract class User implements MessageSender {
 
     public void updateOutbox(){
         MySQLAccess access = new MySQLAccess();
-        outbox = access.getOutGoingMgessage(getUsername());
+        outbox = access.getOutGoingMessage(getUsername());
     }
 
     public ArrayList<Message> getInbox() {

@@ -29,6 +29,7 @@ public class Doctor extends User {
         availableTimes = mySQLAccess.getAvailableDates(this);
         approvedAppointments = mySQLAccess.getApprovedAppointmentOfDoctor(this);
         waitingAppointments = mySQLAccess.getWaitingAppointmentOfDoctor(this);
+        patientSlots = mySQLAccess.getPatientsOfDoctor(getUsername());
     }
 
     public ArrayList<Timestamp> getAvailableTimes() {
@@ -61,6 +62,18 @@ public class Doctor extends User {
     }
     public void approveAppointment(Appointment appointment){
         mySQLAccess.approveAppointment(appointment);
+    }
+
+    public ArrayList<PatientSlot> getPatientSlots() {
+        return patientSlots;
+    }
+
+    public ArrayList<Appointment> getApprovedAppointments() {
+        return approvedAppointments;
+    }
+
+    public ArrayList<Appointment> getWaitingAppointments() {
+        return waitingAppointments;
     }
 
     @Override
