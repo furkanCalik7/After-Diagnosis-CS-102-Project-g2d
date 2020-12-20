@@ -18,6 +18,8 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         MySQLAccess mySQLAccess = new MySQLAccess();
         Patient patient = (Patient) mySQLAccess.getUser("crazyaslan5");
+        Date date = Date.valueOf("1976-01-05");
+        patient.setPatientInfo(date, "0RH+", 44, "polen", "bypass", "Stomach ache");
         System.out.println(patient);
         System.out.println(patient.getAppointmentDates());
     }

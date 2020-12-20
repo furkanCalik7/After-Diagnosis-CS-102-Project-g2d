@@ -44,17 +44,10 @@ public class MySQLAccess {
 
             preparedStatement.executeUpdate();
 
-
-
             preparedStatement = connect
                     .prepareStatement("SELECT user_id from user WHERE username = ?");
             preparedStatement.setString(1, u.getUsername());
             resultSet = preparedStatement.executeQuery();
-
-            if(resultSet.next()) {
-                int id = resultSet.getInt("user_id");
-                u.setId(id);
-            }
 
             if (u instanceof Patient)
                 addPatient((Patient) u);
@@ -179,7 +172,7 @@ public class MySQLAccess {
 
             user_id = getID(username);
             preparedStatement = connect
-                    .prepareStatement("SELECT birth_date, blood_type, age, allergies, preivous_surgeries FROM patient WHERE patient_id = ?");
+                    .prepareStatement("SELECT * FROM patient WHERE patient_id = ?");
             preparedStatement.setInt(1, user_id);
             resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
@@ -188,7 +181,8 @@ public class MySQLAccess {
                 int age = resultSet.getInt("age");
                 String allergies = resultSet.getString("allergies");
                 String surgeries = resultSet.getString("preivous_surgeries");
-                patientInfo = new PatientInfoCard(username, email, name, surname, sex, age, birthDate, bloodType, allergies, surgeries);
+                String complaint = resultSet.getString("complaint");
+                patientInfo = new PatientInfoCard(username, email, name, surname, sex, age, birthDate, bloodType, allergies, surgeries, complaint);
                 return patientInfo;
             }
         } catch (Exception e) {
@@ -509,19 +503,21 @@ public class MySQLAccess {
         return null;
     }
 
-    public void readPatientInfo(String username, Date dob, String bloodType, int age, String allergies, String surgeries) {
+    public void readPatientInfo(String username, Date dob, String bloodType, int age, String allergies, String surgeries, String complaint) {
         int user_id;
         try {
             user_id = getID(username);
             preparedStatement =
-                    connect.prepareStatement("UPDATE patient SET dob = ?, bloodType = ?, age = ?, allergies = ?, surgeries = ?, " +
+                    connect.prepareStatement("UPDATE patient SET birth_date = ?, blood_type = ?, age = ?, allergies = ?, " +
+                            "preivous_surgeries = ?, complaint = ?" +
                             "WHERE patient_id = ?");
             preparedStatement.setDate(1, dob);
             preparedStatement.setString(2, bloodType);
             preparedStatement.setInt(3, age);
             preparedStatement.setString(4, allergies);
             preparedStatement.setString(5, surgeries);
-            preparedStatement.setInt(6, user_id);
+            preparedStatement.setString(6, complaint);
+            preparedStatement.setInt(7, user_id);
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();

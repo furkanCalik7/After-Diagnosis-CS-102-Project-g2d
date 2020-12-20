@@ -26,6 +26,7 @@ public class Patient extends User {
     private String bloodType;
     private String allergies;
     private String surgeries;
+    private String complaint;
 
 
     public Patient(String username, String password, String email, String name, String surname, String sex) {
@@ -36,6 +37,10 @@ public class Patient extends User {
         updateInbox();
         updateOutbox();
         updateDrugs();
+    }
+
+    public String getComplaint() {
+        return complaint;
     }
 
     public int getAge() {
@@ -79,18 +84,20 @@ public class Patient extends User {
             age = infoCard.getAge();
             allergies = infoCard.getAllergies();
             surgeries = infoCard.getSurgeries();
+            complaint = infoCard.getComplaint();
         }
     }
 
 
-    public void setPatientInfo(Date dob, String bloodType, int age, String allergies, String surgeries) {
+    public void setPatientInfo(Date dob, String bloodType, int age, String allergies, String surgeries, String complaint) {
         MySQLAccess access = new MySQLAccess();
-        access.readPatientInfo(getUsername(), dob, bloodType, age, allergies, surgeries);
+        access.readPatientInfo(getUsername(), dob, bloodType, age, allergies, surgeries, complaint);
         this.dob = dob;
         this.bloodType = bloodType;
         this.age = age;
         this.allergies = allergies;
         this.surgeries = surgeries;
+        this.complaint = complaint;
     }
 
     public boolean addDoctor(String code) {
@@ -153,6 +160,7 @@ public class Patient extends User {
                 ", bloodType='" + bloodType + '\'' +
                 ", allergies='" + allergies + '\'' +
                 ", surgeries='" + surgeries + '\'' +
+                ", complaint='" + complaint + '\'' +
                 '}';
     }
 }

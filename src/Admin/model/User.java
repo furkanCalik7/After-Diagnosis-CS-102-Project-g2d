@@ -12,10 +12,10 @@ public abstract class User implements MessageSender {
      private String surname;
      private String sex;
      private String userType;
-    private ArrayList<Message> inbox;
-    private ArrayList<Message> outbox;
-    private ArrayList<IViewer> viewers;
-    private int id;
+     private ArrayList<Message> inbox;
+     private ArrayList<Message> outbox;
+     private ArrayList<IViewer> viewers;
+     private int id;
 
     public User(String username, String userType, String password, String email, String name, String surname, String sex){
         this.username = username;
