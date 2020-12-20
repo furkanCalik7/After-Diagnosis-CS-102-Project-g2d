@@ -6,7 +6,7 @@ import Doctor.Model.DoctorInfoCard;
 import Doctor.Model.PatientSlot;
 import Patient.Model.Patient;
 import Patient.Model.PatientInfoCard;
-
+import LabTechs.Model.TestRequest;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Time;
