@@ -1,7 +1,5 @@
 package LabTechs.Model;
 
-
-import JDBC.Message;
 import Admin.model.User;
 import JDBC.MySQLAccess;
 
@@ -14,18 +12,10 @@ public class LabTechnician extends User {
     private ArrayList<TestRequest> testRequests;
     private MySQLAccess mySQLAccess;
 
-    public LabTechnician(String username,String password, String email,String name, String surname, String sex) {
+    public LabTechnician(String username, String password, String email, String name, String surname, String sex) {
         super(username, password, email, name, surname, sex, "LabTechnician");
         testRequests = mySQLAccess.getTestRequest(getUsername());
-    }
-
-
-    public void sendTestResult(Test test) {
-        test.sendTest();
-    }
-
-    public Test createNewTest(String receiver_username, String test_name, String patient_username, File file) {
-        return Test.newTest(receiver_username, this.getUsername(), test_name, patient_username, file);
+        tests = mySQLAccess.getTestOfLabTech(getUsername());
     }
 
     public ArrayList<Test> getTests() {
@@ -35,6 +25,18 @@ public class LabTechnician extends User {
     public ArrayList<TestRequest> getTestRequests() {
         return testRequests;
     }
+
+    public boolean deleteTestRequest(TestRequest testRequest) {
+        return mySQLAccess.deleteTestRequest(testRequest);
+    }
+    public void sendTestResult(Test test) {
+        test.sendTest();
+    }
+
+    public Test createNewTest(String receiver_username, String test_name, String patient_username, File file) {
+        return Test.newTest(receiver_username, this.getUsername(), test_name, patient_username, file);
+    }
+
 }
 
 

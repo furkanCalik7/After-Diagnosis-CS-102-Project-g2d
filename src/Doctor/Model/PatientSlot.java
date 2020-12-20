@@ -23,6 +23,26 @@ public class PatientSlot {
         this.start_date = start_date;
     }
 
+    public PatientInfoCard getPatientInfo() {
+        return patientInfo;
+    }
+
+    public String getDoctor_username() {
+        return doctor_username;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public String getCode_id() {
+        return code_id;
+    }
+
+    public Date getStart_date() {
+        return start_date;
+    }
+
     @Override
     public String toString() {
         return "PatientSlot{" +
