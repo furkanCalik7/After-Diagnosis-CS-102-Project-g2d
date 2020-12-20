@@ -971,7 +971,6 @@ public class MySQLAccess {
             ResultSet rs = pr.executeQuery();
 
 
-            String username = resultSet.getString("username");
             String password = resultSet.getString("password");
             String email = resultSet.getString("email");
             String name = resultSet.getString("name");
@@ -981,7 +980,9 @@ public class MySQLAccess {
             if (rs.next()) {
                 speciality = rs.getString("speciality");
             }
-            return new Doctor(username, password, email, name, surname, sex, speciality);
+            Doctor doctor = new Doctor(doctorUserName, password, email, name, surname, sex, speciality);
+            doctor.setId(user_id);
+            return doctor;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -1000,14 +1001,15 @@ public class MySQLAccess {
             resultSet = preparedStatement.executeQuery();
 
             User u;
+            int user_id = 0;
             String userType = "";
-            String password = "";
             String name = "";
             String surname = "";
             String email = "";
             String sex = "";
 
             while(resultSet.next()){
+                user_id = resultSet.getInt("user_id");
                 userType = resultSet.getString("user_type");
                 username = resultSet.getString("username");
                 name = resultSet.getString("name");
@@ -1025,6 +1027,7 @@ public class MySQLAccess {
             else {
                 u = new Admin(username, email, email, name, surname, sex);
             }
+            u.setId(user_id);
             return u;
         } catch (Exception e) {
             e.printStackTrace();
