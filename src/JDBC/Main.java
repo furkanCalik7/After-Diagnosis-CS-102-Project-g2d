@@ -19,7 +19,6 @@ public class Main {
         MySQLAccess mySQLAccess = new MySQLAccess();
         Patient patient = (Patient) mySQLAccess.getUser("crazyaslan5");
         System.out.println(patient);
-        Doctor doctor = mySQLAccess.getDoctorByUsername("MichealJackson");
         System.out.println(patient.getAppointmentDates());
     }
 }

@@ -15,6 +15,7 @@ public abstract class User implements MessageSender {
     private ArrayList<Message> inbox;
     private ArrayList<Message> outbox;
     private ArrayList<IViewer> viewers;
+    private int id;
 
     public User(String username, String userType, String password, String email, String name, String surname, String sex){
         this.username = username;
@@ -25,6 +26,14 @@ public abstract class User implements MessageSender {
         this.sex = sex;
         this.userType = userType;
         viewers = new ArrayList<IViewer>();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getUsername() {

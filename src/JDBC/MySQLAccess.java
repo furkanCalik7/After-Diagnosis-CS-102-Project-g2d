@@ -44,9 +44,17 @@ public class MySQLAccess {
 
             preparedStatement.executeUpdate();
 
+
+
             preparedStatement = connect
-                    .prepareStatement("SELECT user_id, user_type, username, password, name, surname, email, sex from user");
+                    .prepareStatement("SELECT user_id from user WHERE username = ?");
+            preparedStatement.setString(1, u.getUsername());
             resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()) {
+                int id = resultSet.getInt("user_id");
+                u.setId(id);
+            }
 
             if (u instanceof Patient)
                 addPatient((Patient) u);
