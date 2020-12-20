@@ -1,8 +1,8 @@
 package Admin.model;
 
-import Doctor.Model.Doctor;
-import Doctor.Model.DoctorInfoCard;
-import JDBC.MySQLAccess;
+import Doctor.Model.*;
+import JDBC.*;
+import LabTechs.*;
 import LabTechs.Model.LabTechnician;
 
 import java.sql.SQLException;
@@ -37,7 +37,7 @@ public class Admin extends User {
             access.addUser(l);
             return true;
         } catch (Exception e) {
-            System.out.print(e);
+            e.printStackTrace();
         }
         return false;
     }

@@ -10,11 +10,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.sql.*;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import Appointment.Appointment;
-import Patient.Model.PatientInfoCard;
+import Appointment.*;
 
 public class MySQLAccess {
     private Connection connect = null;

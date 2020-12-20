@@ -1,9 +1,6 @@
 package Admin.model;
 
-import JDBC.Message;
-import JDBC.MessageSender;
-import JDBC.MySQLAccess;
-
+import JDBC.*;
 import java.util.ArrayList;
 
 public abstract class User implements MessageSender {
