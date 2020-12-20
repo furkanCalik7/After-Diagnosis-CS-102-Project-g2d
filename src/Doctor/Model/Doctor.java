@@ -3,7 +3,10 @@ package Doctor.Model;
 import Appointment.Appointment;
 import JDBC.MySQLAccess;
 import Admin.model.User;
+import LabTechs.Model.Test;
+import LabTechs.Model.TestRequest;
 import Patient.Model.Code;
+import Patient.Model.PatientInfoCard;
 
 import java.sql.Date;
 import java.sql.Time;
@@ -74,6 +77,11 @@ public class Doctor extends User {
 
     public ArrayList<Appointment> getWaitingAppointments() {
         return waitingAppointments;
+    }
+
+    public boolean sendTestRequest(String test_name, PatientInfoCard patient, String lab_tech_username){
+        TestRequest newTest = TestRequest.newTest(test_name,patient,getUsername(),lab_tech_username);
+        return mySQLAccess.addTestRequest(newTest);
     }
 
     @Override

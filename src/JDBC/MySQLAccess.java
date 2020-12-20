@@ -6,6 +6,7 @@ import Doctor.Model.DoctorInfoCard;
 import Doctor.Model.Drug;
 import Doctor.Model.PatientSlot;
 import LabTechs.Model.Test;
+import LabTechs.Model.TestRequest;
 import Patient.Model.Code;
 import Patient.Model.Patient;
 
@@ -954,21 +955,58 @@ public class MySQLAccess {
             close();
         }
     }
-//    public void addTestRequest(TestRequest testRequest){
-//        try {
-//            connect = dbConnection.getConnection();
-//            String sql = "INSERT INTO test_request VALUES(DEFAULT , ?, ?, ?)";
-//            preparedStatement = connect.prepareStatement(sql);
-//            preparedStatement.setString(1, testRequest.getTest_name());
-//            preparedStatement.setString(2, testRequest.getPatient().get);
-//
-//
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }finally {
-//            close();
-//        }
-//    }
+    public boolean addTestRequest(TestRequest testRequest){
+        try {
+            connect = dbConnection.getConnection();
+            String sql = "INSERT INTO test_request VALUES(DEFAULT , ?, ?, ?, ?)";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1, testRequest.getTest_name());
+            preparedStatement.setString(2, testRequest.getPatient().getUsername());
+            preparedStatement.setString(3, testRequest.getDoctor_username());
+            preparedStatement.setString(4, testRequest.getLab_tech_username());
+
+            int i = preparedStatement.executeUpdate();
+            if(i > 0){
+                return true;
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+        return false;
+    }
+    public ArrayList<TestRequest> getTestRequest(String lab_tech_username){
+        try {
+            connect = dbConnection.getConnection();
+            String sql = "SELECT * FROM test_request WHERE lab_tech_username = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1, lab_tech_username);
+            resultSet = preparedStatement.executeQuery();
+
+            String test_name;
+            PatientInfoCard patient;
+            String doctor_username;
+            ArrayList<TestRequest> testRequests = new ArrayList<>();
+
+            while(resultSet.next()){
+                test_name = resultSet.getString("test_name");
+                patient = getPatientInfo(resultSet.getString("patient_username"));
+                doctor_username = resultSet.getString("doctor_username");
+                testRequests.add(new TestRequest(test_name,patient,doctor_username,lab_tech_username));
+            }
+            return testRequests;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+        return null;
+    }
+
+
 
 
     public Doctor getDoctor(String doctor_username) {
