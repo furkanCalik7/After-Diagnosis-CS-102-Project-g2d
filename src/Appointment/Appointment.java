@@ -40,4 +40,15 @@ public class Appointment {
     public Time getEnd_time() {
         return end_time;
     }
+
+    @Override
+    public String toString() {
+        return "Appointment{" +
+                ", doctorUsername='" + doctorUsername + '\'' +
+                ", patientUsername='" + patientUsername + '\'' +
+                ", date=" + date +
+                ", start_time=" + start_time +
+                ", end_time=" + end_time +
+                '}';
+    }
 }

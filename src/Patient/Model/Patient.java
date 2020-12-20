@@ -20,7 +20,7 @@ public class Patient extends User {
     private final int STATUS_SICK = 3;
     private ArrayList<DoctorInfoCard> doctors;
     private ArrayList<Appointment> appointments;
-    ArrayList<Drug> drugs;
+    private ArrayList<Drug> drugs;
     private int age;
     private Date dob;
     private String bloodType;
@@ -93,8 +93,7 @@ public class Patient extends User {
         this.surgeries = surgeries;
     }
 
-    public boolean addDoctor(Code c) {
-        String code = c.getCode_id();
+    public boolean addDoctor(String code) {
         MySQLAccess access = new MySQLAccess();
         if(!access.isCodeUsed(code)) {
             if(access.connectToDoctor(getUsername(), code)) {
@@ -111,11 +110,11 @@ public class Patient extends User {
         doctors = access.getDoctors(getUsername());
     }
 
-    public void addAppointment(DoctorInfoCard d, Date date, Time start_time, Time end_time) {
+    public void addAppointment(String doctorUsername, Date date, Time start_time, Time end_time) {
         MySQLAccess access = new MySQLAccess();
-        Appointment app = new Appointment(d.getDoctorUsername(), getUsername(), date, start_time, end_time);
+        Appointment app = new Appointment(doctorUsername, getUsername(), date, start_time, end_time);
         appointments.add(app);
-        access.readAppointment(getUsername(), d.getDoctorUsername(), date, start_time, end_time);
+        access.readAppointment(getUsername(), doctorUsername, date, start_time, end_time);
     }
 
     public void updateAppointments() {

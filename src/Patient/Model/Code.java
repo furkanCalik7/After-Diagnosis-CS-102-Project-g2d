@@ -20,15 +20,15 @@ public class Code {
         char random;
 
         code_index = "abcdefghijklmnopqrstuvwxtz0123456789";
-        code_id = new StringBuffer("");
 
         do{
+            code_id = new StringBuffer("");
             for(int i = 0; i < 6; i++){
                 random = code_index.charAt((int)(Math.random()*36));
                 code_id.append(random);
             }
-        }while(mySQLAccess.isCodeUsed(code_index));
-        return new Code(code_index, doctor_username,false);
+        }  while(!mySQLAccess.isCodeUsed(code_id.toString()));
+        return new Code(code_id.toString(), doctor_username,false);
     }
 
     public String getCode_id() {

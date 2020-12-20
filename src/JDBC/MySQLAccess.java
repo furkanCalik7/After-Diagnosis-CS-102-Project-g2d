@@ -10,11 +10,11 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.nio.file.Path;
 import java.sql.*;
-import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import Appointment.*;
+import Appointment.Appointment;
+import Patient.Model.PatientInfoCard;
 
 public class MySQLAccess {
     private Connection connect = null;
@@ -125,8 +125,9 @@ public class MySQLAccess {
     public ArrayList<Appointment> getAppointments(Patient p) {
         ArrayList<Appointment> appList = new ArrayList<>();
         try {
+            connect = dbConnection.getConnection();
             preparedStatement = connect
-                    .prepareStatement("SELECT * FROM appointment WHERE patient_username = ?");
+                    .prepareStatement("SELECT * FROM appointment WHERE patient_username = ? AND is_approved = 1");
             preparedStatement.setString(1, p.getUsername());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -301,11 +302,7 @@ public class MySQLAccess {
             preparedStatement.setBoolean(3, false);
 
             int i = preparedStatement.executeUpdate();
-
-            if (i > 0) {
-                return true;
-            }
-
+            return true;
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -393,6 +390,7 @@ public class MySQLAccess {
 
     public void readAppointment(String username, String doctorUsername, Date date, Time start_time, Time end_time) {
         try {
+            connect = dbConnection.getConnection();
             preparedStatement = connect
                     .prepareStatement("INSERT INTO appointment values(default, ?, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, doctorUsername);
@@ -673,7 +671,7 @@ public class MySQLAccess {
                 preparedStatement = connect.prepareStatement("SELECT * FROM user WHERE user_id = ?");
                 preparedStatement.setInt(1, doctorID);
                 ResultSet rs = preparedStatement.executeQuery();
-                while (resultSet.next()) {
+                while (rs.next()) {
                     String username = rs.getString("username");
                     String email = rs.getString("email");
                     String name = rs.getString("name");
@@ -683,14 +681,14 @@ public class MySQLAccess {
                     preparedStatement.setInt(1, doctorID);
                     rs = preparedStatement.executeQuery();
                     if (rs.next()) {
-                        speciality = resultSet.getString("speciality");
+                        speciality = rs.getString("speciality");
                     }
                     docList.add(new DoctorInfoCard(username, email, name, surname, sex, speciality));
                 }
             }
             return docList;
         } catch (Exception e) {
-            System.out.println(e);
+            e.printStackTrace();
         }
         return null;
     }
@@ -948,9 +946,6 @@ public class MySQLAccess {
         }
         return false;
     }
-
-
-
     public Doctor getDoctorByUsername(String doctorUserName) {
         try {
             int user_id = 0;
@@ -987,6 +982,7 @@ public class MySQLAccess {
         }
         return null;
     }
+
     public User getUser(String username) {
         try {
             connect = dbConnection.getConnection();
@@ -1004,8 +1000,8 @@ public class MySQLAccess {
             String sex = "";
 
             while(resultSet.next()){
-                userType = resultSet.getString("userType");
-                password = resultSet.getString("username");
+                userType = resultSet.getString("user_type");
+                username = resultSet.getString("username");
                 name = resultSet.getString("name");
                 surname = resultSet.getString("surname");
                 email = resultSet.getString("email");
@@ -1056,6 +1052,7 @@ public class MySQLAccess {
         }
         return null;
     }
+
     public ArrayList<LabTechnician> getAllLabTechs() {
         try {
             ArrayList<LabTechnician> lablist = new ArrayList<LabTechnician>();
