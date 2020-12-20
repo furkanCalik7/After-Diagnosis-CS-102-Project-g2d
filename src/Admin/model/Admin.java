@@ -1,8 +1,9 @@
 package Admin.model;
 
 import Doctor.Model.Doctor;
+import Doctor.Model.DoctorInfoCard;
 import JDBC.MySQLAccess;
-import JDBC.User;
+import LabTechs.Model.LabTechnician;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,7 +20,7 @@ public class Admin extends User {
         Doctor d = new Doctor(name + surname, password, email, name, surname, sex, speciality);
         MySQLAccess access = new MySQLAccess();
         try {
-            access.readDataBase(d);
+            access.addUser(d);
             return true;
         } catch (Exception e) {
             System.out.print(e);
@@ -27,26 +28,39 @@ public class Admin extends User {
         return false;
     }
 
-    /*public boolean addLabTech(String name, String surname, String email) {
+    public boolean addLabTech(String name, String surname, String email, String sex) {
         //generate code
-        String password = "";
-        LabTechician l = new LabTechnician(name + surname, password, email, name, surname);
+        String password = "12345";
+        LabTechnician l = new LabTechnician(name + surname, password, email, name, surname, sex);
         MySQLAccess access = new MySQLAccess();
         try {
-            access.readDataBase(l);
+            access.addUser(l);
             return true;
         } catch (Exception e) {
             System.out.print(e);
         }
         return false;
-    }*/
+    }
 
     public ArrayList<User> searchWorker(String name) {
         MySQLAccess access = new MySQLAccess();
-        return access.findWorkerByName(name);
+        return access.findWorkerByName(getUsername());
     }
 
+    public ArrayList<DoctorInfoCard> seeDoctors() {
+        MySQLAccess access = new MySQLAccess();
+        return access.getAllDoctors();
+    }
 
+    public ArrayList<LabTechnician> seeLabTechs() {
+        MySQLAccess access = new MySQLAccess();
+        return access.getAllLabTechs();
+    }
+
+    public ArrayList<UserInfoCard> seeAllWorkers() {
+        MySQLAccess access = new MySQLAccess();
+        return access.getAllWorkers();
+    }
 
 
 }

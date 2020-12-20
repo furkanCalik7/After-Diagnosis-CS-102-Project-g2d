@@ -1,11 +1,13 @@
 package Doctor.Model;
 
 import Appointment.Appointment;
-import JDBC.Message;
 import JDBC.MySQLAccess;
-import JDBC.User;
+import Admin.model.User;
+import LabTechs.Model.Test;
+import LabTechs.Model.TestRequest;
+import Patient.Model.Code;
+import Patient.Model.PatientInfoCard;
 
-import java.lang.reflect.Array;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -16,9 +18,8 @@ public class Doctor extends User {
     private String speciality;
     private ArrayList<PatientSlot> patientSlots;
     private MySQLAccess mySQLAccess;
-    private ArrayList<Appointment> appointments;
-    private ArrayList<Message> inbox;
-    private ArrayList<Message> outbox;
+    private ArrayList<Appointment> approvedAppointments;
+    private ArrayList<Appointment> waitingAppointments;
     private ArrayList<Timestamp> availableTimes;
 
 
@@ -29,62 +30,70 @@ public class Doctor extends User {
         updateInbox();
         updateOutbox();
         availableTimes = mySQLAccess.getAvailableDates(this);
+        approvedAppointments = mySQLAccess.getApprovedAppointmentOfDoctor(this);
+        waitingAppointments = mySQLAccess.getWaitingAppointmentOfDoctor(this);
+        patientSlots = mySQLAccess.getPatientsOfDoctor(getUsername());
     }
-
 
     public ArrayList<Timestamp> getAvailableTimes() {
         return availableTimes;
     }
-
     public void setAvailableTimes(ArrayList<Timestamp> availableTimes) {
         this.availableTimes = availableTimes;
     }
+    public String getSpeciality() {
+        return speciality;
+    }
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
+    }
+
+
     public boolean addAvailableTimes(Date date, Time time){
         availableTimes.add(new Timestamp(date.getTime() + time.getTime()));
         return mySQLAccess.readAvailableTimes(this,date,time);
     }
 
-
-    public void sendMessages(String username, String subject, String content) {
-        Message message = Message.newMessage(username, getUsername(), subject, content);
-        message.sendMessage();
-        updateOutbox();
+    public Code createCodeForPatient(){
+        Code code = Code.newCode(this.getUsername());
+        mySQLAccess.addCode(code);
+        return code;
     }
 
-    public ArrayList<Message> getInbox() {
-        return inbox;
+    public void updateDoctorInformation(){
+        mySQLAccess.updateDoctorInformationOnDatabase(this);
+    }
+    public void approveAppointment(Appointment appointment){
+        mySQLAccess.approveAppointment(appointment);
     }
 
-    public ArrayList<Message> getOutbox() {
-            return outbox;
-        }
-
-    public void updateInbox() {
-        inbox = mySQLAccess.getIncomingMessage(this.getUsername());
+    public ArrayList<PatientSlot> getPatientSlots() {
+        return patientSlots;
     }
 
-    public void updateOutbox() {
-        outbox = mySQLAccess.getOutGoingMgessage(this.getUsername());
+    public ArrayList<Appointment> getApprovedAppointments() {
+        return approvedAppointments;
     }
 
-    public String getSpeciality() {
-        return speciality;
+    public ArrayList<Appointment> getWaitingAppointments() {
+        return waitingAppointments;
     }
 
-    public void setSpeciality(String speciality) {
-        this.speciality = speciality;
+    public boolean sendTestRequest(String test_name, PatientInfoCard patient, String lab_tech_username){
+        TestRequest newTest = TestRequest.newTest(test_name,patient,getUsername(),lab_tech_username);
+        return mySQLAccess.addTestRequest(newTest);
     }
 
     @Override
     public String toString() {
+        System.out.println(super.toString());
         return "Doctor{" +
-                ", username = " + super.getUsername() + '\'' +
-                ", password = " + super.getPassword() + '\'' +
-                ", email = " + super.getEmail() + '\'' +
-                ", name = " + super.getName() + '\'' +
-                ", surname = " + super.getSurname() + '\'' +
-                ", sex = " + super.getSex() + '\'' +
-                ", speciality = '" + speciality + '\'' +
+                "speciality='" + speciality + '\'' +
+                ", patientSlots=" + patientSlots +
+                ", mySQLAccess=" + mySQLAccess +
+                ", approvedAppointments=" + approvedAppointments +
+                ", waitingAppointments=" + waitingAppointments +
+                ", availableTimes=" + availableTimes +
                 '}';
     }
 }

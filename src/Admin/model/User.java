@@ -1,6 +1,12 @@
-package JDBC;
+package Admin.model;
 
-public abstract class User {
+import JDBC.Message;
+import JDBC.MessageSender;
+import JDBC.MySQLAccess;
+
+import java.util.ArrayList;
+
+public abstract class User implements MessageSender {
 
      private String username;
      private String password;
@@ -9,6 +15,8 @@ public abstract class User {
      private String surname;
      private String sex;
      private String userType;
+    private ArrayList<Message> inbox;
+    private ArrayList<Message> outbox;
 
     public User(String username, String userType, String password, String email, String name, String surname, String sex){
         this.username = username;
@@ -75,6 +83,30 @@ public abstract class User {
     public void setUserType(String userType) {
         this.userType = userType;
     }
+
+    public void sendMessages(String username, String subject, String content) {
+        Message message = Message.newMessage(username, getUsername(), subject, content);
+        message.sendMessage();
+        updateOutbox();
+    }
+    public void updateInbox(){
+        MySQLAccess access = new MySQLAccess();
+        inbox = access.getIncomingMessage(getUsername());
+    }
+
+    public void updateOutbox(){
+        MySQLAccess access = new MySQLAccess();
+        outbox = access.getOutGoingMessage(getUsername());
+    }
+
+    public ArrayList<Message> getInbox() {
+        return inbox;
+    }
+
+    public ArrayList<Message> getOutbox() {
+        return outbox;
+    }
+
 
     @Override
     public String toString() {
