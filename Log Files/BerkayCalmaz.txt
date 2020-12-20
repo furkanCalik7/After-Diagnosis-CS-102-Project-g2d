@@ -19,3 +19,12 @@ Estimated Time: 4 Hours
 17.11
 Created the main frame for the Doctor class. Created the homepage panel.
 Estimated Time: 3 Hours
+
+19.12
+MVC design is researched. 30 min
+Progressed in GUI designs with Emre Turhan. 4 Hours
+
+20.12
+GUI and modal classes are merged. 
+Some panels are implemented.
+4 Hours.
