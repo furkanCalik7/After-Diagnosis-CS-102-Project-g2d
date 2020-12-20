@@ -951,38 +951,34 @@ public class MySQLAccess {
 
 
 
-    public Doctor getDoctor(String doctor_username) {
+    public Doctor getDoctorByUsername(String doctorUserName) {
         try {
+            int user_id = 0;
+
             connect = dbConnection.getConnection();
-            String sql = "SELECT * FROM user WHERE username = ?";
+            String sql = "SELECT user_id, user_type, username, password, name, surname, email, sex FROM user WHERE username = ?";
             preparedStatement = connect.prepareStatement(sql);
-            preparedStatement.setString(1, doctor_username);
+            preparedStatement.setString(1, doctorUserName);
             resultSet = preparedStatement.executeQuery();
-
-            String password = "";
-            String name = "";
-            String surname = "";
-            String email = "";
-            String sex = "";
-            String speciality = "";
-
-            while (resultSet.next()) {
-                password = resultSet.getString("password");
-                name = resultSet.getString("name");
-                surname = resultSet.getString("surname");
-                email = resultSet.getString("email");
-                sex = resultSet.getString("sex");
+            if (resultSet.next()) {
+                user_id = resultSet.getInt("user_id");
             }
+            PreparedStatement pr = connect.prepareStatement("SELECT * FROM doctor WHERE doctor_id = ?");
+            pr.setInt(1, user_id);
+            ResultSet rs = pr.executeQuery();
 
-            sql = "SELECT * FROM doctor WHERE doctor_id = ?";
-            preparedStatement = connect.prepareStatement(sql);
-            preparedStatement.setInt(1, getID(doctor_username));
-            resultSet = preparedStatement.executeQuery();
 
-            while (resultSet.next()) {
-                speciality = resultSet.getString("speciality");
+            String username = resultSet.getString("username");
+            String password = resultSet.getString("password");
+            String email = resultSet.getString("email");
+            String name = resultSet.getString("name");
+            String surname = resultSet.getString("surname");
+            String sex = resultSet.getString("sex");
+            String speciality = " ";
+            if (rs.next()) {
+                speciality = rs.getString("speciality");
             }
-            return new Doctor(doctor_username, password, email, name, surname, sex, speciality);
+            return new Doctor(username, password, email, name, surname, sex, speciality);
 
         } catch (Exception e) {
             e.printStackTrace();

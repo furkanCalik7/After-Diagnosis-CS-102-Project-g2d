@@ -2,8 +2,9 @@ package Admin.model;
 
 import Doctor.Model.*;
 import JDBC.*;
-import LabTechs.*;
 import LabTechs.Model.LabTechnician;
+import LabTechs.Model.Test;
+import LabTechs.Model.*;
 
 import java.sql.SQLException;
 import java.util.ArrayList;

@@ -14,7 +14,7 @@ public class Main {
         MySQLAccess mySQLAccess = new MySQLAccess();
 
         Doctor doctor = mySQLAccess.getDoctorByUsername("MichealJackson");
-
+        System.out.println(doctor);
         ArrayList<PatientSlot> patientInfoCards = doctor.getPatientSlots();
 
         for(PatientSlot patientInfoCard:patientInfoCards){
