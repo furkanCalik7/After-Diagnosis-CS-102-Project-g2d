@@ -1019,13 +1019,13 @@ public class MySQLAccess {
             }
 
             if(userType.equals("LabTechnician")) {
-                u = new LabTechnician(username, email, email, name, surname, sex);
+                u = new LabTechnician(user_id,username, email, email, name, surname, sex);
             }
             else if(userType.equals("Patient")) {
-                u = new Patient(username, email, email, name, surname, sex);
+                u = new Patient(user_id,username, email, email, name, surname, sex);
             }
             else {
-                u = new Admin(username, email, email, name, surname, sex);
+                u = new Admin(user_id,username, email, email, name, surname, sex);
             }
             u.setId(user_id);
             return u;

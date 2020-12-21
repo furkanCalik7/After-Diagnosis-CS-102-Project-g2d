@@ -40,6 +40,15 @@ public class Patient extends User {
         updateOutbox();
         updateDrugs();
     }
+    public Patient(int user_id,String username, String password, String email, String name, String surname, String sex) {
+        super(user_id,username, "Patient", password, email, name, surname, sex);
+        updateDoctors();
+        updatePatientInfo();
+        updateAppointments();
+        updateInbox();
+        updateOutbox();
+        updateDrugs();
+    }
 
     public String getComplaint() {
         return complaint;
