@@ -15,7 +15,7 @@ public class Admin extends User {
         super(username, "Admin", password, email, name, surname, sex);
     }
     public Admin(int user_id, String username, String password, String email, String name, String surname, String sex) throws SQLException {
-        super(user_id,username, "Admin", password, email, name, surname, sex);
+        super(user_id, username, "Admin", password, email, name, surname, sex);
     }
 
     public boolean addDoctor(String name, String surname, String email, String sex, String speciality) throws SQLException {

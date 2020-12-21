@@ -26,16 +26,10 @@ public class Doctor extends User {
     public Doctor(String username, String password, String email, String name, String surname, String sex, String speciality) {
         super(username, "Doctor", password, email, name, surname, sex);
         this.speciality = speciality;
-        mySQLAccess = new MySQLAccess();
-        updateInbox();
-        updateOutbox();
-        availableTimes = mySQLAccess.getAvailableDates(this);
-        approvedAppointments = mySQLAccess.getApprovedAppointmentOfDoctor(this);
-        waitingAppointments = mySQLAccess.getWaitingAppointmentOfDoctor(this);
-        patientSlots = mySQLAccess.getPatientsOfDoctor(this);
     }
-    public Doctor(int user_id,String username, String password, String email, String name, String surname, String sex, String speciality) {
-        super(user_id,username, "Doctor", password, email, name, surname, sex);
+
+    public Doctor(int user_id, String username, String password, String email, String name, String surname, String sex, String speciality) {
+        super(user_id, username, "Doctor", password, email, name, surname, sex);
         this.speciality = speciality;
         mySQLAccess = new MySQLAccess();
         updateInbox();
@@ -49,32 +43,36 @@ public class Doctor extends User {
     public ArrayList<Timestamp> getAvailableTimes() {
         return availableTimes;
     }
+
     public void setAvailableTimes(ArrayList<Timestamp> availableTimes) {
         this.availableTimes = availableTimes;
     }
+
     public String getSpeciality() {
         return speciality;
     }
+
     public void setSpeciality(String speciality) {
         this.speciality = speciality;
     }
 
 
-    public boolean addAvailableTimes(Date date, Time time){
+    public boolean addAvailableTimes(Date date, Time time) {
         availableTimes.add(new Timestamp(date.getTime() + time.getTime()));
-        return mySQLAccess.readAvailableTimes(this,date,time);
+        return mySQLAccess.readAvailableTimes(this, date, time);
     }
 
-    public Code createCodeForPatient(){
+    public Code createCodeForPatient() {
         Code code = Code.newCode(this.getUsername());
         mySQLAccess.addCode(code);
         return code;
     }
 
-    public void updateDoctorInformation(){
+    public void updateDoctorInformation() {
         mySQLAccess.updateDoctorInformationOnDatabase(this);
     }
-    public void approveAppointment(Appointment appointment){
+
+    public void approveAppointment(Appointment appointment) {
         mySQLAccess.approveAppointment(appointment);
     }
 
@@ -90,8 +88,8 @@ public class Doctor extends User {
         return waitingAppointments;
     }
 
-    public boolean sendTestRequest(String test_name, PatientInfoCard patient, String lab_tech_username){
-        TestRequest newTest = TestRequest.newTest(test_name,patient,getUsername(),lab_tech_username);
+    public boolean sendTestRequest(String test_name, PatientInfoCard patient, String lab_tech_username) {
+        TestRequest newTest = TestRequest.newTest(test_name, patient, getUsername(), lab_tech_username);
         return mySQLAccess.addTestRequest(newTest);
     }
 

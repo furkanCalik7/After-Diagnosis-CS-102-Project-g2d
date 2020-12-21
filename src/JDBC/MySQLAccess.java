@@ -1027,7 +1027,6 @@ public class MySQLAccess {
             else {
                 u = new Admin(user_id,username, email, email, name, surname, sex);
             }
-            u.setId(user_id);
             return u;
         } catch (Exception e) {
             e.printStackTrace();
