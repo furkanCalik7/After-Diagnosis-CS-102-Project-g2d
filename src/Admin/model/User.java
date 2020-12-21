@@ -27,6 +27,17 @@ public abstract class User implements MessageSender {
         this.userType = userType;
         viewers = new ArrayList<IViewer>();
     }
+    public User(int user_id, String username, String userType, String password, String email, String name, String surname, String sex){
+        this.username = username;
+        this.password = password;
+        this.email  = email;
+        this.name = name;
+        this.surname = surname;
+        this.sex = sex;
+        this.userType = userType;
+        id = user_id;
+        viewers = new ArrayList<IViewer>();
+    }
 
     public int getId() {
         return id;

@@ -34,6 +34,17 @@ public class Doctor extends User {
         waitingAppointments = mySQLAccess.getWaitingAppointmentOfDoctor(this);
         patientSlots = mySQLAccess.getPatientsOfDoctor(this);
     }
+    public Doctor(int user_id,String username, String password, String email, String name, String surname, String sex, String speciality) {
+        super(user_id,username, "Doctor", password, email, name, surname, sex);
+        this.speciality = speciality;
+        mySQLAccess = new MySQLAccess();
+        updateInbox();
+        updateOutbox();
+        availableTimes = mySQLAccess.getAvailableDates(this);
+        approvedAppointments = mySQLAccess.getApprovedAppointmentOfDoctor(this);
+        waitingAppointments = mySQLAccess.getWaitingAppointmentOfDoctor(this);
+        patientSlots = mySQLAccess.getPatientsOfDoctor(this);
+    }
 
     public ArrayList<Timestamp> getAvailableTimes() {
         return availableTimes;

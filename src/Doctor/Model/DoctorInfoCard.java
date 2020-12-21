@@ -6,9 +6,9 @@ public class DoctorInfoCard extends UserInfoCard {
 
     private String doctorSpeciality;
 
-    public DoctorInfoCard(String doctorUsername, String doctorEmail, String doctorName, String doctorSurname,
+    public DoctorInfoCard(int user_id, String doctorUsername, String doctorEmail, String doctorName, String doctorSurname,
                           String doctorSex, String doctorSpeciality) {
-        super(doctorUsername, doctorEmail, doctorName, doctorSurname, doctorSex);
+        super(user_id,doctorUsername, doctorEmail, doctorName, doctorSurname, doctorSex);
         this.doctorSpeciality = doctorSpeciality;
     }
 

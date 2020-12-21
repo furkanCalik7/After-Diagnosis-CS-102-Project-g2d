@@ -12,9 +12,9 @@ public class PatientInfoCard extends UserInfoCard {
     private String surgeries;
     private String complaint;
 
-    public PatientInfoCard(String username, String email, String name, String surname, String sex, int age,
+    public PatientInfoCard(int user_id,String username, String email, String name, String surname, String sex, int age,
                            Date dob, String bloodType, String allergies, String surgeries, String complaint) {
-        super(username, email, name, surname, sex);
+        super(user_id,username, email, name, surname, sex);
         this.age = age;
         this.dob = dob;
         this.bloodType = bloodType;
@@ -24,7 +24,7 @@ public class PatientInfoCard extends UserInfoCard {
     }
 
     public PatientInfoCard(int age, Date dob, String bloodType, String allergies, String surgeries) {
-        super("", "", "", "", "");
+        super(0,"", "", "", "", "");
         this.age = age;
         this.dob = dob;
         this.bloodType = bloodType;

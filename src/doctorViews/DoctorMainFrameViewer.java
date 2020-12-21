@@ -1,5 +1,8 @@
 package doctorViews;
 
+import Doctor.Model.Doctor;
+import JDBC.MySQLAccess;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -68,7 +71,12 @@ public class DoctorMainFrameViewer extends JFrame {
         contentPane.add(buttonPanel, BorderLayout.WEST);
 
         doctorHomepagePanelView = new DoctorHomepagePanelView();
-        myPatientsLayeredPanelView = new MyPatientsLayeredPanelView();
+        //
+        MySQLAccess mySQLAccess = new MySQLAccess();
+        Doctor doctor = mySQLAccess.getDoctorByUsername("MichealJackson");
+        myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
+        //
+
 
         JPanel layeredPanePanel = new JPanel();
         contentPane.add(layeredPanePanel, BorderLayout.CENTER);

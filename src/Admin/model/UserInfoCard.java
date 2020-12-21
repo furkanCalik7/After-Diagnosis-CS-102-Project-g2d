@@ -8,7 +8,8 @@ public class UserInfoCard {
     protected String surname;
     protected String sex;
 
-    public UserInfoCard(String username, String email, String name, String surname, String sex) {
+    public UserInfoCard(int user_id,String username, String email, String name, String surname, String sex) {
+        this.user_id = user_id;
         this.username = username;
         this.email = email;
         this.name = name;

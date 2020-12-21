@@ -1,5 +1,8 @@
 package doctorViews;
 
+import Doctor.Model.Doctor;
+import Doctor.Model.PatientSlot;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -25,17 +28,19 @@ import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.util.ArrayList;
 import javax.swing.border.MatteBorder;
 
 public class MyPatientsMainPanel extends JPanel {
     private JTable table;
     private JTextField txtSearchPatientBy;
     private String[] sortArray;
+    private Doctor doctor;
 
     /**
      * Create the panel.
      */
-    public MyPatientsMainPanel() {
+    public MyPatientsMainPanel(Doctor doctor) {
         setLayout(new BorderLayout(0, 20));
 
         JPanel patientListPanel = new JPanel();
@@ -45,6 +50,27 @@ public class MyPatientsMainPanel extends JPanel {
         table.setEnabled(false);
         table.setBorder(new EmptyBorder(8, 0, 8, 0));
         table.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
+//        Experimental
+//        ArrayList<PatientSlot> patientSlots = doctor.getPatientSlots();
+//        String fullName;
+//        String complaint;
+//        int status;
+//        DefaultTableModel dtm = new DefaultTableModel();
+//
+//        String[] headers = new String[] {
+//                "Patient Name", "Description", "Status", "Add Drug", "Remove Patient"};
+//
+//        dtm.setColumnIdentifiers(headers);
+//        for(int i  = 0; i <patientSlots.size(); i++){
+//            fullName = patientSlots.get(i).getPatientInfo().getName() + " " + patientSlots.get(i).getPatientInfo().getSurname();
+//            complaint = patientSlots.get(i).getPatientInfo().getComplaint();
+//            status = patientSlots.get(i).getStatus();
+//            System.out.println("reached.");
+//            dtm.addRow(new Object[]{fullName,complaint,status,"data","data","data"});
+//        }
+//        table.setModel(dtm);
+
         table.setModel(new DefaultTableModel(
                 new Object[][] {
                         {null, null, null, null, null},

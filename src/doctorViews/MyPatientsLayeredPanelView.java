@@ -1,5 +1,7 @@
 package doctorViews;
 
+import Doctor.Model.Doctor;
+
 import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
 import java.awt.CardLayout;
@@ -12,10 +14,10 @@ public class MyPatientsLayeredPanelView extends JPanel {
     /**
      * Create the panel.
      */
-    public MyPatientsLayeredPanelView() {
+    public MyPatientsLayeredPanelView(Doctor doctor) {
         setLayout(new BorderLayout(0, 0));
         patientCreationPanelView = new myPatientCreationPanelView();
-        myPatientsMainPanel = new MyPatientsMainPanel();
+        myPatientsMainPanel = new MyPatientsMainPanel(doctor);
 
         layeredPane = new JLayeredPane();
         add(layeredPane);
