@@ -29,6 +29,8 @@ public class Patient extends User {
     private String complaint;
 
 
+
+    // Patient constructor
     public Patient(String username, String password, String email, String name, String surname, String sex) {
         super(username, "Patient", password, email, name, surname, sex);
         updateDoctors();
