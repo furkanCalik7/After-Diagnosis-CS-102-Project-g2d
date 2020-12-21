@@ -55,8 +55,6 @@ public class MySQLAccess {
             if (u instanceof Doctor)
                 addDoctor((Doctor) u);
 
-        } catch (Exception e) {
-            throw e;
         } finally {
             close();
         }
@@ -148,7 +146,7 @@ public class MySQLAccess {
     }
 
     public PatientInfoCard getPatientInfo(String username) {
-        int user_id;
+
         PatientInfoCard patientInfo;
         try {
             connect = dbConnection.getConnection();
@@ -157,20 +155,20 @@ public class MySQLAccess {
             preparedStatement.setString(1, username);
             resultSet = preparedStatement.executeQuery();
 
+            int user_id = 0;
             String name = "";
             String surname = "";
             String email = "";
             String sex = "";
 
-
             while (resultSet.next()) {
+                user_id = resultSet.getInt("user_id");
                 name = resultSet.getString("name");
                 surname = resultSet.getString("surname");
                 email = resultSet.getString("email");
                 sex = resultSet.getString("sex");
             }
 
-            user_id = getID(username);
             preparedStatement = connect
                     .prepareStatement("SELECT * FROM patient WHERE patient_id = ?");
             preparedStatement.setInt(1, user_id);
@@ -183,6 +181,7 @@ public class MySQLAccess {
                 String surgeries = resultSet.getString("preivous_surgeries");
                 String complaint = resultSet.getString("complaint");
                 patientInfo = new PatientInfoCard(username, email, name, surname, sex, age, birthDate, bloodType, allergies, surgeries, complaint);
+                patientInfo.setUser_id(user_id);
                 return patientInfo;
             }
         } catch (Exception e) {
@@ -193,7 +192,7 @@ public class MySQLAccess {
 
     public ArrayList<Timestamp> getAvailableDates(Doctor d) {
         ArrayList<Timestamp> availableTimes = new ArrayList<>();
-        int doctor_id = getID(d.getUsername());
+        int doctor_id = d.getId();
         try {
             preparedStatement = connect.prepareStatement("SELECT * FROM available_times WHERE doctor_id = ?");
             preparedStatement.setInt(1, doctor_id);
@@ -213,7 +212,7 @@ public class MySQLAccess {
 
     public boolean readAvailableTimes(Doctor d, Date date, Time time) {
         try {
-            int id = getID(d.getUsername());
+            int id = d.getId();
             connect = dbConnection.getConnection();
             String sql = "INSERT INTO available_times VALUES(DEFAULT, ?,?,? )";
             preparedStatement = connect.prepareStatement(sql);
@@ -697,11 +696,10 @@ public class MySQLAccess {
         return null;
     }
 
-    public ArrayList<PatientInfoCard> getPatientInfos(String dUsername) {
+    public ArrayList<PatientInfoCard> getPatientInfos(Doctor doctor) {
         try {
             int patientID = 0;
-            int doctorID = 0;
-            doctorID = getID(dUsername);
+
             String patient_username;
 
             ArrayList<PatientInfoCard> patientInfoCards = new ArrayList<>();
@@ -709,7 +707,7 @@ public class MySQLAccess {
             connect = dbConnection.getConnection();
             String sql = "SELECT patient_id FROM doctor_patient WHERE doctor_id = ?";
             preparedStatement = connect.prepareStatement(sql);
-            preparedStatement.setInt(1, doctorID);
+            preparedStatement.setInt(1, doctor.getId());
             resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()) {
@@ -732,11 +730,11 @@ public class MySQLAccess {
         return null;
     }
 
-    public ArrayList<PatientSlot> getPatientsOfDoctor(String dUsername) {
+    public ArrayList<PatientSlot> getPatientsOfDoctor(Doctor doctor) {
         try {
             ArrayList<PatientSlot> patientSlots = new ArrayList<>();
-            ArrayList<PatientInfoCard> patientInfos = getPatientInfos(dUsername);
-            int doctor_id = getID(dUsername);
+            ArrayList<PatientInfoCard> patientInfos = getPatientInfos(doctor);
+            int doctor_id = doctor.getId();
             int patient_id;
             int status;
             Date start_date;
@@ -755,7 +753,7 @@ public class MySQLAccess {
                     status = resultSet.getInt("status");
                     start_date = resultSet.getDate("start_date");
                     code_id = resultSet.getString("code");
-                    patientSlots.add(new PatientSlot(dUsername,patientInfoCard,status,code_id,start_date));
+                    patientSlots.add(new PatientSlot(doctor.getUsername(), patientInfoCard,status,code_id,start_date));
                 }
             }
 

@@ -32,7 +32,7 @@ public class Doctor extends User {
         availableTimes = mySQLAccess.getAvailableDates(this);
         approvedAppointments = mySQLAccess.getApprovedAppointmentOfDoctor(this);
         waitingAppointments = mySQLAccess.getWaitingAppointmentOfDoctor(this);
-        patientSlots = mySQLAccess.getPatientsOfDoctor(getUsername());
+        patientSlots = mySQLAccess.getPatientsOfDoctor(this);
     }
 
     public ArrayList<Timestamp> getAvailableTimes() {

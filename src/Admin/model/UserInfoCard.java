@@ -1,7 +1,7 @@
 package Admin.model;
 
 public class UserInfoCard {
-
+    protected int user_id;
     protected String username;
     protected String email;
     protected String name;
@@ -14,6 +14,14 @@ public class UserInfoCard {
         this.name = name;
         this.surname = surname;
         this.sex = sex;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 
     public String getUsername() {
