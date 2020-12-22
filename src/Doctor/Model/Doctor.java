@@ -56,6 +56,13 @@ public class Doctor extends User {
         this.speciality = speciality;
     }
 
+    public void prescribeDrug(String patientUsername, String name, boolean isMorning, boolean isAfternoon,
+                        boolean isEvening, boolean isHungry, Date startDate, Date finalDate, int dose) {
+
+        Drug drug = new Drug(patientUsername, name, isMorning, isAfternoon, isEvening, isHungry, startDate, finalDate,
+                dose);
+        mySQLAccess.addDrug(drug);
+    }
 
     public boolean addAvailableTimes(Date date, Time time) {
         availableTimes.add(new Timestamp(date.getTime() + time.getTime()));

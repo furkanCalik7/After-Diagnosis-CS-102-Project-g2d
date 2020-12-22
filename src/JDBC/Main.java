@@ -1,6 +1,7 @@
 package JDBC;
 
 
+import Admin.model.Admin;
 import Doctor.Model.Doctor;
 import Doctor.Model.DoctorInfoCard;
 import Doctor.Model.PatientSlot;
@@ -16,14 +17,13 @@ import java.util.ArrayList;
 public class Main {
 
     public static void main(String[] args) throws SQLException {
-        MySQLAccess mySQLAccess = new MySQLAccess();
-//        Patient patient = (Patient) mySQLAccess.getUser("crazyaslan5");
-//        Date date = Date.valueOf("1976-01-05");
-//        patient.setPatientInfo(date, "0RH+", 44, "polen", "bypass", "Stomach ache");
-//        System.out.println(patient);
-//        System.out.println(patient.getAppointmentDates());
-        Doctor doctor = mySQLAccess.getDoctorByUsername("MichealJackson");
-        System.out.println("size" + doctor.getPatientSlots().size());
-        System.out.println(doctor.getId());
+
+        MySQLAccess access = new MySQLAccess();
+        Doctor d = access.getDoctorByUsername("JuliaRoberts");
+        Date d1 = Date.valueOf("2020-12-22");
+        Date d2 = Date.valueOf("2021-12-22");
+        d.prescribeDrug("AlanGreen", "Apranax", true, false, false, false, d1, d2, 2);
+
+
     }
 }

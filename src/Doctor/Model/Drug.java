@@ -14,9 +14,10 @@ public class Drug {
     private boolean isHungry;
     private Date startDate;
     private Date finalDate;
+    private int dose;
 
     public Drug(String patientUsername, String name, boolean isMorning, boolean isAfternoon,
-                boolean isEvening, boolean isHungry, Date startDate, Date finalDate) {
+                boolean isEvening, boolean isHungry, Date startDate, Date finalDate, int dose) {
         this.patientUsername = patientUsername;
         this.name = name;
         this.isMorning = isMorning;
@@ -25,6 +26,44 @@ public class Drug {
         this.isHungry = isHungry;
         this.startDate = startDate;
         this.finalDate = finalDate;
+        this.dose = dose;
+    }
+
+
+    public int getDose() {
+        return dose;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getPatientUsername() {
+        return patientUsername;
+    }
+
+    public boolean isEvening() {
+        return isEvening;
+    }
+
+    public boolean isAfternoon() {
+        return isAfternoon;
+    }
+
+    public boolean isHungry() {
+        return isHungry;
+    }
+
+    public boolean isMorning() {
+        return isMorning;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public Date getFinalDate() {
+        return finalDate;
     }
 
     @Override

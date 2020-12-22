@@ -59,17 +59,19 @@ public class MySQLAccess {
             close();
         }
     }
+
     private void addPatient(Patient p) {
         int user_id;
         try {
             user_id = getID(p.getUsername());
-            preparedStatement = connect.prepareStatement("insert into patient values (?, ?, ?, ?, ?, ?)");
+            preparedStatement = connect.prepareStatement("insert into patient values (?, ?, ?, ?, ?, ?, ?)");
             preparedStatement.setInt(1, user_id);
             preparedStatement.setDate(2, p.getDob());
             preparedStatement.setString(3, p.getBloodType());
             preparedStatement.setInt(4, p.getAge());
             preparedStatement.setString(5, p.getAllergies());
             preparedStatement.setString(6, p.getSurgeries());
+            preparedStatement.setString(7, p.getComplaint());
             preparedStatement.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,7 +96,8 @@ public class MySQLAccess {
                 Date startDate = resultSet.getDate("start_date");
                 Date endDate = resultSet.getDate("final_date");
                 boolean isHungry = resultSet.getBoolean("is_hungry");
-                drugList.add(new Drug(username, name, isMorning, isAfternoon, isEvening, isHungry, startDate, endDate));
+                int dose = resultSet.getInt("dose");
+                drugList.add(new Drug(username, name, isMorning, isAfternoon, isEvening, isHungry, startDate, endDate, dose));
             }
             return drugList;
         } catch (Exception e) {
@@ -103,6 +106,36 @@ public class MySQLAccess {
         return null;
     }
 
+    public void addDrug(Drug d) {
+        try {
+            int patientID = getID(d.getPatientUsername());
+            connect = dbConnection.getConnection();
+            preparedStatement = connect
+                    .prepareStatement("INSERT INTO drug_patient values(default, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            String patientUsername = d.getPatientUsername();
+            String name = d.getName();
+            boolean isMorning = d.isMorning();
+            boolean isAfternoon = d.isAfternoon();
+            boolean isEvening = d.isEvening();
+            boolean isHungry = d.isHungry();
+            Date startDate = d.getStartDate();
+            Date finalDate = d.getFinalDate();
+            int dose = d.getDose();
+            preparedStatement.setInt(1, patientID);
+            preparedStatement.setString(2, name);
+            preparedStatement.setBoolean(3, isMorning);
+            preparedStatement.setBoolean(4, isAfternoon);
+            preparedStatement.setBoolean(5, isEvening);
+            preparedStatement.setDate(6, startDate);
+            preparedStatement.setDate(7, finalDate);
+            preparedStatement.setBoolean(8, isHungry);
+            preparedStatement.setInt(9, dose);
+
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     private int getID(String username) {
         try {
             int userID = 0;
