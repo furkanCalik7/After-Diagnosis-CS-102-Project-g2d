@@ -76,7 +76,7 @@ public class AdminMainFrame extends JFrame {
         addWorkerMainPanel = new AddWorkerMainPanel();
         hospitalWorkersPanel = new HospitalWorkersInfoPanel();
         messagePanel = new MessagePanel();
-        settingsPanel = new Views.SettingsPanel();
+        settingsPanel = new SettingsPanel();
         hospitalCrew = new JPanel();
         hospitalCrew.add( hospitalWorkersPanel );
 

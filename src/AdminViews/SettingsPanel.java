@@ -1,4 +1,4 @@
-package Views;
+package AdminViews;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
