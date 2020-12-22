@@ -83,6 +83,7 @@ public class LabTestsMainPanel extends JPanel {
 
         patientNameTextField = new JTextField();
         patientNameTextField.setFont(new Font("Century", Font.PLAIN, 20));
+        //TODO Tıklayınca yazının yok olmasını sağla textfielddan.
         patientNameTextField.setText("Patient Name");
         patientNameTxtFPanel.add(patientNameTextField);
         patientNameTextField.setColumns(10);
@@ -140,26 +141,30 @@ public class LabTestsMainPanel extends JPanel {
         buttonsPanel.add(panel);
 
         JButton labReqButton = new JButton("Create a Lab Request");
-        labReqButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                switchPanels( createRequestPanel );
-            }
-        });
-        labReqButton.setForeground(Color.BLACK);
         labReqButton.setFont(new Font("Century", Font.PLAIN, 20));
-        labReqButton.setBackground(new Color(255, 255, 255));
+        labReqButton.setBackground(new Color(38, 69, 191));
         panel.add(labReqButton);
 
         JButton availableTestsButton = new JButton("See Available Tests");
+        availableTestsButton.setFont(new Font("Century", Font.PLAIN, 20));
+        availableTestsButton.setBackground(new Color(240, 240, 240));
+        panel.add(availableTestsButton);
+
+        //Button Action Listeners.
+        labReqButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switchPanels( createRequestPanel );
+                availableTestsButton.setBackground(new Color(240, 240, 240));
+                labReqButton.setBackground(new Color(38, 69, 191));
+            }
+        });
+
         availableTestsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 switchPanels( seeAvailableTestsPanel );
+                labReqButton.setBackground(new Color(240, 240, 240));
+                availableTestsButton.setBackground(new Color(38, 69, 191));
             }
         });
-        availableTestsButton.setFont(new Font("Century", Font.PLAIN, 20));
-        panel.add(availableTestsButton);
-
-
-
     }
 }
