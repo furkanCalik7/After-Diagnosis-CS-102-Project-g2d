@@ -36,6 +36,7 @@ public class DoctorMainFrameViewer extends JFrame {
     private JPanel doctorHomepagePanelView;
     private MyPatientsLayeredPanelView myPatientsLayeredPanelView;
     private Doctor doctor;
+    private LabTestsMainPanel labTestsMainPanel;
 
     /**
      * Internal method to change panels.
@@ -83,8 +84,8 @@ public class DoctorMainFrameViewer extends JFrame {
         contentPane.add(buttonPanel, BorderLayout.WEST);
 
         doctorHomepagePanelView = new DoctorHomepagePanelView( doctor );
-
         myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
+        labTestsMainPanel = new LabTestsMainPanel();
 
         JPanel layeredPanePanel = new JPanel();
         contentPane.add(layeredPanePanel, BorderLayout.CENTER);
@@ -97,6 +98,7 @@ public class DoctorMainFrameViewer extends JFrame {
         //Panels need to be added in inverse order
         layeredPane.add(myPatientsLayeredPanelView);
         layeredPane.add(doctorHomepagePanelView);
+        layeredPane.add(labTestsMainPanel);
 
         //Button initializings
         JButton homepageButton = new JButton("Homepage");
@@ -142,6 +144,7 @@ public class DoctorMainFrameViewer extends JFrame {
         JButton labTestsButton = new JButton("Lab Tests");
         labTestsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                switchPanels(labTestsMainPanel);
             }
         });
         buttonPanel.add( labTestsButton );
