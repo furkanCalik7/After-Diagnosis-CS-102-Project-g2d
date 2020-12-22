@@ -1,29 +1,33 @@
 package AdminViews;
 
-import javax.swing.JPanel;
+import Admin.model.Admin;
+import javafx.scene.control.ComboBox;
+
+import javax.swing.*;
 import java.awt.BorderLayout;
-import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
-import javax.swing.JRadioButton;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
 import java.awt.Panel;
-import javax.swing.JButton;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddWorkerMainPanel extends JPanel {
 
-    private JTextField nameTextField;
-    private JTextField surnameTextField;
-    private JTextField textField_2;
+     JTextField nameTextField;
+     JTextField surnameTextField;
+     JTextField textField_2;
+     JComboBox comboBox;
+     JRadioButton doctorButton;
+     JRadioButton labTechButton;
+     Admin admin;
+
 
     /**
      * Create the panel.
      */
-    public AddWorkerMainPanel() {
+    public AddWorkerMainPanel(Admin admin) {
         setBackground(Color.MAGENTA);
         setBorder(new EmptyBorder(30, 30, 30, 30));
         setLayout(new BorderLayout(0, 0));
@@ -63,12 +67,16 @@ public class AddWorkerMainPanel extends JPanel {
         centerPanel.add(radioButtonPanel);
         radioButtonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-        JRadioButton doctorButton = new JRadioButton("Doctor");
+        doctorButton = new JRadioButton("Doctor");
         doctorButton.setHorizontalAlignment(SwingConstants.LEFT);
         radioButtonPanel.add(doctorButton);
 
-        JRadioButton labTechButton = new JRadioButton("Lab Technician");
+        labTechButton = new JRadioButton("Lab Technician");
         radioButtonPanel.add(labTechButton);
+
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(labTechButton);
+        bg.add(doctorButton);
 
         JPanel panel_6 = new JPanel();
         panel_6.setBackground(Color.MAGENTA);
@@ -114,8 +122,9 @@ public class AddWorkerMainPanel extends JPanel {
         JLabel lblNewLabel_3_2 = new JLabel("Medical Speciality");
         panel_9.add(lblNewLabel_3_2);
 
-        String[] words = new String[] { "sp1","sp2" };
-        JComboBox comboBox = new JComboBox( words  );
+        String[] words = new String[]{"Cardiology", "Neurology", "Immunology", "Dermatology", "Radiology", "Pathology",
+                "Pediatrics", ""};
+        comboBox = new JComboBox(words);
         //ACTION LISTENER
         comboBox.setMaximumRowCount(20);
         panel_9.add(comboBox);
@@ -125,10 +134,12 @@ public class AddWorkerMainPanel extends JPanel {
         centerPanel.add(panel_10);
         panel_10.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
+
         JButton btnNewButton = new JButton("FINISH");
         //ACTION LISTENER WILL BE ADDED
+        ActionListener listener = new AddWorkerController(admin, this);
+        btnNewButton.addActionListener(listener);
         panel_10.add(btnNewButton);
-
 
     }
 

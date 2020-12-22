@@ -11,10 +11,10 @@ import java.util.ArrayList;
 
 public class Admin extends User {
 
-    public Admin(String username, String password, String email, String name, String surname, String sex) throws SQLException {
+    public Admin(String username, String password, String email, String name, String surname, String sex)  {
         super(username, "Admin", password, email, name, surname, sex);
     }
-    public Admin(int user_id, String username, String password, String email, String name, String surname, String sex) throws SQLException {
+    public Admin(int user_id, String username, String password, String email, String name, String surname, String sex)  {
         super(user_id, username, "Admin", password, email, name, surname, sex);
     }
 
