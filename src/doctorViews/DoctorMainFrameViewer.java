@@ -84,10 +84,7 @@ public class DoctorMainFrameViewer extends JFrame {
 
         doctorHomepagePanelView = new DoctorHomepagePanelView( doctor );
 
-        //
         myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
-        //
-
 
         JPanel layeredPanePanel = new JPanel();
         contentPane.add(layeredPanePanel, BorderLayout.CENTER);
@@ -97,8 +94,9 @@ public class DoctorMainFrameViewer extends JFrame {
         layeredPanePanel.add(layeredPane);
         layeredPane.setLayout(new BorderLayout(0, 0));
 
-        layeredPane.add(doctorHomepagePanelView);
+        //Panels need to be added in inverse order
         layeredPane.add(myPatientsLayeredPanelView);
+        layeredPane.add(doctorHomepagePanelView);
 
         //Button initializings
         JButton homepageButton = new JButton("Homepage");
@@ -120,17 +118,33 @@ public class DoctorMainFrameViewer extends JFrame {
         });
         buttonPanel.add(myPatientsButton);
 
-        JButton labTestsButton = new JButton("Lab Tests");
-        buttonPanel.add( labTestsButton );
-
         apptButton = new JButton("Appointment");
+        apptButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
         buttonPanel.add(apptButton);
 
         JButton bloodButton = new JButton("Necessary Bloods");
+        bloodButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
         buttonPanel.add(bloodButton);
 
         JButton messagesButton = new JButton("Messages");
+        messagesButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
         buttonPanel.add( messagesButton );
+
+        JButton labTestsButton = new JButton("Lab Tests");
+        labTestsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        buttonPanel.add( labTestsButton );
 
         JButton settingsPanel = new JButton("Settings");
         settingsPanel.addActionListener(new ActionListener() {
@@ -138,6 +152,8 @@ public class DoctorMainFrameViewer extends JFrame {
             }
         });
         buttonPanel.add( settingsPanel );
+        //
+
     }
 
 }
