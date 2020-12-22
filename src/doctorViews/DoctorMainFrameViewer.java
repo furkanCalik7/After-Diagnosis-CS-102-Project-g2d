@@ -3,6 +3,16 @@ package doctorViews;
 import Doctor.Model.Doctor;
 import JDBC.MySQLAccess;
 
+import Doctor.Model.Doctor;
+import JDBC.MySQLAccess;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -26,7 +36,7 @@ public class DoctorMainFrameViewer extends JFrame {
     private JLayeredPane layeredPane;
     private JPanel doctorHomepagePanelView;
     private MyPatientsLayeredPanelView myPatientsLayeredPanelView;
-
+    private Doctor doctor;
 
     /**
      * Internal method to change panels.
@@ -59,6 +69,9 @@ public class DoctorMainFrameViewer extends JFrame {
      * Create the frame.
      */
     public DoctorMainFrameViewer() {
+        MySQLAccess mySQLAccess = new MySQLAccess();
+        doctor = mySQLAccess.getDoctorByUsername( "MarkJohnson" );
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
         contentPane = new JPanel();
@@ -70,10 +83,9 @@ public class DoctorMainFrameViewer extends JFrame {
         buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 0));
         contentPane.add(buttonPanel, BorderLayout.WEST);
 
-        doctorHomepagePanelView = new DoctorHomepagePanelView();
+        doctorHomepagePanelView = new DoctorHomepagePanelView( doctor );
+
         //
-        MySQLAccess mySQLAccess = new MySQLAccess();
-        Doctor doctor = mySQLAccess.getDoctorByUsername("MichealJackson");
         myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
         //
 

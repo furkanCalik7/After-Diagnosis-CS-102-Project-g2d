@@ -8,11 +8,10 @@ import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.JTextPane;
 import javax.swing.JButton;
-import javax.swing.SwingConstants;
 import java.awt.Component;
 import javax.swing.Box;
+
 
 public class myPatientCreationPanelView extends JPanel {
     private JTextField nameTextField;
@@ -46,22 +45,22 @@ public class myPatientCreationPanelView extends JPanel {
         add(patientNamePanel);
         patientNamePanel.setLayout(new GridLayout(1, 0, 5, 0));
 
-        JPanel panel_8 = new JPanel();
-        panel_8.setBorder(new LineBorder(Color.BLUE));
-        FlowLayout flowLayout = (FlowLayout) panel_8.getLayout();
-        patientNamePanel.add(panel_8);
+        JPanel patientNameLabelPanel = new JPanel();
+        patientNameLabelPanel.setBorder(new LineBorder(Color.BLUE));
+        FlowLayout fl_patientNameLabelPanel = (FlowLayout) patientNameLabelPanel.getLayout();
+        patientNamePanel.add(patientNameLabelPanel);
 
         JLabel patientNameLabel = new JLabel("Patient Name");
         patientNameLabel.setFont(new Font("Century", Font.PLAIN, 20));
-        panel_8.add(patientNameLabel);
+        patientNameLabelPanel.add(patientNameLabel);
 
-        JPanel panel_9 = new JPanel();
-        panel_9.setBorder(new LineBorder(Color.BLUE));
-        patientNamePanel.add(panel_9);
-        panel_9.setLayout(new BorderLayout(0, 0));
+        JPanel nameTextFieldPanel = new JPanel();
+        nameTextFieldPanel.setBorder(new LineBorder(Color.BLUE));
+        patientNamePanel.add(nameTextFieldPanel);
+        nameTextFieldPanel.setLayout(new BorderLayout(0, 0));
 
         nameTextField = new JTextField();
-        panel_9.add(nameTextField);
+        nameTextFieldPanel.add(nameTextField);
         nameTextField.setColumns(20);
 
         JPanel patientSurnamePanel = new JPanel();
@@ -69,21 +68,21 @@ public class myPatientCreationPanelView extends JPanel {
         add(patientSurnamePanel);
         patientSurnamePanel.setLayout(new GridLayout(0, 2, 5, 0));
 
-        JPanel panel = new JPanel();
-        panel.setBorder(new LineBorder(Color.BLUE));
-        patientSurnamePanel.add(panel);
+        JPanel surnamePresenterPanel = new JPanel();
+        surnamePresenterPanel.setBorder(new LineBorder(Color.BLUE));
+        patientSurnamePanel.add(surnamePresenterPanel);
 
-        JLabel lblNewLabel_1 = new JLabel("Patient Surname");
-        lblNewLabel_1.setFont(new Font("Century", Font.PLAIN, 20));
-        panel.add(lblNewLabel_1);
+        JLabel surnamePresenterLabel = new JLabel("Patient Surname");
+        surnamePresenterLabel.setFont(new Font("Century", Font.PLAIN, 20));
+        surnamePresenterPanel.add(surnamePresenterLabel);
 
-        JPanel panel_1 = new JPanel();
-        panel_1.setBorder(new LineBorder(Color.BLUE));
-        patientSurnamePanel.add(panel_1);
-        panel_1.setLayout(new BorderLayout(0, 0));
+        JPanel surnameTextFieldPanel = new JPanel();
+        surnameTextFieldPanel.setBorder(new LineBorder(Color.BLUE));
+        patientSurnamePanel.add(surnameTextFieldPanel);
+        surnameTextFieldPanel.setLayout(new BorderLayout(0, 0));
 
         surnameTextField = new JTextField();
-        panel_1.add(surnameTextField, BorderLayout.CENTER);
+        surnameTextFieldPanel.add(surnameTextField, BorderLayout.CENTER);
         surnameTextField.setColumns(10);
 
         JPanel patientMailPanel = new JPanel();
@@ -91,22 +90,22 @@ public class myPatientCreationPanelView extends JPanel {
         add(patientMailPanel);
         patientMailPanel.setLayout(new GridLayout(0, 2, 5, 0));
 
-        JPanel panel_3 = new JPanel();
-        panel_3.setBorder(new LineBorder(Color.BLUE));
-        patientMailPanel.add(panel_3);
-        panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        JPanel mailLabelPanel = new JPanel();
+        mailLabelPanel.setBorder(new LineBorder(Color.BLUE));
+        patientMailPanel.add(mailLabelPanel);
+        mailLabelPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         JLabel mailLabel = new JLabel("Patient E-Mail");
         mailLabel.setFont(new Font("Century", Font.PLAIN, 20));
-        panel_3.add(mailLabel);
+        mailLabelPanel.add(mailLabel);
 
-        JPanel panel_4 = new JPanel();
-        panel_4.setBorder(new LineBorder(Color.BLUE));
-        patientMailPanel.add(panel_4);
-        panel_4.setLayout(new BorderLayout(0, 0));
+        JPanel emailTextFieldPanel = new JPanel();
+        emailTextFieldPanel.setBorder(new LineBorder(Color.BLUE));
+        patientMailPanel.add(emailTextFieldPanel);
+        emailTextFieldPanel.setLayout(new BorderLayout(0, 0));
 
         emailTextField = new JTextField();
-        panel_4.add(emailTextField, BorderLayout.CENTER);
+        emailTextFieldPanel.add(emailTextField, BorderLayout.CENTER);
         emailTextField.setColumns(10);
 
         JPanel patientDiseasePanel = new JPanel();
@@ -118,9 +117,9 @@ public class myPatientCreationPanelView extends JPanel {
         panel_5.setBorder(new LineBorder(Color.BLUE));
         patientDiseasePanel.add(panel_5);
 
-        JLabel lblNewLabel_3 = new JLabel("Complaint");
-        lblNewLabel_3.setFont(new Font("Century", Font.PLAIN, 20));
-        panel_5.add(lblNewLabel_3);
+        JLabel complaintPresenterLabel = new JLabel("Complaint");
+        complaintPresenterLabel.setFont(new Font("Century", Font.PLAIN, 20));
+        panel_5.add(complaintPresenterLabel);
 
         JPanel panel_6 = new JPanel();
         panel_6.setBorder(new LineBorder(Color.BLUE));

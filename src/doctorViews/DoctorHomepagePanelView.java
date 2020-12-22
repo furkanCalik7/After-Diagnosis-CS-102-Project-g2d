@@ -1,5 +1,7 @@
 package doctorViews;
 
+import Doctor.Model.Doctor;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -25,7 +27,7 @@ public class DoctorHomepagePanelView extends JPanel {
     /**
      * Create the panel.
      */
-    public DoctorHomepagePanelView() {
+    public DoctorHomepagePanelView( Doctor doctor ) {
         setBackground(UIManager.getColor("Button.background"));
         setLayout(new BorderLayout(0, 0));
 
@@ -37,8 +39,7 @@ public class DoctorHomepagePanelView extends JPanel {
         doctorGreetingLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         labelHolderPanel.add(doctorGreetingLabel);
 
-        // TODO doctorNameLabel will be doctor.getName();
-        doctorNameLabel = new JLabel("Alex Green (NameHolder)");
+        doctorNameLabel = new JLabel( doctor.getName() );
         doctorNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         labelHolderPanel.add(doctorNameLabel);
 
@@ -57,24 +58,23 @@ public class DoctorHomepagePanelView extends JPanel {
         infoPanel.add(nameHolderPanel);
         nameHolderPanel.setLayout(new BoxLayout(nameHolderPanel, BoxLayout.X_AXIS));
 
-        // TODO doctorNameLabel will be doctor.getName();
-        doctorNameLabel_1 = new JLabel("Alex Green (NameHolder)");
-        nameHolderPanel.add(doctorNameLabel_1);
-        doctorNameLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
         doctorPresenterLabel = new JLabel("Doctor ");
         nameHolderPanel.add(doctorPresenterLabel);
         doctorPresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
+        doctorNameLabel_1 = new JLabel(doctor.getName() );
+        nameHolderPanel.add(doctorNameLabel_1);
+        doctorNameLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         JPanel idHolderPanel = new JPanel();
         infoPanel.add(idHolderPanel);
         idHolderPanel.setLayout(new BoxLayout(idHolderPanel, BoxLayout.X_AXIS));
 
-        JLabel idPresenterLabel = new JLabel("ID No: ");
+        JLabel idPresenterLabel = new JLabel( "Doctor ID: " );
         idHolderPanel.add(idPresenterLabel);
         idPresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        JLabel doctorIDLabel = new JLabel("12345678 (ID Holder)");
+        JLabel doctorIDLabel = new JLabel( String.valueOf( doctor.getId() ) );
         idHolderPanel.add(doctorIDLabel);
         doctorIDLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
@@ -99,8 +99,7 @@ public class DoctorHomepagePanelView extends JPanel {
         mailHolderPanel.add(mailPresenterLabel);
         mailPresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        // TODO mailLabel will be doctor.getMail();
-        JLabel mailLabel = new JLabel("alex@gmail.com");
+        JLabel mailLabel = new JLabel(doctor.getEmail());
         mailHolderPanel.add(mailLabel);
         mailLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
