@@ -70,7 +70,7 @@ public class DoctorMainFrameViewer extends JFrame {
      */
     public DoctorMainFrameViewer() {
         MySQLAccess mySQLAccess = new MySQLAccess();
-        doctor = mySQLAccess.getDoctorByUsername( "AhmetYildiz" );
+        doctor = mySQLAccess.getDoctorByUsername( "JuliaRoberts" );
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
