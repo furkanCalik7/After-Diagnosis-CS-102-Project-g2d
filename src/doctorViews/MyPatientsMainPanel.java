@@ -2,26 +2,19 @@ package doctorViews;
 
 import Doctor.Model.Doctor;
 import Doctor.Model.PatientSlot;
-import Patient.Model.PatientInfoCard;
 
 import javax.swing.*;
-
-import java.awt.*;
+import javax.swing.border.BevelBorder;
+import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.border.BevelBorder;
-import javax.swing.border.EmptyBorder;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import javax.swing.border.TitledBorder;
-import javax.swing.border.LineBorder;
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Comparator;
-import javax.swing.border.MatteBorder;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class MyPatientsMainPanel extends JPanel {
     private JTable table;
@@ -46,13 +39,16 @@ public class MyPatientsMainPanel extends JPanel {
         table.setBorder(new EmptyBorder(8, 0, 8, 0));
         //table.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-
-        rowSorter = new TableRowSorter<>(new MyTableModel());
         MyTableModel myTableModel = new MyTableModel();
+        rowSorter = new TableRowSorter<>(myTableModel);
         table.setModel(myTableModel);
         table.setRowSorter(rowSorter);
+        table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//        table.getColumn("Drugs").setCellRenderer(new ButtonRenderer());
+//        table.getColumn("Drugs").setCellEditor(new AddDrugButtonEditor(new JTextField()));
 
-        JScrollPane scrollPane = new JScrollPane( table );
+
+        JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setViewportBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
         patientListPanel.add(scrollPane);
 
@@ -65,8 +61,7 @@ public class MyPatientsMainPanel extends JPanel {
         interactionPanel.add(searchPanel);
         searchPanel.setLayout(new BorderLayout(0, 0));
 
-        txtSearchPatientBy = new JTextField();
-        txtSearchPatientBy.setText("Search Patient By Name");
+        txtSearchPatientBy = new HintTextField("Search Patient By Name");
         searchPanel.add(txtSearchPatientBy, BorderLayout.WEST);
         txtSearchPatientBy.setColumns(20);
         txtSearchPatientBy.getDocument().addDocumentListener(
@@ -74,9 +69,11 @@ public class MyPatientsMainPanel extends JPanel {
                     public void changedUpdate(DocumentEvent e) {
                         newFilter();
                     }
+
                     public void insertUpdate(DocumentEvent e) {
                         newFilter();
                     }
+
                     public void removeUpdate(DocumentEvent e) {
                         newFilter();
                     }
@@ -98,18 +95,13 @@ public class MyPatientsMainPanel extends JPanel {
         Component verticalStrut_2 = Box.createVerticalStrut(8);
         rightPanelInteraction.add(verticalStrut_2, BorderLayout.SOUTH);
 
-        sortArray = new String[]{ "By Name","By Status"};
+        sortArray = new String[]{"By Name", "By Status"};
 
         JPanel sortPanel = new JPanel();
         FlowLayout fl_sortPanel = (FlowLayout) sortPanel.getLayout();
         fl_sortPanel.setHgap(10);
         fl_sortPanel.setAlignment(FlowLayout.LEFT);
         rightPanelInteraction.add(sortPanel, BorderLayout.WEST);
-
-//        JLabel sortLabel = new JLabel("Sort");
-//        sortPanel.add(sortLabel);
-//        JComboBox sortComboBox = new JComboBox( sortArray );
-//        sortPanel.add(sortComboBox);
 
         JPanel addPatientPanel = new JPanel();
         FlowLayout fl_addPatientPanel = (FlowLayout) addPatientPanel.getLayout();
@@ -132,74 +124,202 @@ public class MyPatientsMainPanel extends JPanel {
 
     }
 
-    class MyTableModel extends AbstractTableModel {
-        private String[] columnNames = new String[] {
-                "Age","Patient Name", "Email", "Description", "Status", "Start Date", "Drugs"};
-
-        private ArrayList<PatientSlot> patients;
-
-        public MyTableModel() {
-            patients = doctor.getPatientSlots();
-        }
-
-
-        public int getColumnCount() {
-            return columnNames.length;
-        }
-
-        public int getRowCount() {
-            return patients.size();
-        }
-
-        public String getColumnName(int col) {
-            return columnNames[col];
-        }
-
-
-        public Object getValueAt(int row, int col) {
-            PatientSlot data = patients.get(row);
-
-            switch (col){
-                case 0:
-                    return data.getPatientInfo().getAge();
-                case 1:
-                    return data.getPatientInfo().getName() + " " + data.getPatientInfo().getSurname();
-                case 2:
-                    return data.getPatientInfo().getEmail();
-                case 3:
-                    return data.getPatientInfo().getComplaint();
-                case 4:
-                    if(data.getStatus() == 1){
-                        return "Current";
-                    }
-                    return "Expired";
-                case 5:
-                    return data.getStart_date();
-                case 6:
-                    return "null";
-            }
-            return "null";
-        }
-
-//        public Class getColumnClass(int c) {
-//            return getValueAt(0, c).getClass();
+//    class MyTableModel extends AbstractTableModel {
+//        private String[] columnNames = new String[]{
+//                "Age", "Patient Name", "Email", "Description", "Status", "Start Date", "Drugs"};
+//
+//        private ArrayList<PatientSlot> patients;
+//
+//        public MyTableModel() {
+//            patients = doctor.getPatientSlots();
 //        }
 //
-//        public void setValueAt(Object value, int row, int col) {
-//            data[row][col] = value;
-//            fireTableCellUpdated(row, col);
 //
+//        public int getColumnCount() {
+//            return columnNames.length;
 //        }
-    }
+//
+//        public int getRowCount() {
+//            return patients.size();
+//        }
+//
+//        public String getColumnName(int col) {
+//            return columnNames[col];
+//        }
+//
+//
+//        public Object getValueAt(int row, int col) {
+//            PatientSlot data = patients.get(row);
+//
+//            switch (col) {
+//                case 0:
+//                    return data.getPatientInfo().getAge();
+//                case 1:
+//                    return data.getPatientInfo().getName() + " " + data.getPatientInfo().getSurname();
+//                case 2:
+//                    return data.getPatientInfo().getEmail();
+//                case 3:
+//                    return data.getPatientInfo().getComplaint();
+//                case 4:
+//                    if (data.getStatus() == 1) {
+//                        return "Current";
+//                    }
+//                    return "Expired";
+//                case 5:
+//                    return data.getStart_date();
+//                case 6:
+//                    return "Drugs";
+//            }
+//            return "null";
+//        }
+
+//        @Override
+//        public boolean isCellEditable(int rowIndex, int columnIndex) {
+//            return true;
+//        }
+//
+//        @Override
+//        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+//
+//            fireTableCellUpdated(rowIndex,columnIndex);
+//        }
+//    }
+
     private void newFilter() {
         RowFilter<MyTableModel, Object> rf = null;
         try {
-            rf = RowFilter.regexFilter(txtSearchPatientBy.getText(), 0);
+            rf = RowFilter.regexFilter(txtSearchPatientBy.getText(), 1);
         } catch (java.util.regex.PatternSyntaxException e) {
             return;
         }
         rowSorter.setRowFilter(rf);
     }
 
+    class ButtonRenderer extends JButton implements TableCellRenderer {
 
+        public ButtonRenderer() {
+            setOpaque(true);
+        }
+
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+            setText((value == null) ? "" : value.toString());
+            return this;
+        }
+    }
+
+    class AddDrugButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+
+        private String label;
+
+        private boolean isPushed;
+
+        public AddDrugButtonEditor(JTextField textField) {
+            super(textField);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            isPushed = true;
+            return button;
+        }
+
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                //TODO Write here the action when button is clicked
+                JOptionPane.showMessageDialog(button, label + " Clicked");
+            }
+            isPushed = false;
+            return new String(label);
+        }
+
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
+        }
+
+    }
+
+    class MyTableModel extends AbstractTableModel {
+        private String[] columnNames = {"First Name",
+                "Last Name",
+                "Sport",
+                "# of Years",
+                "Vegetarian"};
+        private Object[][] data = {
+                {"Kathy", "Smith",
+                        "Snowboarding", new Integer(5), new Boolean(false)},
+                {"John", "Doe",
+                        "Rowing", new Integer(3), new Boolean(true)},
+                {"Sue", "Black",
+                        "Knitting", new Integer(2), new Boolean(false)},
+                {"Jane", "White",
+                        "Speed reading", new Integer(20), new Boolean(true)},
+                {"Joe", "Brown",
+                        "Pool", new Integer(10), new Boolean(false)}
+        };
+
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        public int getRowCount() {
+            return data.length;
+        }
+
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+        public Object getValueAt(int row, int col) {
+            return data[row][col];
+        }
+
+        /*
+         * JTable uses this method to determine the default renderer/
+         * editor for each cell.  If we didn't implement this method,
+         * then the last column would contain text ("true"/"false"),
+         * rather than a check box.
+         */
+        public Class getColumnClass(int c) {
+            return getValueAt(0, c).getClass();
+        }
+
+        /*
+         * Don't need to implement this method unless your table's
+         * editable.
+         */
+        public boolean isCellEditable(int row, int col) {
+            //Note that the data/cell address is constant,
+            //no matter where the cell appears onscreen.
+            if (col < 2) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+        public void setValueAt(Object value, int row, int col) {
+
+
+            data[row][col] = value;
+            fireTableCellUpdated(row, col);
+
+        }
+
+    }
 }

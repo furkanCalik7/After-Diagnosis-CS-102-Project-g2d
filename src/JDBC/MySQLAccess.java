@@ -780,7 +780,7 @@ public class MySQLAccess {
             connect = dbConnection.getConnection();
 
             for(PatientInfoCard patientInfoCard: patientInfos){
-               // patient_id = getID(patientInfoCard.getUsername());
+              // patient_id = getID(patientInfoCard.getUsername());
                 patient_id = patientInfoCard.getUser_id();
                 System.out.println("Patient_id = " + patient_id );
                 String sql = "SELECT * FROM doctor_patient WHERE doctor_id = ? AND patient_id = ?";
