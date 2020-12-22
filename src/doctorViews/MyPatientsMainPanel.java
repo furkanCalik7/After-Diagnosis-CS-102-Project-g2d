@@ -30,6 +30,7 @@ public class MyPatientsMainPanel extends JPanel {
     private Doctor doctor;
     private TableRowSorter<MyTableModel> rowSorter;
 
+
     /**
      * Create the panel.
      */
@@ -115,6 +116,7 @@ public class MyPatientsMainPanel extends JPanel {
         fl_addPatientPanel.setAlignment(FlowLayout.RIGHT);
         rightPanelInteraction.add(addPatientPanel, BorderLayout.EAST);
 
+        //ADD DRUG BUTTON
         JButton addDrugButton = new JButton("Add Drug");
         addPatientPanel.add(addDrugButton);
 
