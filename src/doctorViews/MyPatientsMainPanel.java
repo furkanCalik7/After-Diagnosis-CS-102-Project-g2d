@@ -2,6 +2,7 @@ package doctorViews;
 
 import Doctor.Model.Doctor;
 import Doctor.Model.PatientSlot;
+import Patient.Model.PatientInfoCard;
 
 import javax.swing.*;
 
@@ -16,6 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.TitledBorder;
 import javax.swing.border.LineBorder;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import javax.swing.border.MatteBorder;
@@ -32,6 +34,7 @@ public class MyPatientsMainPanel extends JPanel {
      * Create the panel.
      */
     public MyPatientsMainPanel(Doctor doctor) {
+        this.doctor = doctor;
         setLayout(new BorderLayout(0, 20));
 
         JPanel patientListPanel = new JPanel();
@@ -43,43 +46,10 @@ public class MyPatientsMainPanel extends JPanel {
         //table.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
 
-        ArrayList<PatientSlot> patientSlots = doctor.getPatientSlots();
-        String fullName;
-        String complaint;
-        int status;
-  //      DefaultTableModel dtm = new DefaultTableModel();
         rowSorter = new TableRowSorter<>(new MyTableModel());
         MyTableModel myTableModel = new MyTableModel();
         table.setModel(myTableModel);
         table.setRowSorter(rowSorter);
-
-
-
-//        dtm.setColumnIdentifiers(headers);
-//        for(int i  = 0; i <patientSlots.size(); i++){
-//            fullName = patientSlots.get(i).getPatientInfo().getName() + " " + patientSlots.get(i).getPatientInfo().getSurname();
-//            complaint = patientSlots.get(i).getPatientInfo().getComplaint();
-//            status = patientSlots.get(i).getStatus();
-//            System.out.println("reached.");
-//            dtm.addRow(new Object[]{fullName,complaint,status,"data","data","data"});
-//        }
-//        table.setModel(dtm);
-    //  table.setAutoCreateRowSorter(true);
-
-
-//        table.setModel(new DefaultTableModel(
-//                new Object[][] {
-//                        {null, null, null, null, null},
-//                        {null, null, null, null, null},
-//                        {null, "Furkan", null, null, null},
-//                        {null, null, null, null, null},
-//                        {null, null, null, null, null},
-//                        {null, null, null, null, null},
-//                },
-//                new String[] {
-//                        "Patient Name", "Description", "Status", "Add Drug", "Remove Patient"
-//                }
-//        ));
 
         JScrollPane scrollPane = new JScrollPane( table );
         scrollPane.setViewportBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -135,10 +105,10 @@ public class MyPatientsMainPanel extends JPanel {
         fl_sortPanel.setAlignment(FlowLayout.LEFT);
         rightPanelInteraction.add(sortPanel, BorderLayout.WEST);
 
-        JLabel sortLabel = new JLabel("Sort");
-        sortPanel.add(sortLabel);
-        JComboBox sortComboBox = new JComboBox( sortArray );
-        sortPanel.add(sortComboBox);
+//        JLabel sortLabel = new JLabel("Sort");
+//        sortPanel.add(sortLabel);
+//        JComboBox sortComboBox = new JComboBox( sortArray );
+//        sortPanel.add(sortComboBox);
 
         JPanel addPatientPanel = new JPanel();
         FlowLayout fl_addPatientPanel = (FlowLayout) addPatientPanel.getLayout();
@@ -162,65 +132,65 @@ public class MyPatientsMainPanel extends JPanel {
 
     class MyTableModel extends AbstractTableModel {
         private String[] columnNames = new String[] {
-                "Patient Name", "Description", "Status", "Add Drug", "Remove Patient"};
+                "Age","Patient Name", "Email", "Description", "Status", "Start Date", "Drugs"};
 
-        private Object[][] data = {
-                {"Kathy", "Smith",
-                        "Snowboarding", new Integer(5), new Boolean(false)},
-                {"John", "Doe",
-                        "Rowing", new Integer(3), new Boolean(true)},
-                {"Sue", "Black",
-                        "Knitting", new Integer(2), new Boolean(false)},
-                {"Jane", "White",
-                        "Speed reading", new Integer(20), new Boolean(true)},
-                {"Joe", "Brown",
-                        "Pool", new Integer(10), new Boolean(false)}
-        };
+        private ArrayList<PatientSlot> patients;
+
+        public MyTableModel() {
+            patients = doctor.getPatientSlots();
+        }
+
 
         public int getColumnCount() {
             return columnNames.length;
         }
 
         public int getRowCount() {
-            return data.length;
+            return patients.size();
         }
 
         public String getColumnName(int col) {
             return columnNames[col];
         }
 
+
         public Object getValueAt(int row, int col) {
-            return data[row][col];
+            PatientSlot data = patients.get(row);
+
+            switch (col){
+                case 0:
+                    return data.getPatientInfo().getAge();
+                case 1:
+                    return data.getPatientInfo().getName() + " " + data.getPatientInfo().getSurname();
+                case 2:
+                    return data.getPatientInfo().getEmail();
+                case 3:
+                    return data.getPatientInfo().getComplaint();
+                case 4:
+                    if(data.getStatus() == 1){
+                        return "Current";
+                    }
+                    return "Expired";
+                case 5:
+                    return data.getStart_date();
+                case 6:
+                    return "null";
+            }
+            return "null";
         }
 
-        /*
-         * JTable uses this method to determine the default renderer/
-         * editor for each cell.  If we didn't implement this method,
-         * then the last column would contain text ("true"/"false"),
-         * rather than a check box.
-         */
-        public Class getColumnClass(int c) {
-            return getValueAt(0, c).getClass();
-        }
-
-        /*
-         * Don't need to implement this method unless your table's
-         * editable.
-         */
-
-        /*
-         * Don't need to implement this method unless your table's
-         * data can change.
-         */
-        public void setValueAt(Object value, int row, int col) {
-            data[row][col] = value;
-            fireTableCellUpdated(row, col);
-
-        }
+//        public Class getColumnClass(int c) {
+//            return getValueAt(0, c).getClass();
+//        }
+//
+//        public void setValueAt(Object value, int row, int col) {
+//            data[row][col] = value;
+//            fireTableCellUpdated(row, col);
+//
+//        }
     }
     private void newFilter() {
         RowFilter<MyTableModel, Object> rf = null;
-        //If current expression doesn't parse, don't update.
         try {
             rf = RowFilter.regexFilter(txtSearchPatientBy.getText(), 0);
         } catch (java.util.regex.PatternSyntaxException e) {
