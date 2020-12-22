@@ -31,7 +31,6 @@ public class DoctorMainFrameViewer extends JFrame {
 
     private JPanel contentPane;
     private JButton myPatientsButton;
-    private JButton myPrescribedDrugsButton;
     private JButton apptButton;
     private JLayeredPane layeredPane;
     private JPanel doctorHomepagePanelView;
@@ -70,7 +69,7 @@ public class DoctorMainFrameViewer extends JFrame {
      */
     public DoctorMainFrameViewer() {
         MySQLAccess mySQLAccess = new MySQLAccess();
-        doctor = mySQLAccess.getDoctorByUsername( "MarkJohnson" );
+        doctor = mySQLAccess.getDoctorByUsername( "AhmetYildiz" );
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
@@ -121,24 +120,24 @@ public class DoctorMainFrameViewer extends JFrame {
         });
         buttonPanel.add(myPatientsButton);
 
-        JButton settingsPanel = new JButton("Settings");
-        buttonPanel.add( settingsPanel );
+        JButton labTestsButton = new JButton("Lab Tests");
+        buttonPanel.add( labTestsButton );
 
-        myPrescribedDrugsButton = new JButton("My Prescribed Drugs");
-        buttonPanel.add(myPrescribedDrugsButton);
-
-        apptButton = new JButton("Take an Appointment");
+        apptButton = new JButton("Appointment");
         buttonPanel.add(apptButton);
 
-        JButton bloodButton = new JButton("Blood Donation");
+        JButton bloodButton = new JButton("Necessary Bloods");
         buttonPanel.add(bloodButton);
 
         JButton messagesButton = new JButton("Messages");
         buttonPanel.add( messagesButton );
 
-        JButton medicalInfoButton = new JButton("Your Medical Information");
-        buttonPanel.add( medicalInfoButton );
-
+        JButton settingsPanel = new JButton("Settings");
+        settingsPanel.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        buttonPanel.add( settingsPanel );
     }
 
 }
