@@ -12,21 +12,28 @@ import java.awt.event.ActionListener;
 
 public class PatientInfoPanelView extends JPanel implements ActionListener {
 
+
     private MyPatientsLayeredPanelView panel;
-    public PatientInfoPanelView(PatientSlot patientSlot,MyPatientsLayeredPanelView panel) {
+    private final JButton drugButton;
+    private final JButton backButton;
+    private int index;
+
+    public PatientInfoPanelView(PatientSlot patientSlot, MyPatientsLayeredPanelView panel, int i) {
         this.panel = panel;
+        this.index = i;
         setLayout(new BorderLayout(0, 15));
 
-        JPanel northPanel = new JPanel();
+        FlowLayout informationFlowLayout = new FlowLayout();
+        informationFlowLayout.setAlignment(FlowLayout.LEFT);
+        JPanel northPanel = new JPanel(informationFlowLayout);
         northPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         add(northPanel, BorderLayout.NORTH);
 
-        JButton backButton = new JButton("<--");
+        backButton = new JButton("<--");
         northPanel.add(backButton);
         backButton.addActionListener(this);
 
         JLabel headerLabel = new JLabel("Patient Information");
-        headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
         headerLabel.setFont(new Font("Century", Font.PLAIN, 20));
         northPanel.add(headerLabel);
 
@@ -125,8 +132,9 @@ public class PatientInfoPanelView extends JPanel implements ActionListener {
         editButton.setFont(new Font("Century", Font.PLAIN, 15));
         southPanel.add(editButton);
 
-        JButton drugButton = new JButton("Go to Drug Page of The Patient");
+        drugButton = new JButton("Go to Drug Page of The Patient");
         drugButton.setFont(new Font("Century", Font.PLAIN, 15));
+        drugButton.addActionListener(this);
         southPanel.add(drugButton);
 
         JPanel allergiesPanel = new JPanel();
@@ -166,6 +174,10 @@ public class PatientInfoPanelView extends JPanel implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        panel.switchMainPanel();
+        if(e.getSource() == this.backButton){
+            panel.switchMainPanel();
+        }else if(e.getSource() == this.drugButton){
+            panel.switchPanels(index,MyPatientsLayeredPanelView.DRUG_MENU);
+        }
     }
 }

@@ -26,10 +26,10 @@ public class MyPatientsLayeredPanelView extends JPanel {
         patientInfoPanelViews = new ArrayList<>();
 
         for(int i = 0; i < doctor.getPatientSlots().size(); i++){
-            patientsDrugPanelViews.add(new myPatientsDrugPanelView(doctor.getPatientSlots().get(i),doctor));
+            patientsDrugPanelViews.add(new myPatientsDrugPanelView(doctor.getPatientSlots().get(i),doctor,this));
         }
         for(int i = 0; i < doctor.getPatientSlots().size(); i++){
-            patientInfoPanelViews.add(new PatientInfoPanelView(doctor.getPatientSlots().get(i),this));
+            patientInfoPanelViews.add(new PatientInfoPanelView(doctor.getPatientSlots().get(i),this,i));
         }
 
         layeredPane = new JLayeredPane();

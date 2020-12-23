@@ -14,12 +14,14 @@ import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
-public class myPatientsDrugPanelView extends JPanel {
+public class myPatientsDrugPanelView extends JPanel implements ActionListener {
     private String[] drugNameArray;
     private JTextField dose;
 
@@ -35,6 +37,7 @@ public class myPatientsDrugPanelView extends JPanel {
     private JCheckBox isMorning;
     private String patient_username;
     private PatientSlot patientSlot;
+    private MyPatientsLayeredPanelView layeredPanelView;
 
 
     public JTextField getDose() {
@@ -76,7 +79,8 @@ public class myPatientsDrugPanelView extends JPanel {
     /**
      * Create the panel.
      */
-    public myPatientsDrugPanelView(PatientSlot patientSlot, Doctor doctor) {
+    public myPatientsDrugPanelView(PatientSlot patientSlot, Doctor doctor, MyPatientsLayeredPanelView layeredPanelView) {
+        this.layeredPanelView = layeredPanelView;
         patient_username = patientSlot.getPatientInfo().getUsername();
         this.patientSlot = patientSlot;
         BorderLayout borderLayout = new BorderLayout();
@@ -241,20 +245,19 @@ public class myPatientsDrugPanelView extends JPanel {
         flowLayout.setAlignment(FlowLayout.LEFT);
         add(welcomePanel, BorderLayout.NORTH);
 
-        JLabel welcomeLabel = new JLabel("Patient Information: Drug List");
+
+        JButton backButton = new JButton("<--");
+        backButton.addActionListener(this);
+
+        JLabel welcomeLabel = new JLabel("Patient Information: " + patientSlot.getPatientInfo().getName() + " " + patientSlot.getPatientInfo().getSurname() + "'s Drug List");
         welcomeLabel.setFont(new Font("Century", Font.PLAIN, 20));
+        welcomePanel.add(backButton);
         welcomePanel.add(welcomeLabel);
 
         JPanel nextButtonPanel = new JPanel();
         FlowLayout fl_nextButtonPanel = (FlowLayout) nextButtonPanel.getLayout();
         fl_nextButtonPanel.setAlignment(FlowLayout.RIGHT);
         add(nextButtonPanel, BorderLayout.SOUTH);
-
-        //TODO this button is at the bottom-right. May be changed?
-        JButton nextButton = new JButton("NEXT");
-        nextButton.setFont(new Font("Century", Font.PLAIN, 20));
-        nextButtonPanel.add(nextButton);
-
 
     }
 
@@ -320,5 +323,10 @@ public class myPatientsDrugPanelView extends JPanel {
             return false;
         }
 
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        layeredPanelView.switchMainPanel();
     }
 }

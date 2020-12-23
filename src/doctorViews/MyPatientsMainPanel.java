@@ -24,9 +24,6 @@ public class MyPatientsMainPanel extends JPanel {
     private MyPatientsLayeredPanelView layeredPane;
 
 
-    /**
-     * Create the panel.
-     */
     public MyPatientsMainPanel(Doctor doctor, MyPatientsLayeredPanelView layeredPanel) {
         this.doctor = doctor;
         this.layeredPane = layeredPanel;
@@ -37,7 +34,6 @@ public class MyPatientsMainPanel extends JPanel {
         patientListPanel.setLayout(new BorderLayout(0, 0));
         table = new JTable();
         table.setBorder(new EmptyBorder(8, 0, 8, 0));
-        //table.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         MyTableModel myTableModel = new MyTableModel();
 
@@ -113,10 +109,6 @@ public class MyPatientsMainPanel extends JPanel {
         fl_addPatientPanel.setAlignment(FlowLayout.RIGHT);
         rightPanelInteraction.add(addPatientPanel, BorderLayout.EAST);
 
-        //ADD DRUG BUTTON
-        JButton addDrugButton = new JButton("Add Drug");
-        addPatientPanel.add(addDrugButton);
-
         JButton patientAddButton = new JButton("Add Patient");
         addPatientPanel.add(patientAddButton);
 
@@ -182,7 +174,7 @@ public class MyPatientsMainPanel extends JPanel {
 
 
         public boolean isCellEditable(int row, int col) {
-            if(col < 6){
+            if (col < 6) {
                 return false;
             }
             return true;
@@ -198,7 +190,7 @@ public class MyPatientsMainPanel extends JPanel {
     private void newFilter() {
         RowFilter<MyTableModel, Object> rf = null;
         try {
-            if(!txtSearchPatientBy.getText().equals("Search Patient By Name")){
+            if (!txtSearchPatientBy.getText().equals("Search Patient By Name")) {
                 rf = RowFilter.regexFilter(txtSearchPatientBy.getText(), 1);
             }
         } catch (java.util.regex.PatternSyntaxException e) {
@@ -266,6 +258,7 @@ public class MyPatientsMainPanel extends JPanel {
         }
 
     }
+
     class InformationButtonEditor extends DefaultCellEditor {
         protected JButton button;
         int i = 0;
