@@ -15,3 +15,9 @@ Drug class is implemented
 
 15:57 17.12.2020
 Helped to draw the UML Diagram and write detailed design report
+23.12.2020
+Add worker and Add doctor button controls are implemented.
+23.12.2020
+SettingButtonControls is implemented.
+24.12.2020
+HospitalWorkersPanel is implemented.
