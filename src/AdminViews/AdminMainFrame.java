@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
 import java.awt.CardLayout;
 import Admin.model.*;
+import JDBC.MySQLAccess;
+import Patient.Model.Patient;
 
 public class AdminMainFrame extends JFrame {
 
@@ -60,7 +62,8 @@ public class AdminMainFrame extends JFrame {
      * Create the frame.
      */
     public AdminMainFrame() {
-
+        MySQLAccess access = new MySQLAccess();
+        Patient p = (Patient) access.getUser("password");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
         contentPane = new JPanel();
@@ -76,7 +79,7 @@ public class AdminMainFrame extends JFrame {
         addWorkerMainPanel = new AddWorkerMainPanel(new Admin("", "", "", "", "", ""));
         hospitalWorkersPanel = new HospitalWorkersInfoPanel();
         messagePanel = new MessagePanel();
-        settingsPanel = new SettingsPanel();
+        settingsPanel = new SettingsPanel(p);
         hospitalCrew = new JPanel();
         hospitalCrew.add( hospitalWorkersPanel );
 

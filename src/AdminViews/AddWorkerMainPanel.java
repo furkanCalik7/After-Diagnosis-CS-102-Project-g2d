@@ -123,7 +123,7 @@ public class AddWorkerMainPanel extends JPanel {
         panel_9.add(lblNewLabel_3_2);
 
         String[] words = new String[]{"Cardiology", "Neurology", "Immunology", "Dermatology", "Radiology", "Pathology",
-                "Pediatrics", ""};
+                "Pediatrics"};
         comboBox = new JComboBox(words);
         //ACTION LISTENER
         comboBox.setMaximumRowCount(20);

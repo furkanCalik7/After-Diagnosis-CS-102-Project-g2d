@@ -5,6 +5,7 @@ import JDBC.*;
 import LabTechs.Model.LabTechnician;
 import LabTechs.Model.Test;
 import LabTechs.Model.*;
+import Patient.Model.Code;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class Admin extends User {
     }
 
     public boolean addDoctor(String name, String surname, String email, String sex, String speciality) throws SQLException {
-        //generate code
-        String password = "123";
+        Code code = Code.newCode();
+        String password = code.getCode_id();
         Doctor d = new Doctor(name + surname, password, email, name, surname, sex, speciality);
         MySQLAccess access = new MySQLAccess();
         try {
@@ -33,8 +34,8 @@ public class Admin extends User {
     }
 
     public boolean addLabTech(String name, String surname, String email, String sex) {
-        //generate code
-        String password = "12345";
+        Code code = Code.newCode();
+        String password = code.getCode_id();
         LabTechnician l = new LabTechnician(name + surname, password, email, name, surname, sex);
         MySQLAccess access = new MySQLAccess();
         try {

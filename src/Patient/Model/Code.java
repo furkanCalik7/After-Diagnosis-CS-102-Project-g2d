@@ -13,7 +13,8 @@ public class Code {
         this.doctor_username = doctor_username;
         this.is_used = is_used;
     }
-    public static Code newCode(String doctor_username){
+
+    public static Code newCode(String doctor_username) {
         MySQLAccess mySQLAccess = new MySQLAccess();
         String code_index;
         StringBuffer code_id;
@@ -21,21 +22,35 @@ public class Code {
 
         code_index = "abcdefghijklmnopqrstuvwxtz0123456789";
 
-        do{
+        do {
             code_id = new StringBuffer("");
-            for(int i = 0; i < 6; i++){
-                random = code_index.charAt((int)(Math.random()*36));
+            for (int i = 0; i < 6; i++) {
+                random = code_index.charAt((int) (Math.random() * 36));
                 code_id.append(random);
             }
-        }  while(!mySQLAccess.isCodeUsed(code_id.toString()));
-        return new Code(code_id.toString(), doctor_username,false);
+        } while (!mySQLAccess.isCodeUsed(code_id.toString()));
+        return new Code(code_id.toString(), doctor_username, false);
     }
 
-    public String getCode_id() {
-        return code_id;
+    public static Code newCode() {
+        String code_index;
+        StringBuffer code_id;
+        char random;
+
+        code_index = "abcdefghijklmnopqrstuvwxtz0123456789";
+        code_id = new StringBuffer("");
+        for (int i = 0; i < 6; i++) {
+            random = code_index.charAt((int) (Math.random() * 36));
+            code_id.append(random);
+        }
+        return new Code(code_id.toString(), "", false);
     }
 
-    public String getDoctor_username() {
-        return doctor_username;
+        public String getCode_id () {
+            return code_id;
+        }
+
+        public String getDoctor_username () {
+            return doctor_username;
+        }
     }
-}

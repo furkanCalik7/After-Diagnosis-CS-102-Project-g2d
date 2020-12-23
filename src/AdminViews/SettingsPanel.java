@@ -1,5 +1,7 @@
 package AdminViews;
 
+import Admin.model.User;
+
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -18,15 +20,18 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
 public class SettingsPanel extends JPanel {
-    private JTextField nameTextField;
-    private JTextField mailTextField;
-    private JTextField passwordTextField;
-    private final ButtonGroup buttonGroup = new ButtonGroup();
+
+     JTextField nameTextField;
+     JTextField mailTextField;
+     JTextField passwordTextField;
+     final ButtonGroup buttonGroup = new ButtonGroup();
+     User user;
 
     /**
      * Create the panel.
      */
-    public SettingsPanel() {
+    public SettingsPanel(User user) {
+        this.user = user;
         setLayout(new GridLayout(7, 1, 0, 6));
 
         JPanel topHeaderPanel = new JPanel();
@@ -145,7 +150,7 @@ public class SettingsPanel extends JPanel {
         add(createPanel);
         createPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        JButton saveYourChangesButton = new JButton("Save Your Changes");
+        JButton saveYourChangesButton = new SettingsButtonController(user, this);
         saveYourChangesButton.setFont(new Font("Century", Font.PLAIN, 20));
         createPanel.add(saveYourChangesButton);
 

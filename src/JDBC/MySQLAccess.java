@@ -29,6 +29,7 @@ public class MySQLAccess {
             resultSet = statement.executeQuery("select * from user");
 
             preparedStatement = connect.prepareStatement("insert into user values (default, ?, ?, ?, ?, ?, ?, ?)");
+            preparedStatement.setString(1, u.getUserType());
             preparedStatement.setString(2, u.getUsername());
             preparedStatement.setString(3, u.getPassword());
             preparedStatement.setString(4, u.getEmail());
@@ -36,11 +37,6 @@ public class MySQLAccess {
             preparedStatement.setString(6, u.getSurname());
             preparedStatement.setString(7, u.getSex());
 
-            if (u instanceof Patient) {
-                preparedStatement.setString(1, "Patient");
-            }
-            if (u instanceof Doctor)
-                preparedStatement.setString(1, "Doctor");
 
             preparedStatement.executeUpdate();
 
@@ -263,6 +259,51 @@ public class MySQLAccess {
             e.printStackTrace();
         } finally {
             close();
+        }
+        return false;
+    }
+
+    public boolean changeUsername(String oldUsername, String username) {
+        try {
+            connect = dbConnection.getConnection();
+            String sql = "UPDATE user SET username = ? WHERE username = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            preparedStatement.setString(2, oldUsername);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean changePassword(String username, String password) {
+        try {
+            connect = dbConnection.getConnection();
+            String sql = "UPDATE user SET password = ? WHERE username = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public boolean changeEmail(String username, String email) {
+        try {
+            connect = dbConnection.getConnection();
+            String sql = "UPDATE user SET email = ? WHERE username = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1, email);
+            preparedStatement.setString(2, username);
+            preparedStatement.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return false;
     }

@@ -52,6 +52,8 @@ public abstract class User implements MessageSender {
     }
 
     public void setUsername(String username) {
+        MySQLAccess access = new MySQLAccess();
+        access.changeUsername(getUsername(), username);
         this.username = username;
     }
 
@@ -60,6 +62,8 @@ public abstract class User implements MessageSender {
     }
 
     public void setPassword(String password) {
+        MySQLAccess access = new MySQLAccess();
+        access.changePassword(getUsername(), password);
         this.password = password;
     }
 
@@ -68,6 +72,8 @@ public abstract class User implements MessageSender {
     }
 
     public void setEmail(String email) {
+        MySQLAccess access = new MySQLAccess();
+        access.changeEmail(getUsername(), email);
         this.email = email;
     }
 
