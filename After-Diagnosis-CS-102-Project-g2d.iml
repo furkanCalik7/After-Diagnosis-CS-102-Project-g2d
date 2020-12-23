@@ -10,45 +10,6 @@
     <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/mysql-connector-java-8.0.22.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22/src/build/java" />
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22/src/demo/java" />
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22/src/generated/java" />
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22/src/legacy/java" />
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22/src/main/core-api/java" />
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22/src/main/core-impl/java" />
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22/src/main/protocol-impl/java" />
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22/src/main/user-api/java" />
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22/src/main/user-impl/java" />
-          <root url="file://$USER_HOME$/mysql-connector-java-8.0.22/src/test/java" />
-        </SOURCES>
-        <jarDirectory url="file://$USER_HOME$/mysql-connector-java-8.0.22" recursive="false" />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/DateTimePicker/DateTimePicker/JPlanner.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library" exported="">
-      <library>
-        <CLASSES>
           <root url="file://$MODULE_DIR$/../../mysql-connector-java-8.0.22" />
         </CLASSES>
         <JAVADOC />
@@ -65,6 +26,15 @@
           <root url="file://$MODULE_DIR$/../../mysql-connector-java-8.0.22/src/test/java" />
         </SOURCES>
         <jarDirectory url="file://$MODULE_DIR$/../../mysql-connector-java-8.0.22" recursive="false" />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../DateTimePicker/JPlanner.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
       </library>
     </orderEntry>
   </component>

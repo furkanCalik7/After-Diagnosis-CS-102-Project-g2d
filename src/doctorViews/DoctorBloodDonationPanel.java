@@ -13,6 +13,7 @@ import javax.swing.JCheckBox;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
+import javax.swing.SwingConstants;
 
 public class DoctorBloodDonationPanel extends JPanel {
 
@@ -29,63 +30,78 @@ public class DoctorBloodDonationPanel extends JPanel {
 
         JPanel lblHolderPanel = new JPanel();
         centerPanel.add(lblHolderPanel);
+        lblHolderPanel.setLayout(new GridLayout(5, 1, 0, 0));
+
+        JPanel panel = new JPanel();
+        lblHolderPanel.add(panel);
+
+        JPanel panel_1 = new JPanel();
+        lblHolderPanel.add(panel_1);
 
         JPanel panel_2 = new JPanel();
-        panel_2.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         lblHolderPanel.add(panel_2);
 
         JLabel prsntrLbl = new JLabel("Select Necessary Blood Types: ");
         panel_2.add(prsntrLbl);
         prsntrLbl.setFont(new Font("Century", Font.PLAIN, 20));
 
+        JPanel panel_3 = new JPanel();
+        lblHolderPanel.add(panel_3);
+
         JPanel selectionPanel = new JPanel();
         centerPanel.add(selectionPanel);
         selectionPanel.setLayout(new BorderLayout(0, 0));
 
-        JPanel panel = new JPanel();
-        panel.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 255), 3), new LineBorder(new Color(0, 0, 0), 1, true)));
-        selectionPanel.add(panel, BorderLayout.NORTH);
-        panel.setLayout(new GridLayout(0, 2, 0, 0));
+        JPanel bloodChoicePanel = new JPanel();
+        bloodChoicePanel.setBorder(new CompoundBorder(new LineBorder(new Color(0, 0, 255), 3), new LineBorder(new Color(0, 0, 0), 1, true)));
+        selectionPanel.add(bloodChoicePanel, BorderLayout.CENTER);
+        bloodChoicePanel.setLayout(new GridLayout(0, 2, 0, 0));
 
         JCheckBox ANegCheckBox = new JCheckBox("A RH-");
         ANegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        panel.add(ANegCheckBox);
+        bloodChoicePanel.add(ANegCheckBox);
 
         JCheckBox APosCheckBox = new JCheckBox("A Rh+");
         APosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        panel.add(APosCheckBox);
+        bloodChoicePanel.add(APosCheckBox);
 
         JCheckBox BNegCheckBox = new JCheckBox("B Rh-");
         BNegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        panel.add(BNegCheckBox);
+        bloodChoicePanel.add(BNegCheckBox);
 
         JCheckBox BPosCheckBox = new JCheckBox("B Rh+");
         BPosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        panel.add(BPosCheckBox);
+        bloodChoicePanel.add(BPosCheckBox);
 
         JCheckBox ABNegCheckBox = new JCheckBox("AB Rh+");
         ABNegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        panel.add(ABNegCheckBox);
+        bloodChoicePanel.add(ABNegCheckBox);
 
         JCheckBox ABPosCheckBox = new JCheckBox("AB Rh+");
         ABPosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        panel.add(ABPosCheckBox);
+        bloodChoicePanel.add(ABPosCheckBox);
 
         JCheckBox zeroNegCheckBox = new JCheckBox("0 Rh-");
         zeroNegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        panel.add(zeroNegCheckBox);
+        bloodChoicePanel.add(zeroNegCheckBox);
 
         JCheckBox zeroPosCheckBox = new JCheckBox("0 Rh+");
         zeroPosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        panel.add(zeroPosCheckBox);
+        bloodChoicePanel.add(zeroPosCheckBox);
 
-        JPanel panel_1 = new JPanel();
-        selectionPanel.add(panel_1, BorderLayout.SOUTH);
-        panel_1.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
+        JPanel buttonPanel = new JPanel();
+        selectionPanel.add(buttonPanel, BorderLayout.SOUTH);
+        buttonPanel.setLayout(new BorderLayout(0, 0));
 
-        JButton btnNewButton = new JButton("Send Messages To All Patients");
-        btnNewButton.setFont(new Font("Century", Font.PLAIN, 20));
-        panel_1.add(btnNewButton);
+        JButton sendMessageButton = new JButton("Send Messages To All Patients");
+        sendMessageButton.setFont(new Font("Century", Font.PLAIN, 20));
+        buttonPanel.add(sendMessageButton, BorderLayout.EAST);
+
+        Component verticalStrut_3 = Box.createVerticalStrut(20);
+        buttonPanel.add(verticalStrut_3, BorderLayout.NORTH);
+
+        Component verticalStrut_2 = Box.createVerticalStrut(60);
+        selectionPanel.add(verticalStrut_2, BorderLayout.NORTH);
 
         Component verticalStrut = Box.createVerticalStrut(40);
         add(verticalStrut, BorderLayout.NORTH);
