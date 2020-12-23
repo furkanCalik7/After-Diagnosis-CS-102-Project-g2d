@@ -1,4 +1,7 @@
 package Doctor.Views;
+import Doctor.Controller.BloodMessageSendController;
+import Doctor.Model.Doctor;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -17,10 +20,48 @@ import javax.swing.SwingConstants;
 
 public class DoctorBloodDonationPanel extends JPanel {
 
-    /**
-     * Create the panel.
-     */
-    public DoctorBloodDonationPanel() {
+    private final JCheckBox zeroPosCheckBox;
+    private final JCheckBox zeroNegCheckBox;
+    private final JCheckBox abPosCheckBox;
+    private final JCheckBox abNegCheckBox;
+    private final JCheckBox bPosCheckBox;
+    private final JCheckBox bNegCheckBox;
+    private final JCheckBox aPosCheckBox;
+    private final JCheckBox aNegCheckBox;
+
+    public JCheckBox getZeroPosCheckBox() {
+        return zeroPosCheckBox;
+    }
+
+    public JCheckBox getZeroNegCheckBox() {
+        return zeroNegCheckBox;
+    }
+
+    public JCheckBox getAbPosCheckBox() {
+        return abPosCheckBox;
+    }
+
+    public JCheckBox getAbNegCheckBox() {
+        return abNegCheckBox;
+    }
+
+    public JCheckBox getbPosCheckBox() {
+        return bPosCheckBox;
+    }
+
+    public JCheckBox getbNegCheckBox() {
+        return bNegCheckBox;
+    }
+
+    public JCheckBox getaPosCheckBox() {
+        return aPosCheckBox;
+    }
+
+    public JCheckBox getaNegCheckBox() {
+        return aNegCheckBox;
+    }
+
+    public DoctorBloodDonationPanel(Doctor doctor) {
         setLayout(new BorderLayout(0, 0));
 
         JPanel centerPanel = new JPanel();
@@ -57,45 +98,48 @@ public class DoctorBloodDonationPanel extends JPanel {
         selectionPanel.add(bloodChoicePanel, BorderLayout.CENTER);
         bloodChoicePanel.setLayout(new GridLayout(0, 2, 0, 0));
 
-        JCheckBox ANegCheckBox = new JCheckBox("A RH-");
-        ANegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        bloodChoicePanel.add(ANegCheckBox);
+        aNegCheckBox = new JCheckBox("A RH-");
+        aNegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        bloodChoicePanel.add(aNegCheckBox);
 
-        JCheckBox APosCheckBox = new JCheckBox("A Rh+");
-        APosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        bloodChoicePanel.add(APosCheckBox);
+        aPosCheckBox = new JCheckBox("A Rh+");
+        aPosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        bloodChoicePanel.add(aPosCheckBox);
 
-        JCheckBox BNegCheckBox = new JCheckBox("B Rh-");
-        BNegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        bloodChoicePanel.add(BNegCheckBox);
+        bNegCheckBox = new JCheckBox("B Rh-");
+        bNegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        bloodChoicePanel.add(bNegCheckBox);
 
-        JCheckBox BPosCheckBox = new JCheckBox("B Rh+");
-        BPosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        bloodChoicePanel.add(BPosCheckBox);
+        bPosCheckBox = new JCheckBox("B Rh+");
+        bPosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        bloodChoicePanel.add(bPosCheckBox);
 
-        JCheckBox ABNegCheckBox = new JCheckBox("AB Rh+");
-        ABNegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        bloodChoicePanel.add(ABNegCheckBox);
+        abNegCheckBox = new JCheckBox("AB Rh+");
+        abNegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        bloodChoicePanel.add(abNegCheckBox);
 
-        JCheckBox ABPosCheckBox = new JCheckBox("AB Rh+");
-        ABPosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
-        bloodChoicePanel.add(ABPosCheckBox);
+        abPosCheckBox = new JCheckBox("AB Rh+");
+        abPosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
+        bloodChoicePanel.add(abPosCheckBox);
 
-        JCheckBox zeroNegCheckBox = new JCheckBox("0 Rh-");
-        zeroNegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        zeroNegCheckBox = new JCheckBox("0 Rh-");
+        zeroNegCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
         bloodChoicePanel.add(zeroNegCheckBox);
 
-        JCheckBox zeroPosCheckBox = new JCheckBox("0 Rh+");
-        zeroPosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 11));
+        zeroPosCheckBox = new JCheckBox("0 Rh+");
+        zeroPosCheckBox.setFont(new Font("Tahoma", Font.PLAIN, 17));
         bloodChoicePanel.add(zeroPosCheckBox);
 
         JPanel buttonPanel = new JPanel();
         selectionPanel.add(buttonPanel, BorderLayout.SOUTH);
         buttonPanel.setLayout(new BorderLayout(0, 0));
 
+
+        BloodMessageSendController bloodMessageSendController = new BloodMessageSendController(this,doctor);
         JButton sendMessageButton = new JButton("Send Messages To All Patients");
         sendMessageButton.setFont(new Font("Century", Font.PLAIN, 20));
         buttonPanel.add(sendMessageButton, BorderLayout.EAST);
+        sendMessageButton.addActionListener(bloodMessageSendController);
 
         Component verticalStrut_3 = Box.createVerticalStrut(20);
         buttonPanel.add(verticalStrut_3, BorderLayout.NORTH);

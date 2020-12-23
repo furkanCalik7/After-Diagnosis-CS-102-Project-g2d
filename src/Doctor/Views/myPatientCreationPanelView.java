@@ -28,7 +28,7 @@ public class myPatientCreationPanelView extends JPanel {
      * Create the panel.
      */
     public myPatientCreationPanelView() {
-        setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         JPanel panel = new JPanel();
         panel.setBorder(new LineBorder(Color.GRAY));

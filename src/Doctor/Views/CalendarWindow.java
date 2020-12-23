@@ -46,9 +46,7 @@ public class CalendarWindow extends JFrame {
                     cal.set(pointedDate.getYear(), pointedDate.getMonth() - 1, pointedDate.getDay());
                     //raise the event
                     setSelectedDate(cal);
-
                     dispose();
-
                 }
 
             }

@@ -3,6 +3,7 @@ package Doctor.Controller;
 import Doctor.Model.Doctor;
 import Doctor.Views.myPatientsDrugPanelView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
@@ -47,7 +48,9 @@ public class AddDrugController implements ActionListener {
         }else {
             isHungry = false;
         }
-
-        doctor.prescribeDrug(username,drugName,isMorning,isAfternoon,isEvening,isHungry,start_date,end_date,dose);
+        int i = JOptionPane.showConfirmDialog(drugMenu,"Are you sure to add this drug?","Confirm Drug:",JOptionPane.YES_NO_OPTION);
+        if(i == JOptionPane.YES_OPTION){
+            doctor.prescribeDrug(username,drugName,isMorning,isAfternoon,isEvening,isHungry,start_date,end_date,dose);
+        }
     }
 }

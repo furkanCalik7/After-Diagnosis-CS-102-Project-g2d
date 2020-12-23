@@ -98,7 +98,7 @@ public class PatientMainFrame extends JFrame {
         BloodDonationPanel = new BloodDonationPanel();
         MessagesPanel = new MessagesPanel();
         MedInfoPanel = new MedInfoPanel();
-        SettingsPanel = new SettingsPanel(p);
+        SettingsPanel = new SettingsPanel();
 
         //Creating layered pane containing panels to switch
         JPanel layeredPanePanel = new JPanel();

@@ -1,9 +1,9 @@
 package Doctor.Model;
 
-import Appointment.Appointment;
-import JDBC.MySQLAccess;
 import Admin.model.User;
-import LabTechs.Model.Test;
+import Appointment.Appointment;
+import JDBC.Message;
+import JDBC.MySQLAccess;
 import LabTechs.Model.TestRequest;
 import Patient.Model.Code;
 import Patient.Model.PatientInfoCard;
@@ -57,7 +57,7 @@ public class Doctor extends User {
     }
 
     public void prescribeDrug(String patientUsername, String name, boolean isMorning, boolean isAfternoon,
-                        boolean isEvening, boolean isHungry, Date startDate, Date finalDate, int dose) {
+                              boolean isEvening, boolean isHungry, Date startDate, Date finalDate, int dose) {
 
         Drug drug = new Drug(patientUsername, name, isMorning, isAfternoon, isEvening, isHungry, startDate, finalDate,
                 dose);
@@ -74,6 +74,16 @@ public class Doctor extends User {
         mySQLAccess.addCode(code);
         return code;
     }
+
+    public void sendBloodRequest(String bloodtype) {
+        String subject = "Urgent blood necessity. " + bloodtype + " required!";
+        String content = bloodtype + " required!! If you have acquaintances to give certain blood type, please notify them to donate blood";
+        for (PatientSlot d : patientSlots) {
+            Message message = Message.newMessage(d.getPatientInfo().getUsername(), getUsername(), subject, content);
+            message.sendMessage();
+        }
+    }
+
 
     public void updateDoctorInformation() {
         mySQLAccess.updateDoctorInformationOnDatabase(this);
@@ -98,18 +108,5 @@ public class Doctor extends User {
     public boolean sendTestRequest(String test_name, PatientInfoCard patient, String lab_tech_username) {
         TestRequest newTest = TestRequest.newTest(test_name, patient, getUsername(), lab_tech_username);
         return mySQLAccess.addTestRequest(newTest);
-    }
-
-    @Override
-    public String toString() {
-        System.out.println(super.toString());
-        return "Doctor{" +
-                "speciality='" + speciality + '\'' +
-                ", patientSlots=" + patientSlots +
-                ", mySQLAccess=" + mySQLAccess +
-                ", approvedAppointments=" + approvedAppointments +
-                ", waitingAppointments=" + waitingAppointments +
-                ", availableTimes=" + availableTimes +
-                '}';
     }
 }
