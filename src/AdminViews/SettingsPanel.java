@@ -1,6 +1,6 @@
 package AdminViews;
 
-import doctorViews.HintTextField;
+import Admin.model.User;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
@@ -20,15 +20,18 @@ import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
 
 public class SettingsPanel extends JPanel {
-    private JTextField nameTextField;
-    private JTextField mailTextField;
-    private JTextField passwordTextField;
-    private final ButtonGroup buttonGroup = new ButtonGroup();
+
+     JTextField nameTextField;
+     JTextField mailTextField;
+     JTextField passwordTextField;
+     final ButtonGroup buttonGroup = new ButtonGroup();
+     User user;
 
     /**
      * Create the panel.
      */
-    public SettingsPanel() {
+    public SettingsPanel(User user) {
+        this.user = user;
         setLayout(new GridLayout(7, 1, 0, 6));
 
         JPanel topHeaderPanel = new JPanel();
@@ -41,7 +44,7 @@ public class SettingsPanel extends JPanel {
         JPanel infoPanel = new JPanel();
         infoPanel.setBorder(new LineBorder(new Color(0, 0, 255), 2));
         add(infoPanel);
-        infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        infoPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
         JLabel infoLabel = new JLabel("Enter or update your information");
         infoLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -66,7 +69,7 @@ public class SettingsPanel extends JPanel {
         patientNamePanel.add(panel_9);
         panel_9.setLayout(new BorderLayout(0, 0));
 
-        nameTextField = new HintTextField("Enter Your Name");
+        nameTextField = new JTextField();
         panel_9.add(nameTextField);
         nameTextField.setColumns(20);
 
@@ -88,7 +91,7 @@ public class SettingsPanel extends JPanel {
         patientSurnamePanel.add(panel_1);
         panel_1.setLayout(new BorderLayout(0, 0));
 
-        mailTextField = new HintTextField( "Enter your mail ");
+        mailTextField = new JTextField();
         panel_1.add(mailTextField, BorderLayout.CENTER);
         mailTextField.setColumns(10);
 
@@ -111,7 +114,7 @@ public class SettingsPanel extends JPanel {
         patientMailPanel.add(panel_4);
         panel_4.setLayout(new BorderLayout(0, 0));
 
-        passwordTextField = new HintTextField( "Enter your password" );
+        passwordTextField = new JTextField();
         panel_4.add(passwordTextField, BorderLayout.CENTER);
         passwordTextField.setColumns(10);
 
@@ -147,7 +150,7 @@ public class SettingsPanel extends JPanel {
         add(createPanel);
         createPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        JButton saveYourChangesButton = new JButton("Save Your Changes");
+        JButton saveYourChangesButton = new SettingsButtonController(user, this);
         saveYourChangesButton.setFont(new Font("Century", Font.PLAIN, 20));
         createPanel.add(saveYourChangesButton);
 

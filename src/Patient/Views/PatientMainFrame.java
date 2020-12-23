@@ -1,6 +1,9 @@
 package Patient.Views;
 
 
+import JDBC.MySQLAccess;
+import Patient.Model.Patient;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
@@ -64,6 +67,8 @@ public class PatientMainFrame extends JFrame {
      */
     public PatientMainFrame() {
 
+        MySQLAccess access = new MySQLAccess();
+        Patient p = (Patient) access.getUser("AlanGreen");
         //Initializing frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
@@ -83,7 +88,7 @@ public class PatientMainFrame extends JFrame {
 
         //Creating panels which will be added to main frame
         HomePagePanel = new HomePagePanel();
-        MyDoctorsPanel = new MyDoctorsPanel();
+        MyDoctorsPanel = new MyDoctorsPanel(p);
         MyDrugsPanel = new MyDrugsPanel();
         AppointmentPanel = new AppointmentPanel();
         BloodDonationPanel = new BloodDonationPanel();

@@ -1,5 +1,8 @@
 package Patient.Views;
 
+import Patient.Controllers.AddDoctorButtonControls;
+import Patient.Model.Patient;
+
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -18,12 +21,14 @@ import javax.swing.JButton;
 public class MyDoctorsPanel extends JPanel {
     private JTextField searchTextField;
     private JTable table;
-    private JTextField codeField;
+    public JTextField codeField;
+    public Patient patient;
 
     /**
      * Create the panel.
      */
-    public MyDoctorsPanel() {
+    public MyDoctorsPanel(Patient patient) {
+        this.patient = patient;
         setBorder(new EmptyBorder(0, 100, 0, 100));
         setLayout(new BorderLayout(0, 0));
 
@@ -95,7 +100,7 @@ public class MyDoctorsPanel extends JPanel {
         codeField.setColumns(10);
         codePanel.add(codeField);
 
-        JButton codeButton = new JButton("DONE");
+        JButton codeButton = new AddDoctorButtonControls(patient, this);
         codePanel.add(codeButton);
 
     }
