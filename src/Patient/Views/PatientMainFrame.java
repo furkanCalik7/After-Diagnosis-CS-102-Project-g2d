@@ -3,6 +3,7 @@ package Patient.Views;
 
 import JDBC.MySQLAccess;
 import Patient.Model.Patient;
+import AdminViews.*;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -20,6 +21,9 @@ import java.awt.FlowLayout;
 import java.awt.CardLayout;
 
 public class PatientMainFrame extends JFrame {
+
+    MySQLAccess access = new MySQLAccess();
+    Patient p = (Patient) access.getUser("fguzelant");
 
     private JPanel contentPane;
     private JLayeredPane layeredPane;
@@ -94,7 +98,7 @@ public class PatientMainFrame extends JFrame {
         BloodDonationPanel = new BloodDonationPanel();
         MessagesPanel = new MessagesPanel();
         MedInfoPanel = new MedInfoPanel();
-        SettingsPanel = new SettingsPanel();
+        SettingsPanel = new SettingsPanel(p);
 
         //Creating layered pane containing panels to switch
         JPanel layeredPanePanel = new JPanel();
