@@ -62,8 +62,11 @@ public class AdminMainFrame extends JFrame {
      * Create the frame.
      */
     public AdminMainFrame() {
+        // For test only
         MySQLAccess access = new MySQLAccess();
-        Patient p = (Patient) access.getUser("password");
+        Patient p = (Patient) access.getUser("fguzelant");
+        //
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
         contentPane = new JPanel();
