@@ -71,7 +71,6 @@ public class DoctorMainFrameViewer extends JFrame {
     public DoctorMainFrameViewer() {
         MySQLAccess mySQLAccess = new MySQLAccess();
         doctor = mySQLAccess.getDoctorByUsername( "JuliaRoberts" );
-
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
         contentPane = new JPanel();
@@ -96,9 +95,10 @@ public class DoctorMainFrameViewer extends JFrame {
         layeredPane.setLayout(new BorderLayout(0, 0));
 
         //Panels need to be added in inverse order
+        layeredPane.add(labTestsMainPanel);
         layeredPane.add(myPatientsLayeredPanelView);
         layeredPane.add(doctorHomepagePanelView);
-        layeredPane.add(labTestsMainPanel);
+
 
         //Button initializings
         JButton homepageButton = new JButton("Homepage");

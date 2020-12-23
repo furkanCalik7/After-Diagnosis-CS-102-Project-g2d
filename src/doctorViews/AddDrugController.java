@@ -32,9 +32,8 @@ public class AddDrugController implements ActionListener {
         isMorning = drugMenu.getIsMorning().isSelected();
         isAfternoon = drugMenu.getIsAfternoon().isSelected();
         isEvening = drugMenu.getIsEvening().isSelected();
-
-//        start_date = drugMenu.getStartingDateTextField().getText();
-//        end_date = drugMenu.getEndingDateTextField();
+        start_date = Date.valueOf(drugMenu.getDataPickerStart().getSelectedDate());
+        end_date = Date.valueOf(drugMenu.getDataPickerEnd().getSelectedDate());
 
         if(drugMenu.getDose().getText().isEmpty()){
             dose = 0;
@@ -42,12 +41,12 @@ public class AddDrugController implements ActionListener {
             dose = Integer.parseInt(drugMenu.getDose().getText());
         }
 
-        System.out.println(drugName);
-        System.out.println(username);
-        System.out.println(isMorning);
-        System.out.println(isAfternoon);
-        System.out.println(isEvening);
-        System.out.println(dose);
-        System.out.println(drugMenu.getHungryButtonGroup().getSelection().getActionCommand());
+        if(drugMenu.getHungryButtonGroup().getSelection().getActionCommand() == "Hungry"){
+            isHungry = true;
+        }else {
+            isHungry = false;
+        }
+
+        doctor.prescribeDrug(username,drugName,isMorning,isAfternoon,isEvening,isHungry,start_date,end_date,dose);
     }
 }

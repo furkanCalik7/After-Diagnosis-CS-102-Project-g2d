@@ -18,7 +18,7 @@ import java.util.ArrayList;
 
 public class MyPatientsMainPanel extends JPanel {
     private JTable table;
-    private JTextField txtSearchPatientBy;
+    private HintTextField txtSearchPatientBy;
     private Doctor doctor;
     private TableRowSorter<MyTableModel> rowSorter;
     private MyPatientsLayeredPanelView layeredPane;
@@ -40,13 +40,18 @@ public class MyPatientsMainPanel extends JPanel {
         //table.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         MyTableModel myTableModel = new MyTableModel();
+
         rowSorter = new TableRowSorter<>(myTableModel);
         table.setModel(myTableModel);
         table.setRowSorter(rowSorter);
+
         table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
         table.getColumn("Drugs").setCellRenderer(new ButtonRenderer());
         table.getColumn("Drugs").setCellEditor(new AddDrugButtonEditor(new JTextField()));
 
+        table.getColumn("More Information").setCellRenderer(new ButtonRenderer());
+        table.getColumn("More Information").setCellEditor(new InformationButtonEditor(new JTextField()));
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setViewportBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -64,6 +69,7 @@ public class MyPatientsMainPanel extends JPanel {
         txtSearchPatientBy = new HintTextField("Search Patient By Name");
         searchPanel.add(txtSearchPatientBy, BorderLayout.WEST);
         txtSearchPatientBy.setColumns(20);
+
         txtSearchPatientBy.getDocument().addDocumentListener(
                 new DocumentListener() {
                     public void changedUpdate(DocumentEvent e) {
@@ -125,7 +131,7 @@ public class MyPatientsMainPanel extends JPanel {
 
     class MyTableModel extends AbstractTableModel {
         private String[] columnNames = new String[]{
-                "Age", "Patient Name", "Email", "Description", "Status", "Start Date", "Drugs"};
+                "Age", "Patient Name", "Email", "Description", "Status", "Start Date", "Drugs", "More Information"};
 
         private ArrayList<PatientSlot> patients;
 
@@ -146,7 +152,7 @@ public class MyPatientsMainPanel extends JPanel {
             return columnNames[col];
         }
 
-
+        @Override
         public Object getValueAt(int row, int col) {
             PatientSlot data = patients.get(row);
 
@@ -168,6 +174,8 @@ public class MyPatientsMainPanel extends JPanel {
                     return data.getStart_date();
                 case 6:
                     return "Drugs";
+                case 7:
+                    return "More Information";
             }
             return "null";
         }
@@ -190,7 +198,9 @@ public class MyPatientsMainPanel extends JPanel {
     private void newFilter() {
         RowFilter<MyTableModel, Object> rf = null;
         try {
-            rf = RowFilter.regexFilter(txtSearchPatientBy.getText(), 1);
+            if(!txtSearchPatientBy.getText().equals("Search Patient By Name")){
+                rf = RowFilter.regexFilter(txtSearchPatientBy.getText(), 1);
+            }
         } catch (java.util.regex.PatternSyntaxException e) {
             return;
         }
@@ -241,7 +251,52 @@ public class MyPatientsMainPanel extends JPanel {
         public Object getCellEditorValue() {
             if (isPushed) {
                 layeredPane.switchPanels(table.convertRowIndexToModel(i), MyPatientsLayeredPanelView.DRUG_MENU);
-                System.out.println(table.convertColumnIndexToModel(i));
+            }
+            isPushed = false;
+            return new String(label);
+        }
+
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
+        }
+
+    }
+    class InformationButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+        int i = 0;
+        private String label;
+
+        private boolean isPushed;
+
+        public InformationButtonEditor(JTextField textField) {
+            super(textField);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            i = row;
+            isPushed = true;
+            return button;
+        }
+
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                layeredPane.switchPanels(table.convertRowIndexToModel(i), MyPatientsLayeredPanelView.INFORMATION_MENU);
             }
             isPushed = false;
             return new String(label);
