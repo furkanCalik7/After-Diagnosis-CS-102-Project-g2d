@@ -27,7 +27,6 @@ public class AddWorkerMainPanel extends JPanel {
         setBackground(Color.MAGENTA);
         setBorder(new EmptyBorder(30, 30, 30, 30));
         setLayout(new BorderLayout(0, 0));
-
         JLabel lblNewLabel = new JLabel("ADD A HOSPITAL WORKER");
         lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(lblNewLabel, BorderLayout.NORTH);

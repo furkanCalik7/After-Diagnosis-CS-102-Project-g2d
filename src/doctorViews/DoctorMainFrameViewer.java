@@ -17,7 +17,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import AdminViews.SettingsPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,6 +37,7 @@ public class DoctorMainFrameViewer extends JFrame {
     private MyPatientsLayeredPanelView myPatientsLayeredPanelView;
     private Doctor doctor;
     private LabTestsMainPanel labTestsMainPanel;
+    private SettingsPanel settingsPanel;
 
     /**
      * Internal method to change panels.
@@ -81,11 +82,12 @@ public class DoctorMainFrameViewer extends JFrame {
 
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 0));
-        contentPane.add(buttonPanel, BorderLayout.WEST);
+        contentPane.add( buttonPanel, BorderLayout.WEST );
 
         doctorHomepagePanelView = new DoctorHomepagePanelView( doctor );
         labTestsMainPanel = new LabTestsMainPanel();
         myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
+        settingsPanel = new SettingsPanel();
 
         JPanel layeredPanePanel = new JPanel();
         contentPane.add(layeredPanePanel, BorderLayout.CENTER);
@@ -96,9 +98,10 @@ public class DoctorMainFrameViewer extends JFrame {
         layeredPane.setLayout(new BorderLayout(0, 0));
 
         //Panels need to be added in inverse order
-        layeredPane.add(myPatientsLayeredPanelView);
-        layeredPane.add(doctorHomepagePanelView);
-        layeredPane.add(labTestsMainPanel);
+        layeredPane.add( myPatientsLayeredPanelView );
+        layeredPane.add( doctorHomepagePanelView );
+        layeredPane.add( labTestsMainPanel );
+        layeredPane.add( settingsPanel );
 
         //Button initializings
         JButton homepageButton = new JButton("Homepage");
@@ -149,12 +152,13 @@ public class DoctorMainFrameViewer extends JFrame {
         });
         buttonPanel.add( labTestsButton );
 
-        JButton settingsPanel = new JButton("Settings");
-        settingsPanel.addActionListener(new ActionListener() {
+        JButton settingsPanelButton = new JButton("Settings");
+        settingsPanelButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                switchPanels( settingsPanel );
             }
         });
-        buttonPanel.add( settingsPanel );
+        buttonPanel.add( settingsPanelButton );
         //
 
     }

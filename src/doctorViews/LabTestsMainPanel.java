@@ -81,10 +81,9 @@ public class LabTestsMainPanel extends JPanel {
         JPanel patientNameTxtFPanel = new JPanel();
         centerPanel.add(patientNameTxtFPanel);
 
-        patientNameTextField = new JTextField();
+        patientNameTextField = new HintTextField("Patient Name");
         patientNameTextField.setFont(new Font("Century", Font.PLAIN, 20));
-        //TODO Tıklayınca yazının yok olmasını sağla textfielddan.
-        patientNameTextField.setText("Patient Name");
+
         patientNameTxtFPanel.add(patientNameTextField);
         patientNameTextField.setColumns(10);
 
@@ -98,8 +97,7 @@ public class LabTestsMainPanel extends JPanel {
         JPanel testNameTxtFPanel = new JPanel();
         centerPanel.add(testNameTxtFPanel);
 
-        txtTestName = new JTextField();
-        txtTestName.setText("Test Name");
+        txtTestName = new HintTextField( "Test Name");
         txtTestName.setFont(new Font("Century", Font.PLAIN, 20));
         testNameTxtFPanel.add(txtTestName);
         txtTestName.setColumns(10);

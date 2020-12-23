@@ -35,7 +35,6 @@ public class MyPatientsMainPanel extends JPanel {
         add(patientListPanel, BorderLayout.CENTER);
         patientListPanel.setLayout(new BorderLayout(0, 0));
         table = new JTable();
-        table.setEnabled(false);
         table.setBorder(new EmptyBorder(8, 0, 8, 0));
         //table.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
