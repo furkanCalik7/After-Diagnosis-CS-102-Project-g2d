@@ -32,10 +32,7 @@ public class LabTestsMainPanel extends JPanel {
         layeredPane.repaint();
         layeredPane.revalidate();
     }
-
-    /**
-     * Create the panel.
-     */
+    
     public LabTestsMainPanel() {
 
         setLayout(new BorderLayout(0, 0));

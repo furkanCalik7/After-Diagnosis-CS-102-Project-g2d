@@ -23,8 +23,8 @@ public class myPatientsDrugPanelView extends JPanel {
     private String[] drugNameArray;
     private JTextField dose;
 
-    private JTextField startingDateTextField;
-    private JTextField endingDateTextField;
+    private DatePickerPanel dataPickerStart;
+    private DatePickerPanel dataPickerEnd;
     private JTable table;
     private JScrollPane scrollPane;
     private ButtonGroup hungryButtonGroup;
@@ -45,12 +45,12 @@ public class myPatientsDrugPanelView extends JPanel {
         return hungryButtonGroup;
     }
 
-    public JTextField getStartingDateTextField() {
-        return startingDateTextField;
+    public DatePickerPanel getDataPickerStart() {
+        return dataPickerStart;
     }
 
-    public JTextField getEndingDateTextField() {
-        return endingDateTextField;
+    public DatePickerPanel getDataPickerEnd() {
+        return dataPickerEnd;
     }
 
     public JComboBox getDrugComboBox() {
@@ -194,30 +194,22 @@ public class myPatientsDrugPanelView extends JPanel {
         JPanel datePanel = new JPanel();
         inputPanel.add(datePanel);
         datePanel.setLayout(new GridLayout(3, 0, 0, 0));
-
-        JPanel startingDatePanel = new JPanel();
-        datePanel.add(startingDatePanel);
-
-        JLabel dateStartPromptLabel = new JLabel("Enter Starting Date:");
+        //TODO TIKLAYINCA TEKRAR KAPATMASINI AYARLA
+        JPanel startDatePanel = new JPanel();
+        JLabel dateStartPromptLabel = new JLabel("Start Date:");
         dateStartPromptLabel.setFont(new Font("Century", Font.PLAIN, 15));
-        startingDatePanel.add(dateStartPromptLabel);
+        dataPickerStart = new DatePickerPanel();
+        startDatePanel.add(dateStartPromptLabel);
+        startDatePanel.add(dataPickerStart);
+        datePanel.add(startDatePanel);
 
-        //TODO this text field takes starting field of the drug.
-        startingDateTextField = new JTextField();
-        startingDatePanel.add(startingDateTextField);
-        startingDateTextField.setColumns(10);
-
-        JPanel panel_4 = new JPanel();
-        datePanel.add(panel_4);
-
-        JLabel lblNewLabel_1 = new JLabel("Enter Ending Date:");
-        lblNewLabel_1.setFont(new Font("Century", Font.PLAIN, 15));
-        panel_4.add(lblNewLabel_1);
-
-        //TODO this text field takes ending field of the drug.
-        endingDateTextField = new JTextField();
-        panel_4.add(endingDateTextField);
-        endingDateTextField.setColumns(10);
+        JPanel endDatePanel = new JPanel();
+        JLabel endDate = new JLabel("End Date:");
+        endDate.setFont(new Font("Century", Font.PLAIN, 15));
+        dataPickerEnd = new DatePickerPanel();
+        endDatePanel.add(endDate);
+        endDatePanel.add(dataPickerEnd);
+        datePanel.add(endDatePanel);
 
         JPanel panel_3 = new JPanel();
         FlowLayout flowLayout_1 = (FlowLayout) panel_3.getLayout();
@@ -304,25 +296,26 @@ public class myPatientsDrugPanelView extends JPanel {
                     return drug.getDose();
                 case 4:
                     String temp = "";
-                    if(drug.isMorning()){
+                    if (drug.isMorning()) {
                         temp += " Morning";
                     }
-                    if(drug.isAfternoon()){
+                    if (drug.isAfternoon()) {
                         temp += " Afternoon";
                     }
-                    if(drug.isEvening()){
+                    if (drug.isEvening()) {
                         temp += " Evening";
                     }
                     return temp;
                 case 5:
-                    if(drug.isHungry()){
+                    if (drug.isHungry()) {
                         return "Hungry";
-                    }else {
+                    } else {
                         return "Full";
                     }
             }
             return "null";
         }
+
         public boolean isCellEditable(int row, int col) {
             return false;
         }

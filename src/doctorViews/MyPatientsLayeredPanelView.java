@@ -14,6 +14,7 @@ public class MyPatientsLayeredPanelView extends JPanel {
     MyPatientsMainPanel myPatientsMainPanel;
     JLayeredPane layeredPane;
     myPatientCreationPanelView patientCreationPanelView;
+
     ArrayList<PatientInfoPanelView> patientInfoPanelViews;
     ArrayList<myPatientsDrugPanelView> patientsDrugPanelViews;
 
@@ -38,6 +39,7 @@ public class MyPatientsLayeredPanelView extends JPanel {
         layeredPane.add(myPatientsMainPanel);
         layeredPane.add(patientCreationPanelView);
     }
+
     public void switchPanels(int index, int kind) {
         layeredPane.removeAll();
         if(kind == DRUG_MENU){
