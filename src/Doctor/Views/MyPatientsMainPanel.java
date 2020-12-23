@@ -1,4 +1,4 @@
-package doctorViews;
+package Doctor.Views;
 
 import Doctor.Model.Doctor;
 import Doctor.Model.PatientSlot;
@@ -110,13 +110,15 @@ public class MyPatientsMainPanel extends JPanel {
         rightPanelInteraction.add(addPatientPanel, BorderLayout.EAST);
 
         JButton patientAddButton = new JButton("Add Patient");
-        addPatientPanel.add(patientAddButton);
-
-        JButton removeButton = new JButton("Remove Patient");
-        removeButton.addActionListener(new ActionListener() {
+        patientAddButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                layeredPanel.switchCreationMenu();
             }
         });
+        addPatientPanel.add(patientAddButton);
+
+        //TODO MAKE A CONTROLLER
+        JButton removeButton = new JButton("Remove Patient");
         addPatientPanel.add(removeButton);
 
     }

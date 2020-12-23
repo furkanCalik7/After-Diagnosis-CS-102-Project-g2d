@@ -1,6 +1,7 @@
-package doctorViews;
+package Doctor.Controller;
 
 import Doctor.Model.Doctor;
+import Doctor.Views.myPatientsDrugPanelView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -1,4 +1,4 @@
-package doctorViews;
+package Doctor.Views;
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -14,15 +14,14 @@ import javax.swing.Box;
 
 
 public class myPatientCreationPanelView extends JPanel {
+
     private JTextField nameTextField;
     private JTextField surnameTextField;
     private JTextField emailTextField;
     private JTextField complaintTextField;
 
-    /**
-     * Create the panel.
-     */
     public myPatientCreationPanelView() {
+
         setLayout(new GridLayout(7, 1, 0, 6));
 
         JPanel emptyPanel1 = new JPanel();

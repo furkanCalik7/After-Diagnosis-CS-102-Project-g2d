@@ -1,4 +1,4 @@
-package doctorViews;
+package Doctor.Views;
 
 import com.mindfusion.common.*;
 import com.mindfusion.scheduling.Calendar;

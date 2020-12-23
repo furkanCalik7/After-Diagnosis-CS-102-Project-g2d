@@ -1,4 +1,4 @@
-package doctorViews;
+package Doctor.Views;
 
 import java.awt.Color;
 import java.awt.Font;

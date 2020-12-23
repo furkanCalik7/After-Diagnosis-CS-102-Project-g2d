@@ -1,8 +1,9 @@
-package doctorViews;
+package Doctor.Views;
 
 import Doctor.Model.Doctor;
 import Doctor.Model.Drug;
 import Doctor.Model.PatientSlot;
+import Doctor.Controller.AddDrugController;
 
 import javax.swing.*;
 import java.awt.GridLayout;
@@ -19,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.border.MatteBorder;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 
 public class myPatientsDrugPanelView extends JPanel implements ActionListener {
     private String[] drugNameArray;

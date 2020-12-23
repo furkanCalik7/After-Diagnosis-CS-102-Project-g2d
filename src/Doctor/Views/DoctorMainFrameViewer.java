@@ -1,31 +1,23 @@
-package doctorViews;
+package Doctor.Views;
 
 import Doctor.Model.Doctor;
 import JDBC.MySQLAccess;
 
-import Doctor.Model.Doctor;
-import JDBC.MySQLAccess;
-
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import AdminViews.SettingsPanel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import java.awt.FlowLayout;
 
 public class DoctorMainFrameViewer extends JFrame {
 
@@ -100,11 +92,10 @@ public class DoctorMainFrameViewer extends JFrame {
         layeredPane.setLayout(new BorderLayout(0, 0));
 
         //Panels need to be added in inverse order
+        layeredPane.add( settingsPanel );
+        layeredPane.add( labTestsMainPanel );
         layeredPane.add( myPatientsLayeredPanelView );
         layeredPane.add( doctorHomepagePanelView );
-        layeredPane.add( labTestsMainPanel );
-        layeredPane.add( settingsPanel );
-
         //Button initializings
         JButton homepageButton = new JButton("Homepage");
         homepageButton.setIcon(new ImageIcon("C:\\Users\\42ber\\OneDrive\\Masa\u00FCst\u00FC\\homePage.png"));

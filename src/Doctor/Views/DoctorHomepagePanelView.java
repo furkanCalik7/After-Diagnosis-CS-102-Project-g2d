@@ -1,4 +1,4 @@
-package doctorViews;
+package Doctor.Views;
 
 import Doctor.Model.Doctor;
 

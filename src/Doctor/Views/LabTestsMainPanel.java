@@ -1,4 +1,4 @@
-package doctorViews;
+package Doctor.Views;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -6,7 +6,6 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.SystemColor;
 import javax.swing.JLayeredPane;
 import java.awt.CardLayout;
 import java.awt.GridLayout;

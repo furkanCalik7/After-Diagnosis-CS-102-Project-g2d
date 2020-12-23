@@ -1,4 +1,4 @@
-package doctorViews;
+package Doctor.Views;
 
 import Doctor.Model.Doctor;
 
@@ -54,6 +54,12 @@ public class MyPatientsLayeredPanelView extends JPanel {
     public void switchMainPanel() {
         layeredPane.removeAll();
         layeredPane.add(myPatientsMainPanel);
+        layeredPane.repaint();
+        layeredPane.revalidate();
+    }
+    public void switchCreationMenu() {
+        layeredPane.removeAll();
+        layeredPane.add(patientCreationPanelView);
         layeredPane.repaint();
         layeredPane.revalidate();
     }
