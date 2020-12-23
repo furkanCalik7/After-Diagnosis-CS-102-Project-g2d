@@ -1,0 +1,23 @@
+.LOG
+Furkan Güzelant
+7.12.2020
+Database connection is implemented.
+9.12.2020
+Database is connected to server.
+11.12.2020 
+LoginModel is implemented
+14.12.2020
+Admin and patient classes are partially implemented
+15.12.2020
+Some updates in Patient and MySQLAccess class
+16.12.2020
+Drug class is implemented
+
+15:57 17.12.2020
+Helped to draw the UML Diagram and write detailed design report
+23.12.2020
+Add worker and Add doctor button controls are implemented.
+23.12.2020
+SettingButtonControls is implemented.
+24.12.2020
+HospitalWorkersPanel is implemented.
