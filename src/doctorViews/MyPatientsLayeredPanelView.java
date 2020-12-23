@@ -9,6 +9,8 @@ import java.awt.BorderLayout;
 import java.util.ArrayList;
 
 public class MyPatientsLayeredPanelView extends JPanel {
+    public static final int DRUG_MENU = 0;
+    public static final int INFORMATION_MENU = 1;
     MyPatientsMainPanel myPatientsMainPanel;
     JLayeredPane layeredPane;
     myPatientCreationPanelView patientCreationPanelView;
@@ -23,10 +25,10 @@ public class MyPatientsLayeredPanelView extends JPanel {
         patientInfoPanelViews = new ArrayList<>();
 
         for(int i = 0; i < doctor.getPatientSlots().size(); i++){
-            patientsDrugPanelViews.add(new myPatientsDrugPanelView(doctor.getPatientSlots().get(i)));
+            patientsDrugPanelViews.add(new myPatientsDrugPanelView(doctor.getPatientSlots().get(i),doctor));
         }
         for(int i = 0; i < doctor.getPatientSlots().size(); i++){
-            patientInfoPanelViews.add(new PatientInfoPanelView(doctor.getPatientSlots().get(i)));
+            patientInfoPanelViews.add(new PatientInfoPanelView(doctor.getPatientSlots().get(i),this));
         }
 
         layeredPane = new JLayeredPane();
@@ -38,12 +40,18 @@ public class MyPatientsLayeredPanelView extends JPanel {
     }
     public void switchPanels(int index, int kind) {
         layeredPane.removeAll();
-        if(kind == 0){
+        if(kind == DRUG_MENU){
             layeredPane.add(patientsDrugPanelViews.get(index));
         }
-        if(kind == 1){
+        if(kind == INFORMATION_MENU){
             layeredPane.add(patientInfoPanelViews.get(index));
         }
+        layeredPane.repaint();
+        layeredPane.revalidate();
+    }
+    public void switchMainPanel() {
+        layeredPane.removeAll();
+        layeredPane.add(myPatientsMainPanel);
         layeredPane.repaint();
         layeredPane.revalidate();
     }

@@ -7,18 +7,23 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class PatientInfoPanelView extends JPanel {
+public class PatientInfoPanelView extends JPanel implements ActionListener {
 
-    /**
-     * Create the panel.
-     */
-    public PatientInfoPanelView(PatientSlot patientSlot) {
+    private MyPatientsLayeredPanelView panel;
+    public PatientInfoPanelView(PatientSlot patientSlot,MyPatientsLayeredPanelView panel) {
+        this.panel = panel;
         setLayout(new BorderLayout(0, 15));
 
         JPanel northPanel = new JPanel();
         northPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         add(northPanel, BorderLayout.NORTH);
+
+        JButton backButton = new JButton("<--");
+        northPanel.add(backButton);
+        backButton.addActionListener(this);
 
         JLabel headerLabel = new JLabel("Patient Information");
         headerLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -159,4 +164,8 @@ public class PatientInfoPanelView extends JPanel {
 
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        panel.switchMainPanel();
+    }
 }

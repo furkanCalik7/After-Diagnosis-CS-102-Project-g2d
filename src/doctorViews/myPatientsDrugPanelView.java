@@ -1,21 +1,19 @@
 package doctorViews;
 
+import Doctor.Model.Doctor;
 import Doctor.Model.PatientSlot;
 
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
-import javax.swing.SwingConstants;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
-import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JComboBox;
 import javax.swing.JTextField;
 import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
-import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
 
 import java.awt.BorderLayout;
@@ -24,26 +22,67 @@ import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.JCheckBox;
 import javax.swing.border.MatteBorder;
-import java.awt.ScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Button;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 public class myPatientsDrugPanelView extends JPanel {
     private String[] drugNameArray;
-    private JTextField textField;
-    private ButtonGroup statusGroup;
+    private JTextField dose;
+
     private JTextField startingDateTextField;
     private JTextField endingDateTextField;
     private JTable table;
     private JScrollPane scrollPane;
+    private ButtonGroup hungryButtonGroup;
+
+    private JComboBox drugComboBox;
+    private JCheckBox isEvening;
+    private JCheckBox isAfternoon;
+    private JCheckBox isMorning;
+    private String patient_username;
+
+
+    public JTextField getDose() {
+        return dose;
+    }
+
+    public ButtonGroup getHungryButtonGroup() {
+        return hungryButtonGroup;
+    }
+
+    public JTextField getStartingDateTextField() {
+        return startingDateTextField;
+    }
+
+    public JTextField getEndingDateTextField() {
+        return endingDateTextField;
+    }
+
+    public JComboBox getDrugComboBox() {
+        return drugComboBox;
+    }
+
+    public JCheckBox getIsEvening() {
+        return isEvening;
+    }
+
+    public JCheckBox getIsAfternoon() {
+        return isAfternoon;
+    }
+
+    public JCheckBox getIsMorning() {
+        return isMorning;
+    }
+
+    public String getPatient_username() {
+        return patient_username;
+    }
 
     /**
      * Create the panel.
      */
-    public myPatientsDrugPanelView(PatientSlot patientSlot) {
+    public myPatientsDrugPanelView(PatientSlot patientSlot, Doctor doctor) {
+        patient_username = patientSlot.getPatientInfo().getUsername();
         BorderLayout borderLayout = new BorderLayout();
         borderLayout.setVgap(5);
         setLayout(borderLayout );
@@ -74,7 +113,7 @@ public class myPatientsDrugPanelView extends JPanel {
         //Most common prescriptions. Will be added to the drug choices.
         drugNameArray = new String[]{ "Vicodin", "Amoxil", "Lipitor", "Motrin", "Synthroid", "Delasone" };
 
-        JComboBox drugComboBox = new JComboBox( drugNameArray );
+        drugComboBox = new JComboBox( drugNameArray );
         drugComboBox.setFont(new Font("Century", Font.PLAIN, 13));
         drugNamePanel.add(drugComboBox);
 
@@ -86,9 +125,9 @@ public class myPatientsDrugPanelView extends JPanel {
         enterDoseLabel.setFont(new Font("Century", Font.PLAIN, 15));
         dosePanel.add(enterDoseLabel);
 
-        textField = new JTextField();
-        dosePanel.add(textField);
-        textField.setColumns(10);
+        dose = new JTextField();
+        dosePanel.add(dose);
+        dose.setColumns(10);
 
         JPanel panel = new JPanel();
         panel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -109,13 +148,16 @@ public class myPatientsDrugPanelView extends JPanel {
         //Hungry Full radiobuttons.
         JRadioButton hungryButton = new JRadioButton("Hungry");
         choicePanel.add(hungryButton);
+        hungryButton.setActionCommand("Hungry");
 
         JRadioButton fullButton = new JRadioButton("Full");
         choicePanel.add(fullButton);
+        fullButton.setActionCommand("Full");
 
-        statusGroup = new ButtonGroup();
-        statusGroup.add(fullButton);
-        statusGroup.add(hungryButton);
+        hungryButtonGroup = new ButtonGroup();
+        hungryButtonGroup.add(fullButton);
+        hungryButtonGroup.add(hungryButton);
+        hungryButton.setSelected(true);
 
         JPanel schedulePanel = new JPanel();
         schedulePanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -138,20 +180,20 @@ public class myPatientsDrugPanelView extends JPanel {
         morningHolderPanel.setBorder(new EmptyBorder(0, 5, 0, 5));
         panel_1.add(morningHolderPanel);
 
-        JCheckBox chckbxNewCheckBox = new JCheckBox("Morning");
-        morningHolderPanel.add(chckbxNewCheckBox);
+        isMorning = new JCheckBox("Morning");
+        morningHolderPanel.add(isMorning);
 
         JPanel anoonHolderPanel = new JPanel();
         panel_1.add(anoonHolderPanel);
 
-        JCheckBox chckbxNewCheckBox_1 = new JCheckBox("Afternoon");
-        anoonHolderPanel.add(chckbxNewCheckBox_1);
+        isAfternoon = new JCheckBox("Afternoon");
+        anoonHolderPanel.add(isAfternoon);
 
         JPanel eveningHolderPanel = new JPanel();
         panel_1.add(eveningHolderPanel);
 
-        JCheckBox chckbxNewCheckBox_2 = new JCheckBox("Evening");
-        eveningHolderPanel.add(chckbxNewCheckBox_2);
+        isEvening = new JCheckBox("Evening");
+        eveningHolderPanel.add(isEvening);
 
         JPanel datePanel = new JPanel();
         inputPanel.add(datePanel);
@@ -190,6 +232,7 @@ public class myPatientsDrugPanelView extends JPanel {
         JButton btnNewButton = new JButton("Create New Drug");
         btnNewButton.setFont(new Font("Century", Font.PLAIN, 16));
         panel_3.add(btnNewButton);
+        btnNewButton.addActionListener(new AddDrugController(this,doctor));
 
         JPanel tablePanel = new JPanel();
         centerPanel.add(tablePanel);

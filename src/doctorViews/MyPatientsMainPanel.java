@@ -240,8 +240,8 @@ public class MyPatientsMainPanel extends JPanel {
 
         public Object getCellEditorValue() {
             if (isPushed) {
-                layeredPane.switchPanels(table.convertRowIndexToModel(i), 1);
-                System.out.println(i);
+                layeredPane.switchPanels(table.convertRowIndexToModel(i), MyPatientsLayeredPanelView.DRUG_MENU);
+                System.out.println(table.convertColumnIndexToModel(i));
             }
             isPushed = false;
             return new String(label);
