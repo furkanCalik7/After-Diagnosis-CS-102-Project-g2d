@@ -1099,7 +1099,7 @@ public class MySQLAccess {
                 u = new Patient(user_id,username, email, email, name, surname, sex);
             }
             else {
-                u = new Admin(user_id,username, email, email, name, surname, sex);
+                u = new Admin(user_id, username, email, email, name, surname, sex);
             }
             return u;
         } catch (Exception e) {
@@ -1182,12 +1182,12 @@ public class MySQLAccess {
                     ResultSet rs = preparedStatement.executeQuery();
                     if(rs.next()) {
                         String speciality = rs.getString("speciality");
-                        UserInfoCard u = new DoctorInfoCard(userID,username, email, name, surname, sex, speciality);
+                        UserInfoCard u = new DoctorInfoCard(userID, username, email, name, surname, sex, speciality);
                         workers.add(u);
                     }
                 }
                 else {
-                    workers.add(new UserInfoCard(userID,username, email, name, surname, sex));
+                    workers.add(new UserInfoCard(userID, userType, username, email, name, surname, sex));
                 }
             }
             return  workers;

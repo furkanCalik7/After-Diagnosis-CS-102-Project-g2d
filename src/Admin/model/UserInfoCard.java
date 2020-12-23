@@ -7,14 +7,16 @@ public class UserInfoCard {
     protected String name;
     protected String surname;
     protected String sex;
+    protected String userType;
 
-    public UserInfoCard(int user_id,String username, String email, String name, String surname, String sex) {
+    public UserInfoCard(int user_id, String userType, String username, String email, String name, String surname, String sex) {
         this.user_id = user_id;
         this.username = username;
         this.email = email;
         this.name = name;
         this.surname = surname;
         this.sex = sex;
+        this.userType = userType;
     }
 
     public int getUser_id() {
@@ -23,6 +25,10 @@ public class UserInfoCard {
 
     public void setUser_id(int user_id) {
         this.user_id = user_id;
+    }
+
+    public String getUserType() {
+        return userType;
     }
 
     public String getUsername() {

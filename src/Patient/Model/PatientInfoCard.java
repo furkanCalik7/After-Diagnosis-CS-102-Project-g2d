@@ -19,7 +19,7 @@ public class PatientInfoCard extends UserInfoCard {
 
     public PatientInfoCard(int user_id,String username, String email, String name, String surname, String sex, int age,
                            Date dob, String bloodType, String allergies, String surgeries, String complaint) {
-        super(user_id,username, email, name, surname, sex);
+        super(user_id, "Patient", username, email, name, surname, sex);
         this.age = age;
         this.dob = dob;
         this.bloodType = bloodType;
@@ -31,7 +31,7 @@ public class PatientInfoCard extends UserInfoCard {
     }
 
     public PatientInfoCard(int age, Date dob, String bloodType, String allergies, String surgeries) {
-        super(0,"", "", "", "", "");
+        super(0, "Patient", "", "", "", "", "");
         this.age = age;
         this.dob = dob;
         this.bloodType = bloodType;

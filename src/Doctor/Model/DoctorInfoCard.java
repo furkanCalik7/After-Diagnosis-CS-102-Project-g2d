@@ -8,12 +8,16 @@ public class DoctorInfoCard extends UserInfoCard {
 
     public DoctorInfoCard(int user_id, String doctorUsername, String doctorEmail, String doctorName, String doctorSurname,
                           String doctorSex, String doctorSpeciality) {
-        super(user_id,doctorUsername, doctorEmail, doctorName, doctorSurname, doctorSex);
+        super(user_id, "Doctor", doctorUsername,  doctorEmail, doctorName, doctorSurname, doctorSex);
         this.doctorSpeciality = doctorSpeciality;
     }
 
     public String getDoctorUsername() {
         return username;
+    }
+
+    public String getDoctorSpeciality() {
+        return doctorSpeciality;
     }
 
     @Override
