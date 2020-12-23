@@ -21,21 +21,21 @@ public class MyPatientsMainPanel extends JPanel {
     private JTextField txtSearchPatientBy;
     private Doctor doctor;
     private TableRowSorter<MyTableModel> rowSorter;
-    private ArrayList<myPatientsDrugPanelView> drugViews;
+    private MyPatientsLayeredPanelView layeredPane;
 
 
     /**
      * Create the panel.
      */
-    public MyPatientsMainPanel(Doctor doctor) {
+    public MyPatientsMainPanel(Doctor doctor, MyPatientsLayeredPanelView layeredPanel) {
         this.doctor = doctor;
+        this.layeredPane = layeredPanel;
         setLayout(new BorderLayout(0, 20));
 
         JPanel patientListPanel = new JPanel();
         add(patientListPanel, BorderLayout.CENTER);
         patientListPanel.setLayout(new BorderLayout(0, 0));
         table = new JTable();
-        table.setEnabled(true);
         table.setBorder(new EmptyBorder(8, 0, 8, 0));
         //table.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
@@ -174,16 +174,16 @@ public class MyPatientsMainPanel extends JPanel {
 
 
         public boolean isCellEditable(int row, int col) {
-            //Note that the data/cell address is constant,
-            //no matter where the cell appears onscreen.
-            System.out.println("reached");
-           return true;
+            if(col < 6){
+                return false;
+            }
+            return true;
         }
 
         @Override
         public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
 
-            fireTableCellUpdated(rowIndex,columnIndex);
+            fireTableCellUpdated(rowIndex, columnIndex);
         }
     }
 
@@ -240,8 +240,7 @@ public class MyPatientsMainPanel extends JPanel {
 
         public Object getCellEditorValue() {
             if (isPushed) {
-                //TODO Write here the action when button is clicked
-                JOptionPane.showMessageDialog(button, label + " Clicked");
+                layeredPane.switchPanels(table.convertRowIndexToModel(i), 1);
                 System.out.println(i);
             }
             isPushed = false;

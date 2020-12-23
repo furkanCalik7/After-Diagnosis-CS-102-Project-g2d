@@ -156,7 +156,6 @@ public class DoctorMainFrameViewer extends JFrame {
         });
         buttonPanel.add( settingsPanel );
         //
-
     }
 
 }

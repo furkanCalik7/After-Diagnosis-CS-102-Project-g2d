@@ -1,5 +1,7 @@
 package doctorViews;
 
+import Doctor.Model.PatientSlot;
+
 import javax.swing.JPanel;
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -41,7 +43,7 @@ public class myPatientsDrugPanelView extends JPanel {
     /**
      * Create the panel.
      */
-    public myPatientsDrugPanelView() {
+    public myPatientsDrugPanelView(PatientSlot patientSlot) {
         BorderLayout borderLayout = new BorderLayout();
         borderLayout.setVgap(5);
         setLayout(borderLayout );
