@@ -1,28 +1,22 @@
 package doctorViews;
 
 import Doctor.Model.Doctor;
+import Doctor.Model.Drug;
 import Doctor.Model.PatientSlot;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
 import java.awt.FlowLayout;
 import java.awt.Font;
 
 import javax.swing.border.EmptyBorder;
-import javax.swing.JComboBox;
-import javax.swing.JTextField;
-import javax.swing.JRadioButton;
-import javax.swing.JScrollPane;
-import javax.swing.ButtonGroup;
 
 import java.awt.BorderLayout;
-import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
-import javax.swing.JCheckBox;
+import java.util.ArrayList;
 import javax.swing.border.MatteBorder;
-import javax.swing.JTable;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
 
 public class myPatientsDrugPanelView extends JPanel {
@@ -40,6 +34,7 @@ public class myPatientsDrugPanelView extends JPanel {
     private JCheckBox isAfternoon;
     private JCheckBox isMorning;
     private String patient_username;
+    private PatientSlot patientSlot;
 
 
     public JTextField getDose() {
@@ -83,9 +78,10 @@ public class myPatientsDrugPanelView extends JPanel {
      */
     public myPatientsDrugPanelView(PatientSlot patientSlot, Doctor doctor) {
         patient_username = patientSlot.getPatientInfo().getUsername();
+        this.patientSlot = patientSlot;
         BorderLayout borderLayout = new BorderLayout();
         borderLayout.setVgap(5);
-        setLayout(borderLayout );
+        setLayout(borderLayout);
 
 
         JPanel centerPanel = new JPanel();
@@ -111,9 +107,9 @@ public class myPatientsDrugPanelView extends JPanel {
         drugNamePanel.add(drugLabel);
 
         //Most common prescriptions. Will be added to the drug choices.
-        drugNameArray = new String[]{ "Vicodin", "Amoxil", "Lipitor", "Motrin", "Synthroid", "Delasone" };
+        drugNameArray = new String[]{"Vicodin", "Amoxil", "Lipitor", "Motrin", "Synthroid", "Delasone"};
 
-        drugComboBox = new JComboBox( drugNameArray );
+        drugComboBox = new JComboBox(drugNameArray);
         drugComboBox.setFont(new Font("Century", Font.PLAIN, 13));
         drugNamePanel.add(drugComboBox);
 
@@ -232,29 +228,21 @@ public class myPatientsDrugPanelView extends JPanel {
         JButton btnNewButton = new JButton("Create New Drug");
         btnNewButton.setFont(new Font("Century", Font.PLAIN, 16));
         panel_3.add(btnNewButton);
-        btnNewButton.addActionListener(new AddDrugController(this,doctor));
+        btnNewButton.addActionListener(new AddDrugController(this, doctor));
 
         JPanel tablePanel = new JPanel();
         centerPanel.add(tablePanel);
         tablePanel.setLayout(new BorderLayout(0, 0));
 
         //Table and scrollpane initializations.
+        //TODO ILAC EKLEYINCE CALISIYOR MU DIYE BAK
         table = new JTable();
-        table.setModel(new DefaultTableModel(
-                new Object[][] {
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                },
-                new String[] {
-                        "Drug Name", "Daily Schedule", "Doses", "Time Period", "Remove Drug"
-                }
-        ));
-        scrollPane = new JScrollPane( table );
-        tablePanel.add( scrollPane);
+
+        MyTableModel dataModel = new MyTableModel();
+        table.setModel(dataModel);
+        scrollPane = new JScrollPane(table);
+        tablePanel.add(scrollPane);
+        table.setAutoCreateRowSorter(true);
 
         JPanel welcomePanel = new JPanel();
         FlowLayout flowLayout = (FlowLayout) welcomePanel.getLayout();
@@ -278,4 +266,66 @@ public class myPatientsDrugPanelView extends JPanel {
 
     }
 
+
+    class MyTableModel extends AbstractTableModel {
+        private String[] columnNames = new String[]{
+                "Drug Name", "Start Date", "End Date", "Dose", "Day Routine", "Condition"};
+
+        private ArrayList<Drug> drugs;
+
+        public MyTableModel() {
+            drugs = patientSlot.getPatientInfo().getDrugs();
+        }
+
+
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        public int getRowCount() {
+            return drugs.size();
+        }
+
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+
+        public Object getValueAt(int row, int col) {
+            Drug drug = drugs.get(row);
+            switch (col) {
+                case 0:
+                    return drug.getName();
+                case 1:
+                    return drug.getStartDate();
+                case 2:
+                    return drug.getFinalDate();
+                case 3:
+                    return drug.getDose();
+                case 4:
+                    String temp = "";
+                    if(drug.isMorning()){
+                        temp += " Morning";
+                    }
+                    if(drug.isAfternoon()){
+                        temp += " Afternoon";
+                    }
+                    if(drug.isEvening()){
+                        temp += " Evening";
+                    }
+                    return temp;
+                case 5:
+                    if(drug.isHungry()){
+                        return "Hungry";
+                    }else {
+                        return "Full";
+                    }
+            }
+            return "null";
+        }
+        public boolean isCellEditable(int row, int col) {
+            return false;
+        }
+
+    }
 }
