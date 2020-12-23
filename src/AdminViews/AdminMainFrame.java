@@ -13,8 +13,8 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import java.awt.FlowLayout;
 import java.awt.CardLayout;
+import Admin.model.*;
 
 public class AdminMainFrame extends JFrame {
 
@@ -73,7 +73,7 @@ public class AdminMainFrame extends JFrame {
         contentPane.add(buttonPanel,BorderLayout.WEST);
 
         HomePagePanel = new HomePage();
-        addWorkerMainPanel = new AddWorkerMainPanel();
+        addWorkerMainPanel = new AddWorkerMainPanel(new Admin("", "", "", "", "", ""));
         hospitalWorkersPanel = new HospitalWorkersInfoPanel();
         messagePanel = new MessagePanel();
         settingsPanel = new SettingsPanel();

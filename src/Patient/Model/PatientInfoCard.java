@@ -1,7 +1,10 @@
 package Patient.Model;
 import Admin.model.UserInfoCard;
+import Doctor.Model.Drug;
+import JDBC.MySQLAccess;
 
 import java.sql.Date;
+import java.util.ArrayList;
 
 public class PatientInfoCard extends UserInfoCard {
 
@@ -11,6 +14,8 @@ public class PatientInfoCard extends UserInfoCard {
     private String allergies;
     private String surgeries;
     private String complaint;
+    private ArrayList<Drug> drugs;
+    MySQLAccess mySQLAccess;
 
     public PatientInfoCard(int user_id,String username, String email, String name, String surname, String sex, int age,
                            Date dob, String bloodType, String allergies, String surgeries, String complaint) {
@@ -21,6 +26,8 @@ public class PatientInfoCard extends UserInfoCard {
         this.allergies = allergies;
         this.surgeries = surgeries;
         this.complaint = complaint;
+        mySQLAccess = new MySQLAccess();
+        this.drugs = mySQLAccess.getDrugs(getUsername());
     }
 
     public PatientInfoCard(int age, Date dob, String bloodType, String allergies, String surgeries) {
@@ -30,6 +37,8 @@ public class PatientInfoCard extends UserInfoCard {
         this.bloodType = bloodType;
         this.allergies = allergies;
         this.surgeries = surgeries;
+        mySQLAccess = new MySQLAccess();
+        this.drugs = mySQLAccess.getDrugs(getUsername());
     }
 
     public String getComplaint() {
@@ -74,6 +83,10 @@ public class PatientInfoCard extends UserInfoCard {
 
     public void setSurgeries(String surgeries) {
         this.surgeries = surgeries;
+    }
+
+    public ArrayList<Drug> getDrugs() {
+        return drugs;
     }
 
     @Override
