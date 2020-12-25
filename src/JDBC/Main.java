@@ -15,9 +15,9 @@ public class Main {
          Use Authentication: Yes
          Port for TLS/STARTTLS: 587
          */
-        final String fromEmail = "furkanguzelant@gmail.com"; //requires valid gmail id
-        final String password = "Guzelant_2001"; // correct password for gmail id
-        final String toEmail = "fguzelant@hotmail.com"; // can be any email id
+        final String fromEmail = "afterdiagnosiscs102@gmail.com"; //requires valid gmail id
+        final String password = "cs102_2020"; // correct password for gmail id
+        final String toEmail = "furkancalikk7@gmail.com"; // can be any email id
 
         System.out.println("TLSEmail Start");
         Properties props = new Properties();
