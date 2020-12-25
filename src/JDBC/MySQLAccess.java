@@ -966,7 +966,6 @@ public class MySQLAccess {
             preparedStatement.setString(1, testRequest.getTest_name());
             preparedStatement.setString(2, testRequest.getPatient().getUsername());
             preparedStatement.setString(3, testRequest.getDoctor_username());
-            preparedStatement.setString(4, testRequest.getLab_tech_username());
 
             int i = preparedStatement.executeUpdate();
             if(i > 0){
@@ -980,12 +979,11 @@ public class MySQLAccess {
         }
         return false;
     }
-    public ArrayList<TestRequest> getTestRequest(String lab_tech_username){
+    public ArrayList<TestRequest> getTestRequest(){
         try {
             connect = dbConnection.getConnection();
-            String sql = "SELECT * FROM test_request WHERE lab_tech_username = ?";
+            String sql = "SELECT * FROM test_request";
             preparedStatement = connect.prepareStatement(sql);
-            preparedStatement.setString(1, lab_tech_username);
             resultSet = preparedStatement.executeQuery();
 
             String test_name;
@@ -997,7 +995,7 @@ public class MySQLAccess {
                 test_name = resultSet.getString("test_name");
                 patient = getPatientInfo(resultSet.getString("patient_username"));
                 doctor_username = resultSet.getString("doctor_username");
-                testRequests.add(new TestRequest(test_name,patient,doctor_username,lab_tech_username));
+                testRequests.add(new TestRequest(test_name,patient,doctor_username));
             }
             return testRequests;
 
@@ -1029,6 +1027,7 @@ public class MySQLAccess {
         }
         return false;
     }
+
     public Doctor getDoctorByUsername(String doctorUserName) {
         try {
             int user_id = 0;
