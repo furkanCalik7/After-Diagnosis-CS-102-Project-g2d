@@ -1,9 +1,6 @@
 package JDBC;
 
 import java.util.Properties;
-import javax.mail.Authenticator;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
 
 
 public class Main {
@@ -27,15 +24,15 @@ public class Main {
         props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
 
         //create Authenticator object to pass in Session.getInstance argument
-        Authenticator auth = new Authenticator() {
-            //override the getPasswordAuthentication method
-            protected PasswordAuthentication getPasswordAuthentication() {
-                return new PasswordAuthentication(fromEmail, password);
-            }
-        };
-        Session session = Session.getInstance(props, auth);
-
-        EmailUtil.sendEmail(session, toEmail, "TLSEmail Testing Subject", "TLSEmail Testing Body");
+//        Authenticator auth = new Authenticator() {
+//            //override the getPasswordAuthentication method
+//            protected PasswordAuthentication getPasswordAuthentication() {
+//                return new PasswordAuthentication(fromEmail, password);
+//            }
+//        };
+//        Session session = Session.getInstance(props, auth);
+//
+//        EmailUtil.sendEmail(session, toEmail, "TLSEmail Testing Subject", "TLSEmail Testing Body");
 
     }
 

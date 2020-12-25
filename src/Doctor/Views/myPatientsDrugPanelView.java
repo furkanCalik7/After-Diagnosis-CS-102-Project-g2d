@@ -331,7 +331,6 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener, I
         public void newRowsAdded(TableModelEvent event) {
             fireTableChanged(event);
         }
-
     }
 
     public void addRow() {
