@@ -3,22 +3,12 @@ package Patient.Views;
 
 import JDBC.MySQLAccess;
 import Patient.Model.Patient;
-import AdminViews.*;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
 
 public class PatientMainFrame extends JFrame {
 
@@ -41,9 +31,10 @@ public class PatientMainFrame extends JFrame {
 
     /**
      * Internal method to change panels.
+     *
      * @param panel
      */
-    public void switchPanels( JPanel panel ) {
+    public void switchPanels(JPanel panel) {
         layeredPane.removeAll();
         layeredPane.add(panel);
         layeredPane.repaint();
@@ -88,7 +79,7 @@ public class PatientMainFrame extends JFrame {
         JPanel buttonPanel = new JPanel();
         buttonPanel.setLayout(new GridLayout(8, 0, 0, 0));
         buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 0));
-        contentPane.add(buttonPanel,BorderLayout.WEST);
+        contentPane.add(buttonPanel, BorderLayout.WEST);
 
         //Creating panels which will be added to main frame
         HomePagePanel = new HomePagePanel();
@@ -102,7 +93,7 @@ public class PatientMainFrame extends JFrame {
 
         //Creating layered pane containing panels to switch
         JPanel layeredPanePanel = new JPanel();
-        contentPane.add(layeredPanePanel,BorderLayout.CENTER);
+        contentPane.add(layeredPanePanel, BorderLayout.CENTER);
         layeredPanePanel.setLayout(new BorderLayout(0, 0));
 
         layeredPane = new JLayeredPane();
@@ -110,14 +101,14 @@ public class PatientMainFrame extends JFrame {
         layeredPane.setLayout(new CardLayout(0, 0));
 
         //Adding panels to layered pane
-        layeredPane.add( HomePagePanel, "name_944915029693400");
-        layeredPane.add( MyDoctorsPanel, "name_944915062377900");
-        layeredPane.add( MyDrugsPanel, "name_944915089517800");
-        layeredPane.add( AppointmentPanel, "name_944915113895900");
-        layeredPane.add( BloodDonationPanel, "name_944915165083100");
-        layeredPane.add( MessagesPanel, "name_944915191691800");
-        layeredPane.add( MedInfoPanel );
-        layeredPane.add( SettingsPanel );
+        layeredPane.add(HomePagePanel, "name_944915029693400");
+        layeredPane.add(MyDoctorsPanel, "name_944915062377900");
+        layeredPane.add(MyDrugsPanel, "name_944915089517800");
+        layeredPane.add(AppointmentPanel, "name_944915113895900");
+        layeredPane.add(BloodDonationPanel, "name_944915165083100");
+        layeredPane.add(MessagesPanel, "name_944915191691800");
+        layeredPane.add(MedInfoPanel);
+        layeredPane.add(SettingsPanel);
 
         //Button initializings
 
@@ -139,7 +130,7 @@ public class PatientMainFrame extends JFrame {
         JButton myDrugsButton = new JButton("My Drugs");
         myDrugsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels( MyDrugsPanel);
+                switchPanels(MyDrugsPanel);
             }
         });
 
@@ -147,7 +138,7 @@ public class PatientMainFrame extends JFrame {
         JButton messageButton = new JButton("Messages");
         messageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels ( MessagesPanel );
+                switchPanels(MessagesPanel);
             }
         });
 
@@ -155,7 +146,7 @@ public class PatientMainFrame extends JFrame {
         JButton appointmentButton = new JButton("Appointment");
         appointmentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels( AppointmentPanel );
+                switchPanels(AppointmentPanel);
             }
         });
 
@@ -163,25 +154,24 @@ public class PatientMainFrame extends JFrame {
         JButton settingsButton = new JButton("Settings");
         settingsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels ( SettingsPanel );
+                switchPanels(SettingsPanel);
             }
         });
 
         medicalInfoButton = new JButton("Medical Information");
         medicalInfoButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels( MedInfoPanel );
+                switchPanels(MedInfoPanel);
             }
         });
         bloodDonationButton = new JButton("Blood Donation");
         bloodDonationButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels( BloodDonationPanel );
+                switchPanels(BloodDonationPanel);
             }
         });
 
         //Adding Buttons to button panel
-
 
 
         buttonPanel.add(homepageButton);
@@ -192,7 +182,6 @@ public class PatientMainFrame extends JFrame {
         buttonPanel.add(appointmentButton);
         buttonPanel.add(bloodDonationButton);
         buttonPanel.add(medicalInfoButton);
-
 
 
     }

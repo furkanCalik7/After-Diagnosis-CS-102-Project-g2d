@@ -19,6 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
 public class myPatientsDrugPanelView extends JPanel implements ActionListener {
@@ -38,6 +39,7 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener {
     private String patient_username;
     private PatientSlot patientSlot;
     private MyPatientsLayeredPanelView layeredPanelView;
+    private final MyTableModel dataModel;
 
 
     public JTextField getDose() {
@@ -220,7 +222,6 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener {
         flowLayout_1.setAlignment(FlowLayout.TRAILING);
         datePanel.add(panel_3);
 
-        //TODO this button creates the drug..
         JButton btnNewButton = new JButton("Create New Drug");
         btnNewButton.setFont(new Font("Century", Font.PLAIN, 16));
         panel_3.add(btnNewButton);
@@ -230,11 +231,9 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener {
         centerPanel.add(tablePanel);
         tablePanel.setLayout(new BorderLayout(0, 0));
 
-        //Table and scrollpane initializations.
-        //TODO ILAC EKLEYINCE CALISIYOR MU DIYE BAK
         table = new JTable();
 
-        MyTableModel dataModel = new MyTableModel();
+        dataModel = new MyTableModel();
         table.setModel(dataModel);
         scrollPane = new JScrollPane(table);
         tablePanel.add(scrollPane);
@@ -323,6 +322,18 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener {
             return false;
         }
 
+        public void newRowsAdded(TableModelEvent event) {
+            fireTableChanged(event);
+        }
+
+    }
+
+    public void addRow(Drug drug) {
+        int rowIndex = patientSlot.getPatientInfo().getDrugs().size();
+        patientSlot.getPatientInfo().addDrugDeneme(drug);
+        dataModel.newRowsAdded(new TableModelEvent(
+                dataModel, rowIndex, rowIndex, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT)
+        );
     }
 
     @Override

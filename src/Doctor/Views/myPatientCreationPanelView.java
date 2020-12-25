@@ -12,6 +12,8 @@ import javax.swing.JTextPane;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
@@ -24,10 +26,11 @@ public class myPatientCreationPanelView extends JPanel {
     private JTextField ageTextField;
     private JTextField allergyTextField;
     private ButtonGroup buttonGroup;
+
     /**
      * Create the panel.
      */
-    public myPatientCreationPanelView() {
+    public myPatientCreationPanelView(MyPatientsLayeredPanelView layeredPanelView) {
         setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         JPanel panel = new JPanel();
@@ -46,6 +49,12 @@ public class myPatientCreationPanelView extends JPanel {
 
         JButton returnButton = new JButton("Return");
         holderPanel.add(returnButton, BorderLayout.WEST);
+        returnButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                layeredPanelView.switchMainPanel();
+            }
+        });
 
         JLabel topGenericLabel = new JLabel("New Patient Information ");
         holderPanel.add(topGenericLabel, BorderLayout.CENTER);
@@ -184,6 +193,7 @@ public class myPatientCreationPanelView extends JPanel {
 
         JRadioButton unknownRadioButton = new JRadioButton("Not Specified");
         radioButtonPanel.add(unknownRadioButton);
+        unknownRadioButton.setSelected(true);
 
         buttonGroup.add(maleRadioButton);
         buttonGroup.add(femaleRadioButton);

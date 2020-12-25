@@ -2,30 +2,17 @@ package AdminViews;
 
 import Admin.model.User;
 
-import javax.swing.JPanel;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import javax.swing.JTextField;
-import java.awt.BorderLayout;
+import javax.swing.*;
 import javax.swing.border.LineBorder;
-import java.awt.Color;
-import javax.swing.JTextPane;
-import javax.swing.JButton;
-import javax.swing.SwingConstants;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.JRadioButton;
-import javax.swing.ButtonGroup;
+import java.awt.*;
 
 public class SettingsPanel extends JPanel {
 
-     JTextField nameTextField;
-     JTextField mailTextField;
-     JTextField passwordTextField;
-     final ButtonGroup buttonGroup = new ButtonGroup();
-     User user;
+    JTextField nameTextField;
+    JTextField mailTextField;
+    JTextField passwordTextField;
+    final ButtonGroup buttonGroup = new ButtonGroup();
+    User user;
 
     /**
      * Create the panel.

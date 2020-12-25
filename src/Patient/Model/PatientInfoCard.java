@@ -89,6 +89,12 @@ public class PatientInfoCard extends UserInfoCard {
         return drugs;
     }
 
+    //TODO drug denemem silmeyi unutma
+    public void addDrugDeneme(Drug drug){
+        drugs.add(drug);
+        System.out.println(drugs);
+    }
+
     @Override
     public String toString() {
         System.out.println(super.toString());

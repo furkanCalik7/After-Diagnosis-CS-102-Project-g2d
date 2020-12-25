@@ -1,12 +1,15 @@
 package Doctor.Controller;
 
 import Doctor.Model.Doctor;
+import Doctor.Model.Drug;
 import Doctor.Views.myPatientsDrugPanelView;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Date;
+import java.util.Calendar;
+import java.util.Scanner;
 
 public class AddDrugController implements ActionListener {
     private myPatientsDrugPanelView drugMenu;
@@ -28,6 +31,8 @@ public class AddDrugController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+
+        Drug drug;
 
         drugName = String.valueOf(drugMenu.getDrugComboBox().getSelectedItem());
         username = drugMenu.getPatient_username();

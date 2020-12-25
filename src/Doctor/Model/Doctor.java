@@ -16,7 +16,8 @@ import java.util.ArrayList;
 public class Doctor extends User {
 
     private String speciality;
-    private ArrayList<PatientSlot> patientSlots;
+    //TODO private yap yeniden drug
+     ArrayList<PatientSlot> patientSlots;
     private MySQLAccess mySQLAccess;
     private ArrayList<Appointment> approvedAppointments;
     private ArrayList<Appointment> waitingAppointments;

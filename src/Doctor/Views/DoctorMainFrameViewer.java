@@ -27,7 +27,6 @@ public class DoctorMainFrameViewer extends JFrame {
     private JLayeredPane layeredPane;
     private JPanel doctorHomepagePanelView;
     private MyPatientsLayeredPanelView myPatientsLayeredPanelView;
-    private Doctor doctor;
     private LabTestsMainPanel labTestsMainPanel;
     private SettingsPanel settingsPanel;
     private DoctorBloodDonationPanel doctorBloodDonationPanel;
@@ -46,28 +45,29 @@ public class DoctorMainFrameViewer extends JFrame {
     /**
      * Launch the application.
      */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    DoctorMainFrameViewer frame = new DoctorMainFrameViewer();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+//    public static void main(String[] args) {
+//        EventQueue.invokeLater(new Runnable() {
+//            public void run() {
+//                try {
+//                    DoctorMainFrameViewer frame = new DoctorMainFrameViewer();
+//                    frame.setVisible(true);
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        });
+//    }
 
     /**
      * Create the frame.
      */
-    public DoctorMainFrameViewer() {
-        MySQLAccess mySQLAccess = new MySQLAccess();
-        doctor = mySQLAccess.getDoctorByUsername( "JuliaRoberts" );
+    public DoctorMainFrameViewer(Doctor doctor) {
+//        MySQLAccess mySQLAccess = new MySQLAccess();
+//        doctor = mySQLAccess.getDoctorByUsername( "JuliaRoberts" );
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
+
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -154,6 +154,26 @@ public class DoctorMainFrameViewer extends JFrame {
         });
         buttonPanel.add( settingsPanelButton );
         //
+        setVisible(true);
     }
 
+    public void setDoctorHomepagePanelView(JPanel doctorHomepagePanelView) {
+        this.doctorHomepagePanelView = doctorHomepagePanelView;
+    }
+
+    public void setMyPatientsLayeredPanelView(MyPatientsLayeredPanelView myPatientsLayeredPanelView) {
+        this.myPatientsLayeredPanelView = myPatientsLayeredPanelView;
+    }
+
+    public void setLabTestsMainPanel(LabTestsMainPanel labTestsMainPanel) {
+        this.labTestsMainPanel = labTestsMainPanel;
+    }
+
+    public void setSettingsPanel(SettingsPanel settingsPanel) {
+        this.settingsPanel = settingsPanel;
+    }
+
+    public void setDoctorBloodDonationPanel(DoctorBloodDonationPanel doctorBloodDonationPanel) {
+        this.doctorBloodDonationPanel = doctorBloodDonationPanel;
+    }
 }
