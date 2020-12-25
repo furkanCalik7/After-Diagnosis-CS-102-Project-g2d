@@ -25,7 +25,6 @@ public class CalendarWindow extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         setSize(235, 200);
-        setTitle("MindFusion.Scheduling Sample: Minimal Application");
 
         changeSupport = new PropertyChangeSupport(this);
         calendar.setTheme(ThemeType.Light);

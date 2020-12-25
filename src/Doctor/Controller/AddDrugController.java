@@ -2,6 +2,7 @@ package Doctor.Controller;
 
 import Doctor.Model.Doctor;
 import Doctor.Model.Drug;
+import Doctor.Model.PatientSlot;
 import Doctor.Views.myPatientsDrugPanelView;
 
 import javax.swing.*;
@@ -23,17 +24,18 @@ public class AddDrugController implements ActionListener {
     private Date end_date;
     private int dose;
     private Doctor doctor;
+    private PatientSlot patientSlot;
 
-    public AddDrugController(myPatientsDrugPanelView drugMenu, Doctor doctor){
+    public AddDrugController(myPatientsDrugPanelView drugMenu, Doctor doctor, PatientSlot patientSlot){
         this.drugMenu = drugMenu;
         this.doctor = doctor;
+        this.patientSlot = patientSlot;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
         Drug drug;
-
         drugName = String.valueOf(drugMenu.getDrugComboBox().getSelectedItem());
         username = drugMenu.getPatient_username();
         isMorning = drugMenu.getIsMorning().isSelected();
@@ -55,7 +57,9 @@ public class AddDrugController implements ActionListener {
         }
         int i = JOptionPane.showConfirmDialog(drugMenu,"Are you sure to add this drug?","Confirm Drug:",JOptionPane.YES_NO_OPTION);
         if(i == JOptionPane.YES_OPTION){
-            doctor.prescribeDrug(username,drugName,isMorning,isAfternoon,isEvening,isHungry,start_date,end_date,dose);
+       //     doctor.prescribeDrug(username,drugName,isMorning,isAfternoon,isEvening,isHungry,start_date,end_date,dose);
+            drug = new Drug(username,drugName,isMorning,isAfternoon,isEvening,isHungry,start_date,end_date,dose);
+            doctor.addDrugToPatient(patientSlot,drug);
         }
     }
 }

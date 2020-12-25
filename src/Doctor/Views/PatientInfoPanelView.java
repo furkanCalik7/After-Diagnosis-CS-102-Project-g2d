@@ -1,6 +1,7 @@
 package Doctor.Views;
 
 
+import Admin.model.IViewer;
 import Doctor.Model.PatientSlot;
 
 import javax.swing.*;
@@ -10,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PatientInfoPanelView extends JPanel implements ActionListener {
+public class PatientInfoPanelView extends JPanel implements ActionListener, IViewer {
 
 
     private MyPatientsLayeredPanelView panel;
@@ -179,5 +180,12 @@ public class PatientInfoPanelView extends JPanel implements ActionListener {
         }else if(e.getSource() == this.drugButton){
             panel.switchPanels(index,MyPatientsLayeredPanelView.DRUG_MENU);
         }
+    }
+
+
+    //TODO UPDATE METODUNU YAZ
+    @Override
+    public void update() {
+
     }
 }

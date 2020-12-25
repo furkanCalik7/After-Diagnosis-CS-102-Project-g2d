@@ -1,22 +1,18 @@
 package Doctor.Views;
 
-import javax.swing.JPanel;
-import java.awt.BorderLayout;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import java.awt.Color;
-import java.awt.Font;
-import javax.swing.JLayeredPane;
-import java.awt.CardLayout;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import Doctor.Controller.FileChooserForDownloadController;
+import Doctor.Model.Doctor;
+import LabTechs.Model.Test;
+
+import javax.swing.*;
+import java.awt.*;
 import javax.swing.border.LineBorder;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
 
 public class LabTestsMainPanel extends JPanel {
     private JTextField patientNameTextField;
@@ -24,18 +20,22 @@ public class LabTestsMainPanel extends JPanel {
     private JLayeredPane layeredPane;
     private JTable table;
     private JPanel seeAvailableTestsPanel;
+    private Doctor doctor;
+    MyTableModel myTableModel;
+    RowSorter<MyTableModel> rowSorter;
 
     public void switchPanels( JPanel panel ) {
         layeredPane.removeAll();
         layeredPane.add(panel);
         layeredPane.repaint();
         layeredPane.revalidate();
+
     }
-    
-    public LabTestsMainPanel() {
+
+    public LabTestsMainPanel(Doctor doctor) {
+        this.doctor = doctor;
 
         setLayout(new BorderLayout(0, 0));
-
 
         layeredPane = new JLayeredPane();
         layeredPane.setLayout(new CardLayout(0, 0));
@@ -106,21 +106,14 @@ public class LabTestsMainPanel extends JPanel {
 
 
         //Building the table.
+        myTableModel = new MyTableModel();
         table = new JTable();
-        table.setFont(new Font("Century", Font.PLAIN, 15));
-        table.setModel(new DefaultTableModel(
-                new Object[][] {
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                },
-                new String[] {
-                        "Patient Name", "Test Type", "Date", "Status", "Remove Patient"
-                }
-        ));
+        table.setModel(myTableModel);
+
+        table.getColumn("Download").setCellEditor(new DownloadButtonEditor(new JTextField()));
+        table.getColumn("Download").setCellRenderer(new DownloadButtonRenderer());
+
+
         JScrollPane scrollPane = new JScrollPane( table );
 
         seeAvailableTestsPanel.add(scrollPane);
@@ -160,5 +153,132 @@ public class LabTestsMainPanel extends JPanel {
                 availableTestsButton.setBackground(new Color(38, 69, 191));
             }
         });
+    }
+
+//    @Override
+//    public void update() {
+//        addRow();
+//    }
+
+
+    private class MyTableModel extends AbstractTableModel {
+        private String[] columnNames = new String[]{
+                "Doctor name","Patient Name", "Test Name", "Send Time", "Sent time", "Download"};
+
+        private ArrayList<Test> tests;
+
+        public MyTableModel() {
+            tests = doctor.getTests();
+        }
+
+
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        public int getRowCount() {
+            return tests.size();
+        }
+
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+
+        public Object getValueAt(int row, int col) {
+            Test test = tests.get(row);
+            switch (col) {
+                case 0:
+                    return test.getSender_username();
+                case 1:
+                    return test.getPatient_username();
+                case 2:
+                    return test.getTest_name();
+                case 3:
+                    return test.getSent_date();
+                case 4:
+                    return test.getSent_time();
+                case 5:
+                    return "Download";
+            }
+            return "null";
+        }
+
+        public boolean isCellEditable(int row, int col) {
+            return col >= 5;
+        }
+
+        public void newRowsAdded(TableModelEvent event) {
+            fireTableChanged(event);
+        }
+
+    }
+
+//    public void addRow() {
+//        int rowIndex = patientSlot.getPatientInfo().getDrugs().size() - 1;
+//        dataModel.newRowsAdded(new TableModelEvent(
+//                dataModel, rowIndex, rowIndex, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT)
+//        );
+//    }
+
+    class DownloadButtonRenderer extends JButton implements TableCellRenderer {
+
+        public DownloadButtonRenderer() {
+            setOpaque(true);
+        }
+
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+            setText((value == null) ? "" : value.toString());
+            return this;
+        }
+    }
+
+    class DownloadButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+        int i = 0;
+        private String label;
+
+        private boolean isPushed;
+
+        public DownloadButtonEditor(JTextField textField) {
+            super(textField);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            i = row;
+            isPushed = true;
+            return button;
+        }
+
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                Test test = doctor.getTests().get(table.convertRowIndexToModel(i));
+                new FileChooserForDownloadController(LabTestsMainPanel.this,test,doctor);
+            }
+            isPushed = false;
+            return new String(label);
+        }
+
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
+        }
+
     }
 }

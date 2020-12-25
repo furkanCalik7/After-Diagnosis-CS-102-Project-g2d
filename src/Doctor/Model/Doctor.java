@@ -4,10 +4,12 @@ import Admin.model.User;
 import Appointment.Appointment;
 import JDBC.Message;
 import JDBC.MySQLAccess;
+import LabTechs.Model.Test;
 import LabTechs.Model.TestRequest;
 import Patient.Model.Code;
 import Patient.Model.PatientInfoCard;
 
+import java.nio.file.Path;
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
@@ -22,6 +24,7 @@ public class Doctor extends User {
     private ArrayList<Appointment> approvedAppointments;
     private ArrayList<Appointment> waitingAppointments;
     private ArrayList<Timestamp> availableTimes;
+    private ArrayList<Test> tests;
 
 
     public Doctor(String username, String password, String email, String name, String surname, String sex, String speciality) {
@@ -39,6 +42,7 @@ public class Doctor extends User {
         approvedAppointments = mySQLAccess.getApprovedAppointmentOfDoctor(this);
         waitingAppointments = mySQLAccess.getWaitingAppointmentOfDoctor(this);
         patientSlots = mySQLAccess.getPatientsOfDoctor(this);
+        tests = mySQLAccess.getTestOfDoctor(getUsername());
     }
 
     public ArrayList<Timestamp> getAvailableTimes() {
@@ -84,7 +88,14 @@ public class Doctor extends User {
             message.sendMessage();
         }
     }
+    public void addDrugToPatient(PatientSlot patientSlot, Drug drug){
+        patientSlot.getPatientInfo().getDrugs().add(drug);
+        updateViewers();
+    }
 
+    public ArrayList<Test> getTests() {
+        return tests;
+    }
 
     public void updateDoctorInformation() {
         mySQLAccess.updateDoctorInformationOnDatabase(this);
@@ -104,6 +115,10 @@ public class Doctor extends User {
 
     public ArrayList<Appointment> getWaitingAppointments() {
         return waitingAppointments;
+    }
+
+    public void downloadTest(Test test, Path path){
+        mySQLAccess.writeTestResult(test,path);
     }
 
     public boolean sendTestRequest(String test_name, PatientInfoCard patient, String lab_tech_username) {

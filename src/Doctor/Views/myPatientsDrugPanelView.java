@@ -1,5 +1,6 @@
 package Doctor.Views;
 
+import Admin.model.IViewer;
 import Doctor.Model.Doctor;
 import Doctor.Model.Drug;
 import Doctor.Model.PatientSlot;
@@ -22,7 +23,7 @@ import javax.swing.border.MatteBorder;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 
-public class myPatientsDrugPanelView extends JPanel implements ActionListener {
+public class myPatientsDrugPanelView extends JPanel implements ActionListener, IViewer {
     private String[] drugNameArray;
     private JTextField dose;
 
@@ -225,7 +226,7 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener {
         JButton btnNewButton = new JButton("Create New Drug");
         btnNewButton.setFont(new Font("Century", Font.PLAIN, 16));
         panel_3.add(btnNewButton);
-        btnNewButton.addActionListener(new AddDrugController(this, doctor));
+        btnNewButton.addActionListener(new AddDrugController(this, doctor, patientSlot));
 
         JPanel tablePanel = new JPanel();
         centerPanel.add(tablePanel);
@@ -258,6 +259,11 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener {
         fl_nextButtonPanel.setAlignment(FlowLayout.RIGHT);
         add(nextButtonPanel, BorderLayout.SOUTH);
 
+    }
+
+    @Override
+    public void update() {
+        addRow();
     }
 
 
@@ -328,9 +334,8 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener {
 
     }
 
-    public void addRow(Drug drug) {
-        int rowIndex = patientSlot.getPatientInfo().getDrugs().size();
-        patientSlot.getPatientInfo().addDrugDeneme(drug);
+    public void addRow() {
+        int rowIndex = patientSlot.getPatientInfo().getDrugs().size() - 1;
         dataModel.newRowsAdded(new TableModelEvent(
                 dataModel, rowIndex, rowIndex, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT)
         );

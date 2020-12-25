@@ -123,7 +123,7 @@ public class MyPatientsMainPanel extends JPanel {
 
     }
 
-    class MyTableModel extends AbstractTableModel {
+    private class MyTableModel extends AbstractTableModel {
         private String[] columnNames = new String[]{
                 "Age", "Patient Name", "Email", "Description", "Status", "Start Date", "Drugs", "More Information"};
 

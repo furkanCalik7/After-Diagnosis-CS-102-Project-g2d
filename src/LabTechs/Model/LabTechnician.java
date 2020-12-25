@@ -21,6 +21,7 @@ public class LabTechnician extends User {
 
     public LabTechnician(int user_id, String username, String password, String email, String name, String surname, String sex) {
         super(user_id, username, "LabTechnician", password, email, name, surname, sex);
+        mySQLAccess = new MySQLAccess();
         testRequests = mySQLAccess.getTestRequest(getUsername());
         tests = mySQLAccess.getTestOfLabTech(getUsername());
     }
