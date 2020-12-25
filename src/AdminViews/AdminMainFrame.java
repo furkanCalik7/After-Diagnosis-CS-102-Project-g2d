@@ -78,7 +78,7 @@ public class AdminMainFrame extends JFrame {
         buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 0));
         contentPane.add(buttonPanel,BorderLayout.WEST);
 
-        HomePagePanel = new HomePage();
+        HomePagePanel = new HomePage(admin);
         addWorkerMainPanel = new AddWorkerMainPanel(admin);
         hospitalWorkersPanel = new HospitalWorkersInfoPanel(admin);
         messagePanel = new MessagePanel();

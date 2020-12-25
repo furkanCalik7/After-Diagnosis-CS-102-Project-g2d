@@ -1,25 +1,46 @@
 package JDBC;
 
+import java.util.Properties;
+import javax.mail.Authenticator;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
 
-import Admin.model.Admin;
-import Doctor.Model.Doctor;
-import Doctor.Model.DoctorInfoCard;
-import Doctor.Model.PatientSlot;
-import Patient.Model.Patient;
-import Patient.Model.PatientInfoCard;
-import LabTechs.Model.TestRequest;
-import java.sql.Date;
-import java.sql.SQLException;
-import java.sql.Time;
-import java.time.LocalTime;
-import java.util.ArrayList;
 
 public class Main {
 
-    public static void main(String[] args) throws SQLException {
+    public static void main(String[] args) {
+        /**
+         Outgoing Mail (SMTP) Server
+         requires TLS or SSL: smtp.gmail.com (use authentication)
+         Use Authentication: Yes
+         Port for TLS/STARTTLS: 587
+         */
+        final String fromEmail = "furkanguzelant@gmail.com"; //requires valid gmail id
+        final String password = "Guzelant_2001"; // correct password for gmail id
+        final String toEmail = "fguzelant@hotmail.com"; // can be any email id
 
-        MySQLAccess access = new MySQLAccess();
-        Patient p = (Patient) access.getUser("AlanGreen");
-        System.out.println(p.getDrugs());
+        System.out.println("TLSEmail Start");
+        Properties props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+        props.put("mail.smtp.port", "587"); //TLS Port
+        props.put("mail.smtp.auth", "true"); //enable authentication
+        props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+
+        //create Authenticator object to pass in Session.getInstance argument
+        Authenticator auth = new Authenticator() {
+            //override the getPasswordAuthentication method
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        };
+        Session session = Session.getInstance(props, auth);
+
+        EmailUtil.sendEmail(session, toEmail, "TLSEmail Testing Subject", "TLSEmail Testing Body");
+
     }
+
+
 }
+
+
+

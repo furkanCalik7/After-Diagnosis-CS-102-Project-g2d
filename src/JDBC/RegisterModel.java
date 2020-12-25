@@ -3,6 +3,7 @@ package JDBC;
 import JDBC.MySQLAccess;
 import Patient.Model.Patient;
 
+import javax.swing.*;
 import java.sql.Connection;
 
 public class RegisterModel {
@@ -19,7 +20,7 @@ public class RegisterModel {
             access.addUser(new Patient(username, password, email, name, surname, sex));
             return true;
         } catch (Exception e) {
-            System.out.println("Username already exists");
+            JOptionPane.showMessageDialog(null, "This username already exits.");
         }
         return false;
     }

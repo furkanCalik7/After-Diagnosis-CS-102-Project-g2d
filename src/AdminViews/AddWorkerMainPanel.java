@@ -15,13 +15,15 @@ import java.awt.event.ActionListener;
 
 public class AddWorkerMainPanel extends JPanel {
 
-     JTextField nameTextField;
-     JTextField surnameTextField;
-     JTextField textField_2;
-     JComboBox comboBox;
-     JRadioButton doctorButton;
-     JRadioButton labTechButton;
-     Admin admin;
+    JTextField nameTextField;
+    JTextField surnameTextField;
+    JTextField textField_2;
+    JComboBox comboBox;
+    JRadioButton doctorButton;
+    JRadioButton labTechButton;
+    JRadioButton maleButton;
+    JRadioButton femaleButton;
+    Admin admin;
 
 
     /**
@@ -76,6 +78,7 @@ public class AddWorkerMainPanel extends JPanel {
         ButtonGroup bg = new ButtonGroup();
         bg.add(labTechButton);
         bg.add(doctorButton);
+
 
         JPanel panel_6 = new JPanel();
         panel_6.setBackground(Color.MAGENTA);
@@ -135,10 +138,10 @@ public class AddWorkerMainPanel extends JPanel {
 
 
         JButton btnNewButton = new JButton("FINISH");
-        //ACTION LISTENER WILL BE ADDED
         ActionListener listener = new AddWorkerController(admin, this);
         btnNewButton.addActionListener(listener);
         panel_10.add(btnNewButton);
+
 
     }
 

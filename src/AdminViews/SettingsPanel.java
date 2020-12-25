@@ -47,7 +47,7 @@ public class SettingsPanel extends JPanel {
         FlowLayout flowLayout = (FlowLayout) panel_8.getLayout();
         patientNamePanel.add(panel_8);
 
-        JLabel patientNameLabel = new JLabel("Your Name");
+        JLabel patientNameLabel = new JLabel("Your Username");
         patientNameLabel.setFont(new Font("Century", Font.PLAIN, 20));
         panel_8.add(patientNameLabel);
 
@@ -56,7 +56,7 @@ public class SettingsPanel extends JPanel {
         patientNamePanel.add(panel_9);
         panel_9.setLayout(new BorderLayout(0, 0));
 
-        nameTextField = new JTextField();
+        nameTextField = new JTextField(user.getUsername());
         panel_9.add(nameTextField);
         nameTextField.setColumns(20);
 
@@ -78,7 +78,7 @@ public class SettingsPanel extends JPanel {
         patientSurnamePanel.add(panel_1);
         panel_1.setLayout(new BorderLayout(0, 0));
 
-        mailTextField = new JTextField();
+        mailTextField = new JTextField(user.getEmail());
         panel_1.add(mailTextField, BorderLayout.CENTER);
         mailTextField.setColumns(10);
 
@@ -101,7 +101,7 @@ public class SettingsPanel extends JPanel {
         patientMailPanel.add(panel_4);
         panel_4.setLayout(new BorderLayout(0, 0));
 
-        passwordTextField = new JTextField();
+        passwordTextField = new JTextField(user.getPassword());
         panel_4.add(passwordTextField, BorderLayout.CENTER);
         passwordTextField.setColumns(10);
 

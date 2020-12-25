@@ -12,9 +12,6 @@ import java.awt.event.ActionListener;
 
 public class PatientMainFrame extends JFrame {
 
-    MySQLAccess access = new MySQLAccess();
-    Patient p = (Patient) access.getUser("fguzelant");
-
     private JPanel contentPane;
     private JLayeredPane layeredPane;
     private JPanel HomePagePanel;
@@ -25,6 +22,7 @@ public class PatientMainFrame extends JFrame {
     private JPanel MessagesPanel;
     private JPanel MedInfoPanel;
     private JPanel SettingsPanel;
+    private Patient patient;
 
     private JButton medicalInfoButton;
     private JButton bloodDonationButton;
@@ -82,13 +80,13 @@ public class PatientMainFrame extends JFrame {
         contentPane.add(buttonPanel, BorderLayout.WEST);
 
         //Creating panels which will be added to main frame
-        HomePagePanel = new HomePagePanel();
+        HomePagePanel = new HomePagePanel(p);
         MyDoctorsPanel = new MyDoctorsPanel(p);
         MyDrugsPanel = new MyDrugsPanel();
         AppointmentPanel = new AppointmentPanel();
         BloodDonationPanel = new BloodDonationPanel();
         MessagesPanel = new MessagesPanel();
-        MedInfoPanel = new MedInfoPanel();
+        MedInfoPanel = new MedInfoPanel(p);
         SettingsPanel = new SettingsPanel();
 
         //Creating layered pane containing panels to switch

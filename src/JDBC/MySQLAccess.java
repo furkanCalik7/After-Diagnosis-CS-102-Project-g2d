@@ -1081,8 +1081,10 @@ public class MySQLAccess {
             String surname = "";
             String email = "";
             String sex = "";
+            String password = "";
 
             while(resultSet.next()){
+                password = resultSet.getString("password");
                 user_id = resultSet.getInt("user_id");
                 userType = resultSet.getString("user_type");
                 username = resultSet.getString("username");
@@ -1093,13 +1095,13 @@ public class MySQLAccess {
             }
 
             if(userType.equals("LabTechnician")) {
-                u = new LabTechnician(user_id,username, email, email, name, surname, sex);
+                u = new LabTechnician(user_id, username, password, email,  name, surname, sex);
             }
             else if(userType.equals("Patient")) {
-                u = new Patient(user_id,username, email, email, name, surname, sex);
+                u = new Patient(user_id,username, email, password, name, surname, sex);
             }
             else {
-                u = new Admin(user_id, username, email, email, name, surname, sex);
+                u = new Admin(user_id, username, email, password, name, surname, sex);
             }
             return u;
         } catch (Exception e) {

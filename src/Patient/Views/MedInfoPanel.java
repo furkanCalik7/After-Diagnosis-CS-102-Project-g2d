@@ -1,5 +1,7 @@
 package Patient.Views;
 
+import Patient.Model.Patient;
+
 import javax.swing.*;
 
 import javax.swing.JPanel;
@@ -42,7 +44,7 @@ public class MedInfoPanel extends JPanel {
         layeredPane.revalidate();
     }
 
-    public MedInfoPanel() {
+    public MedInfoPanel(Patient patient) {
         setLayout(new BorderLayout(0, 0));
 
         JPanel topButtonsPanel = new JPanel();
@@ -96,6 +98,7 @@ public class MedInfoPanel extends JPanel {
         panel_2.add(lblNewLabel_1);
 
         allergieTextField = new JTextField();
+        allergieTextField.setText(patient.getAllergies());
         allergieTextField.setFont(new Font("Century", Font.PLAIN, 15));
         panel_2.add(allergieTextField);
         allergieTextField.setColumns(10);
@@ -130,7 +133,7 @@ public class MedInfoPanel extends JPanel {
         panel_6.add(panel_7);
         panel_7.setLayout(new GridLayout(1, 0, 0, 0));
 
-        surgeryTextField = new JTextField();
+        surgeryTextField = new JTextField(patient.getSurgeries());
         surgeryTextField.setFont(new Font("Century", Font.PLAIN, 15));
         panel_7.add(surgeryTextField);
         surgeryTextField.setColumns(10);

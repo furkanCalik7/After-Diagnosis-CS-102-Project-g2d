@@ -1,5 +1,7 @@
 package Patient.Views;
 
+import Patient.Model.Patient;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
@@ -14,14 +16,14 @@ public class HomePagePanel extends JPanel {
     /**
      * Create the panel.
      */
-    public HomePagePanel() {
+    public HomePagePanel(Patient patient) {
         setLayout(new BorderLayout(0, 0));
 
         JPanel headerPanel = new JPanel();
         add(headerPanel, BorderLayout.NORTH);
         headerPanel.setLayout(new GridLayout(0, 2, 0, 0));
 
-        JLabel nameLabel = new JLabel("Welcome John Smith");
+        JLabel nameLabel = new JLabel("Welcome " + patient.getName() + " " + patient.getSurname());
         nameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         headerPanel.add(nameLabel);
 
