@@ -2,4 +2,13 @@
 21:33 17.12.2020
 Getter, setter and constructor methods of User, Doctor and Lab Technician added.
 11:48 18.12.2020
-Getter and setter methods of Drug class added, some samll changes in other classes
+Getter and setter methods of Drug class added, some small changes in other classes.
+
+18.11.2020
+Eclipse IDE GUI Builder(windowBuilder) is learned.
+21.12.2020
+Sent Tests panel, waiting tests panel and greeting panel is created for Lab Technician GUI. 
+22.12.2020
+Greeting panel and Tests Panel for Lab Technician GUI are roughly completed
+24.12.2020
+Main Panel for Lab technician is implemented and GUI's improved on TestsPanel and GreetingsPanel for Lab Technician GUI.
