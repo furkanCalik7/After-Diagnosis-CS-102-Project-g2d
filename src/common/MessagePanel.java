@@ -2,16 +2,14 @@ package common;
 
 import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
-import java.awt.BorderLayout;
+import java.awt.*;
 import javax.swing.JButton;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.awt.Font;
+import javax.swing.border.LineBorder;
+import javax.swing.border.MatteBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.JTextArea;
 import java.awt.event.ActionListener;
@@ -47,10 +45,12 @@ public class MessagePanel extends JPanel {
         //--------sentPanel code--------:
         //This panel shows the sent messages.
         JPanel sentPanel = new JPanel();
+        sentPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         layeredPane.add(sentPanel, "name_861411644361400");
         sentPanel.setLayout(new BorderLayout(0, 10));
 
         JPanel searchFieldPanel = new JPanel();
+        searchFieldPanel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
         sentPanel.add(searchFieldPanel, BorderLayout.NORTH);
         searchFieldPanel.setLayout(new GridLayout(0, 3, 0, 0));
 
@@ -83,10 +83,12 @@ public class MessagePanel extends JPanel {
         //--------inboxPanel--------------:
         //This panel shows the received messages.
         JPanel inboxPanel = new JPanel();
+        inboxPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         layeredPane.add(inboxPanel, "name_861414322704500");
         inboxPanel.setLayout(new BorderLayout(0, 10));
 
         JPanel searchFieldPanel_2 = new JPanel();
+        searchFieldPanel_2.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
         inboxPanel.add(searchFieldPanel_2, BorderLayout.NORTH);
         searchFieldPanel_2.setLayout(new GridLayout(0, 3, 0, 0));
 
@@ -120,10 +122,12 @@ public class MessagePanel extends JPanel {
         //--------composePanel--------------:
         //This panel creates messages.
         JPanel composePanel = new JPanel();
+        composePanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         layeredPane.add(composePanel, "name_861416546981100");
         composePanel.setLayout(new BorderLayout(0, 10));
 
         JPanel emailTextFieldPanel = new JPanel();
+        emailTextFieldPanel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
         composePanel.add(emailTextFieldPanel, BorderLayout.NORTH);
         emailTextFieldPanel.setLayout(new GridLayout(0, 3, 0, 5));
 
@@ -146,6 +150,7 @@ public class MessagePanel extends JPanel {
         messagePanelCenter.add(messageTextArea, BorderLayout.CENTER);
 
         JPanel subjectPanel = new JPanel();
+        subjectPanel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
         messagePanel.add(subjectPanel, BorderLayout.NORTH);
         subjectPanel.setLayout(new GridLayout(0, 3, 0, 0));
 
@@ -196,7 +201,10 @@ public class MessagePanel extends JPanel {
         composeButton.setFont(new Font("Century", Font.PLAIN, 16));
         buttonPanel.add(composeButton);
 
+        //GUI related
+        JPanel emptyPanel = new JPanel();
+        add(emptyPanel, BorderLayout.SOUTH);
+
 
     }
 }
-
