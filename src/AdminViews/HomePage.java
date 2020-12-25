@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.BoxLayout;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import java.awt.GridBagLayout;
 import java.awt.FlowLayout;
 
@@ -22,56 +24,57 @@ public class HomePage extends JPanel {
      */
     public HomePage(Admin admin) {
         this.admin = admin;
-        setLayout(new BorderLayout(0, 0));
 
-        JLabel header = new JLabel("HOMEPAGE");
-        header.setHorizontalAlignment(SwingConstants.CENTER);
-        header.setFont(new Font("Century", Font.BOLD, 20));
-        add(header, BorderLayout.NORTH);
+        setLayout( new BorderLayout() );
 
-        JPanel panel = new JPanel();
-        add(panel, BorderLayout.CENTER);
-        panel.setLayout(new BorderLayout(0, 0));
+        JPanel welcomeLabelHolderPanel = new JPanel();
+        welcomeLabelHolderPanel.setBorder(new EmptyBorder(25, 0, 25, 0));
+        add(welcomeLabelHolderPanel, BorderLayout.NORTH);
 
-        JLabel lblNewLabel = new JLabel("WELCOME " + admin.getName() + " " + admin.getSurname());
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panel.add(lblNewLabel, BorderLayout.NORTH);
+        JLabel welcomeLabel = new JLabel("Welcome _name _surname" );//+ labTechnician.getName() + " " + labTechnician.getSurname());
+        welcomeLabel.setOpaque(true);
+        welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        welcomeLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
+        welcomeLabelHolderPanel.add(welcomeLabel, BorderLayout.NORTH);
 
-        JPanel panel_1 = new JPanel();
-        panel.add(panel_1, BorderLayout.CENTER);
-        panel_1.setLayout(new GridLayout(4, 0, 0, 0));
+        JPanel actionsMainPanel = new JPanel();
+        add(actionsMainPanel,BorderLayout.CENTER);
+        actionsMainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        JPanel panel_3 = new JPanel();
-        panel_1.add(panel_3);
-        panel_3.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        JLabel lblNewLabel = new JLabel("You Have");
+        lblNewLabel.setOpaque(true);
+        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
+        actionsMainPanel.add(lblNewLabel);
 
-        JLabel lblNewLabel_1 = new JLabel("There is total:");
-        lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panel_3.add(lblNewLabel_1);
+        JPanel actionsPanel = new JPanel();
+        actionsPanel.setBorder(new LineBorder(new Color(0, 255, 255), 2, true));
+        actionsMainPanel.add(actionsPanel);
+        actionsPanel.setLayout(new GridLayout(3, 2, 20, 20));
 
-        JPanel panel_4 = new JPanel();
-        panel_1.add(panel_4);
-        panel_4.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        JLabel doctorCountLabel = new JLabel("X");
+        doctorCountLabel.setFont(new Font("Century", Font.PLAIN, 30));
+        actionsPanel.add(doctorCountLabel);
 
-        JLabel lblNewLabel_2 = new JLabel(admin.seeDoctors().size() + " Doctors");
-        lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panel_4.add(lblNewLabel_2);
+        JLabel testResultsIcon = new JLabel("Doctors");
+        testResultsIcon.setFont(new Font("Century", Font.PLAIN, 20));
+        actionsPanel.add(testResultsIcon);
 
-        JPanel panel_5 = new JPanel();
-        panel_1.add(panel_5);
-        panel_5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        JLabel labTechCountLabel = new JLabel("X");
+        labTechCountLabel.setFont(new Font("Century", Font.PLAIN, 30));
+        actionsPanel.add(labTechCountLabel);
 
-        JLabel lblNewLabel_3 = new JLabel(admin.seeLabTechs().size() + " Lab Technicians in your hospital");
-        lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panel_5.add(lblNewLabel_3);
+        JLabel waitingTestsLabel = new JLabel("Lab Technicians");
+        waitingTestsLabel.setFont(new Font("Century", Font.PLAIN, 20));
+        actionsPanel.add(waitingTestsLabel);
 
-        JPanel panel_6 = new JPanel();
-        panel_1.add(panel_6);
-        panel_6.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        JLabel messagesCountLabel = new JLabel("X");
+        messagesCountLabel.setFont(new Font("Century", Font.PLAIN, 30));
+        actionsPanel.add( messagesCountLabel );
 
-        JLabel lblNewLabel_4 = new JLabel("And You have x new messages");
-        lblNewLabel_4.setFont(new Font("Tahoma", Font.PLAIN, 15));
-        panel_6.add(lblNewLabel_4);
+        JLabel messageIconLabel = new JLabel("Messages");
+        messageIconLabel.setFont(new Font("Century", Font.PLAIN, 20));
+        actionsPanel.add(messageIconLabel);
 
     }
 
