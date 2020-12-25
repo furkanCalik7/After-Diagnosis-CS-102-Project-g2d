@@ -93,7 +93,7 @@ public class MyPatientsLayeredPanelView extends JPanel {
             patientsDrugPanelViews.add(new myPatientsDrugPanelView(doctor.getPatientSlots().get(i), doctor, this));
         }
         for (int i = 0; i < doctor.getPatientSlots().size(); i++) {
-            patientInfoPanelViews.add(new PatientInfoPanelView(doctor.getPatientSlots().get(i), this, i));
+            patientInfoPanelViews.add(new PatientInfoPanelView(doctor.getPatientSlots().get(i), this, i,doctor));
         }
     }
 }

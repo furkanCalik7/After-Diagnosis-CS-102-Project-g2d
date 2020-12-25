@@ -5,15 +5,16 @@ import Patient.Model.PatientInfoCard;
 
 public class TestRequest {
     private String test_name;
-    private PatientInfoCard patient;
+    private String patient_username;
     private String doctor_username;
 
-    public TestRequest(String test_name, PatientInfoCard patient, String doctor_username){
-        this.patient = patient;
+    public TestRequest(String test_name, String patient_username, String doctor_username){
+        this.test_name = test_name;
+        this.patient_username = patient_username;
         this.doctor_username = doctor_username;
     }
-    public static TestRequest newTest(String test_name, PatientInfoCard patient, String doctor_username, String lab_tech_username){
-        return new TestRequest(test_name, patient, doctor_username,lab_tech_username);
+    public static TestRequest newTest(String test_name, String patient_username, String doctor_username){
+        return new TestRequest(test_name, patient_username, doctor_username);
     }
     public boolean sendTestRequest (){
         MySQLAccess mySQLAccess = new MySQLAccess();
@@ -24,8 +25,8 @@ public class TestRequest {
         return test_name;
     }
 
-    public PatientInfoCard getPatient() {
-        return patient;
+    public String getPatient() {
+        return patient_username;
     }
 
     public String getDoctor_username() {

@@ -2,6 +2,8 @@ package Doctor.Views;
 
 
 import Admin.model.IViewer;
+import Doctor.Controller.SendTestRequestController;
+import Doctor.Model.Doctor;
 import Doctor.Model.PatientSlot;
 
 import javax.swing.*;
@@ -19,7 +21,7 @@ public class PatientInfoPanelView extends JPanel implements ActionListener, IVie
     private final JButton backButton;
     private int index;
 
-    public PatientInfoPanelView(PatientSlot patientSlot, MyPatientsLayeredPanelView panel, int i) {
+    public PatientInfoPanelView(PatientSlot patientSlot, MyPatientsLayeredPanelView panel, int i, Doctor doctor) {
         this.panel = panel;
         this.index = i;
         setLayout(new BorderLayout(0, 15));
@@ -128,6 +130,11 @@ public class PatientInfoPanelView extends JPanel implements ActionListener, IVie
         FlowLayout flowLayout = (FlowLayout) southPanel.getLayout();
         flowLayout.setAlignment(FlowLayout.TRAILING);
         centerPanel.add(southPanel, BorderLayout.SOUTH);
+
+        JButton requestButton = new JButton("Send Test Request");
+        requestButton.addActionListener(new SendTestRequestController(this,doctor,patientSlot.getPatientInfo().getUsername()));
+        requestButton.setFont(new Font("Century", Font.PLAIN, 15));
+        southPanel.add(requestButton);
 
         JButton editButton = new JButton("Edit Patient Information");
         editButton.setFont(new Font("Century", Font.PLAIN, 15));

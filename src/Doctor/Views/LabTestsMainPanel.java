@@ -23,84 +23,60 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 
+
 public class LabTestsMainPanel extends JPanel {
-    private JTextField patientNameTextField;
-    private JTextField txtTestName;
-    private JLayeredPane layeredPane;
     private JTable table;
-    private JPanel seeAvailableTestsPanel;
-    private Doctor doctor;
-    MyTableModel myTableModel;
-    RowSorter<MyTableModel> rowSorter;
+    private MyTableModel myTableModel;
+    private RowSorter<MyTableModel> rowSorter;
+    protected Doctor doctor;
+    private JTextField searchTextField;
 
 
-    public class LabTestsMainPanel1 extends JPanel {
-        private JTextField searchTextField;
-        private JTable table;
+    public LabTestsMainPanel(Doctor doctor) {
+        this.doctor = doctor;
+        setLayout(new BorderLayout(0, 0));
 
-        /**
-         * Create the panel.
-         */
-        public LabTestsMainPanel1() {
-            setLayout(new BorderLayout(0, 0));
+        JPanel northMainPanel = new JPanel();
+        add(northMainPanel, BorderLayout.NORTH);
+        northMainPanel.setLayout(new GridLayout(0, 2, 0, 0));
 
-            JPanel northMainPanel = new JPanel();
-            add(northMainPanel, BorderLayout.NORTH);
-            northMainPanel.setLayout(new GridLayout(0, 2, 0, 0));
+        JPanel searchPanel = new JPanel();
+        FlowLayout fl_searchPanel = (FlowLayout) searchPanel.getLayout();
+        fl_searchPanel.setAlignment(FlowLayout.LEFT);
+        northMainPanel.add(searchPanel);
 
-            JPanel searchPanel = new JPanel();
-            FlowLayout fl_searchPanel = (FlowLayout) searchPanel.getLayout();
-            fl_searchPanel.setAlignment(FlowLayout.LEFT);
-            northMainPanel.add(searchPanel);
+        searchTextField = new JTextField();
+        searchTextField.setText("Search");
+        searchPanel.add(searchTextField);
+        searchTextField.setColumns(10);
 
-            searchTextField = new JTextField();
-            searchTextField.setText("Search");
-            searchPanel.add(searchTextField);
-            searchTextField.setColumns(10);
+        JPanel removeAllPanel = new JPanel();
+        FlowLayout fl_removeAllPanel = (FlowLayout) removeAllPanel.getLayout();
+        fl_removeAllPanel.setAlignment(FlowLayout.RIGHT);
+        northMainPanel.add(removeAllPanel);
 
-            JPanel removeAllPanel = new JPanel();
-            FlowLayout fl_removeAllPanel = (FlowLayout) removeAllPanel.getLayout();
-            fl_removeAllPanel.setAlignment(FlowLayout.RIGHT);
-            northMainPanel.add(removeAllPanel);
+        JButton removeAllButton = new JButton("Remove all");
+        removeAllPanel.add(removeAllButton);
 
-            JButton removeAllButton = new JButton("Remove all");
-            removeAllPanel.add(removeAllButton);
+        JPanel tablePanel = new JPanel();
+        add(tablePanel, BorderLayout.CENTER);
+        tablePanel.setLayout(new BorderLayout(0, 0));
 
-            JPanel tablePanel = new JPanel();
-            add(tablePanel, BorderLayout.CENTER);
-            tablePanel.setLayout(new BorderLayout(0, 0));
+        myTableModel = new MyTableModel();
+        table = new JTable();
+        table.setModel(myTableModel);
 
-            table = new JTable();
-            table.setFont(new Font("Century", Font.PLAIN, 15));
-            table.setModel(new DefaultTableModel(
-                    new Object[][] {
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                            {null, null, null, null, null},
-                    },
-                    new String[] {
-                            "Patient Name", "Test Type", "Date", "Status", "Remove Patient"
-                    }
-            ));
-            JScrollPane scrollPane = new JScrollPane( table );
-            tablePanel.add(scrollPane);
-        }
+        table.getColumn("Download").setCellEditor(new DownloadButtonEditor(new JTextField()));
+        table.getColumn("Download").setCellRenderer(new DownloadButtonRenderer());
 
+        JScrollPane scrollPane = new JScrollPane(table);
+        tablePanel.add(scrollPane);
     }
-
-
-//    @Override
-//    public void update() {
-//        addRow();
-//    }
 
 
     private class MyTableModel extends AbstractTableModel {
         private String[] columnNames = new String[]{
-                "Doctor name","Patient Name", "Test Name", "Send Time", "Sent time", "Download"};
+                "Doctor name", "Patient Name", "Test Name", "Send Time", "Sent time", "Download"};
 
         private ArrayList<Test> tests;
 
@@ -151,12 +127,6 @@ public class LabTestsMainPanel extends JPanel {
 
     }
 
-//    public void addRow() {
-//        int rowIndex = patientSlot.getPatientInfo().getDrugs().size() - 1;
-//        dataModel.newRowsAdded(new TableModelEvent(
-//                dataModel, rowIndex, rowIndex, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT)
-//        );
-//    }
 
     class DownloadButtonRenderer extends JButton implements TableCellRenderer {
 
@@ -202,7 +172,7 @@ public class LabTestsMainPanel extends JPanel {
         public Object getCellEditorValue() {
             if (isPushed) {
                 Test test = doctor.getTests().get(table.convertRowIndexToModel(i));
-                new FileChooserForDownloadController(LabTestsMainPanel.this,test,doctor);
+                new FileChooserForDownloadController(LabTestsMainPanel.this, test, doctor);
             }
             isPushed = false;
             return new String(label);

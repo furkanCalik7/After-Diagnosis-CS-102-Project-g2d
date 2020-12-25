@@ -121,8 +121,8 @@ public class Doctor extends User {
         mySQLAccess.writeTestResult(test,path);
     }
 
-    public boolean sendTestRequest(String test_name, PatientInfoCard patient) {
-        TestRequest newTest = TestRequest.newTest(test_name, patient, getUsername());
+    public boolean sendTestRequest(TestRequest testRequest) {
+        TestRequest newTest = TestRequest.newTest(testRequest.getTest_name(), testRequest.getPatient(), getUsername());
         return mySQLAccess.addTestRequest(newTest);
     }
 }

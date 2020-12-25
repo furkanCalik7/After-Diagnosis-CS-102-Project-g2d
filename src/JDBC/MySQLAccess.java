@@ -961,10 +961,10 @@ public class MySQLAccess {
     public boolean addTestRequest(TestRequest testRequest){
         try {
             connect = dbConnection.getConnection();
-            String sql = "INSERT INTO test_request VALUES(DEFAULT , ?, ?, ?, ?)";
+            String sql = "INSERT INTO test_request VALUES(DEFAULT , ?, ?, ?)";
             preparedStatement = connect.prepareStatement(sql);
             preparedStatement.setString(1, testRequest.getTest_name());
-            preparedStatement.setString(2, testRequest.getPatient().getUsername());
+            preparedStatement.setString(2, testRequest.getPatient());
             preparedStatement.setString(3, testRequest.getDoctor_username());
 
             int i = preparedStatement.executeUpdate();
@@ -987,15 +987,15 @@ public class MySQLAccess {
             resultSet = preparedStatement.executeQuery();
 
             String test_name;
-            PatientInfoCard patient;
+            String patient_username;
             String doctor_username;
             ArrayList<TestRequest> testRequests = new ArrayList<>();
 
             while(resultSet.next()){
                 test_name = resultSet.getString("test_name");
-                patient = getPatientInfo(resultSet.getString("patient_username"));
+                patient_username = resultSet.getString("patient_username");
                 doctor_username = resultSet.getString("doctor_username");
-                testRequests.add(new TestRequest(test_name,patient,doctor_username));
+                testRequests.add(new TestRequest(test_name,patient_username,doctor_username));
             }
             return testRequests;
 
@@ -1013,7 +1013,7 @@ public class MySQLAccess {
             String sql = "DELETE FROM test_request WHERE test_name = ? AND patient_username = ?";
             preparedStatement = connect.prepareStatement(sql);
             preparedStatement.setString(1, testRequest.getTest_name());
-            preparedStatement.setString(2, testRequest.getPatient().getUsername());
+            preparedStatement.setString(2, testRequest.getPatient());
 
             int i = preparedStatement.executeUpdate();
             if(i > 0){
