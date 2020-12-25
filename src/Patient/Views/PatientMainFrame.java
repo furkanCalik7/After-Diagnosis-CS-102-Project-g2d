@@ -62,6 +62,7 @@ public class PatientMainFrame extends JFrame {
 
         MySQLAccess access = new MySQLAccess();
         Patient p = (Patient) access.getUser("AlanGreen");
+
         //Initializing frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
@@ -87,7 +88,10 @@ public class PatientMainFrame extends JFrame {
         BloodDonationPanel = new BloodDonationPanel();
         MessagesPanel = new MessagesPanel();
         MedInfoPanel = new MedInfoPanel(p);
-        SettingsPanel = new SettingsPanel();
+
+        //Some bugs about settingspanel
+
+        //SettingsPanel = new SettingsPanel(p);
 
         //Creating layered pane containing panels to switch
         JPanel layeredPanePanel = new JPanel();
@@ -106,7 +110,7 @@ public class PatientMainFrame extends JFrame {
         layeredPane.add(BloodDonationPanel, "name_944915165083100");
         layeredPane.add(MessagesPanel, "name_944915191691800");
         layeredPane.add(MedInfoPanel);
-        layeredPane.add(SettingsPanel);
+        //layeredPane.add(SettingsPanel);
 
         //Button initializings
 
