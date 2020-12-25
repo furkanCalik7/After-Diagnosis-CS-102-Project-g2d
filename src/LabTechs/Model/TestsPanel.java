@@ -1,33 +1,33 @@
-import javax.swing.JPanel;
-import javax.swing.JLabel;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.table.DefaultTableModel;
+package LabTechs.Model;
 
-import java.awt.GridLayout;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import java.awt.BorderLayout;
-import javax.swing.JLayeredPane;
-import javax.swing.JTable;
-import java.awt.CardLayout;
-import javax.swing.JScrollBar;
-import javax.swing.BoxLayout;
-import javax.swing.JScrollPane;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class TestsPanel extends JPanel {
     private JTable waitingTestsTable;
-    private JTable sentTextTable;
     private JTable sentTestsTable;
 
     /**
      * Create the panel.
      */
+    JLayeredPane testsLayeredPane;
+
+    public void switchPanels( JPanel panel ) {
+        testsLayeredPane.removeAll();
+        testsLayeredPane.add(panel);
+        testsLayeredPane.repaint();
+        testsLayeredPane.revalidate();
+    }
+
     public TestsPanel() {
         setLayout(new BorderLayout(0, 0));
 
         JPanel switchPanel = new JPanel();
         add(switchPanel, BorderLayout.NORTH);
+
 
         JButton sentTestSwitchButton = new JButton("Sent Tests");
         switchPanel.add(sentTestSwitchButton);
@@ -35,7 +35,7 @@ public class TestsPanel extends JPanel {
         JButton waitingtestsSwitchButton = new JButton("Waiting Tests");
         switchPanel.add(waitingtestsSwitchButton);
 
-        JLayeredPane testsLayeredPane = new JLayeredPane();
+        testsLayeredPane = new JLayeredPane();
         add(testsLayeredPane, BorderLayout.CENTER);
         testsLayeredPane.setLayout(new CardLayout(0, 0));
 
@@ -46,7 +46,7 @@ public class TestsPanel extends JPanel {
         JTable waitingTestsTable = new JTable();
         waitingTestsTable.setModel( new DefaultTableModel(
                 new Object[][] {
-                        {null, null, null},
+                        {"Hemoglobin", "Jacob", "John"},
                         {null, null, null},
                         {null, null, null},
                         {null, null, null},
@@ -63,12 +63,12 @@ public class TestsPanel extends JPanel {
         JPanel sentTestsPanel = new JPanel();
         testsLayeredPane.setLayer(sentTestsPanel, 1);
         testsLayeredPane.add(sentTestsPanel, "name_54665244771500");
-        sentTestsPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        sentTestsPanel.setLayout(new BoxLayout(sentTestsPanel, BoxLayout.X_AXIS));//new FlowLayout(FlowLayout.CENTER, 5, 5));
 
         sentTestsTable = new JTable();
         sentTestsTable.setModel( new DefaultTableModel(
                 new Object[][] {
-                        {null, null, null},
+                        {"MVC", "Hannah", "Morgana"},
                         {null, null, null},
                         {null, null, null},
                         {null, null, null},
@@ -82,6 +82,22 @@ public class TestsPanel extends JPanel {
         JScrollPane scrollPane = new JScrollPane( sentTestsTable );
         sentTestsPanel.add(scrollPane);
 
+        //Button Action Listeners.
+        sentTestSwitchButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switchPanels( sentTestsPanel );
+                waitingtestsSwitchButton.setBackground(new Color(240, 240, 240));
+                sentTestSwitchButton.setBackground(new Color(38, 69, 191));
+            }
+        });
+
+        waitingtestsSwitchButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                switchPanels( waitingTestsPanel );
+                sentTestSwitchButton.setBackground(new Color(240, 240, 240));
+                waitingtestsSwitchButton.setBackground(new Color(38, 69, 191));
+            }
+        });
 
     }
 
