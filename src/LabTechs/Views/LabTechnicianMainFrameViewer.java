@@ -82,7 +82,7 @@ public class LabTechnicianMainFrameViewer extends JFrame {
         contentPane.add(buttonPanel, BorderLayout.WEST);
 
         labTechHomepagePanelView = new LabTechnicianHomepagePanelView( labTechnician ,this );
-        labTestsMainPanel = new LabTechnicianTestsMainPanel();
+        labTestsMainPanel = new LabTechnicianTestsMainPanel( labTechnician );
 
         settingsPanel = new SettingsPanel( labTechnician );
         messagePanel = new MessagePanel();

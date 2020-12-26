@@ -20,7 +20,7 @@ public class LabTechnicianRunner {
         LabTechnician labTechnician = ( LabTechnician ) mySQLAccess.getUser( "PeterJackson" );
 
         LabTechnicianMainFrameViewer labTechnicianMainFrameViewer = new LabTechnicianMainFrameViewer(labTechnician);
-        LabTechnicianTestsMainPanel labTestsMainPanel = new LabTechnicianTestsMainPanel();
+        LabTechnicianTestsMainPanel labTestsMainPanel = new LabTechnicianTestsMainPanel( labTechnician );
         LabTechnicianHomepagePanelView labTechnicianHomepagePanelView = new LabTechnicianHomepagePanelView( labTechnician , labTechnicianMainFrameViewer);
         SettingsPanel settingsPanel = new SettingsPanel(labTechnician);
 
