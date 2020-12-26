@@ -1,6 +1,6 @@
 package LabTechs.Views;
 
-import AdminViews.MessagePanel;
+import common.MessagePanel;
 import AdminViews.SettingsPanel;
 import JDBC.MySQLAccess;
 import LabTechs.Model.LabTechnician;
@@ -66,7 +66,7 @@ public class LabTechnicianMainFrameViewer extends JFrame {
      * Create the frame.
      */
     public LabTechnicianMainFrameViewer( LabTechnician labTechnician ) {
-        MySQLAccess mySQLAccess = new MySQLAccess();
+        //MySQLAccess mySQLAccess = new MySQLAccess();
         //labTechnician = ( LabTechnician ) mySQLAccess.getUser( "PeterJackson" );
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

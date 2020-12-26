@@ -1,12 +1,18 @@
 package LabTechs.Views;
 
+import Doctor.Views.LabTestsMainPanel;
+import LabTechs.Controller.FileChooserForDownloadController;
 import LabTechs.Model.LabTechnician;
 import LabTechs.Model.Test;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
@@ -24,6 +30,7 @@ public class SentTestsPanel extends JPanel{
 
         sentTestsTable = new JTable();
         sentTestsTable.setBorder(new EmptyBorder(8, 0, 8, 0));
+        sentTestsTable.setRowHeight( 20 );
 
         MyTableModel myTableModel = new MyTableModel();
 
@@ -32,6 +39,9 @@ public class SentTestsPanel extends JPanel{
         sentTestsTable.setRowSorter(rowSorter);
 
         sentTestsTable.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+
+        sentTestsTable.getColumn("Download").setCellRenderer(new ButtonRenderer());
+        sentTestsTable.getColumn("Download").setCellEditor(new AddDownloadButtonEditor(new JTextField()));
 
         JScrollPane sentTestsScrollPane = new JScrollPane( sentTestsTable );
         add( sentTestsScrollPane );
@@ -74,16 +84,16 @@ public class SentTestsPanel extends JPanel{
                 case 3:
                     return data.getSender_username();
                 case 4:
-                    return data.getSent_date() + "!!!" + data.getSent_time();
+                    return data.getSent_time() + "  " + data.getSent_date();
                 case 5:
-                    return " Download Button ";
+                    return "Download";
             }
             return "null";
         }
 
 
         public boolean isCellEditable(int row, int col) {
-            if (col < 6) {
+            if (col < 5) {
                 return false;
             }
             return true;
@@ -94,5 +104,68 @@ public class SentTestsPanel extends JPanel{
 
             fireTableCellUpdated(rowIndex, columnIndex);
         }
+    }
+
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+
+        public ButtonRenderer() {
+            setOpaque(true);
+        }
+
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+            setText((value == null) ? "" : value.toString());
+            return this;
+        }
+    }
+
+    class AddDownloadButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+        int i = 0;
+        private String label;
+
+        private boolean isPushed;
+
+        public AddDownloadButtonEditor(JTextField textField) {
+            super(textField);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            i = row;
+            isPushed = true;
+            return button;
+        }
+
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                //Todo Implement Download
+                System.out.println( "The button at row: " + this.label );
+                Test test = labTechnician.getTests().get(sentTestsTable.convertRowIndexToModel(i));
+                new FileChooserForDownloadController(SentTestsPanel.this, test, labTechnician);
+            }
+            isPushed = false;
+            return new String(label);
+        }
+
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
+        }
+
     }
 }

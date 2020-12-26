@@ -163,6 +163,6 @@ public class LabTechnicianHomepagePanelView extends JPanel {
 
         actionsMainPanel.add( waitingTestsButton );
         actionsMainPanel.add( waitingTestsLabel );
-        homePagePanel.add(actionsMainPanel , BorderLayout.NORTH);
+        homePagePanel.add(actionsMainPanel , BorderLayout.SOUTH);
     }
 }

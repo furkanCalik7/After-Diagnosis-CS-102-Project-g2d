@@ -4,6 +4,7 @@ import Admin.model.User;
 import JDBC.MySQLAccess;
 
 import java.io.File;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class LabTechnician extends User {
@@ -44,7 +45,10 @@ public class LabTechnician extends User {
     public Test createNewTest(String receiver_username, String test_name, String patient_username, File file) {
         return Test.newTest(receiver_username, this.getUsername(), test_name, patient_username, file);
     }
-
+    //
+    public void downloadTest(Test test, Path path){
+        mySQLAccess.writeTestResult(test,path);
+    }
 }
 
 
