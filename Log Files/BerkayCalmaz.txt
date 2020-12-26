@@ -35,6 +35,11 @@ Some panels are implemented.
 Some GUI panels are created.
 5 Hours
 
-26.12
+25.12
 Some GUI panels are fixed and created.
 3-4 Hours
+
+26.12
+Login panels are finished and more GUI classes are implemented.
+
+4 Hours
