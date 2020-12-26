@@ -1,7 +1,6 @@
 package Doctor.Views;
 
 import Doctor.Controller.DischargedPatientController;
-import Doctor.Controller.SendTestRequestController;
 import Doctor.Model.Doctor;
 import Doctor.Model.PatientSlot;
 
@@ -52,6 +51,10 @@ public class MyPatientsMainPanel extends JPanel {
 
         table.getColumn("More Information").setCellRenderer(new ButtonRenderer());
         table.getColumn("More Information").setCellEditor(new InformationButtonEditor(new JTextField()));
+
+
+        table.getColumn("Send Message").setCellRenderer(new ButtonRenderer());
+        table.getColumn("Send Message").setCellEditor(new SendMessageButton(new JTextField()));
 
         JScrollPane scrollPane = new JScrollPane(table);
         scrollPane.setViewportBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -354,7 +357,8 @@ public class MyPatientsMainPanel extends JPanel {
 
         public Object getCellEditorValue() {
             if (isPushed) {
-                System.out.println(1);
+                layeredPane.getDoctorMainFrameViewer().getMessagePanel().switchMessage(doctor.getPatientSlots().get(table.convertRowIndexToModel(i)).getPatientInfo().getUsername());
+                layeredPane.getDoctorMainFrameViewer().switchPanels(layeredPane.getDoctorMainFrameViewer().getMessagePanel());
             }
             isPushed = false;
             return new String(label);

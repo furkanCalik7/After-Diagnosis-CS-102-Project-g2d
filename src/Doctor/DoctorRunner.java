@@ -17,7 +17,7 @@ public class DoctorRunner {
         Doctor doctor = mySQLAccess.getDoctorByUsername( "JuliaRoberts" );
 
         DoctorMainFrameViewer doctorMainFrameViewer = new DoctorMainFrameViewer(doctor);
-        MyPatientsLayeredPanelView myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
+        MyPatientsLayeredPanelView myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor,doctorMainFrameViewer);
         LabTestsMainPanel labTestsMainPanel = new LabTestsMainPanel(doctor);
         SettingsPanel settingsPanel = new SettingsPanel(doctor);
         DoctorBloodDonationPanel donationPanel = new DoctorBloodDonationPanel(doctor);

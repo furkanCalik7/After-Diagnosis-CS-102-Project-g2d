@@ -34,7 +34,7 @@ public class MessagePanel extends JPanel {
     private TableRowSorter<InboxTable> rowSorter;
     private TableRowSorter<SentTable> rs;
     private User user;
-    private final JPanel messagePanelCenter;
+    private JPanel messagePanelCenter;
     private JPanel messagePanel;
     private JPanel composePanel;
 
@@ -53,7 +53,6 @@ public class MessagePanel extends JPanel {
         layeredPane.revalidate();
 
     }
-
 
     public JTextArea getMessageTextArea() {
         return messageTextArea;
@@ -249,8 +248,12 @@ public class MessagePanel extends JPanel {
         JButton composeButton = new JButton("Create a Message");
         composeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                txtSubject.setText("Subject");
+                txtEnterTheSubjects.setText("Enter the receiver username");
+                messageTextArea.setText("Enter your message here.");
                 switchPanels(composePanel);
             }
+
         });
         composeButton.setFont(new Font("Century", Font.PLAIN, 16));
         buttonPanel.add(composeButton);

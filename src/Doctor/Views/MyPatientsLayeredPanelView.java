@@ -19,10 +19,17 @@ public class MyPatientsLayeredPanelView extends JPanel {
     private ArrayList<myPatientsDrugPanelView> patientsDrugPanelViews;
     private Doctor doctor;
 
-    public MyPatientsLayeredPanelView(Doctor doctor) {
+    public DoctorMainFrameViewer getDoctorMainFrameViewer() {
+        return doctorMainFrameViewer;
+    }
+
+    private DoctorMainFrameViewer doctorMainFrameViewer;
+
+    public MyPatientsLayeredPanelView(Doctor doctor, DoctorMainFrameViewer doctorMainFrameViewer) {
 
         setLayout(new BorderLayout(0, 0));
         patientCreationPanelView = new myPatientCreationPanelView(this);
+        this.doctorMainFrameViewer = doctorMainFrameViewer;
         patientsDrugPanelViews = new ArrayList<>();
         patientInfoPanelViews = new ArrayList<>();
         this.doctor = doctor;

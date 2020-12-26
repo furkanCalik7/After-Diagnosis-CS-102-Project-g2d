@@ -59,7 +59,7 @@ public class DoctorMainFrameViewer extends JFrame {
 
         doctorHomepagePanelView = new DoctorHomepagePanelView( doctor );
         labTestsMainPanel = new LabTestsMainPanel(doctor);
-        myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
+        myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor,this);
         settingsPanel = new SettingsPanel( doctor );
         doctorBloodDonationPanel = new DoctorBloodDonationPanel(doctor);
 
@@ -157,6 +157,10 @@ public class DoctorMainFrameViewer extends JFrame {
 
     public void setDoctorBloodDonationPanel(DoctorBloodDonationPanel doctorBloodDonationPanel) {
         this.doctorBloodDonationPanel = doctorBloodDonationPanel;
+    }
+
+    public MessagePanel getMessagePanel() {
+        return messagePanel;
     }
 
     public void setMessagePanel(MessagePanel messagePanel) {
