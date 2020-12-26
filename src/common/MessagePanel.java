@@ -1,21 +1,25 @@
 package common;
 
 import Admin.model.User;
+import Admin.model.UserInfoCard;
+import AdminViews.HospitalWorkersInfoPanel;
+import Doctor.Model.DoctorInfoCard;
+import Doctor.Views.HintTextField;
+import JDBC.Message;
 
-import javax.swing.JPanel;
-import javax.swing.JLayeredPane;
+import javax.swing.*;
 import java.awt.*;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.JTextArea;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.util.ArrayList;
 
 public class MessagePanel extends JPanel {
     private JTextField sentSearchField;
@@ -27,13 +31,27 @@ public class MessagePanel extends JPanel {
     private JTextField txtEnterTheSubjects;
     private JTextField txtSubject;
     private JTextArea messageTextArea;
+    private TableRowSorter<InboxTable> rowSorter;
+    private TableRowSorter<SentTable> rs;
     private User user;
+    private final JPanel messagePanelCenter;
+    private JPanel messagePanel;
+    private JPanel composePanel;
 
-    public void switchPanels( JPanel panel ) {
+    public void switchPanels(JPanel panel) {
         layeredPane.removeAll();
         layeredPane.add(panel);
         layeredPane.repaint();
         layeredPane.revalidate();
+    }
+
+    public void switchMessage(String username) {
+        layeredPane.removeAll();
+        layeredPane.add(composePanel);
+        txtEnterTheSubjects.setText(username);
+        layeredPane.repaint();
+        layeredPane.revalidate();
+
     }
 
 
@@ -76,10 +94,24 @@ public class MessagePanel extends JPanel {
         sentPanel.add(searchFieldPanel, BorderLayout.NORTH);
         searchFieldPanel.setLayout(new GridLayout(0, 3, 0, 0));
 
-        sentSearchField = new JTextField();
-        sentSearchField.setText("Search");
+        sentSearchField = new HintTextField("Search");
         searchFieldPanel.add(sentSearchField);
         sentSearchField.setColumns(10);
+
+        sentSearchField.getDocument().addDocumentListener(
+                new DocumentListener() {
+                    public void changedUpdate(DocumentEvent e) {
+                        sentFilter();
+                    }
+
+                    public void insertUpdate(DocumentEvent e) {
+                        sentFilter();
+                    }
+
+                    public void removeUpdate(DocumentEvent e) {
+                        sentFilter();
+                    }
+                });
 
         JPanel sentMessagesPanel = new JPanel();
         sentPanel.add(sentMessagesPanel, BorderLayout.CENTER);
@@ -87,20 +119,13 @@ public class MessagePanel extends JPanel {
 
         //Initializing the table and scroll pane.
         sentJTable = new JTable();
-        sentJTable.setModel(new DefaultTableModel(
-                new Object[][] {
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                },
-                new String[] {
-                        "Subject", "Receiver", "Date", "Status"
-                }
-        ));
+        SentTable tableModel = new SentTable();
+        sentJTable.setModel(tableModel);
+        rs = new TableRowSorter<>(tableModel);
+        sentJTable.setRowSorter(rs);
+        sentJTable.setEnabled(false);
         sentMessagesScrollPane = new JScrollPane(sentJTable);
-        sentMessagesPanel.add( sentMessagesScrollPane );
+        sentMessagesPanel.add(sentMessagesScrollPane);
 
         //--------inboxPanel--------------:
         //This panel shows the received messages.
@@ -114,10 +139,26 @@ public class MessagePanel extends JPanel {
         inboxPanel.add(searchFieldPanel_2, BorderLayout.NORTH);
         searchFieldPanel_2.setLayout(new GridLayout(0, 3, 0, 0));
 
-        inboxSearchField = new JTextField();
+        inboxSearchField = new HintTextField("Search");
         inboxSearchField.setText("Search");
         searchFieldPanel_2.add(inboxSearchField);
         inboxSearchField.setColumns(10);
+
+        inboxSearchField.getDocument().addDocumentListener(
+                new DocumentListener() {
+                    public void changedUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+
+                    public void insertUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+
+                    public void removeUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+                });
+
 
         JPanel inboxCenterPanel = new JPanel();
         inboxPanel.add(inboxCenterPanel, BorderLayout.CENTER);
@@ -125,25 +166,18 @@ public class MessagePanel extends JPanel {
 
         //Initializing the table and scroll pane.
         inboxJTable = new JTable();
-        inboxJTable.setModel(new DefaultTableModel(
-                new Object[][] {
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                        {null, null, null, null},
-                },
-                new String[] {
-                        "Subject", "Sender", "Date", "Status"
-                }
-        ));
-        JScrollPane inboxMessagesScrollPane = new JScrollPane( inboxJTable );
+        InboxTable dataModel = new InboxTable();
+        inboxJTable.setModel(dataModel);
+        rowSorter = new TableRowSorter<>(dataModel);
+        inboxJTable.setRowSorter(rowSorter);
+        inboxJTable.setEnabled(false);
+        JScrollPane inboxMessagesScrollPane = new JScrollPane(inboxJTable);
         inboxCenterPanel.add(inboxMessagesScrollPane);
 
 
         //--------composePanel--------------:
         //This panel creates messages.
-        JPanel composePanel = new JPanel();
+        composePanel = new JPanel();
         composePanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         layeredPane.add(composePanel, "name_861416546981100");
         composePanel.setLayout(new BorderLayout(0, 10));
@@ -153,16 +187,15 @@ public class MessagePanel extends JPanel {
         composePanel.add(emailTextFieldPanel, BorderLayout.NORTH);
         emailTextFieldPanel.setLayout(new GridLayout(0, 3, 0, 5));
 
-        txtEnterTheSubjects = new JTextField();
-        txtEnterTheSubjects.setText("Enter the receiver username");
+        txtEnterTheSubjects = new HintTextField("Enter the receiver username");
         emailTextFieldPanel.add(txtEnterTheSubjects);
         txtEnterTheSubjects.setColumns(10);
 
-        JPanel messagePanel = new JPanel();
+        messagePanel = new JPanel();
         composePanel.add(messagePanel, BorderLayout.CENTER);
         messagePanel.setLayout(new BorderLayout(10, 10));
 
-        JPanel messagePanelCenter = new JPanel();
+        messagePanelCenter = new JPanel();
         messagePanel.add(messagePanelCenter, BorderLayout.CENTER);
         messagePanelCenter.setLayout(new BorderLayout(0, 0));
 
@@ -176,8 +209,7 @@ public class MessagePanel extends JPanel {
         messagePanel.add(subjectPanel, BorderLayout.NORTH);
         subjectPanel.setLayout(new GridLayout(0, 3, 0, 0));
 
-        txtSubject = new JTextField();
-        txtSubject.setText("Subject");
+        txtSubject = new HintTextField("Subject");
         subjectPanel.add(txtSubject);
         txtSubject.setColumns(10);
 
@@ -199,7 +231,7 @@ public class MessagePanel extends JPanel {
         JButton inboxButton = new JButton("Inbox");
         inboxButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels( inboxPanel );
+                switchPanels(inboxPanel);
             }
         });
         inboxButton.setFont(new Font("Century", Font.PLAIN, 16));
@@ -208,7 +240,7 @@ public class MessagePanel extends JPanel {
         JButton sentButton = new JButton("Sent");
         sentButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels( sentPanel );
+                switchPanels(sentPanel);
             }
         });
         sentButton.setFont(new Font("Century", Font.PLAIN, 16));
@@ -217,7 +249,7 @@ public class MessagePanel extends JPanel {
         JButton composeButton = new JButton("Create a Message");
         composeButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels( composePanel);
+                switchPanels(composePanel);
             }
         });
         composeButton.setFont(new Font("Century", Font.PLAIN, 16));
@@ -226,7 +258,142 @@ public class MessagePanel extends JPanel {
         //GUI related
         JPanel emptyPanel = new JPanel();
         add(emptyPanel, BorderLayout.SOUTH);
+    }
 
+
+    //Outbox Table
+    class SentTable extends AbstractTableModel {
+        private String[] columnNames = new String[]{
+                "Subject", "Receiver", "Date", "Status"};
+
+        private ArrayList<Message> messages;
+
+        public SentTable() {
+            messages = user.getOutbox();
+        }
+
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        public int getRowCount() {
+            return messages.size();
+        }
+
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+
+        public Object getValueAt(int row, int col) {
+            Message data = messages.get(row);
+
+            switch (col) {
+                case 0:
+                    return data.getSubject();
+                case 1:
+                    return data.getReceiver_username();
+                case 2:
+                    return data.getSent_date();
+                case 3:
+                    return data.is_read();
+            }
+            return "null";
+        }
+
+        public boolean isCellEditable(int row, int col) {
+            return false;
+        }
+
+        @Override
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+
+            fireTableCellUpdated(rowIndex, columnIndex);
+        }
+
+        public void newRowsAdded(TableModelEvent event) {
+            fireTableChanged(event);
+        }
 
     }
+
+    private void sentFilter() {
+        RowFilter<SentTable, Object> rf = null;
+        try {
+            rf = RowFilter.regexFilter(sentSearchField.getText(), 1);
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+        rs.setRowFilter(rf);
+    }
+
+
+    // Inbox Table
+    class InboxTable extends AbstractTableModel {
+        private String[] columnNames = new String[]{
+                "Subject", "Sender", "Date", "Status"};
+
+        private ArrayList<Message> messages;
+
+        public InboxTable() {
+            messages = user.getInbox();
+        }
+
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        public int getRowCount() {
+            return messages.size();
+        }
+
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+
+        public Object getValueAt(int row, int col) {
+            Message data = messages.get(row);
+
+            switch (col) {
+                case 0:
+                    return data.getSubject();
+                case 1:
+                    return data.getSender_username();
+                case 2:
+                    return data.getSent_date();
+                case 3:
+                    return data.is_read();
+            }
+            return "null";
+        }
+
+        public boolean isCellEditable(int row, int col) {
+            return false;
+        }
+
+        @Override
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+
+            fireTableCellUpdated(rowIndex, columnIndex);
+        }
+
+        public void newRowsAdded(TableModelEvent event) {
+            fireTableChanged(event);
+        }
+
+    }
+
+    private void newFilter() {
+        RowFilter<InboxTable, Object> rf = null;
+        try {
+            rf = RowFilter.regexFilter(inboxSearchField.getText(), 1);
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+        rowSorter.setRowFilter(rf);
+    }
+
+
+
 }

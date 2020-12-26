@@ -20,7 +20,7 @@ public class PatientMainFrame extends JFrame {
     private JPanel MyDrugsPanel;
     private JPanel AppointmentPanel;
     private JPanel BloodDonationPanel;
-    private JPanel MessagesPanel;
+    private MessagePanel MessagesPanel;
     private JPanel MedInfoPanel;
     private JPanel SettingsPanel;
     private Patient patient;
@@ -83,11 +83,11 @@ public class PatientMainFrame extends JFrame {
 
         //Creating panels which will be added to main frame
         HomePagePanel = new HomePagePanel(p);
-        MyDoctorsPanel = new MyDoctorsPanel(p);
         MyDrugsPanel = new MyDrugsPanel(p);
         AppointmentPanel = new AppointmentPanel();
         BloodDonationPanel = new BloodDonationPanel();
         MessagesPanel = new MessagePanel(p);
+        MyDoctorsPanel = new MyDoctorsPanel(p, MessagesPanel, this);
         MedInfoPanel = new MedInfoPanel(p);
 
         //Some bugs about settingspanel
