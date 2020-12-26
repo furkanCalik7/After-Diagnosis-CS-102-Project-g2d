@@ -8,13 +8,15 @@ import javax.swing.border.MatteBorder;
 import java.awt.Color;
 import java.awt.GridLayout;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 import javax.swing.border.LineBorder;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 
 public class ForgotPasswordPanel extends JPanel {
-    private JTextField textField;
-
+    private JTextField mailTextField;
+    private JButton resetButton;
+    private JButton returnButton;
     /**
      * Create the panel.
      */
@@ -61,24 +63,37 @@ public class ForgotPasswordPanel extends JPanel {
         JPanel mailHolder = new JPanel();
         mailPanel.add(mailHolder);
 
-        textField = new JTextField();
-        mailHolder.add(textField);
-        textField.setColumns(14);
+        mailTextField = new JTextField();
+        mailHolder.add(mailTextField);
+        mailTextField.setColumns(14);
 
         JPanel buttonPanel = new JPanel();
         FlowLayout flowLayout = (FlowLayout) buttonPanel.getLayout();
         flowLayout.setAlignment(FlowLayout.RIGHT);
         centerPanel.add(buttonPanel);
 
-        JButton btnNewButton = new JButton("Reset");
-        btnNewButton.setFont(new Font("Century", Font.PLAIN, 20));
-        buttonPanel.add(btnNewButton);
+        resetButton = new JButton("Reset");
+        resetButton.setFont(new Font("Century", Font.PLAIN, 20));
+        buttonPanel.add(resetButton);
 
-        JButton btnNewButton_1 = new JButton("Return");
-        btnNewButton_1.setFont(new Font("Century", Font.PLAIN, 20));
-        buttonPanel.add(btnNewButton_1);
+        returnButton = new JButton("Return");
+        returnButton.setFont(new Font("Century", Font.PLAIN, 20));
+        buttonPanel.add(returnButton);
 
     }
 
-}
 
+    //Getters
+    public JButton getResetButton() {
+        return resetButton;
+    }
+
+    public JButton getReturnButton() {
+        return returnButton;
+    }
+
+    public JTextField getMailTextField() {
+        return mailTextField;
+    }
+
+}

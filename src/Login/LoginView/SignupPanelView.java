@@ -18,8 +18,9 @@ public class SignupPanelView extends JPanel {
     private JTextField surnameTxtField;
     private JPasswordField passwordField;
     private JPasswordField confirmPasswordField;
-    private JTextField textField;
-
+    private JTextField mailTxtField;
+    private JButton returnButton;
+    private JButton createButton;
     /**
      * Create the panel.
      */
@@ -146,17 +147,51 @@ public class SignupPanelView extends JPanel {
         JPanel mailHolderPanel = new JPanel();
         emailPanel.add(mailHolderPanel);
 
-        textField = new JTextField();
-        mailHolderPanel.add(textField);
-        textField.setColumns(14);
+        mailTxtField = new JTextField();
+        mailHolderPanel.add(mailTxtField);
+        mailTxtField.setColumns(14);
 
         JPanel createButtonHolderPanel = new JPanel();
         centerPanel.add(createButtonHolderPanel);
 
-        JButton createButton = new JButton("Create");
+        createButton = new JButton("Create");
         createButton.setFont(new Font("Century", Font.PLAIN, 20));
         createButtonHolderPanel.add(createButton);
 
+        returnButton = new JButton("Return");
+        returnButton.setFont(new Font("Century", Font.PLAIN, 20));
+        createButtonHolderPanel.add(returnButton);
+
+    }
+
+    //Getters
+
+    public JButton getReturnButton() {
+        return returnButton;
+    }
+
+    public JButton getCreateButton() {
+        return createButton;
+    }
+
+    public JTextField getNameTxtField() {
+        return nameTxtField;
+    }
+
+    public JTextField getSurnameTxtField() {
+        return surnameTxtField;
+    }
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public JPasswordField getConfirmPasswordField() {
+        return confirmPasswordField;
+    }
+
+    public JTextField getMailTxtField() {
+        return mailTxtField;
     }
 
 }

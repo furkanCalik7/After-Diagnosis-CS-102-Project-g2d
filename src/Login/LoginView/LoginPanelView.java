@@ -5,12 +5,16 @@ import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginPanelView extends JPanel {
     String[] userTypes;
     private JPasswordField passwordField;
-    private JTextField textField;
+    private JTextField usernameTextField;
     private JLabel forgotLabel;
+    private JButton loginButton;
+    private JButton createAccButton;
 
     /**
      * Create the panel.
@@ -78,9 +82,9 @@ public class LoginPanelView extends JPanel {
         usernamePanel.add(passwordHolderPanel);
         passwordHolderPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 11));
 
-        textField = new JTextField();
-        passwordHolderPanel.add(textField);
-        textField.setColumns(15);
+        usernameTextField = new JTextField();
+        passwordHolderPanel.add(usernameTextField);
+        usernameTextField.setColumns(15);
 
         JPanel passwordPanel = new JPanel();
         centerPanel.add(passwordPanel);
@@ -106,7 +110,11 @@ public class LoginPanelView extends JPanel {
         FlowLayout flowLayout = (FlowLayout) forgotPanel.getLayout();
         centerPanel.add(forgotPanel);
 
-        JButton loginButton = new JButton("Login");
+        loginButton = new JButton("Login");
+        loginButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
         forgotPanel.add(loginButton);
         loginButton.setFont(new Font("Century", Font.PLAIN, 20));
 
@@ -123,7 +131,7 @@ public class LoginPanelView extends JPanel {
         JPanel createPanel = new JPanel();
         centerPanel.add(createPanel);
 
-        JButton createAccButton = new JButton("Create a New Account");
+        createAccButton = new JButton("Create a New Account");
         createAccButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         createPanel.add(createAccButton);
 
@@ -136,4 +144,28 @@ public class LoginPanelView extends JPanel {
     public JLabel getForgotLabel() {
         return forgotLabel;
     }
+
+    /**
+     * Returns the loginButton.
+     * @return
+     */
+    public JButton getLoginButton() {
+        return loginButton;
+    }
+
+    /**
+     * @return Returns the signupButton.
+     */
+    public JButton getSignupButton() {
+        return createAccButton;
+    }
+
+    public JTextField getUsernameTextField() {
+        return usernameTextField;
+    }
+
+    public JPasswordField getPasswordField() {
+        return passwordField;
+    }
+
 }
