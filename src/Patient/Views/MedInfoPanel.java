@@ -1,5 +1,6 @@
 package Patient.Views;
 
+import Patient.Controllers.MedInfoControls;
 import Patient.Model.Patient;
 
 import javax.swing.*;
@@ -28,7 +29,9 @@ public class MedInfoPanel extends JPanel {
     private final ButtonGroup buttonGroup = new ButtonGroup();
     private JTextField txtSearch;
     private JTable table;
-    JLayeredPane layeredPane;
+    private JLayeredPane layeredPane;
+    private JComboBox bloodTypecomboBox;
+    private JComboBox rhComboBox;
 
     /**
      * Create the panel.
@@ -39,6 +42,27 @@ public class MedInfoPanel extends JPanel {
         layeredPane.repaint();
         layeredPane.revalidate();
     }
+
+    public JComboBox getRhComboBox() {
+        return rhComboBox;
+    }
+
+    public JComboBox getBloodTypecomboBox() {
+        return bloodTypecomboBox;
+    }
+
+    public JTextField getAllergieTextField() {
+        return allergieTextField;
+    }
+
+    public JTextField getSurgeryTextField() {
+        return surgeryTextField;
+    }
+
+    public JTextField getAdditionalInfoTextField() {
+        return additionalInfoTextField;
+    }
+
 
     public MedInfoPanel(Patient patient) {
         setLayout(new BorderLayout(0, 0));
@@ -81,11 +105,11 @@ public class MedInfoPanel extends JPanel {
         String[] bloodTypes = new String[]{"AB","A","B","0"};
         String[] rh = new String[]{"+","-"};
 
-        JComboBox bloodTypecomboBox = new JComboBox(bloodTypes);
+        bloodTypecomboBox = new JComboBox(bloodTypes);
         bloodTypecomboBox.setFont(new Font("Century", Font.PLAIN, 15));
         panel_9.add(bloodTypecomboBox);
 
-        JComboBox rhComboBox = new JComboBox(rh);
+        rhComboBox = new JComboBox(rh);
         rhComboBox.setFont(new Font("Century", Font.PLAIN, 15));
         panel_9.add(rhComboBox);
 
@@ -162,7 +186,7 @@ public class MedInfoPanel extends JPanel {
         enterInfoPanel.add(panel_5);
         panel_5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-        JButton saveButton = new JButton("Save Your Changes");
+        JButton saveButton = new MedInfoControls(patient, this);
         saveButton.setFont(new Font("Century", Font.PLAIN, 15));
         panel_5.add(saveButton);
 

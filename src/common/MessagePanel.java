@@ -1,5 +1,7 @@
 package common;
 
+import Admin.model.User;
+
 import javax.swing.JPanel;
 import javax.swing.JLayeredPane;
 import java.awt.*;
@@ -24,6 +26,8 @@ public class MessagePanel extends JPanel {
     private JTextField inboxSearchField;
     private JTextField txtEnterTheSubjects;
     private JTextField txtSubject;
+    private JTextArea messageTextArea;
+    private User user;
 
     public void switchPanels( JPanel panel ) {
         layeredPane.removeAll();
@@ -32,10 +36,28 @@ public class MessagePanel extends JPanel {
         layeredPane.revalidate();
     }
 
+
+    public JTextArea getMessageTextArea() {
+        return messageTextArea;
+    }
+
+    public JTextField getTxtSubject() {
+        return txtSubject;
+    }
+
+    public JTextField getInboxSearchField() {
+        return inboxSearchField;
+    }
+
+    public JTextField getTxtEnterTheSubjects() {
+        return txtEnterTheSubjects;
+    }
+
     /**
      * Create the panel.
      */
-    public MessagePanel() {
+    public MessagePanel(User user) {
+        this.user = user;
         setLayout(new BorderLayout(0, 5));
 
         layeredPane = new JLayeredPane();
@@ -132,7 +154,7 @@ public class MessagePanel extends JPanel {
         emailTextFieldPanel.setLayout(new GridLayout(0, 3, 0, 5));
 
         txtEnterTheSubjects = new JTextField();
-        txtEnterTheSubjects.setText("Enter the receiver email");
+        txtEnterTheSubjects.setText("Enter the receiver username");
         emailTextFieldPanel.add(txtEnterTheSubjects);
         txtEnterTheSubjects.setColumns(10);
 
@@ -144,7 +166,7 @@ public class MessagePanel extends JPanel {
         messagePanel.add(messagePanelCenter, BorderLayout.CENTER);
         messagePanelCenter.setLayout(new BorderLayout(0, 0));
 
-        JTextArea messageTextArea = new JTextArea();
+        messageTextArea = new JTextArea();
         messageTextArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
         messageTextArea.setText("Enter your message here.");
         messagePanelCenter.add(messageTextArea, BorderLayout.CENTER);
@@ -164,7 +186,7 @@ public class MessagePanel extends JPanel {
         flowLayout.setAlignment(FlowLayout.RIGHT);
         composePanel.add(createButtonPanel, BorderLayout.SOUTH);
 
-        JButton sendButton = new JButton("Send the message");
+        JButton sendButton = new SendButtonControl(user, this);
         sendButton.setFont(new Font("Century", Font.PLAIN, 15));
         createButtonPanel.add(sendButton);
 

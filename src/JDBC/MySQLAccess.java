@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import Appointment.Appointment;
 import Patient.Model.PatientInfoCard;
 
+import javax.swing.*;
+
 public class MySQLAccess {
     private Connection connect = null;
     private Statement statement = null;
@@ -502,7 +504,7 @@ public class MySQLAccess {
                 return true;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Error! Message cannot be sent");
         } finally {
             close();
         }

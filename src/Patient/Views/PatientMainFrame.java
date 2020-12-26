@@ -9,6 +9,7 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import common.*;
 
 public class PatientMainFrame extends JFrame {
 
@@ -86,7 +87,7 @@ public class PatientMainFrame extends JFrame {
         MyDrugsPanel = new MyDrugsPanel(p);
         AppointmentPanel = new AppointmentPanel();
         BloodDonationPanel = new BloodDonationPanel();
-        MessagesPanel = new MessagesPanel();
+        MessagesPanel = new MessagePanel(p);
         MedInfoPanel = new MedInfoPanel(p);
 
         //Some bugs about settingspanel
