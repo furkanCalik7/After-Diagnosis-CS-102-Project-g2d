@@ -1,6 +1,6 @@
 package LabTechs.Views;
 
-import Doctor.Views.LabTestsMainPanel;
+import Admin.model.IViewer;
 import LabTechs.Controller.FileChooserForDownloadController;
 import LabTechs.Model.LabTechnician;
 import LabTechs.Model.Test;
@@ -16,11 +16,16 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class SentTestsPanel extends JPanel{
+public class SentTestsPanel extends JPanel implements IViewer {
 
     JTable sentTestsTable;
     private TableRowSorter<MyTableModel> rowSorter;
     private LabTechnician labTechnician;
+
+    @Override
+    public void update() {
+
+    }
 
     public SentTestsPanel( LabTechnician labTechnician ){
 
@@ -149,8 +154,6 @@ public class SentTestsPanel extends JPanel{
 
         public Object getCellEditorValue() {
             if (isPushed) {
-                //Todo Implement Download
-                System.out.println( "The button at row: " + this.label );
                 Test test = labTechnician.getTests().get(sentTestsTable.convertRowIndexToModel(i));
                 new FileChooserForDownloadController(SentTestsPanel.this, test, labTechnician);
             }

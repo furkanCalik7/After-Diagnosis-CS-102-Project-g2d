@@ -1,11 +1,16 @@
 package LabTechs;
 
-import common.SettingsPanel;
+import AdminViews.SettingsPanel;
+import Doctor.Model.Doctor;
+import Doctor.Views.*;
 import JDBC.MySQLAccess;
 import LabTechs.Model.LabTechnician;
 import LabTechs.Views.LabTechnicianHomepagePanelView;
 import LabTechs.Views.LabTechnicianMainFrameViewer;
 import LabTechs.Views.LabTechnicianTestsMainPanel;
+
+
+import java.util.ArrayList;
 
 public class LabTechnicianRunner {
 
@@ -23,12 +28,5 @@ public class LabTechnicianRunner {
         labTechnicianMainFrameViewer.setLabTestsMainPanel(labTestsMainPanel);
         labTechnicianMainFrameViewer.setLabTechHomepagePanelView(labTechnicianHomepagePanelView);
         labTechnicianMainFrameViewer.setSettingsPanel(settingsPanel);
-
-
-        //MyPatientsMainPanel myPatientsMainPanel = new MyPatientsMainPanel(labTechnician,myPatientsLayeredPanelView);
-        //myPatientsLayeredPanelView.setMyPatientsMainPanel(myPatientsMainPanel);
-        //ArrayList<myPatientsDrugPanelView> myPatientsDrugPanelViewArrayList = myPatientsLayeredPanelView.getPatientsDrugPanelViews();
-        //ArrayList<PatientInfoPanelView> patientInfoPanelViews = myPatientsLayeredPanelView.getPatientInfoPanelViews();
-
     }
 }

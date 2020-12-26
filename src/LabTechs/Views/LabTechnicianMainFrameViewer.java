@@ -85,7 +85,7 @@ public class LabTechnicianMainFrameViewer extends JFrame {
         labTestsMainPanel = new LabTechnicianTestsMainPanel( labTechnician );
 
         settingsPanel = new SettingsPanel( labTechnician );
-        messagePanel = new MessagePanel();
+        messagePanel = new MessagePanel( labTechnician );
 
         JPanel layeredPanePanel = new JPanel();
         contentPane.add(layeredPanePanel, BorderLayout.CENTER);
