@@ -19,7 +19,7 @@ public class DatePickerPanel extends JPanel implements PropertyChangeListener {
 		public DatePickerPanel()
 		{
 			formatter = new SimpleDateFormat("yyyy-MM-dd");
-			 textField = new JFormattedTextField(formatter);
+			textField = new JFormattedTextField(formatter);
 			textField.setValue(new Date());
 			textField.setPreferredSize(new Dimension(130, 30));
 

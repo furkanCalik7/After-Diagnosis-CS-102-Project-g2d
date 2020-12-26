@@ -2,26 +2,22 @@ package Patient.Views;
 
 import Doctor.Model.DoctorInfoCard;
 import Doctor.Model.Drug;
-import Doctor.Views.MyPatientsLayeredPanelView;
-import Doctor.Views.MyPatientsMainPanel;
 import Patient.Controllers.AddDoctorButtonControls;
 import Patient.Model.Patient;
-import common.MessagePanel;
 
 import javax.swing.*;
 
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.FlowLayout;
 import java.util.ArrayList;
 
 public class MyDoctorsPanel extends JPanel {
@@ -30,22 +26,13 @@ public class MyDoctorsPanel extends JPanel {
     public JTextField codeField;
     public Patient patient;
     private TableRowSorter<MyTableModel> rowSorter;
-    private JLayeredPane layeredPane;
-    private MessagePanel messagePanel;
-    protected ArrayList<DoctorInfoCard> doctors;
-    private PatientMainFrame mainFrame;
+
 
     /**
      * Create the panel.
      */
-    public MyDoctorsPanel(Patient patient, MessagePanel messagePanel, PatientMainFrame mainFrame) {
+    public MyDoctorsPanel(Patient patient) {
         this.patient = patient;
-        this.messagePanel = messagePanel;
-        this.mainFrame = mainFrame;
-
-        layeredPane = new JLayeredPane();
-        add(layeredPane);
-        layeredPane.setLayout(new CardLayout(0, 0));
 
         setBorder(new EmptyBorder(0, 100, 0, 100));
         setLayout(new BorderLayout(0, 0));
@@ -66,6 +53,8 @@ public class MyDoctorsPanel extends JPanel {
         panel_1.add(searchTextField);
         searchTextField.setColumns(10);
 
+        //xd
+
         searchTextField.getDocument().addDocumentListener(
                 new DocumentListener() {
                     public void changedUpdate(DocumentEvent e) {
@@ -82,14 +71,13 @@ public class MyDoctorsPanel extends JPanel {
                 });
 
         table = new JTable();
+        table.setEnabled(false);
         MyTableModel myTableModel = new MyTableModel();
         table.setModel(myTableModel);
         rowSorter = new TableRowSorter<>(myTableModel);
         table.setRowSorter(rowSorter);
+        //xd
 
-
-        table.getColumn("Send Message").setCellRenderer(new ButtonRenderer());
-        table.getColumn("Send Message").setCellEditor(new AddDrugButtonEditor(new JTextField()));
 
         JScrollPane scrollPane = new JScrollPane( table );
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -134,7 +122,9 @@ public class MyDoctorsPanel extends JPanel {
 
     class MyTableModel extends AbstractTableModel {
         protected String[] columnNames = new String[]{
-                "Doctor name", "Doctor Speciality", "Doctor Email", "Send Message"};
+                "Doctor name", "Doctor Speciality", "Doctor Email", "Reappointment"};
+
+        protected ArrayList<DoctorInfoCard> doctors;
 
         public MyTableModel() {
             doctors = patient.getDoctors();
@@ -164,17 +154,12 @@ public class MyDoctorsPanel extends JPanel {
                     return data.getDoctorSpeciality();
                 case 2:
                     return data.getEmail();
-                case 3:
-                    return "Send Message";
             }
             return "null";
         }
 
         public boolean isCellEditable(int row, int col) {
-            if(col < 2) {
-                return  false;
-            }
-            return true;
+            return false;
         }
 
         @Override
@@ -199,67 +184,7 @@ public class MyDoctorsPanel extends JPanel {
         rowSorter.setRowFilter(rf);
     }
 
-    class ButtonRenderer extends JButton implements TableCellRenderer {
 
-        public ButtonRenderer() {
-            setOpaque(true);
-        }
-
-        public Component getTableCellRendererComponent(JTable table, Object value,
-                                                       boolean isSelected, boolean hasFocus, int row, int column) {
-            setText((value == null) ? "" : value.toString());
-            return this;
-        }
-    }
-
-    class AddDrugButtonEditor extends DefaultCellEditor {
-        protected JButton button;
-        int i = 0;
-        private String label;
-
-        private boolean isPushed;
-
-        public AddDrugButtonEditor(JTextField textField) {
-            super(textField);
-            button = new JButton();
-            button.setOpaque(true);
-            button.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                    fireEditingStopped();
-                }
-            });
-        }
-
-        public Component getTableCellEditorComponent(JTable table, Object value,
-                                                     boolean isSelected, int row, int column) {
-
-            label = (value == null) ? "" : value.toString();
-            button.setText(label);
-            i = row;
-            isPushed = true;
-            return button;
-        }
-
-        public Object getCellEditorValue() {
-            if (isPushed) {
-                System.out.println(table.convertRowIndexToModel(i));
-               messagePanel.switchMessage(doctors.get(table.convertRowIndexToModel(i)).getUsername());
-               mainFrame.switchPanels(messagePanel);
-            }
-            isPushed = false;
-            return new String(label);
-        }
-
-        public boolean stopCellEditing() {
-            isPushed = false;
-            return super.stopCellEditing();
-        }
-
-        protected void fireEditingStopped() {
-            super.fireEditingStopped();
-        }
-
-    }
 
 }
 

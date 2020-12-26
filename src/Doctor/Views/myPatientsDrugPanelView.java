@@ -28,6 +28,7 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener, I
     private JTextField dose;
 
     private DatePickerPanel dataPickerStart;
+
     private DatePickerPanel dataPickerEnd;
     private JTable table;
     private JScrollPane scrollPane;
