@@ -130,7 +130,7 @@ public class MyPatientsMainPanel extends JPanel {
 
     private class MyTableModel extends AbstractTableModel {
         private String[] columnNames = new String[]{
-                "Age", "Patient Name", "Email", "Description", "Status", "Start Date", "Drugs", "More Information"};
+                "Age", "Patient Name", "Email", "Description", "Status", "Start Date", "Drugs", "More Information","Send Message"};
 
         private ArrayList<PatientSlot> patients;
 
@@ -174,7 +174,9 @@ public class MyPatientsMainPanel extends JPanel {
                 case 6:
                     return "Drugs";
                 case 7:
-                    return "More Information";
+                    return "Info";
+                case 8:
+                    return "Send Message";
             }
             return "null";
         }
@@ -306,6 +308,53 @@ public class MyPatientsMainPanel extends JPanel {
         public Object getCellEditorValue() {
             if (isPushed) {
                 layeredPane.switchPanels(table.convertRowIndexToModel(i), MyPatientsLayeredPanelView.INFORMATION_MENU);
+            }
+            isPushed = false;
+            return new String(label);
+        }
+
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
+        }
+
+    }
+
+    class SendMessageButton extends DefaultCellEditor {
+        protected JButton button;
+        int i = 0;
+        private String label;
+
+        private boolean isPushed;
+
+        public SendMessageButton(JTextField textField) {
+            super(textField);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            i = row;
+            isPushed = true;
+            return button;
+        }
+
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                System.out.println(1);
             }
             isPushed = false;
             return new String(label);
