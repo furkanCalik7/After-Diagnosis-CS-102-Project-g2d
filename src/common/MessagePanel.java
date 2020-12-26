@@ -5,6 +5,8 @@ import Admin.model.UserInfoCard;
 import AdminViews.HospitalWorkersInfoPanel;
 import Doctor.Model.DoctorInfoCard;
 import Doctor.Views.HintTextField;
+import Doctor.Views.MyPatientsLayeredPanelView;
+import Doctor.Views.MyPatientsMainPanel;
 import JDBC.Message;
 
 import javax.swing.*;
@@ -16,6 +18,7 @@ import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -37,6 +40,7 @@ public class MessagePanel extends JPanel {
     private JPanel messagePanelCenter;
     private JPanel messagePanel;
     private JPanel composePanel;
+    private ReadMessagePanelView readMessagePanelView;
 
     public void switchPanels(JPanel panel) {
         layeredPane.removeAll();
@@ -76,7 +80,7 @@ public class MessagePanel extends JPanel {
     public MessagePanel(User user) {
         this.user = user;
         setLayout(new BorderLayout(0, 5));
-
+        readMessagePanelView = new ReadMessagePanelView();
         layeredPane = new JLayeredPane();
         add(layeredPane, BorderLayout.CENTER);
         layeredPane.setLayout(new CardLayout(10, 0));
@@ -122,9 +126,11 @@ public class MessagePanel extends JPanel {
         sentJTable.setModel(tableModel);
         rs = new TableRowSorter<>(tableModel);
         sentJTable.setRowSorter(rs);
-        sentJTable.setEnabled(false);
         sentMessagesScrollPane = new JScrollPane(sentJTable);
         sentMessagesPanel.add(sentMessagesScrollPane);
+
+        sentJTable.getColumn("Read").setCellRenderer(new ButtonRenderer());
+        sentJTable.getColumn("Read").setCellEditor(new ReadMessageButton(new JTextField()));
 
         //--------inboxPanel--------------:
         //This panel shows the received messages.
@@ -169,10 +175,11 @@ public class MessagePanel extends JPanel {
         inboxJTable.setModel(dataModel);
         rowSorter = new TableRowSorter<>(dataModel);
         inboxJTable.setRowSorter(rowSorter);
-        inboxJTable.setEnabled(false);
         JScrollPane inboxMessagesScrollPane = new JScrollPane(inboxJTable);
         inboxCenterPanel.add(inboxMessagesScrollPane);
 
+        inboxJTable.getColumn("Read").setCellRenderer(new ButtonRenderer());
+        inboxJTable.getColumn("Read").setCellEditor(new ReadMessageButton(new JTextField()));
 
         //--------composePanel--------------:
         //This panel creates messages.
@@ -267,7 +274,7 @@ public class MessagePanel extends JPanel {
     //Outbox Table
     class SentTable extends AbstractTableModel {
         private String[] columnNames = new String[]{
-                "Subject", "Receiver", "Date", "Status"};
+                "Subject", "Receiver", "Date", "Status", "Read"};
 
         private ArrayList<Message> messages;
 
@@ -300,12 +307,14 @@ public class MessagePanel extends JPanel {
                     return data.getSent_date();
                 case 3:
                     return data.is_read();
+                case 4:
+                    return "Read";
             }
             return "null";
         }
 
         public boolean isCellEditable(int row, int col) {
-            return false;
+            return col > 3;
         }
 
         @Override
@@ -334,7 +343,7 @@ public class MessagePanel extends JPanel {
     // Inbox Table
     class InboxTable extends AbstractTableModel {
         private String[] columnNames = new String[]{
-                "Subject", "Sender", "Date", "Status"};
+                "Subject", "Sender", "Date", "Status", "Read"};
 
         private ArrayList<Message> messages;
 
@@ -367,12 +376,14 @@ public class MessagePanel extends JPanel {
                     return data.getSent_date();
                 case 3:
                     return data.is_read();
+                case 4:
+                    return "Read";
             }
             return "null";
         }
 
         public boolean isCellEditable(int row, int col) {
-            return false;
+            return col > 3;
         }
 
         @Override
@@ -397,6 +408,67 @@ public class MessagePanel extends JPanel {
         rowSorter.setRowFilter(rf);
     }
 
+
+    class ButtonRenderer extends JButton implements TableCellRenderer {
+
+        public ButtonRenderer() {
+            setOpaque(true);
+        }
+
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+            setText((value == null) ? "" : value.toString());
+            return this;
+        }
+    }
+
+    class ReadMessageButton extends DefaultCellEditor {
+        protected JButton button;
+        int i = 0;
+        private String label;
+
+        private boolean isPushed;
+
+        public ReadMessageButton(JTextField textField) {
+            super(textField);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            i = row;
+            isPushed = true;
+            return button;
+        }
+
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                switchPanels(readMessagePanelView);
+
+            }
+            isPushed = false;
+            return new String(label);
+        }
+
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
+        }
+
+    }
 
 
 }

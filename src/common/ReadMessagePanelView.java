@@ -6,9 +6,22 @@ import java.awt.*;
 
 public class ReadMessagePanelView extends JPanel {
 
-    /**
-     * Create the panel.
-     */
+    private JTextArea messageTxtArea;
+    private JLabel subjectLabel;
+    private JLabel senderLabel;
+
+    public void setMessageTxtArea(JTextArea messageTxtArea) {
+        this.messageTxtArea = messageTxtArea;
+    }
+
+    public void setSubjectLabel(JLabel subjectLabel) {
+        this.subjectLabel = subjectLabel;
+    }
+
+    public void setSenderLabel(JLabel senderLabel) {
+        this.senderLabel = senderLabel;
+    }
+
     public ReadMessagePanelView() {
         setLayout(new BorderLayout(0, 20));
 
@@ -21,7 +34,7 @@ public class ReadMessagePanelView extends JPanel {
         SenderPanel.add(senderPromptLabel);
         senderPromptLabel.setFont(new Font("Centaur", Font.PLAIN, 20));
 
-        JLabel senderLabel = new JLabel("ExampleName");
+        senderLabel = new JLabel("ExampleName");
         SenderPanel.add(senderLabel);
         senderLabel.setFont(new Font("Centaur", Font.PLAIN, 20));
 
@@ -42,7 +55,7 @@ public class ReadMessagePanelView extends JPanel {
         subjectPromptLabel.setFont(new Font("Centaur", Font.PLAIN, 20));
         subjectLabelsPanel.add(subjectPromptLabel);
 
-        JLabel subjectLabel = new JLabel("Example Subject");
+        subjectLabel = new JLabel("Example Subject");
         subjectLabel.setFont(new Font("Centaur", Font.PLAIN, 20));
         subjectLabelsPanel.add(subjectLabel);
 
@@ -50,11 +63,11 @@ public class ReadMessagePanelView extends JPanel {
         centerPanel.add(textAreaPanel, BorderLayout.CENTER);
         textAreaPanel.setLayout(new BorderLayout(0, 0));
 
-        JTextArea messageTxtArea = new JTextArea();
+        messageTxtArea = new JTextArea();
         messageTxtArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
         messageTxtArea.setText("Message.");
         textAreaPanel.add(messageTxtArea);
-
     }
+
 
 }
