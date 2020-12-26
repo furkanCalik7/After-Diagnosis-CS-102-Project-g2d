@@ -15,15 +15,14 @@ public class LabTechnician extends User {
     public LabTechnician(String username, String password, String email, String name, String surname, String sex) {
         super(username, "LabTechnician", password, email, name, surname, sex);
         mySQLAccess = new MySQLAccess();
-        testRequests = mySQLAccess.getTestRequest();
+        testRequests = mySQLAccess.getTestRequest(getUsername());
         tests = mySQLAccess.getTestOfLabTech(getUsername());
     }
 
     public LabTechnician(int user_id, String username, String password, String email, String name, String surname, String sex) {
         super(user_id, username, "LabTechnician", password, email, name, surname, sex);
-        mySQLAccess = new MySQLAccess();
-        testRequests = mySQLAccess.getTestRequest();
-        tests = mySQLAccess.getTestOfLabTech(getUsername());
+        //testRequests = mySQLAccess.getTestRequest(getUsername());
+        //tests = mySQLAccess.getTestOfLabTech(getUsername());
     }
 
     public ArrayList<Test> getTests() {
