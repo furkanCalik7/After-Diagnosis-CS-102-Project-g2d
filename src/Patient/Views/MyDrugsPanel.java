@@ -1,21 +1,28 @@
 package Patient.Views;
 
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import Admin.model.UserInfoCard;
+import AdminViews.HospitalWorkersInfoPanel;
+import Doctor.Model.DoctorInfoCard;
+import Doctor.Model.Drug;
+import Patient.Model.Patient;
+
+import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import javax.swing.JButton;
 import java.awt.CardLayout;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Calendar;
 
 public class MyDrugsPanel extends JPanel {
     private JTextField textField;
@@ -25,21 +32,23 @@ public class MyDrugsPanel extends JPanel {
     private JPanel expiredTablePanel;
     private JLayeredPane layeredPane;
     private JTextField textField_1;
-
+    private Patient patient;
+    private TableRowSorter<CurrentTableModel> rowSorter;
 
 
     /**
      * Create the panel.
      */
-    public void switchPanels( JPanel panel ) {
+    public void switchPanels(JPanel panel) {
         layeredPane.removeAll();
         layeredPane.add(panel);
         layeredPane.repaint();
         layeredPane.revalidate();
     }
 
-    public MyDrugsPanel() {
+    public MyDrugsPanel(Patient patient) {
 
+        this.patient = patient;
         setLayout(new BorderLayout(0, 0));
 
         JPanel panel = new JPanel();
@@ -77,27 +86,20 @@ public class MyDrugsPanel extends JPanel {
         panel_2.add(textField);
         textField.setColumns(10);
 
+
+
         JPanel currentCenterPanel = new JPanel();
         currentMedicationsPanel.add(currentCenterPanel, BorderLayout.CENTER);
         currentCenterPanel.setLayout(new BorderLayout(0, 0));
 
         currentTable = new JTable();
+        CurrentTableModel currentTableModel = new CurrentTableModel();
+        currentTable.setModel(currentTableModel);
+        rowSorter = new TableRowSorter<>(currentTableModel);
+        currentTable.setRowSorter(rowSorter);
         currentTable.setEnabled(false);
-        currentTable.setModel(new DefaultTableModel(
-                new Object[][] {
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                },
-                new String[] {
-                        "Pill Name", "Until which date you take the pill", "How and when you should take it?"
-                }
-        ));
 
-        JScrollPane scrollPane = new JScrollPane( currentTable );
+        JScrollPane scrollPane = new JScrollPane(currentTable);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
@@ -111,8 +113,6 @@ public class MyDrugsPanel extends JPanel {
 
         JPanel drugsPanel = new JPanel();
         currentCenterPanel.add(drugsPanel, BorderLayout.NORTH);
-
-
 
 
         JPanel expiredMedicationsPanel = new JPanel();
@@ -134,23 +134,30 @@ public class MyDrugsPanel extends JPanel {
         panel_5.add(textField_1);
         textField_1.setColumns(10);
 
+        textField.getDocument().addDocumentListener(
+                new DocumentListener() {
+                    public void changedUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+
+                    public void insertUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+
+                    public void removeUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+                });
+
         expiredTable = new JTable();
         expiredTable.setEnabled(false);
-        expiredTable.setModel(new DefaultTableModel(
-                new Object[][] {
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                },
-                new String[] {
-                        "Pill Name", "When did you use this pill", "Who assigned this pill?"
-                }
-        ));
+        ExpiredTableModel expiredModel = new ExpiredTableModel();
+        expiredTable.setModel(expiredModel);
+        expiredTable.setRowSorter(rowSorter);
 
-        JScrollPane scrollPane2 = new JScrollPane( expiredTable );
+
+
+        JScrollPane scrollPane2 = new JScrollPane(expiredTable);
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
@@ -160,18 +167,150 @@ public class MyDrugsPanel extends JPanel {
         expiredTablePanel.add(scrollPane2);
         expiredMedicationsPanel.add(expiredTablePanel, BorderLayout.WEST);
 
+
         currentMedicationsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels( currentMedicationsPanel );
-                System.out.println("annen");
+                switchPanels(currentMedicationsPanel);
             }
         });
         expiredMedicationsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels( expiredMedicationsPanel );
+                switchPanels(expiredMedicationsPanel);
             }
         });
     }
 
+    class CurrentTableModel extends AbstractTableModel {
+        protected String[] columnNames = new String[]{
+                "Drug name", "Final Date", "Dose", "Hungry/Full", "Drug times"};
+
+        protected ArrayList<Drug> drugs;
+
+        public CurrentTableModel() {
+            drugs = patient.getDrugs();
+        }
+
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        public int getRowCount() {
+            return drugs.size();
+        }
+
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+
+        public Object getValueAt(int row, int col) {
+            Drug data = drugs.get(row);
+            String times = "";
+
+            switch (col) {
+                case 0:
+                    return data.getName();
+                case 1:
+                    return data.getFinalDate();
+                case 2:
+                    return data.getDose();
+                case 3:
+                    if(data.isHungry())
+                        return "Hungry";
+                    return "Full";
+                case 4:
+                    if(data.isMorning())
+                        times += "Morning ";
+                    if(data.isAfternoon())
+                        times += "Afternoon ";
+                    if(data.isEvening())
+                        times += "Evening";
+                    return times;
+            }
+            return "null";
+        }
+
+        public boolean isCellEditable(int row, int col) {
+            return false;
+        }
+
+        @Override
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+
+            fireTableCellUpdated(rowIndex, columnIndex);
+        }
+
+        public void newRowsAdded(TableModelEvent event) {
+            fireTableChanged(event);
+        }
+
+    }
+
+    private void newFilter() {
+        RowFilter<CurrentTableModel, Object> rf = null;
+        try {
+            rf = RowFilter.regexFilter(textField.getText(), 0);
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+        rowSorter.setRowFilter(rf);
+    }
+
+    class ExpiredTableModel extends CurrentTableModel {
+
+        private String[] columns = new String[]{
+                "Pill name", "Start Date", "End Date"};
+
+        private ArrayList<Drug> expiredDrugs;
+
+
+
+        public ExpiredTableModel() {
+            super();
+        }
+
+        public int getColumnCount() {
+            return columns.length;
+        }
+
+        public String getColumnName(int col) {
+            return columns[col];
+        }
+
+        public Object getValueAt(int row, int col) {
+            Drug data = drugs.get(row);
+
+            Date date = new Date(Calendar.getInstance().getTime().getTime());
+            if(data.getFinalDate().compareTo(date) < 0) {
+                switch (col) {
+                    case 0:
+                        return data.getName();
+                    case 1:
+                        return data.getStartDate();
+                    case 2:
+                        return data.getFinalDate();
+                }
+            }
+            return "null";
+        }
+
+
+
+
+    }
+
+    /*public void addRow() {
+        int rowIndex = admin.getWorkers().size();
+        dataModel.newRowsAdded(new TableModelEvent(
+                dataModel, rowIndex, rowIndex, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT)
+        );
+    }
+
+    public void update() {
+        addRow();
+    }*/
+
 }
+
+
 

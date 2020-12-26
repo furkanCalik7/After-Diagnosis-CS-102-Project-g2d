@@ -25,7 +25,7 @@ public class AdminMainFrame extends JFrame {
     private JPanel HomePagePanel;
     private JPanel searchWorker;
     private JPanel addWorkerMainPanel;
-    private JPanel hospitalWorkersPanel;
+    private HospitalWorkersInfoPanel hospitalWorkersPanel;
     private JPanel messagePanel;
     private JPanel settingsPanel;
     private JPanel hospitalWorkersContainer;
@@ -64,7 +64,8 @@ public class AdminMainFrame extends JFrame {
     public AdminMainFrame() {
         // For test only
         MySQLAccess access = new MySQLAccess();
-        Admin admin  = (Admin) access.getUser("root");
+        Admin admin  = (Admin) access.getUser("ahmet");
+
         //
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -81,10 +82,12 @@ public class AdminMainFrame extends JFrame {
         HomePagePanel = new HomePage(admin);
         addWorkerMainPanel = new AddWorkerMainPanel(admin);
         hospitalWorkersPanel = new HospitalWorkersInfoPanel(admin);
+        admin.addViewer(hospitalWorkersPanel);
         messagePanel = new MessagePanel();
         settingsPanel = new SettingsPanel(admin);
         hospitalCrew = new JPanel();
         hospitalCrew.add( hospitalWorkersPanel );
+
 
         JPanel layeredPanePanel = new JPanel();
         contentPane.add(layeredPanePanel,BorderLayout.CENTER);

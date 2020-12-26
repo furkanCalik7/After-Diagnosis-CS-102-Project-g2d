@@ -29,29 +29,36 @@ class AddWorkerController implements ActionListener {
                 options[1]);
 
         if(n == 0) {
+            String gender = "";
             String name = panel.nameTextField.getText();
             String surname = panel.surnameTextField.getText();
             String email = panel.textField_2.getText();
 
             String speciality = panel.comboBox.getSelectedItem().toString();
 
+            if(panel.genderButtonGroup.getSelection().toString().equals("M")) {
+                gender = "M";
+            }
+            else if(panel.genderButtonGroup.getSelection().toString().equals("F")) {
+                gender = "F";
+            }
             if (panel.doctorButton.isSelected()) {
                 try {
-                    admin.addDoctor(name, surname, email, "M", speciality);
+                    admin.addDoctor(name, surname, email, gender, speciality);
                 } catch (Exception exception) {
                     exception.printStackTrace();
                 }
             } else {
                 try {
-                    admin.addLabTech(name, surname, email, "M");
+                    admin.addLabTech(name, surname, email, gender);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
             }
-        }
             panel.nameTextField.setText("");
             panel.surnameTextField.setText("");
             panel.textField_2.setText("");
+        }
 
     }
 }

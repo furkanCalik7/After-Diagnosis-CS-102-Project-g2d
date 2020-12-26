@@ -31,7 +31,7 @@ public class HomePage extends JPanel {
         welcomeLabelHolderPanel.setBorder(new EmptyBorder(25, 0, 25, 0));
         add(welcomeLabelHolderPanel, BorderLayout.NORTH);
 
-        JLabel welcomeLabel = new JLabel("Welcome _name _surname" );//+ labTechnician.getName() + " " + labTechnician.getSurname());
+        JLabel welcomeLabel = new JLabel("Welcome " + admin.getName() + " " + admin.getSurname() );//+ labTechnician.getName() + " " + labTechnician.getSurname());
         welcomeLabel.setOpaque(true);
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Tahoma", Font.BOLD, 30));
@@ -52,7 +52,7 @@ public class HomePage extends JPanel {
         actionsMainPanel.add(actionsPanel);
         actionsPanel.setLayout(new GridLayout(3, 2, 20, 20));
 
-        JLabel doctorCountLabel = new JLabel("X");
+        JLabel doctorCountLabel = new JLabel(admin.getDoctors().size() + "");
         doctorCountLabel.setFont(new Font("Century", Font.PLAIN, 30));
         actionsPanel.add(doctorCountLabel);
 
@@ -60,7 +60,7 @@ public class HomePage extends JPanel {
         testResultsIcon.setFont(new Font("Century", Font.PLAIN, 20));
         actionsPanel.add(testResultsIcon);
 
-        JLabel labTechCountLabel = new JLabel("X");
+        JLabel labTechCountLabel = new JLabel(admin.getLabTechs().size() + "");
         labTechCountLabel.setFont(new Font("Century", Font.PLAIN, 30));
         actionsPanel.add(labTechCountLabel);
 

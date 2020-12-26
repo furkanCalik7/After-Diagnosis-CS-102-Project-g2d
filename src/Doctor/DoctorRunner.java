@@ -18,14 +18,14 @@ public class DoctorRunner {
 
         DoctorMainFrameViewer doctorMainFrameViewer = new DoctorMainFrameViewer(doctor);
         MyPatientsLayeredPanelView myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
-        LabTestsMainPanel labTestsMainPanel = new LabTestsMainPanel(doctor);
+       // LabTestsMainPanel labTestsMainPanel = new LabTestsMainPanel(doctor);
         SettingsPanel settingsPanel = new SettingsPanel(doctor);
         DoctorBloodDonationPanel donationPanel = new DoctorBloodDonationPanel(doctor);
         DoctorHomepagePanelView homepagePanelView = new DoctorHomepagePanelView(doctor);
 
         doctorMainFrameViewer.setMyPatientsLayeredPanelView(myPatientsLayeredPanelView);
         doctorMainFrameViewer.setDoctorBloodDonationPanel(donationPanel);
-        doctorMainFrameViewer.setLabTestsMainPanel(labTestsMainPanel);
+    //    doctorMainFrameViewer.setLabTestsMainPanel(labTestsMainPanel);
         doctorMainFrameViewer.setDoctorHomepagePanelView(homepagePanelView);
         doctorMainFrameViewer.setSettingsPanel(settingsPanel);
 

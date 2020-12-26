@@ -14,14 +14,38 @@ import java.util.ArrayList;
 
 public class Admin extends User {
 
+    private ArrayList<DoctorInfoCard> doctors;
+    private ArrayList<LabTechnician> labTechs;
+    private ArrayList<UserInfoCard> workers;
+
+
     private AddWorkerMainPanel addWorkerPanel;
 
     public Admin(String username, String password, String email, String name, String surname, String sex) {
         super(username, "Admin", password, email, name, surname, sex);
+        updateDoctors();
+        updateLabTechs();
+        updateWorkers();
     }
 
     public Admin(int user_id, String username, String password, String email, String name, String surname, String sex) {
         super(user_id, username, "Admin", password, email, name, surname, sex);
+        updateDoctors();
+        updateLabTechs();
+        updateWorkers();
+    }
+
+
+    public ArrayList<DoctorInfoCard> getDoctors() {
+        return doctors;
+    }
+
+    public ArrayList<UserInfoCard> getWorkers() {
+        return workers;
+    }
+
+    public ArrayList<LabTechnician> getLabTechs() {
+        return labTechs;
     }
 
     public boolean addDoctor(String name, String surname, String email, String sex, String speciality) {
@@ -31,6 +55,7 @@ public class Admin extends User {
         MySQLAccess access = new MySQLAccess();
         try {
             access.addUser(d);
+            updateViewers();
             JOptionPane.showMessageDialog(addWorkerPanel, "New worker is added with password: " + password);
             return true;
         } catch (Exception e) {
@@ -46,6 +71,7 @@ public class Admin extends User {
         MySQLAccess access = new MySQLAccess();
         try {
             access.addUser(l);
+            updateViewers();
             JOptionPane.showMessageDialog(addWorkerPanel, "New worker is added with password: " + password);
             return true;
         } catch (Exception e) {
@@ -59,19 +85,19 @@ public class Admin extends User {
         return access.findWorkerByName(getUsername());
     }
 
-    public ArrayList<DoctorInfoCard> seeDoctors() {
+    public void updateLabTechs() {
         MySQLAccess access = new MySQLAccess();
-        return access.getAllDoctors();
+        labTechs =  access.getAllLabTechs();
     }
 
-    public ArrayList<LabTechnician> seeLabTechs() {
+    public void updateWorkers() {
         MySQLAccess access = new MySQLAccess();
-        return access.getAllLabTechs();
+        workers = access.getAllWorkers();
     }
 
-    public ArrayList<UserInfoCard> seeAllWorkers() {
+    public void updateDoctors() {
         MySQLAccess access = new MySQLAccess();
-        return access.getAllWorkers();
+        doctors = access.getAllDoctors();
     }
 
 

@@ -1,6 +1,7 @@
 package AdminViews;
 
 import Admin.model.Admin;
+import Admin.model.IViewer;
 import Admin.model.UserInfoCard;
 import Doctor.Model.Doctor;
 import Doctor.Model.DoctorInfoCard;
@@ -13,19 +14,22 @@ import java.awt.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.*;
+import javax.swing.event.TableModelEvent;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class HospitalWorkersInfoPanel extends JPanel {
+public class HospitalWorkersInfoPanel extends JPanel implements IViewer {
     private JTextField searchField;
     private JTable table;
     private TableRowSorter<MyTableModel> rowSorter;
     private JComboBox sortComboBox;
     private Admin admin;
     private JComboBox workersBox;
+    private MyTableModel dataModel;
 
     /**
      * Create the panel.
@@ -102,9 +106,9 @@ public class HospitalWorkersInfoPanel extends JPanel {
 
 
         table = new JTable();
-        MyTableModel myTableModel = new MyTableModel();
-        rowSorter = new TableRowSorter<>(myTableModel);
-        table.setModel(myTableModel);
+        dataModel = new MyTableModel();
+        table.setModel(dataModel);
+        rowSorter = new TableRowSorter<>(dataModel);
         table.setRowSorter(rowSorter);
         table.setEnabled(false);
 
@@ -122,7 +126,7 @@ public class HospitalWorkersInfoPanel extends JPanel {
         private ArrayList<UserInfoCard> workers;
 
         public MyTableModel() {
-            workers = admin.seeAllWorkers();
+            workers = admin.getWorkers();
         }
 
         public int getColumnCount() {
@@ -159,9 +163,8 @@ public class HospitalWorkersInfoPanel extends JPanel {
             return "null";
         }
 
-
         public boolean isCellEditable(int row, int col) {
-            return true;
+            return false;
         }
 
         @Override
@@ -169,6 +172,11 @@ public class HospitalWorkersInfoPanel extends JPanel {
 
             fireTableCellUpdated(rowIndex, columnIndex);
         }
+
+        public void newRowsAdded(TableModelEvent event) {
+            fireTableChanged(event);
+        }
+
     }
 
     private void newFilter() {
@@ -197,6 +205,17 @@ public class HospitalWorkersInfoPanel extends JPanel {
             }
             rowSorter.setRowFilter(rf);
         }
+    }
+
+    public void addRow() {
+        int rowIndex = admin.getWorkers().size();
+        dataModel.newRowsAdded(new TableModelEvent(
+                dataModel, rowIndex, rowIndex, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT)
+        );
+    }
+
+    public void update() {
+        addRow();
     }
 }
 

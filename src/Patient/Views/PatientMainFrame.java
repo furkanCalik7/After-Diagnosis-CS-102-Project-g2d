@@ -83,7 +83,7 @@ public class PatientMainFrame extends JFrame {
         //Creating panels which will be added to main frame
         HomePagePanel = new HomePagePanel(p);
         MyDoctorsPanel = new MyDoctorsPanel(p);
-        MyDrugsPanel = new MyDrugsPanel();
+        MyDrugsPanel = new MyDrugsPanel(p);
         AppointmentPanel = new AppointmentPanel();
         BloodDonationPanel = new BloodDonationPanel();
         MessagesPanel = new MessagesPanel();

@@ -78,7 +78,7 @@ public class DoctorMainFrameViewer extends JFrame {
         contentPane.add( buttonPanel, BorderLayout.WEST );
 
         doctorHomepagePanelView = new DoctorHomepagePanelView( doctor );
-        labTestsMainPanel = new LabTestsMainPanel(doctor);
+        //labTestsMainPanel = new LabTestsMainPanel(doctor);
         myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
         settingsPanel = new SettingsPanel( doctor );
         doctorBloodDonationPanel = new DoctorBloodDonationPanel(doctor);

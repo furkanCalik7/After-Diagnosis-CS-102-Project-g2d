@@ -1,28 +1,32 @@
 package Patient.Views;
 
+import Doctor.Model.DoctorInfoCard;
+import Doctor.Model.Drug;
 import Patient.Controllers.AddDoctorButtonControls;
 import Patient.Model.Patient;
 
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
+import javax.swing.*;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
-import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 import java.awt.FlowLayout;
-import javax.swing.JButton;
+import java.util.ArrayList;
 
 public class MyDoctorsPanel extends JPanel {
     private JTextField searchTextField;
     private JTable table;
     public JTextField codeField;
     public Patient patient;
+    private TableRowSorter<MyTableModel> rowSorter;
+
 
     /**
      * Create the panel.
@@ -48,21 +52,29 @@ public class MyDoctorsPanel extends JPanel {
         panel_1.add(searchTextField);
         searchTextField.setColumns(10);
 
+        searchTextField.getDocument().addDocumentListener(
+                new DocumentListener() {
+                    public void changedUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+
+                    public void insertUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+
+                    public void removeUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+                });
+
         table = new JTable();
         table.setEnabled(false);
-        table.setModel(new DefaultTableModel(
-                new Object[][] {
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                        {null, null, null, null, null},
-                },
-                new String[] {
-                        "Doctor name", "Reappointment", "Doctor's Field"
-                }
-        ));
+        MyTableModel myTableModel = new MyTableModel();
+        table.setModel(myTableModel);
+        rowSorter = new TableRowSorter<>(myTableModel);
+        table.setRowSorter(rowSorter);
+
+
 
         JScrollPane scrollPane = new JScrollPane( table );
         scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
@@ -104,6 +116,72 @@ public class MyDoctorsPanel extends JPanel {
         codePanel.add(codeButton);
 
     }
+
+    class MyTableModel extends AbstractTableModel {
+        protected String[] columnNames = new String[]{
+                "Doctor name", "Doctor Speciality", "Doctor Email", "Reappointment"};
+
+        protected ArrayList<DoctorInfoCard> doctors;
+
+        public MyTableModel() {
+            doctors = patient.getDoctors();
+        }
+
+        public int getColumnCount() {
+            return columnNames.length;
+        }
+
+        public int getRowCount() {
+            return doctors.size();
+        }
+
+        public String getColumnName(int col) {
+            return columnNames[col];
+        }
+
+
+        public Object getValueAt(int row, int col) {
+            DoctorInfoCard data  = doctors.get(row);
+            String times = "";
+
+            switch (col) {
+                case 0:
+                    return data.getName() + " " + data.getSurname();
+                case 1:
+                    return data.getDoctorSpeciality();
+                case 2:
+                    return data.getEmail();
+            }
+            return "null";
+        }
+
+        public boolean isCellEditable(int row, int col) {
+            return false;
+        }
+
+        @Override
+        public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+
+            fireTableCellUpdated(rowIndex, columnIndex);
+        }
+
+        public void newRowsAdded(TableModelEvent event) {
+            fireTableChanged(event);
+        }
+
+    }
+
+    private void newFilter() {
+        RowFilter<MyTableModel, Object> rf = null;
+        try {
+            rf = RowFilter.regexFilter(searchTextField.getText(), 0);
+        } catch (java.util.regex.PatternSyntaxException e) {
+            return;
+        }
+        rowSorter.setRowFilter(rf);
+    }
+
+
 
 }
 

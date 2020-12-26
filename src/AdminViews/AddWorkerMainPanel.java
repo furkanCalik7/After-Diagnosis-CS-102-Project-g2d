@@ -69,7 +69,7 @@ public class AddWorkerMainPanel extends JPanel {
         centerPanel.add(radioButtonPanel);
         radioButtonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-        JRadioButton doctorButton = new JRadioButton("Doctor");
+        doctorButton = new JRadioButton("Doctor");
         doctorButton.setFont(new Font("Century", Font.PLAIN, 15));
         doctorButton.setHorizontalAlignment(SwingConstants.LEFT);
         radioButtonPanel.add(doctorButton);
@@ -149,8 +149,8 @@ public class AddWorkerMainPanel extends JPanel {
         panel_9.add(lblNewLabel_3_2);
 
         String[] words = new String[]{"Cardiology", "Neurology", "Immunology", "Dermatology", "Radiology", "Pathology",
-                "Pediatrics"};
-        JComboBox comboBox = new JComboBox( words  );
+                "Pediatrics", "Microbiology"};
+        comboBox = new JComboBox( words  );
         comboBox.setFont(new Font("Century", Font.PLAIN, 15));
         //ACTION LISTENER
         comboBox.setMaximumRowCount(20);

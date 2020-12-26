@@ -1,5 +1,7 @@
 package JDBC;
 
+import Admin.model.Admin;
+
 import java.util.Properties;
 
 
@@ -22,6 +24,10 @@ public class Main {
         props.put("mail.smtp.port", "587"); //TLS Port
         props.put("mail.smtp.auth", "true"); //enable authentication
         props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+
+        MySQLAccess access = new MySQLAccess();
+        Admin a = (Admin) access.getUser("ahmet");
+        System.out.println(a.getDoctors());
 
         //create Authenticator object to pass in Session.getInstance argument
 //        Authenticator auth = new Authenticator() {
