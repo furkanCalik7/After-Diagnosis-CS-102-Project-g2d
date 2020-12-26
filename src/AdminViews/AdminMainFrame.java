@@ -76,7 +76,7 @@ public class AdminMainFrame extends JFrame {
         contentPane.setLayout(new BorderLayout(30, 0));
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 0));
+        buttonPanel.setBorder(new EmptyBorder(40, 5, 40, 0));
         contentPane.add(buttonPanel,BorderLayout.WEST);
 
         HomePagePanel = new HomePage(admin);
@@ -112,7 +112,7 @@ public class AdminMainFrame extends JFrame {
                 switchPanels(HomePagePanel);
             }
         });
-        buttonPanel.setLayout(new GridLayout(5, 0, 0, 0));
+        buttonPanel.setLayout(new GridLayout(5, 0, 20, 10));
         buttonPanel.add(homepageButton);
 
         JButton hospitalCrewButton = new JButton("Hospital Crew");

@@ -1,5 +1,6 @@
 package Doctor;
 
+import AdminViews.MessagePanel;
 import AdminViews.SettingsPanel;
 import Doctor.Model.Doctor;
 import Doctor.Views.*;
@@ -18,16 +19,19 @@ public class DoctorRunner {
 
         DoctorMainFrameViewer doctorMainFrameViewer = new DoctorMainFrameViewer(doctor);
         MyPatientsLayeredPanelView myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
-       // LabTestsMainPanel labTestsMainPanel = new LabTestsMainPanel(doctor);
+        LabTestsMainPanel labTestsMainPanel = new LabTestsMainPanel(doctor);
         SettingsPanel settingsPanel = new SettingsPanel(doctor);
         DoctorBloodDonationPanel donationPanel = new DoctorBloodDonationPanel(doctor);
         DoctorHomepagePanelView homepagePanelView = new DoctorHomepagePanelView(doctor);
+        MessagePanel messagePanel = new MessagePanel();
 
         doctorMainFrameViewer.setMyPatientsLayeredPanelView(myPatientsLayeredPanelView);
         doctorMainFrameViewer.setDoctorBloodDonationPanel(donationPanel);
-    //    doctorMainFrameViewer.setLabTestsMainPanel(labTestsMainPanel);
+        doctorMainFrameViewer.setLabTestsMainPanel(labTestsMainPanel);
         doctorMainFrameViewer.setDoctorHomepagePanelView(homepagePanelView);
         doctorMainFrameViewer.setSettingsPanel(settingsPanel);
+        doctorMainFrameViewer.setMessagePanel(messagePanel);
+
 
         MyPatientsMainPanel myPatientsMainPanel = new MyPatientsMainPanel(doctor,myPatientsLayeredPanelView);
         myPatientsLayeredPanelView.setMyPatientsMainPanel(myPatientsMainPanel);

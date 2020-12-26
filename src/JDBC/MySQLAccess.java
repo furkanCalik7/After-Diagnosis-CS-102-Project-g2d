@@ -790,7 +790,6 @@ public class MySQLAccess {
 
             while (resultSet.next()) {
                 patientID = resultSet.getInt("patient_id");
-                System.out.println(patientID);
                 sql = "SELECT username FROM user WHERE user_id = ?";
                 preparedStatement = connect.prepareStatement(sql);
                 preparedStatement.setInt(1, patientID);
@@ -825,7 +824,6 @@ public class MySQLAccess {
             for(PatientInfoCard patientInfoCard: patientInfos){
               // patient_id = getID(patientInfoCard.getUsername());
                 patient_id = patientInfoCard.getUser_id();
-                System.out.println("Patient_id = " + patient_id );
                 String sql = "SELECT * FROM doctor_patient WHERE doctor_id = ? AND patient_id = ?";
                 preparedStatement = connect.prepareStatement(sql);
                 preparedStatement.setInt(1, doctor_id);
@@ -989,15 +987,15 @@ public class MySQLAccess {
             resultSet = preparedStatement.executeQuery();
 
             String test_name;
-            String patient_username;
+            String patientInfoCard;
             String doctor_username;
             ArrayList<TestRequest> testRequests = new ArrayList<>();
 
             while(resultSet.next()){
                 test_name = resultSet.getString("test_name");
-                patient_username = resultSet.getString("patient_username");
+                patientInfoCard = resultSet.getString("patient_username");
                 doctor_username = resultSet.getString("doctor_username");
-                testRequests.add(new TestRequest(test_name,patient_username,doctor_username));
+                testRequests.add(new TestRequest(test_name,patientInfoCard,doctor_username));
             }
             return testRequests;
 

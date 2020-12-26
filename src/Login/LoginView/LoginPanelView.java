@@ -1,4 +1,4 @@
-package LoginView;
+package Login.LoginView;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;

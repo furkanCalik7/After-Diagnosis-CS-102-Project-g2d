@@ -2,34 +2,30 @@ package Doctor.Views;
 
 import Doctor.Controller.FileChooserForDownloadController;
 import Doctor.Model.Doctor;
+import Doctor.Model.PatientSlot;
 import LabTechs.Model.Test;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
-import java.util.ArrayList;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import java.awt.BorderLayout;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
+import javax.swing.table.TableRowSorter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.regex.PatternSyntaxException;
 
 
 public class LabTestsMainPanel extends JPanel {
     private JTable table;
     private MyTableModel myTableModel;
-    private RowSorter<MyTableModel> rowSorter;
+    private TableRowSorter<MyTableModel> rowSorter;
     protected Doctor doctor;
-    private JTextField searchTextField;
+    private HintTextField searchByName;
+
 
 
     public LabTestsMainPanel(Doctor doctor) {
@@ -45,10 +41,25 @@ public class LabTestsMainPanel extends JPanel {
         fl_searchPanel.setAlignment(FlowLayout.LEFT);
         northMainPanel.add(searchPanel);
 
-        searchTextField = new JTextField();
-        searchTextField.setText("Search");
-        searchPanel.add(searchTextField);
-        searchTextField.setColumns(10);
+
+        searchByName = new HintTextField("Search by patient name");
+        searchPanel.add(searchByName);
+        searchByName.setColumns(20);
+
+        searchByName.getDocument().addDocumentListener(
+                new DocumentListener() {
+                    public void changedUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+
+                    public void insertUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+
+                    public void removeUpdate(DocumentEvent e) {
+                        newFilter();
+                    }
+                });
 
         JPanel removeAllPanel = new JPanel();
         FlowLayout fl_removeAllPanel = (FlowLayout) removeAllPanel.getLayout();
@@ -65,6 +76,9 @@ public class LabTestsMainPanel extends JPanel {
         myTableModel = new MyTableModel();
         table = new JTable();
         table.setModel(myTableModel);
+        rowSorter = new TableRowSorter<>(myTableModel);
+        table.setRowSorter(rowSorter);
+
 
         table.getColumn("Download").setCellEditor(new DownloadButtonEditor(new JTextField()));
         table.getColumn("Download").setCellRenderer(new DownloadButtonRenderer());
@@ -76,7 +90,7 @@ public class LabTestsMainPanel extends JPanel {
 
     private class MyTableModel extends AbstractTableModel {
         private String[] columnNames = new String[]{
-                "Doctor name", "Patient Name", "Test Name", "Send Time", "Sent time", "Download"};
+               "Patient Name", "Test Name", "Send Time", "Sent time", "Download"};
 
         private ArrayList<Test> tests;
 
@@ -102,23 +116,25 @@ public class LabTestsMainPanel extends JPanel {
             Test test = tests.get(row);
             switch (col) {
                 case 0:
-                    return test.getSender_username();
+                    for(PatientSlot patientSlot:doctor.getPatientSlots()){
+                        if(test.getPatient_username().equals(patientSlot.getPatientInfo().getUsername())){
+                            return patientSlot.getPatientInfo().getName() + " " + patientSlot.getPatientInfo().getSurname();
+                        }
+                    }
                 case 1:
-                    return test.getPatient_username();
-                case 2:
                     return test.getTest_name();
-                case 3:
+                case 2:
                     return test.getSent_date();
-                case 4:
+                case 3:
                     return test.getSent_time();
-                case 5:
+                case 4:
                     return "Download";
             }
             return "null";
         }
 
         public boolean isCellEditable(int row, int col) {
-            return col >= 5;
+            return col >=4 ;
         }
 
         public void newRowsAdded(TableModelEvent event) {
@@ -187,5 +203,17 @@ public class LabTestsMainPanel extends JPanel {
             super.fireEditingStopped();
         }
 
+    }
+
+    private void newFilter() {
+        RowFilter<MyTableModel, Object> rf = null;
+        try {
+            if (!this.searchByName.getText().equals("Search by patient name")) {
+                rf = RowFilter.regexFilter(searchByName.getText(), 0);
+            }
+        } catch (PatternSyntaxException e) {
+            return;
+        }
+        rowSorter.setRowFilter(rf);
     }
 }

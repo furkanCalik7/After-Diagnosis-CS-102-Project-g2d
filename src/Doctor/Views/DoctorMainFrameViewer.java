@@ -1,5 +1,6 @@
 package Doctor.Views;
 
+import AdminViews.MessagePanel;
 import Doctor.Model.Doctor;
 import JDBC.MySQLAccess;
 
@@ -30,6 +31,7 @@ public class DoctorMainFrameViewer extends JFrame {
     private LabTestsMainPanel labTestsMainPanel;
     private SettingsPanel settingsPanel;
     private DoctorBloodDonationPanel doctorBloodDonationPanel;
+    private MessagePanel messagePanel;
 
     /**
      * Internal method to change panels.
@@ -42,28 +44,8 @@ public class DoctorMainFrameViewer extends JFrame {
         layeredPane.revalidate();
     }
 
-    /**
-     * Launch the application.
-     */
-//    public static void main(String[] args) {
-//        EventQueue.invokeLater(new Runnable() {
-//            public void run() {
-//                try {
-//                    DoctorMainFrameViewer frame = new DoctorMainFrameViewer();
-//                    frame.setVisible(true);
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//        });
-//    }
 
-    /**
-     * Create the frame.
-     */
     public DoctorMainFrameViewer(Doctor doctor) {
-//        MySQLAccess mySQLAccess = new MySQLAccess();
-//        doctor = mySQLAccess.getDoctorByUsername( "JuliaRoberts" );
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
@@ -78,7 +60,7 @@ public class DoctorMainFrameViewer extends JFrame {
         contentPane.add( buttonPanel, BorderLayout.WEST );
 
         doctorHomepagePanelView = new DoctorHomepagePanelView( doctor );
-        //labTestsMainPanel = new LabTestsMainPanel(doctor);
+        labTestsMainPanel = new LabTestsMainPanel(doctor);
         myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
         settingsPanel = new SettingsPanel( doctor );
         doctorBloodDonationPanel = new DoctorBloodDonationPanel(doctor);
@@ -96,9 +78,10 @@ public class DoctorMainFrameViewer extends JFrame {
         layeredPane.add( labTestsMainPanel );
         layeredPane.add( myPatientsLayeredPanelView );
         layeredPane.add( doctorHomepagePanelView );
-        //Button initializings
+
+//        //Button initializings
         JButton homepageButton = new JButton("Homepage");
-        homepageButton.setIcon(new ImageIcon("C:\\Users\\42ber\\OneDrive\\Masa\u00FCst\u00FC\\homePage.png"));
+//        homepageButton.setIcon(new ImageIcon("C:\\Users\\42ber\\OneDrive\\Masa\u00FCst\u00FC\\homePage.png"));
         homepageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 switchPanels( doctorHomepagePanelView );
@@ -134,6 +117,7 @@ public class DoctorMainFrameViewer extends JFrame {
         JButton messagesButton = new JButton("Messages");
         messagesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                switchPanels(messagePanel);
             }
         });
         buttonPanel.add( messagesButton );
@@ -175,5 +159,9 @@ public class DoctorMainFrameViewer extends JFrame {
 
     public void setDoctorBloodDonationPanel(DoctorBloodDonationPanel doctorBloodDonationPanel) {
         this.doctorBloodDonationPanel = doctorBloodDonationPanel;
+    }
+
+    public void setMessagePanel(MessagePanel messagePanel) {
+        this.messagePanel = messagePanel;
     }
 }

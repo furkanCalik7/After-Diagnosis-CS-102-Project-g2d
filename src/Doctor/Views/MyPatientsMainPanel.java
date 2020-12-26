@@ -1,5 +1,7 @@
 package Doctor.Views;
 
+import Doctor.Controller.DischargedPatientController;
+import Doctor.Controller.SendTestRequestController;
 import Doctor.Model.Doctor;
 import Doctor.Model.PatientSlot;
 
@@ -8,6 +10,7 @@ import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
+import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
@@ -22,6 +25,7 @@ public class MyPatientsMainPanel extends JPanel {
     private Doctor doctor;
     private TableRowSorter<MyTableModel> rowSorter;
     private MyPatientsLayeredPanelView layeredPane;
+    private MyTableModel myTableModel;
 
 
     public MyPatientsMainPanel(Doctor doctor, MyPatientsLayeredPanelView layeredPanel) {
@@ -35,7 +39,7 @@ public class MyPatientsMainPanel extends JPanel {
         table = new JTable();
         table.setBorder(new EmptyBorder(8, 0, 8, 0));
 
-        MyTableModel myTableModel = new MyTableModel();
+        myTableModel = new MyTableModel();
 
         rowSorter = new TableRowSorter<>(myTableModel);
         table.setModel(myTableModel);
@@ -120,6 +124,7 @@ public class MyPatientsMainPanel extends JPanel {
         //TODO MAKE A CONTROLLER
         JButton removeButton = new JButton("Remove Patient");
         addPatientPanel.add(removeButton);
+        removeButton.addActionListener(new DischargedPatientController(table.getSelectedRowCount(),doctor,this));
 
     }
 
@@ -187,6 +192,15 @@ public class MyPatientsMainPanel extends JPanel {
 
             fireTableCellUpdated(rowIndex, columnIndex);
         }
+        public void updateTable(TableModelEvent event){
+            fireTableChanged(event);
+        }
+    }
+
+    public void updateTable(int i) {
+        myTableModel.updateTable(new TableModelEvent(
+                myTableModel, i, i, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT)
+        );
     }
 
     private void newFilter() {

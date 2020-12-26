@@ -125,4 +125,8 @@ public class Doctor extends User {
         TestRequest newTest = TestRequest.newTest(testRequest.getTest_name(), testRequest.getPatient(), getUsername());
         return mySQLAccess.addTestRequest(newTest);
     }
+    public void removePatient(int i){
+        System.out.println(patientSlots.get(i));
+        patientSlots.get(i).setStatus(0);
+    }
 }
