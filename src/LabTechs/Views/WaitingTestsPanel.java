@@ -164,7 +164,7 @@ public class WaitingTestsPanel extends JPanel{
 
                 System.out.println( "The filepath: |" + testFile.getAbsolutePath() + "|" );
 
-                Test test = Test.newTest( testRequest.getDoctor_username(), testRequest.getLab_tech_username(), testRequest.getTest_name() ,
+                Test test = Test.newTest( testRequest.getDoctor_username(), labTechnician.getUsername(), testRequest.getTest_name() ,
                         testRequest.getPatient() , testFile );
 
                  boolean isUploadSuccesfull = test.sendTest();

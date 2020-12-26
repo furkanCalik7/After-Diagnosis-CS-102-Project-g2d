@@ -630,6 +630,22 @@ public class MySQLAccess {
         return false;
     }
 
+    public void removeTest(Time time){
+        try{
+            connect = dbConnection.getConnection();
+            String sql = "DELETE FROM test WHERE sent_time = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setTime(1, time);
+            preparedStatement.executeUpdate();
+        }catch (Exception e){
+            e.printStackTrace();
+        }finally {
+            close();
+        }
+    }
+
+
+
     public ArrayList<Test> getTestOfDoctor(String doc_username) {
         try {
             ArrayList<Test> tests = new ArrayList<>();

@@ -16,7 +16,8 @@ import java.awt.GridLayout;
 import java.awt.CardLayout;
 import Admin.model.*;
 import JDBC.MySQLAccess;
-import Patient.Model.Patient;
+import common.MessagePanel;
+import common.SettingsPanel;
 
 public class AdminMainFrame extends JFrame {
 
@@ -83,7 +84,7 @@ public class AdminMainFrame extends JFrame {
         addWorkerMainPanel = new AddWorkerMainPanel(admin);
         hospitalWorkersPanel = new HospitalWorkersInfoPanel(admin);
         admin.addViewer(hospitalWorkersPanel);
-        messagePanel = new MessagePanel();
+        messagePanel = new MessagePanel(admin);
         settingsPanel = new SettingsPanel(admin);
         hospitalCrew = new JPanel();
         hospitalCrew.add( hospitalWorkersPanel );

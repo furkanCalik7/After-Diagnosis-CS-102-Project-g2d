@@ -1,6 +1,8 @@
 package Doctor.Views;
 
+import Admin.model.IViewer;
 import Doctor.Controller.FileChooserForDownloadController;
+import Doctor.Controller.RemoveTestController;
 import Doctor.Model.Doctor;
 import Doctor.Model.PatientSlot;
 import LabTechs.Model.Test;
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 import java.util.regex.PatternSyntaxException;
 
 
-public class LabTestsMainPanel extends JPanel {
+public class LabTestsMainPanel extends JPanel implements IViewer {
     private JTable table;
     private MyTableModel myTableModel;
     private TableRowSorter<MyTableModel> rowSorter;
@@ -83,14 +85,22 @@ public class LabTestsMainPanel extends JPanel {
         table.getColumn("Download").setCellEditor(new DownloadButtonEditor(new JTextField()));
         table.getColumn("Download").setCellRenderer(new DownloadButtonRenderer());
 
+        table.getColumn("Remove").setCellEditor(new RemoveButtonEditor(new JTextField()));
+        table.getColumn("Remove").setCellRenderer(new DownloadButtonRenderer());
+
         JScrollPane scrollPane = new JScrollPane(table);
         tablePanel.add(scrollPane);
+    }
+
+    @Override
+    public void update() {
+        myTableModel.updateTable();
     }
 
 
     private class MyTableModel extends AbstractTableModel {
         private String[] columnNames = new String[]{
-               "Patient Name", "Test Name", "Send Time", "Sent time", "Download"};
+               "Patient Name", "Test Name", "Send Time", "Sent time", "Download","Remove"};
 
         private ArrayList<Test> tests;
 
@@ -129,6 +139,8 @@ public class LabTestsMainPanel extends JPanel {
                     return test.getSent_time();
                 case 4:
                     return "Download";
+                case 5:
+                    return "Remove";
             }
             return "null";
         }
@@ -139,6 +151,9 @@ public class LabTestsMainPanel extends JPanel {
 
         public void newRowsAdded(TableModelEvent event) {
             fireTableChanged(event);
+        }
+        public void updateTable(){
+            this.fireTableDataChanged();
         }
 
     }
@@ -215,5 +230,52 @@ public class LabTestsMainPanel extends JPanel {
             return;
         }
         rowSorter.setRowFilter(rf);
+    }
+
+    private class RemoveButtonEditor extends DefaultCellEditor {
+        protected JButton button;
+        int i = 0;
+        private String label;
+
+        private boolean isPushed;
+
+        public RemoveButtonEditor(JTextField textField) {
+            super(textField);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            i = row;
+            isPushed = true;
+            return button;
+        }
+
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                new RemoveTestController(table.convertRowIndexToModel(i),LabTestsMainPanel.this,doctor);
+            }
+            isPushed = false;
+            return new String(label);
+        }
+
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
+        }
+
     }
 }

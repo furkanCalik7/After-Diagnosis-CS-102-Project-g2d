@@ -1,7 +1,7 @@
 package LabTechs.Model;
 
-import AdminViews.MessagePanel;
 import JDBC.MySQLAccess;
+import common.MessagePanel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -71,7 +71,7 @@ public class LabTechnicianMainFrameViewer extends JFrame {
         labTestsMainPanel = new TestsPanel();
         //myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor);
 
-        messagePanel = new MessagePanel();
+        messagePanel = new MessagePanel(labTechnician);
 
         JPanel layeredPanePanel = new JPanel();
         contentPane.add(layeredPanePanel, BorderLayout.CENTER);

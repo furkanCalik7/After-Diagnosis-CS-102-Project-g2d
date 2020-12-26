@@ -16,9 +16,7 @@ public class LoginPanelView extends JPanel {
     private JButton loginButton;
     private JButton createAccButton;
 
-    /**
-     * Create the panel.
-     */
+
     public LoginPanelView() {
         setLayout(new BorderLayout(0, 15));
 

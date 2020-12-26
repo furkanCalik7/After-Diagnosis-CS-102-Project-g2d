@@ -1,11 +1,10 @@
 package Doctor;
 
-import AdminViews.MessagePanel;
-import AdminViews.SettingsPanel;
+import common.MessagePanel;
+import common.SettingsPanel;
 import Doctor.Model.Doctor;
 import Doctor.Views.*;
 import JDBC.MySQLAccess;
-import Patient.Model.PatientInfoCard;
 
 import java.util.ArrayList;
 
@@ -23,7 +22,7 @@ public class DoctorRunner {
         SettingsPanel settingsPanel = new SettingsPanel(doctor);
         DoctorBloodDonationPanel donationPanel = new DoctorBloodDonationPanel(doctor);
         DoctorHomepagePanelView homepagePanelView = new DoctorHomepagePanelView(doctor);
-        MessagePanel messagePanel = new MessagePanel();
+        MessagePanel messagePanel = new MessagePanel(doctor);
 
         doctorMainFrameViewer.setMyPatientsLayeredPanelView(myPatientsLayeredPanelView);
         doctorMainFrameViewer.setDoctorBloodDonationPanel(donationPanel);
@@ -44,5 +43,6 @@ public class DoctorRunner {
         for(PatientInfoPanelView patientInfoCard: myPatientsLayeredPanelView.getPatientInfoPanelViews()){
             doctor.addViewer(patientInfoCard);
         }
+        doctor.addViewer(labTestsMainPanel);
     }
 }

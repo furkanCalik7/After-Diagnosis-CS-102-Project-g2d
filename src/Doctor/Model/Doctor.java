@@ -2,6 +2,7 @@ package Doctor.Model;
 
 import Admin.model.User;
 import Appointment.Appointment;
+import Doctor.Views.MyPatientsMainPanel;
 import JDBC.Message;
 import JDBC.MySQLAccess;
 import LabTechs.Model.Test;
@@ -128,5 +129,11 @@ public class Doctor extends User {
     public void removePatient(int i){
         System.out.println(patientSlots.get(i));
         patientSlots.get(i).setStatus(0);
+    }
+    public void removeTest(int index){
+        Test test = tests.get(index);
+        tests.remove(index);
+        mySQLAccess.removeTest(test.getSent_time());
+        updateViewers();
     }
 }

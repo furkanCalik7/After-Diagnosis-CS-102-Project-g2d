@@ -1,8 +1,6 @@
 package Doctor.Views;
 
-import AdminViews.MessagePanel;
 import Doctor.Model.Doctor;
-import JDBC.MySQLAccess;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,10 +8,10 @@ import java.awt.event.ActionListener;
 import javax.swing.border.EmptyBorder;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 
-import AdminViews.SettingsPanel;
-import javax.swing.ImageIcon;
+import common.MessagePanel;
+import common.SettingsPanel;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
