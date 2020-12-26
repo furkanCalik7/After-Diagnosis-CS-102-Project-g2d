@@ -1,31 +1,49 @@
 package JDBC;
+
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
-import javax.mail.BodyPart;
+import javax.mail.*;
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Multipart;
-import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import java.sql.Date;
+import java.util.Properties;
 
 public class EmailUtil {
 
     /**
      * Utility method to send simple HTML email
+     *
      * @param session
      * @param toEmail
      * @param subject
      * @param body
      */
-    public static void sendEmail(Session session, String toEmail, String subject, String body){
-        try
-        {
+    final String fromEmail = "afterdiagnosiscs102@gmail.com"; //requires valid gmail id
+    final String password = "cs102_2020"; // correct password for gmail id
+    private Properties props;
+    private Session session;
+
+    public EmailUtil() {
+        props = new Properties();
+        props.put("mail.smtp.host", "smtp.gmail.com"); //SMTP Host
+        props.put("mail.smtp.port", "587"); //TLS Port
+        props.put("mail.smtp.auth", "true"); //enable authentication
+        props.put("mail.smtp.starttls.enable", "true"); //enable STARTTLS
+
+        Authenticator auth = new Authenticator() {
+            protected PasswordAuthentication getPasswordAuthentication() {
+                return new PasswordAuthentication(fromEmail, password);
+            }
+        };
+        session = Session.getInstance(props, auth);
+    }
+
+    public void sendEmail(String toEmail, String subject, String body) {
+        try {
             MimeMessage msg = new MimeMessage(session);
             //set message headers
             msg.addHeader("Content-type", "text/HTML; charset=UTF-8");
@@ -45,8 +63,7 @@ public class EmailUtil {
             Transport.send(msg);
 
             System.out.println("EMail Sent Successfully!!");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
     }
