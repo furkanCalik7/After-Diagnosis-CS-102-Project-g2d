@@ -2,6 +2,7 @@ package LabTechs.Controller;
 
 import LabTechs.Model.LabTechnician;
 import LabTechs.Model.Test;
+import LabTechs.Views.SentTestsPanel;
 
 import javax.swing.*;
 
@@ -21,10 +22,13 @@ public class FileChooserForDownloadController {
         if (chooser.showOpenDialog(panel) == JFileChooser.APPROVE_OPTION) {
             int i = JOptionPane.showConfirmDialog(panel, "Are you sure to download?", "Download Confirmation", JOptionPane.YES_NO_OPTION);
             if (i == JOptionPane.YES_OPTION) {
-                labTechnician.downloadTest(test, chooser.getSelectedFile().toPath());
-                JOptionPane.showMessageDialog(panel,"Test is downloaded.");
-            } else {
-                JOptionPane.showMessageDialog(panel,"Test is not downloaded.");
+                try{
+                    labTechnician.downloadTest(test, chooser.getSelectedFile().toPath());
+                    JOptionPane.showMessageDialog(panel,"Test is downloaded.");
+                }catch ( Exception e ){ JOptionPane.showMessageDialog( panel , "The Test could not have been Downloaded!" ); }
+
+                } else {
+                    JOptionPane.showMessageDialog(panel,"Test is not downloaded.");
             }
         }
     }

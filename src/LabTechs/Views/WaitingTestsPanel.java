@@ -1,8 +1,8 @@
 package LabTechs.Views;
 
+import Admin.model.IViewer;
 import LabTechs.Controller.*;
 import LabTechs.Model.LabTechnician;
-import LabTechs.Model.Test;
 import LabTechs.Model.TestRequest;
 
 import javax.swing.*;
@@ -13,15 +13,18 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.util.ArrayList;
-import java.sql.Date;
 
-public class WaitingTestsPanel extends JPanel{
+public class WaitingTestsPanel extends JPanel implements IViewer {
 
     JTable waitingTestsTable;
     private TableRowSorter<MyTableModel> rowSorter;
     private LabTechnician labTechnician;
+
+    @Override
+    public void update() {
+
+    }
 
     public WaitingTestsPanel( LabTechnician labTechnician ){
 
@@ -150,31 +153,8 @@ public class WaitingTestsPanel extends JPanel{
 
         public Object getCellEditorValue() {
             if (isPushed) {
-                //Todo Implement Download
-                System.out.println( "The button at row: " + this.label );
-
-
                 TestRequest testRequest = labTechnician.getTestRequests().get(waitingTestsTable.convertRowIndexToModel(i));
-
-                System.out.println( "The Testrequest: |" + testRequest.getTest_name() + "|" );
-
-                FileChooserForUploadController fileUploadController = new FileChooserForUploadController(WaitingTestsPanel.this);
-
-                File testFile = fileUploadController.getFile();
-
-                System.out.println( "The filepath: |" + testFile.getAbsolutePath() + "|" );
-
-                Test test = Test.newTest( testRequest.getDoctor_username(), labTechnician.getUsername(), testRequest.getTest_name() ,
-                        testRequest.getPatient() , testFile );
-
-                 boolean isUploadSuccesfull = test.sendTest();
-
-                 if( isUploadSuccesfull )
-                     System.out.println( "UPLOADED THE FİLE" );
-                 else
-                     System.out.println( "COULD NOT UPLOADED THE FİLE" );
-                //Uploads
-
+                new FileChooserForUploadController(WaitingTestsPanel.this , testRequest , labTechnician);
             }
             isPushed = false;
             return new String(label);
