@@ -1,5 +1,6 @@
 package LabTechs.Model;
 
+import Admin.model.IViewer;
 import Admin.model.User;
 import JDBC.MySQLAccess;
 

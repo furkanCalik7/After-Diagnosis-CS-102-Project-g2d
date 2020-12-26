@@ -3,12 +3,8 @@ package JDBC;
 import javax.mail.*;
 import javax.mail.Message;
 import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
-import java.sql.Date;
 import java.util.Properties;
-
 public class EmailUtil {
 
     /**
