@@ -7,12 +7,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import javax.swing.JLabel;
-import java.awt.FlowLayout;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
-import java.awt.Font;
 
 public class BloodDonationPanel extends JPanel {
     private JTable table;
@@ -25,6 +23,7 @@ public class BloodDonationPanel extends JPanel {
         setLayout(new BorderLayout(0, 0));
 
         JPanel panel = new JPanel();
+        panel.setBackground(new Color(30, 144, 255));
         add(panel, BorderLayout.NORTH);
         panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -33,6 +32,7 @@ public class BloodDonationPanel extends JPanel {
         panel.add(lblNewLabel);
 
         JPanel panel_1 = new JPanel();
+        panel_1.setBackground(new Color(30, 144, 255));
         add(panel_1, BorderLayout.CENTER);
         panel_1.setLayout(new BorderLayout(0, 0));
 
