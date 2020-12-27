@@ -1,8 +1,7 @@
 package AdminViews;
 
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -12,8 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.GridLayout;
-import java.awt.CardLayout;
+
 import Admin.model.*;
 import JDBC.MySQLAccess;
 import common.MessagePanel;
@@ -75,25 +73,34 @@ public class AdminMainFrame extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
         contentPane = new JPanel();
+        contentPane.setBackground(new Color(101, 180, 206));
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(30, 0));
 
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(101, 180, 206));
         buttonPanel.setBorder(new EmptyBorder(40, 5, 40, 0));
         contentPane.add(buttonPanel,BorderLayout.WEST);
 
         HomePagePanel = new HomePage(admin);
+        HomePagePanel.setBackground(new Color(101, 180, 206));
         addWorkerMainPanel = new AddWorkerMainPanel(admin);
+        addWorkerMainPanel.setBackground(new Color(101, 180, 206));
         hospitalWorkersPanel = new HospitalWorkersInfoPanel(admin);
+        hospitalWorkersPanel.setBackground(new Color(101, 180, 206));
         admin.addViewer(hospitalWorkersPanel);
         messagePanel = new MessagePanel(admin);
+        messagePanel.setBackground(new Color(101, 180, 206));
         settingsPanel = new SettingsPanel(admin);
+        settingsPanel.setBackground(new Color(101, 180, 206));
         hospitalCrew = new JPanel();
+        hospitalCrew.setBackground(new Color(101, 180, 206));
         hospitalCrew.add( hospitalWorkersPanel );
 
 
         JPanel layeredPanePanel = new JPanel();
+        layeredPanePanel.setBackground(new Color(101, 180, 206));
         contentPane.add(layeredPanePanel,BorderLayout.CENTER);
         layeredPanePanel.setLayout(new BorderLayout(0, 0));
 

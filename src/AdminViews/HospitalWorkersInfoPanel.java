@@ -45,14 +45,17 @@ public class HospitalWorkersInfoPanel extends JPanel implements IViewer {
         add(lblNewLabel, BorderLayout.NORTH);
 
         JPanel panel = new JPanel();
+        panel.setBackground(new Color(101, 180, 206));
         add(panel, BorderLayout.CENTER);
         panel.setLayout(new BorderLayout(0, 0));
 
         JPanel panel_1 = new JPanel();
+        panel_1.setBackground(new Color(101, 180, 206));
         panel.add(panel_1, BorderLayout.NORTH);
         panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 
         JPanel panel_3 = new JPanel();
+        panel_3.setBackground(new Color(101, 180, 206));
         panel_1.add(panel_3);
         panel_3.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -80,6 +83,7 @@ public class HospitalWorkersInfoPanel extends JPanel implements IViewer {
 
 
         JPanel panel_4 = new JPanel();
+        panel_4.setBackground(new Color(101, 180, 206));
         panel_1.add(panel_4);
         panel_4.setLayout(new FlowLayout(FlowLayout.RIGHT, 5, 5));
 
@@ -101,6 +105,7 @@ public class HospitalWorkersInfoPanel extends JPanel implements IViewer {
         //Panel including the table
 
         JPanel panel_2 = new JPanel();
+        panel_2.setBackground(new Color(101, 180, 206));
         panel.add(panel_2, BorderLayout.CENTER);
         panel_2.setLayout(new BorderLayout(0, 0));
 

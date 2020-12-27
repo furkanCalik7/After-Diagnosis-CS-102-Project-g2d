@@ -28,6 +28,7 @@ public class HomePage extends JPanel {
         setLayout( new BorderLayout() );
 
         JPanel welcomeLabelHolderPanel = new JPanel();
+        welcomeLabelHolderPanel.setBackground(new Color(101, 180, 206));
         welcomeLabelHolderPanel.setBorder(new EmptyBorder(25, 0, 25, 0));
         add(welcomeLabelHolderPanel, BorderLayout.NORTH);
 
@@ -38,6 +39,7 @@ public class HomePage extends JPanel {
         welcomeLabelHolderPanel.add(welcomeLabel, BorderLayout.NORTH);
 
         JPanel actionsMainPanel = new JPanel();
+        actionsMainPanel.setBackground(new Color(101, 180, 206));
         add(actionsMainPanel,BorderLayout.CENTER);
         actionsMainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -48,6 +50,7 @@ public class HomePage extends JPanel {
         actionsMainPanel.add(lblNewLabel);
 
         JPanel actionsPanel = new JPanel();
+        actionsPanel.setBackground(new Color(101, 180, 206));
         actionsPanel.setBorder(new LineBorder(new Color(0, 255, 255), 2, true));
         actionsMainPanel.add(actionsPanel);
         actionsPanel.setLayout(new GridLayout(3, 2, 20, 20));

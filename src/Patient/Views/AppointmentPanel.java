@@ -214,7 +214,7 @@ public class AppointmentPanel extends JPanel {
         panel_6.add(panel_5);
         panel_5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-        JLabel lblNewLabel_3 = new JLabel("Enter start date with a  : (example 9:30)");
+        JLabel lblNewLabel_3 = new JLabel("Enter start date of appointment");
         lblNewLabel_3.setFont(new Font("Century", Font.PLAIN, 15));
         panel_5.add(lblNewLabel_3);
 
