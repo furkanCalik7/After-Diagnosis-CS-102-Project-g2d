@@ -136,6 +136,12 @@ public class LoginPanelView extends JPanel {
         createAccButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         createPanel.add(createAccButton);
 
+        //Color Choices
+        mainPanel.setBackground(new Color(101, 180, 206));
+        northPanel.setBackground(new Color(101, 180, 206));
+        this.setBackground(new Color(101, 180, 206));
+        topLabelPanel.setBackground( new Color(101, 180, 206));
+
     }
 
     /**
