@@ -166,7 +166,7 @@ public class MyPatientsMainPanel extends JPanel {
                 case 2:
                     return data.getPatientInfo().getEmail();
                 case 3:
-                    return data.getPatientInfo().getComplaint();
+                    return data.getComplaint();
                 case 4:
                     if (data.getStatus() == 1) {
                         return "Current";

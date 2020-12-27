@@ -23,6 +23,7 @@ public class AddDoctorButtonControls extends JButton {
 
         public void actionPerformed(ActionEvent e) {
            String code = panel.codeField.getText();
+            System.out.println(panel.codeField.getText());
            patient.addDoctor(code);
            panel.codeField.setText("");
         }

@@ -8,7 +8,6 @@ import com.github.lgooddatepicker.components.DatePickerSettings;
 import com.github.lgooddatepicker.optionalusertools.DateHighlightPolicy;
 import com.github.lgooddatepicker.zinternaltools.HighlightInformation;
 import common.HasAppointment;
-import sun.util.calendar.JulianCalendar;
 
 import javax.swing.*;
 import javax.swing.JScrollPane;

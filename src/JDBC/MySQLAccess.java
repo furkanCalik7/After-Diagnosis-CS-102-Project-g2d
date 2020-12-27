@@ -24,6 +24,7 @@ public class MySQLAccess {
     private Statement statement = null;
     private PreparedStatement preparedStatement = null;
     private ResultSet resultSet = null;
+    private PatientSlot patientSlot;
 
     public void addUser(User u) throws Exception {
         try {
@@ -365,13 +366,14 @@ public class MySQLAccess {
                 setCodeUsed(code_id);
             }
             patientID = getID(username);
-            sql = "INSERT INTO doctor_patient values(?, ?, ?, ?, ?)";
+            sql = "INSERT INTO doctor_patient values(?, ?, ?, ?, ?, ?)";
             preparedStatement = connect.prepareStatement(sql);
             preparedStatement.setInt(1, doctorID);
             preparedStatement.setInt(2, patientID);
             preparedStatement.setBoolean(3, true);
             preparedStatement.setDate(4, date);
             preparedStatement.setString(5, code);
+            preparedStatement.setString(6, "null");
             preparedStatement.executeUpdate();
             return true;
         } catch (Exception e) {
@@ -393,7 +395,7 @@ public class MySQLAccess {
             preparedStatement.setString(1, code.getCode_id());
             preparedStatement.setInt(2, doctor_id);
             preparedStatement.setBoolean(3, false);
-            preparedStatement.setString(4,code.getComplaint());
+            preparedStatement.setString(4, code.getComplaint());
             // preparedStatement.setString(4, code.getComplaint());
 
             int i = preparedStatement.executeUpdate();
@@ -605,7 +607,7 @@ public class MySQLAccess {
             preparedStatement.setTime(2, message.getSent_time());
             int i = preparedStatement.executeUpdate();
 
-            if(i >0){
+            if (i > 0) {
                 return true;
             }
             return false;
@@ -625,7 +627,7 @@ public class MySQLAccess {
             preparedStatement.setTime(1, time);
             int i = preparedStatement.executeUpdate();
 
-            if(i >0){
+            if (i > 0) {
                 return true;
             }
             return false;
@@ -884,6 +886,27 @@ public class MySQLAccess {
         return null;
     }
 
+    public String getComplaintByCode(String code_id) {
+        try {
+            connect = dbConnection.getConnection();
+            
+            String complaint = "null";
+            
+            String sql = "SELECT * FROM code_of_doctor WHERE code_id = ?";
+            PreparedStatement pr = connect.prepareStatement(sql);
+            pr.setString(1, code_id);
+            ResultSet rs = pr.executeQuery();
+
+            while (rs.next()) {
+                complaint = rs.getString("complaint");
+            }
+            return complaint;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public ArrayList<PatientSlot> getPatientsOfDoctor(Doctor doctor) {
         try {
             ArrayList<PatientSlot> patientSlots = new ArrayList<>();
@@ -908,7 +931,12 @@ public class MySQLAccess {
                     status = resultSet.getInt("status");
                     start_date = resultSet.getDate("start_date");
                     code_id = resultSet.getString("code");
-                    patientSlots.add(new PatientSlot(doctor.getUsername(), patientInfoCard, status, code_id, start_date));
+                    patientSlot = new PatientSlot(doctor.getUsername(), patientInfoCard, status, code_id, start_date);
+                    patientSlot.setComplaint(getComplaintByCode(code_id));
+
+                    //TODO sil
+                    System.out.println(patientSlot.getComplaint());
+                    patientSlots.add(patientSlot);
                 }
             }
 
@@ -918,7 +946,6 @@ public class MySQLAccess {
         }
         return null;
     }
-
 
 
     public ArrayList<Appointment> getWaitingAppointmentOfDoctor(Doctor doctor) {
