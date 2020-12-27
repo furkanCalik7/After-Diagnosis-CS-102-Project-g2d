@@ -23,7 +23,7 @@ public class BloodDonationPanel extends JPanel {
         setLayout(new BorderLayout(0, 0));
 
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(30, 144, 255));
+        panel.setBackground(new Color(101, 180, 206));
         add(panel, BorderLayout.NORTH);
         panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -32,7 +32,7 @@ public class BloodDonationPanel extends JPanel {
         panel.add(lblNewLabel);
 
         JPanel panel_1 = new JPanel();
-        panel_1.setBackground(new Color(30, 144, 255));
+        panel_1.setBackground(new Color(101, 180, 206));
         add(panel_1, BorderLayout.CENTER);
         panel_1.setLayout(new BorderLayout(0, 0));
 

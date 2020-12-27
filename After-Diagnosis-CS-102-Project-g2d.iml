@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../cs project/JPlanner.jar!/" />
+          <root url="jar://$USER_HOME$/cs project/JPlanner.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -19,7 +19,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../cs project/Yeni klasör/javamail-1.4.7/mail.jar!/" />
+          <root url="jar://$USER_HOME$/cs project/Yeni klasör/javamail-1.4.7/mail.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -29,6 +29,33 @@
       <library>
         <CLASSES>
           <root url="jar://C:/Program Files (x86)/MySQL/mysql-connector-java-8.0.22/mysql-connector-java-8.0.22/mysql-connector-java-8.0.22.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../mail.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../mysql-connector-java-8.0.22.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library" exported="">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../JPlanner.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

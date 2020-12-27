@@ -18,7 +18,7 @@ public class HomePagePanel extends JPanel {
         setLayout(new BorderLayout(0, 0));
 
         JPanel headerPanel = new JPanel();
-        headerPanel.setBackground(new Color(30, 144, 255));
+        headerPanel.setBackground(new Color(101, 180, 206));
         add(headerPanel, BorderLayout.NORTH);
         headerPanel.setLayout(new GridLayout(0, 2, 0, 0));
 
@@ -27,7 +27,7 @@ public class HomePagePanel extends JPanel {
         headerPanel.add(nameLabel);
 
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(30, 144, 255));
+        panel.setBackground(new Color(101, 180, 206));
         headerPanel.add(panel);
         panel.setLayout(new GridLayout(2, 0, 0, 0));
 
@@ -36,7 +36,7 @@ public class HomePagePanel extends JPanel {
         panel.add(feelingLabel);
 
         JPanel panel_1 = new JPanel();
-        panel_1.setBackground(new Color(30, 144, 255));
+        panel_1.setBackground(new Color(101, 180, 206));
         panel.add(panel_1);
         panel_1.setLayout(new GridLayout(0, 3, 0, 0));
 
@@ -53,12 +53,12 @@ public class HomePagePanel extends JPanel {
         panel_1.add(wellButton);
 
         JPanel centerPanel = new JPanel();
-        centerPanel.setBackground(new Color(30, 144, 255));
+        centerPanel.setBackground(new Color(101, 180, 206));
         add(centerPanel, BorderLayout.CENTER);
         centerPanel.setLayout(new GridLayout(0, 2, 0, 0));
 
         JPanel appointmentPanel = new JPanel();
-        appointmentPanel.setBackground(new Color(30, 144, 255));
+        appointmentPanel.setBackground(new Color(101, 180, 206));
         centerPanel.add(appointmentPanel);
         appointmentPanel.setLayout(new BorderLayout(0, 0));
 
@@ -67,11 +67,11 @@ public class HomePagePanel extends JPanel {
         appointmentPanel.add(appointmentLabel, BorderLayout.NORTH);
 
         JPanel calenderPanel = new JPanel();
-        calenderPanel.setBackground(new Color(30, 144, 255));
+        calenderPanel.setBackground(new Color(101, 180, 206));
         appointmentPanel.add(calenderPanel, BorderLayout.CENTER);
 
         JPanel medicationPanel = new JPanel();
-        medicationPanel.setBackground(new Color(30, 144, 255));
+        medicationPanel.setBackground(new Color(101, 180, 206));
         centerPanel.add(medicationPanel);
         medicationPanel.setLayout(new BorderLayout(0, 0));
 
@@ -79,7 +79,7 @@ public class HomePagePanel extends JPanel {
         medicationPanel.add(lblNewLabel, BorderLayout.NORTH);
 
         JPanel drugsPanel = new JPanel();
-        drugsPanel.setBackground(new Color(30, 144, 255));
+        drugsPanel.setBackground(new Color(101, 180, 206));
         medicationPanel.add(drugsPanel, BorderLayout.CENTER);
 
     }

@@ -37,13 +37,13 @@ public class AppointmentPanel extends JPanel {
         setLayout(new BorderLayout(0, 0));
 
         JPanel panel = new JPanel();
-        panel.setBackground(new Color(30, 144, 255) );
+        panel.setBackground(new Color(101, 180, 206) );
         add(panel);
         panel.setLayout(new BorderLayout(0, 0));
 
         //Header Panel including buttons is initialized
         JPanel headerPanel = new JPanel();
-        headerPanel.setBackground(new Color(30, 144, 255));
+        headerPanel.setBackground(new Color(101, 180, 206));
         panel.add(headerPanel, BorderLayout.NORTH);
 
         JButton takeAppointmentButton = new JButton("Take Appointment");
@@ -93,11 +93,11 @@ public class AppointmentPanel extends JPanel {
         //Take Appointment Panel
 
         takeAppointmentPanel = new JPanel();
-        takeAppointmentPanel.setBackground(new Color(30, 144, 255));
+        takeAppointmentPanel.setBackground(new Color(101, 180, 206));
         takeAppointmentPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel appointmentNorthPanel = new JPanel();
-        appointmentNorthPanel.setBackground(new Color(30, 144, 255));
+        appointmentNorthPanel.setBackground(new Color(101, 180, 206));
         takeAppointmentPanel.add(appointmentNorthPanel, BorderLayout.NORTH);
         appointmentNorthPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -106,7 +106,7 @@ public class AppointmentPanel extends JPanel {
         appointmentNorthPanel.add(lblNewLabel);
 
         JPanel appointmentWestPanel = new JPanel();
-        appointmentWestPanel.setBackground(new Color(30, 144, 255));
+        appointmentWestPanel.setBackground(new Color(101, 180, 206));
         appointmentWestPanel.add(scrollPane);
         takeAppointmentPanel.add(appointmentWestPanel, BorderLayout.WEST);
 
@@ -116,12 +116,12 @@ public class AppointmentPanel extends JPanel {
         //See appointment panel
 
         seeAppointmentPanel = new JPanel();
-        seeAppointmentPanel.setBackground(new Color(30, 144, 255));
+        seeAppointmentPanel.setBackground(new Color(101, 180, 206));
 
         seeAppointmentPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel seeAppointmentNorthPanel = new JPanel();
-        seeAppointmentNorthPanel.setBackground(new Color(30, 144, 255));
+        seeAppointmentNorthPanel.setBackground(new Color(101, 180, 206));
         seeAppointmentPanel.add(seeAppointmentNorthPanel, BorderLayout.NORTH);
 
         JLabel lblNewLabel_1 = new JLabel("Blue boxes are your available dates");
@@ -131,7 +131,7 @@ public class AppointmentPanel extends JPanel {
 
         //DATES WILL BE ADDED TO THIS PART
         JPanel seeAppointmentCenterPanel = new JPanel();
-        seeAppointmentCenterPanel.setBackground(new Color(30, 144, 255));
+        seeAppointmentCenterPanel.setBackground(new Color(101, 180, 206));
         seeAppointmentPanel.add(seeAppointmentCenterPanel, BorderLayout.CENTER);
 
 

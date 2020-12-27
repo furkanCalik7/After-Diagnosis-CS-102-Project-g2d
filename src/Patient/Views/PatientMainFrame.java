@@ -54,6 +54,8 @@ public class PatientMainFrame extends JFrame {
 
         //Creating content pane
         contentPane = new JPanel();
+
+        contentPane.setBackground( new Color(101, 180, 206) );
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(30, 0));
@@ -61,19 +63,28 @@ public class PatientMainFrame extends JFrame {
 
         //Creating button panel and adding it to content panel
         JPanel buttonPanel = new JPanel();
+        buttonPanel.setBackground(new Color(101, 180, 206));
         buttonPanel.setLayout(new GridLayout(8, 0, 0, 0));
         buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 0));
         contentPane.add(buttonPanel, BorderLayout.WEST);
 
         //Creating panels which will be added to main frame
         SettingsPanel = new SettingsPanel(p);
+        SettingsPanel.setBackground(new Color(101, 180, 206));
         HomePagePanel = new HomePagePanel(p);
+        HomePagePanel.setBackground(new Color(101, 180, 206));
         MyDrugsPanel = new MyDrugsPanel(p);
+        MyDrugsPanel.setBackground( new Color(101, 180, 206) );
         AppointmentPanel = new AppointmentPanel();
+        AppointmentPanel.setBackground( new Color(101, 180, 206) );
         BloodDonationPanel = new BloodDonationPanel();
+        BloodDonationPanel.setBackground(new Color(101, 180, 206));
         MessagesPanel = new MessagePanel(p);
+        MessagesPanel.setBackground(new Color(101, 180, 206));
         MyDoctorsPanel = new MyDoctorsPanel(p, MessagesPanel, this);
+        MyDoctorsPanel.setBackground(new Color(101, 180, 206));
         MedInfoPanel = new MedInfoPanel(p);
+        MedInfoPanel.setBackground(new Color(101, 180, 206));
 
         //Some bugs about settingspanel
 
@@ -81,6 +92,7 @@ public class PatientMainFrame extends JFrame {
 
         //Creating layered pane containing panels to switch
         JPanel layeredPanePanel = new JPanel();
+        layeredPanePanel.setBackground(new Color(101, 180, 206));
         contentPane.add(layeredPanePanel, BorderLayout.CENTER);
         layeredPanePanel.setLayout(new BorderLayout(0, 0));
 
@@ -89,6 +101,7 @@ public class PatientMainFrame extends JFrame {
         layeredPane.setLayout(new CardLayout(0, 0));
 
         //Adding panels to layered pane
+        layeredPanePanel.setBackground(new Color(101, 180, 206));
         layeredPane.add(HomePagePanel, "name_944915029693400");
         layeredPane.add(MyDoctorsPanel, "name_944915062377900");
         layeredPane.add(MyDrugsPanel, "name_944915089517800");
@@ -161,7 +174,7 @@ public class PatientMainFrame extends JFrame {
 
         //Adding Buttons to button panel
 
-
+        buttonPanel.setBackground(new Color(101, 180, 206));
         buttonPanel.add(homepageButton);
         buttonPanel.add(myDoctorsButton);
         buttonPanel.add(settingsButton);

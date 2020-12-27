@@ -8,10 +8,7 @@ import Patient.Model.Patient;
 
 import javax.swing.*;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.CardLayout;
-import java.awt.GridLayout;
+import java.awt.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
@@ -52,6 +49,9 @@ public class MyDrugsPanel extends JPanel {
         setLayout(new BorderLayout(0, 0));
 
         JPanel panel = new JPanel();
+
+        panel.setBackground(new Color(101, 180, 206));
+
         add(panel, BorderLayout.NORTH);
         panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -64,14 +64,17 @@ public class MyDrugsPanel extends JPanel {
         panel.add(expiredMedicationsButton);
 
         layeredPane = new JLayeredPane();
+        layeredPane.setBackground(new Color(101, 180, 206));
         add(layeredPane, BorderLayout.CENTER);
         layeredPane.setLayout(new CardLayout(0, 0));
 
         JPanel currentMedicationsPanel = new JPanel();
+        currentMedicationsPanel.setBackground( new Color(101, 180, 206) );
         layeredPane.add(currentMedicationsPanel, "name_1117144943200400");
         currentMedicationsPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel currentHeadPanel = new JPanel();
+        currentHeadPanel.setBackground(new Color(101, 180, 206));
         currentMedicationsPanel.add(currentHeadPanel, BorderLayout.NORTH);
         currentHeadPanel.setLayout(new GridLayout(2, 0, 0, 0));
 
@@ -79,6 +82,7 @@ public class MyDrugsPanel extends JPanel {
         currentHeadPanel.add(lblSearchByName);
 
         JPanel panel_2 = new JPanel();
+        panel_2.setBackground(new Color(101, 180, 206));
         currentHeadPanel.add(panel_2);
         panel_2.setLayout(new GridLayout(0, 3, 0, 0));
 
@@ -89,6 +93,9 @@ public class MyDrugsPanel extends JPanel {
 
 
         JPanel currentCenterPanel = new JPanel();
+
+        currentCenterPanel.setBackground(new Color(101, 180, 206));
+
         currentMedicationsPanel.add(currentCenterPanel, BorderLayout.CENTER);
         currentCenterPanel.setLayout(new BorderLayout(0, 0));
 
@@ -104,6 +111,7 @@ public class MyDrugsPanel extends JPanel {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         currentTablePanel = new JPanel();
+        currentTablePanel.setBackground(new Color(101, 180, 206));
         currentTablePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
         currentTablePanel.add(scrollPane);
@@ -112,14 +120,19 @@ public class MyDrugsPanel extends JPanel {
         currentCenterPanel.add(currentTablePanel, BorderLayout.WEST);
 
         JPanel drugsPanel = new JPanel();
+        drugsPanel.setBackground(new Color(101, 180, 206));
         currentCenterPanel.add(drugsPanel, BorderLayout.NORTH);
 
 
         JPanel expiredMedicationsPanel = new JPanel();
+        expiredMedicationsPanel.setBackground(new Color(101, 180, 206));
         layeredPane.add(expiredMedicationsPanel, "name_1117149041432400");
         expiredMedicationsPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel expiredHeadPanel = new JPanel();
+
+        expiredHeadPanel.setBackground(new Color(101, 180, 206));
+
         expiredMedicationsPanel.add(expiredHeadPanel, BorderLayout.NORTH);
         expiredHeadPanel.setLayout(new GridLayout(2, 0, 0, 0));
 
@@ -127,6 +140,7 @@ public class MyDrugsPanel extends JPanel {
         expiredHeadPanel.add(lblNewLabel_1);
 
         JPanel panel_5 = new JPanel();
+        panel_5.setBackground(new Color(101, 180, 206));
         expiredHeadPanel.add(panel_5);
         panel_5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 

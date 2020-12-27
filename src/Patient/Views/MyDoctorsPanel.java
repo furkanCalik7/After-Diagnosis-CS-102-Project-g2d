@@ -51,6 +51,7 @@ public class MyDoctorsPanel extends JPanel {
         setLayout(new BorderLayout(0, 0));
 
         JPanel panel = new JPanel();
+        panel.setBackground(new Color(101, 180, 206));
         panel.setBorder(new EmptyBorder(30, 0, 0, 0));
         add(panel, BorderLayout.NORTH);
         panel.setLayout(new GridLayout(2, 0, 0, 0));
@@ -59,6 +60,7 @@ public class MyDoctorsPanel extends JPanel {
         panel.add(lblNewLabel);
 
         JPanel panel_1 = new JPanel();
+        panel_1.setBackground(new Color(101, 180, 206));
         panel.add(panel_1);
         panel_1.setLayout(new GridLayout(0, 3, 0, 0));
 
@@ -96,6 +98,7 @@ public class MyDoctorsPanel extends JPanel {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         JPanel tablePanel = new JPanel();
+        tablePanel.setBackground(new Color(101, 180, 206));
         tablePanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
         tablePanel.add(scrollPane);
@@ -103,16 +106,19 @@ public class MyDoctorsPanel extends JPanel {
         add(tablePanel, BorderLayout.CENTER);
 
         JPanel panel_3 = new JPanel();
+        panel_3.setBackground(new Color(101, 180, 206));
         tablePanel.add(panel_3);
         panel_3.setLayout(new GridLayout(3, 0, 0, 0));
 
         JPanel panel_4 = new JPanel();
+        panel_4.setBackground(new Color(101, 180, 206));
         panel_3.add(panel_4);
 
         JLabel lblNewLabel_1 = new JLabel("Do you need to add a doctor?");
         panel_4.add(lblNewLabel_1);
 
         JPanel panel_5 = new JPanel();
+        panel_5.setBackground(new Color(101, 180, 206));
         panel_3.add(panel_5);
         panel_5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -120,6 +126,7 @@ public class MyDoctorsPanel extends JPanel {
         panel_5.add(lblNewLabel_2);
 
         JPanel codePanel = new JPanel();
+        codePanel.setBackground(new Color(101, 180, 206));
         panel_3.add(codePanel);
         codePanel.setLayout(new GridLayout(0, 2, 0, 0));
 

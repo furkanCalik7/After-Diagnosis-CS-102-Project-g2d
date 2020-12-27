@@ -77,6 +77,7 @@ public class MedInfoPanel extends JPanel {
         setLayout(new BorderLayout(0, 0));
 
         JPanel topButtonsPanel = new JPanel();
+        topButtonsPanel.setBackground(new Color(101, 180, 206));
         add(topButtonsPanel, BorderLayout.NORTH);
 
         medInfoButton = new JButton("Enter Your Medical Information");
@@ -88,14 +89,17 @@ public class MedInfoPanel extends JPanel {
         topButtonsPanel.add(labResultsButton);
 
         layeredPane = new JLayeredPane();
+        layeredPane.setBackground(new Color(101, 180, 206));
         add(layeredPane, BorderLayout.CENTER);
         layeredPane.setLayout(new CardLayout(0, 0));
 
         enterInfoPanel = new JPanel();
+        enterInfoPanel.setBackground(new Color(101, 180, 206));
         layeredPane.add(enterInfoPanel, "name_1195886766063900");
         enterInfoPanel.setLayout(new GridLayout(6, 0, 20, 20));
 
         JPanel panel_1 = new JPanel();
+        panel_1.setBackground(new Color(101, 180, 206));
         enterInfoPanel.add(panel_1);
         panel_1.setLayout(new GridLayout(0, 2, 0, 0));
 
@@ -104,6 +108,7 @@ public class MedInfoPanel extends JPanel {
         panel_1.add(lblNewLabel);
 
         JPanel panel_9 = new JPanel();
+        panel_9.setBackground(new Color(101, 180, 206));
         panel_1.add(panel_9);
         panel_9.setLayout(new GridLayout(1, 0, 0, 0));
 
@@ -114,6 +119,7 @@ public class MedInfoPanel extends JPanel {
         bloodTypecomboBox.setFont(new Font("Century", Font.PLAIN, 15));
 
         JPanel bloodTypecomboBoxContainer = new JPanel();
+        bloodTypecomboBoxContainer.setBackground(new Color(101, 180, 206));
         bloodTypecomboBoxContainer.add(bloodTypecomboBox);
         bloodTypecomboBoxContainer.setBorder(new EmptyBorder(20,0,20,0));
 
@@ -122,12 +128,14 @@ public class MedInfoPanel extends JPanel {
         rhComboBox = new JComboBox(rh);
         rhComboBox.setFont(new Font("Century", Font.PLAIN, 15));
         JPanel rhComboBoxContainer = new JPanel();
+        rhComboBoxContainer.setBackground(new Color(101, 180, 206));
         rhComboBoxContainer.add(rhComboBox);
         rhComboBoxContainer.setBorder(new EmptyBorder(20,0,20,20));
 
         panel_9.add(rhComboBoxContainer);
 
         JPanel panel_2 = new JPanel();
+        panel_2.setBackground(new Color(101, 180, 206));
         enterInfoPanel.add(panel_2);
         panel_2.setLayout(new GridLayout(0, 2, 0, 0));
 
@@ -141,6 +149,7 @@ public class MedInfoPanel extends JPanel {
         allergieTextField.setColumns(10);
 
         JPanel panel_3 = new JPanel();
+        panel_3.setBackground(new Color(101, 180, 206));
         enterInfoPanel.add(panel_3);
         panel_3.setLayout(new GridLayout(0, 2, 0, 0));
 
@@ -149,10 +158,12 @@ public class MedInfoPanel extends JPanel {
         panel_3.add(lblNewLabel_2);
 
         JPanel panel_6 = new JPanel();
+        panel_6.setBackground(new Color(101, 180, 206));
         panel_3.add(panel_6);
         panel_6.setLayout(new GridLayout(2, 0, 0, 0));
 
         JPanel panel_8 = new JPanel();
+        panel_8.setBackground(new Color(101, 180, 206));
         panel_6.add(panel_8);
         panel_8.setLayout(new GridLayout(0, 2, 0, 0));
 
@@ -167,6 +178,7 @@ public class MedInfoPanel extends JPanel {
         panel_8.add(noRadioButton);
 
         JPanel panel_7 = new JPanel();
+        panel_7.setBackground(new Color(101, 180, 206));
         panel_6.add(panel_7);
         panel_7.setLayout(new GridLayout(1, 0, 0, 0));
 
@@ -176,6 +188,7 @@ public class MedInfoPanel extends JPanel {
         surgeryTextField.setColumns(10);
 
         JPanel panel_4 = new JPanel();
+        panel_4.setBackground(new Color(101, 180, 206));
         enterInfoPanel.add(panel_4);
         panel_4.setLayout(new GridLayout(0, 2, 0, 0));
 
@@ -191,8 +204,10 @@ public class MedInfoPanel extends JPanel {
         JPanel datePickContainer = new JPanel();
         enterInfoPanel.add(datePickContainer);
         datePickContainer.setLayout(new GridLayout(0, 2, 0, 0));
+        datePickContainer.setBackground(new Color(101, 180, 206));
 
         JPanel dateLabelPanel = new JPanel();
+        dateLabelPanel.setBackground(new Color(101, 180, 206));
         datePickContainer.add(dateLabelPanel);
         dateLabelPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -201,9 +216,11 @@ public class MedInfoPanel extends JPanel {
         dateLabelPanel.add(dateLabel);
 
         JPanel datePickPanel = new DatePickerPanel();
+        datePickPanel.setBackground(new Color(101, 180, 206));
         datePickContainer.add(datePickPanel);
 
         JPanel completeButtonPanel = new JPanel();
+        completeButtonPanel.setBackground(new Color(101, 180, 206));
         enterInfoPanel.add(completeButtonPanel);
         completeButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -212,14 +229,17 @@ public class MedInfoPanel extends JPanel {
         completeButtonPanel.add(completeButton);
 
         labResultsPanel = new JPanel();
+        labResultsPanel.setBackground(new Color(101, 180, 206));
         layeredPane.add(labResultsPanel, "name_1195886789861600");
         labResultsPanel.setLayout(new BorderLayout(0, 0));
 
         JPanel labResultsTopPanel = new JPanel();
+        labResultsTopPanel.setBackground(new Color(101, 180, 206));
         labResultsPanel.add(labResultsTopPanel, BorderLayout.NORTH);
         labResultsTopPanel.setLayout(new GridLayout(2, 0, 0, 0));
 
         JPanel panel_11 = new JPanel();
+        panel_11.setBackground(new Color(101, 180, 206));
         labResultsTopPanel.add(panel_11);
         panel_11.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -228,6 +248,7 @@ public class MedInfoPanel extends JPanel {
         panel_11.add(lblNewLabel_4);
 
         JPanel panel_12 = new JPanel();
+        panel_12.setBackground(new Color(101, 180, 206));
         labResultsTopPanel.add(panel_12);
         panel_12.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -238,6 +259,7 @@ public class MedInfoPanel extends JPanel {
         txtSearch.setColumns(20);
 
         JPanel labResultsWestPanel = new JPanel();
+        labResultsWestPanel.setBackground(new Color(101, 180, 206));
         labResultsPanel.add(labResultsWestPanel, BorderLayout.CENTER);
         labResultsWestPanel.setLayout(new BorderLayout(0, 0));
 
@@ -263,6 +285,7 @@ public class MedInfoPanel extends JPanel {
         scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
 
         JPanel tablePanel = new JPanel();
+        tablePanel.setBackground(new Color(101, 180, 206));
         tablePanel.add(scrollPane);
         labResultsWestPanel.add(tablePanel, BorderLayout.WEST);
 
