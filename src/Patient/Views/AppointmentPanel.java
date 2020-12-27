@@ -177,95 +177,97 @@ public class AppointmentPanel extends JPanel {
 
 
 
-        JPanel takeAppointmentPanell = new JPanel();
-        seeAppointmentCenterPanel.add(takeAppointmentPanell);
-        takeAppointmentPanell.setBackground(new Color(101, 180, 206));
-        takeAppointmentPanell.setLayout(new GridLayout(5, 0, 0, 0));
+        if(user instanceof Patient) {
+            JPanel takeAppointmentPanell = new JPanel();
+            seeAppointmentCenterPanel.add(takeAppointmentPanell);
+            takeAppointmentPanell.setBackground(new Color(101, 180, 206));
+            takeAppointmentPanell.setLayout(new GridLayout(5, 0, 0, 0));
 
-        JPanel panel_4 = new JPanel();
-        panel_4.setBackground(new Color(101, 180, 206));
-        takeAppointmentPanell.add(panel_4);
-        panel_4.setLayout(new GridLayout(0, 2, 0, 0));
+            JPanel panel_4 = new JPanel();
+            panel_4.setBackground(new Color(101, 180, 206));
+            takeAppointmentPanell.add(panel_4);
+            panel_4.setLayout(new GridLayout(0, 2, 0, 0));
 
-        JPanel panel_7 = new JPanel();
-        panel_7.setBackground(new Color(101, 180, 206));
-        panel_4.add(panel_7);
-        panel_7.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+            JPanel panel_7 = new JPanel();
+            panel_7.setBackground(new Color(101, 180, 206));
+            panel_4.add(panel_7);
+            panel_7.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-        JLabel lblNewLabel_2 = new JLabel("Enter Username of doctor");
-        lblNewLabel_2.setFont(new Font("Century", Font.PLAIN, 15) );
-        panel_7.add(lblNewLabel_2);
+            JLabel lblNewLabel_2 = new JLabel("Enter Username of doctor");
+            lblNewLabel_2.setFont(new Font("Century", Font.PLAIN, 15));
+            panel_7.add(lblNewLabel_2);
 
-        JPanel panel_8 = new JPanel();
-        panel_8.setBackground(new Color(101, 180, 206));
-        panel_4.add(panel_8);
+            JPanel panel_8 = new JPanel();
+            panel_8.setBackground(new Color(101, 180, 206));
+            panel_4.add(panel_8);
 
-        doctorUsernameTextField = new JTextField();
-        doctorUsernameTextField.setFont(new Font("Century", Font.PLAIN, 15));
-        panel_8.add(doctorUsernameTextField);
-        doctorUsernameTextField.setColumns(10);
+            doctorUsernameTextField = new JTextField();
+            doctorUsernameTextField.setFont(new Font("Century", Font.PLAIN, 15));
+            panel_8.add(doctorUsernameTextField);
+            doctorUsernameTextField.setColumns(10);
 
-        datePickPanel = new DatePickerPanel();
-        datePickPanel.setBackground(new Color(101, 180, 206));
-        takeAppointmentPanell.add(datePickPanel);
+            datePickPanel = new DatePickerPanel();
+            datePickPanel.setBackground(new Color(101, 180, 206));
+            takeAppointmentPanell.add(datePickPanel);
 
-        JPanel panel_6 = new JPanel();
-        panel_6.setBackground(new Color(101, 180, 206));
-        takeAppointmentPanell.add(panel_6);
-        panel_6.setLayout(new GridLayout(0, 2, 0, 0));
+            JPanel panel_6 = new JPanel();
+            panel_6.setBackground(new Color(101, 180, 206));
+            takeAppointmentPanell.add(panel_6);
+            panel_6.setLayout(new GridLayout(0, 2, 0, 0));
 
-        JPanel panel_5 = new JPanel();
-        panel_5.setBackground(new Color(101, 180, 206));
-        panel_6.add(panel_5);
-        panel_5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+            JPanel panel_5 = new JPanel();
+            panel_5.setBackground(new Color(101, 180, 206));
+            panel_6.add(panel_5);
+            panel_5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-        JLabel lblNewLabel_3 = new JLabel("Enter start date with a  : (example 9:30)");
-        lblNewLabel_3.setFont(new Font("Century", Font.PLAIN, 15));
-        panel_5.add(lblNewLabel_3);
+            JLabel lblNewLabel_3 = new JLabel("Enter start date with a  : (example 9:30)");
+            lblNewLabel_3.setFont(new Font("Century", Font.PLAIN, 15));
+            panel_5.add(lblNewLabel_3);
 
-        JPanel panel_9 = new JPanel();
-        panel_9.setBackground(new Color(101, 180, 206));
-        panel_6.add(panel_9);
+            JPanel panel_9 = new JPanel();
+            panel_9.setBackground(new Color(101, 180, 206));
+            panel_6.add(panel_9);
 
-        startDateTextfield = new JTextField();
-        startDateTextfield.setFont(new Font("Century", Font.PLAIN, 15));
-        panel_9.add(startDateTextfield);
-        startDateTextfield.setColumns(10);
+            startDateTextfield = new JTextField();
+            startDateTextfield.setFont(new Font("Century", Font.PLAIN, 15));
+            panel_9.add(startDateTextfield);
+            startDateTextfield.setColumns(10);
 
-        JPanel panel_3 = new JPanel();
-        panel_3.setBackground(new Color(101, 180, 206));
-        takeAppointmentPanell.add(panel_3);
-        panel_3.setLayout(new GridLayout(0, 2, 0, 0));
+            JPanel panel_3 = new JPanel();
+            panel_3.setBackground(new Color(101, 180, 206));
+            takeAppointmentPanell.add(panel_3);
+            panel_3.setLayout(new GridLayout(0, 2, 0, 0));
 
-        JPanel panel_10 = new JPanel();
-        panel_10.setBackground( new Color(101, 180, 206) );
-        panel_3.add(panel_10);
-        panel_10.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+            JPanel panel_10 = new JPanel();
+            panel_10.setBackground(new Color(101, 180, 206));
+            panel_3.add(panel_10);
+            panel_10.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-        JLabel lblNewLabel_4 = new JLabel("Enter end date of appointment");
-        lblNewLabel_4.setFont(new Font("Century", Font.PLAIN, 15));
-        panel_10.add(lblNewLabel_4);
+            JLabel lblNewLabel_4 = new JLabel("Enter end date of appointment");
+            lblNewLabel_4.setFont(new Font("Century", Font.PLAIN, 15));
+            panel_10.add(lblNewLabel_4);
 
-        JPanel panel_11 = new JPanel();
-        panel_11.setBackground(new Color(101, 180, 206));
-        panel_3.add(panel_11);
+            JPanel panel_11 = new JPanel();
+            panel_11.setBackground(new Color(101, 180, 206));
+            panel_3.add(panel_11);
 
-        endDateTextField = new JTextField();
-        endDateTextField.setFont(new Font("Century", Font.PLAIN, 15));
-        panel_11.add(endDateTextField);
-        endDateTextField.setColumns(10);
+            endDateTextField = new JTextField();
+            endDateTextField.setFont(new Font("Century", Font.PLAIN, 15));
+            panel_11.add(endDateTextField);
+            endDateTextField.setColumns(10);
 
-        JPanel endButtonPanel = new JPanel();
-        endButtonPanel.setBackground(new Color(101, 180, 206));
-        endButtonPanel.setLayout( new FlowLayout( FlowLayout.CENTER) );
+            JPanel endButtonPanel = new JPanel();
+            endButtonPanel.setBackground(new Color(101, 180, 206));
+            endButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        JButton completeButton = new TakeAppointmentButton((Patient) user, this);
-        endButtonPanel.add(completeButton);
+            JButton completeButton = new TakeAppointmentButton((Patient) user, this);
+            endButtonPanel.add(completeButton);
 
-        takeAppointmentPanell.add(endButtonPanel);
-        takeAppointmentPanell.setBackground(new Color(101, 180, 206));
+            takeAppointmentPanell.add(endButtonPanel);
+            takeAppointmentPanell.setBackground(new Color(101, 180, 206));
 
-        seeAppointmentCenterPanel.add( takeAppointmentPanell );
+            seeAppointmentCenterPanel.add(takeAppointmentPanell);
+        }
 
 
         seeAppointmentPanel.add(seeAppointmentCenterPanel, BorderLayout.CENTER);
