@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/mysql-connector-java-8.0.22.jar!/" />
+          <root url="jar://$MODULE_DIR$/../mysql-connector-java-8.0.22.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/JPlanner.jar!/" />
+          <root url="jar://$MODULE_DIR$/../JPlanner.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,7 +37,16 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/Desktop/mail.jar!/" />
+          <root url="jar://$MODULE_DIR$/../mail.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../LGoodDatePicker-11.1.0 (1).jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

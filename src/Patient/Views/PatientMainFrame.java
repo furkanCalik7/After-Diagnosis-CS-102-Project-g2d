@@ -64,7 +64,7 @@ public class PatientMainFrame extends JFrame {
         //Creating button panel and adding it to content panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.setBackground(new Color(101, 180, 206));
-        buttonPanel.setLayout(new GridLayout(8, 0, 0, 0));
+        buttonPanel.setLayout(new GridLayout(8, 0, 0, 20));
         buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 0));
         contentPane.add(buttonPanel, BorderLayout.WEST);
 
