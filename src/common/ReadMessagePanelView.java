@@ -10,16 +10,16 @@ public class ReadMessagePanelView extends JPanel {
     private JLabel subjectLabel;
     private JLabel senderLabel;
 
-    public void setMessageTxtArea(JTextArea messageTxtArea) {
-        this.messageTxtArea = messageTxtArea;
+    public void setMessageTxtArea(String messageTxtArea) {
+        this.messageTxtArea.setText(messageTxtArea);
     }
 
-    public void setSubjectLabel(JLabel subjectLabel) {
-        this.subjectLabel = subjectLabel;
+    public void setSubjectLabel(String subjectLabel) {
+        this.subjectLabel.setText(subjectLabel);
     }
 
-    public void setSenderLabel(JLabel senderLabel) {
-        this.senderLabel = senderLabel;
+    public void setSenderLabel(String senderLabel) {
+        this.senderLabel.setText(senderLabel);
     }
 
     public ReadMessagePanelView() {

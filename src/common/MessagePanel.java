@@ -1,12 +1,7 @@
 package common;
 
 import Admin.model.User;
-import Admin.model.UserInfoCard;
-import AdminViews.HospitalWorkersInfoPanel;
-import Doctor.Model.DoctorInfoCard;
 import Doctor.Views.HintTextField;
-import Doctor.Views.MyPatientsLayeredPanelView;
-import Doctor.Views.MyPatientsMainPanel;
 import JDBC.Message;
 
 import javax.swing.*;
@@ -17,7 +12,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionListener;
@@ -41,6 +35,8 @@ public class MessagePanel extends JPanel {
     private JPanel messagePanel;
     private JPanel composePanel;
     private ReadMessagePanelView readMessagePanelView;
+    private ArrayList<Message> inbox;
+    private ArrayList<Message> outbox;
 
     public void switchPanels(JPanel panel) {
         layeredPane.removeAll();
@@ -130,7 +126,7 @@ public class MessagePanel extends JPanel {
         sentMessagesPanel.add(sentMessagesScrollPane);
 
         sentJTable.getColumn("Read").setCellRenderer(new ButtonRenderer());
-        sentJTable.getColumn("Read").setCellEditor(new ReadMessageButton(new JTextField()));
+        sentJTable.getColumn("Read").setCellEditor(new ReadMessageButtonOutbox(new JTextField()));
 
         //--------inboxPanel--------------:
         //This panel shows the received messages.
@@ -179,7 +175,7 @@ public class MessagePanel extends JPanel {
         inboxCenterPanel.add(inboxMessagesScrollPane);
 
         inboxJTable.getColumn("Read").setCellRenderer(new ButtonRenderer());
-        inboxJTable.getColumn("Read").setCellEditor(new ReadMessageButton(new JTextField()));
+        inboxJTable.getColumn("Read").setCellEditor(new ReadMessageButtonInbox(new JTextField()));
 
         //--------composePanel--------------:
         //This panel creates messages.
@@ -276,10 +272,9 @@ public class MessagePanel extends JPanel {
         private String[] columnNames = new String[]{
                 "Subject", "Receiver", "Date", "Status", "Read"};
 
-        private ArrayList<Message> messages;
 
         public SentTable() {
-            messages = user.getOutbox();
+            outbox = user.getOutbox();
         }
 
         public int getColumnCount() {
@@ -287,7 +282,7 @@ public class MessagePanel extends JPanel {
         }
 
         public int getRowCount() {
-            return messages.size();
+            return outbox.size();
         }
 
         public String getColumnName(int col) {
@@ -296,7 +291,7 @@ public class MessagePanel extends JPanel {
 
 
         public Object getValueAt(int row, int col) {
-            Message data = messages.get(row);
+            Message data = outbox.get(row);
 
             switch (col) {
                 case 0:
@@ -345,10 +340,9 @@ public class MessagePanel extends JPanel {
         private String[] columnNames = new String[]{
                 "Subject", "Sender", "Date", "Status", "Read"};
 
-        private ArrayList<Message> messages;
 
         public InboxTable() {
-            messages = user.getInbox();
+            inbox = user.getInbox();
         }
 
         public int getColumnCount() {
@@ -356,7 +350,7 @@ public class MessagePanel extends JPanel {
         }
 
         public int getRowCount() {
-            return messages.size();
+            return inbox.size();
         }
 
         public String getColumnName(int col) {
@@ -365,7 +359,7 @@ public class MessagePanel extends JPanel {
 
 
         public Object getValueAt(int row, int col) {
-            Message data = messages.get(row);
+            Message data = inbox.get(row);
 
             switch (col) {
                 case 0:
@@ -422,14 +416,14 @@ public class MessagePanel extends JPanel {
         }
     }
 
-    class ReadMessageButton extends DefaultCellEditor {
+    class ReadMessageButtonOutbox extends DefaultCellEditor {
         protected JButton button;
         int i = 0;
         private String label;
 
         private boolean isPushed;
 
-        public ReadMessageButton(JTextField textField) {
+        public ReadMessageButtonOutbox(JTextField textField) {
             super(textField);
             button = new JButton();
             button.setOpaque(true);
@@ -452,8 +446,62 @@ public class MessagePanel extends JPanel {
 
         public Object getCellEditorValue() {
             if (isPushed) {
+
+                readMessagePanelView.setMessageTxtArea(outbox.get(sentJTable.convertRowIndexToModel(i)).getContent());
+                readMessagePanelView.setSenderLabel(outbox.get(sentJTable.convertRowIndexToModel(i)).getReceiver_username());
+                readMessagePanelView.setSubjectLabel(outbox.get(sentJTable.convertRowIndexToModel(i)).getSubject());
                 switchPanels(readMessagePanelView);
 
+            }
+            isPushed = false;
+            return new String(label);
+        }
+
+        public boolean stopCellEditing() {
+            isPushed = false;
+            return super.stopCellEditing();
+        }
+
+        protected void fireEditingStopped() {
+            super.fireEditingStopped();
+        }
+
+    }
+
+    class ReadMessageButtonInbox extends DefaultCellEditor {
+        protected JButton button;
+        int i = 0;
+        private String label;
+
+        private boolean isPushed;
+
+        public ReadMessageButtonInbox(JTextField textField) {
+            super(textField);
+            button = new JButton();
+            button.setOpaque(true);
+            button.addActionListener(new ActionListener() {
+                public void actionPerformed(ActionEvent e) {
+                    fireEditingStopped();
+                }
+            });
+        }
+
+        public Component getTableCellEditorComponent(JTable table, Object value,
+                                                     boolean isSelected, int row, int column) {
+
+            label = (value == null) ? "" : value.toString();
+            button.setText(label);
+            i = row;
+            isPushed = true;
+            return button;
+        }
+
+        public Object getCellEditorValue() {
+            if (isPushed) {
+                readMessagePanelView.setMessageTxtArea(inbox.get(inboxJTable.convertRowIndexToModel(i)).getContent());
+                readMessagePanelView.setSenderLabel(inbox.get(inboxJTable.convertRowIndexToModel(i)).getReceiver_username());
+                readMessagePanelView.setSubjectLabel(inbox.get(inboxJTable.convertRowIndexToModel(i)).getSubject());
+                switchPanels(readMessagePanelView);
             }
             isPushed = false;
             return new String(label);
