@@ -43,31 +43,34 @@ public class AdminMainFrame extends JFrame {
         layeredPane.revalidate();
     }
 
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    AdminMainFrame frame = new AdminMainFrame();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
+    public void setSettingsPanel(JPanel settingsPanel) {
+        this.settingsPanel = settingsPanel;
     }
+
+    public void setAddWorkerMainPanel(JPanel addWorkerMainPanel) {
+        this.addWorkerMainPanel = addWorkerMainPanel;
+    }
+
+    public void setMessagePanel(JPanel messagePanel) {
+        this.messagePanel = messagePanel;
+    }
+
+    public void setHospitalWorkersPanel(HospitalWorkersInfoPanel hospitalWorkersPanel) {
+        this.hospitalWorkersPanel = hospitalWorkersPanel;
+    }
+
+    public void setHomePagePanel(JPanel homePagePanel) {
+        HomePagePanel = homePagePanel;
+    }
+
 
     /**
      * Create the frame.
      */
-    public AdminMainFrame() {
-        // For test only
-        MySQLAccess access = new MySQLAccess();
-        Admin admin  = (Admin) access.getUser("ahmet");
 
-        //
+    public AdminMainFrame(String username) {
+        MySQLAccess mySQLAccess = new MySQLAccess();
+        Admin admin = (Admin) mySQLAccess.getUser( username );
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 1198, 648);
@@ -147,6 +150,7 @@ public class AdminMainFrame extends JFrame {
             }
         });
         buttonPanel.add(settingsButton);
+        setVisible(true);
 
     }
 

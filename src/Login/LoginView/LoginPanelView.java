@@ -1,5 +1,7 @@
 package Login.LoginView;
 
+import Login.LoginButtonController;
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
@@ -15,6 +17,7 @@ public class LoginPanelView extends JPanel {
     private JLabel forgotLabel;
     private JButton loginButton;
     private JButton createAccButton;
+    private JComboBox userTypeComboBox;
 
 
     public LoginPanelView() {
@@ -61,7 +64,7 @@ public class LoginPanelView extends JPanel {
         flowLayout_4.setVgap(10);
         userTypePanel.add(comboHolder);
 
-        JComboBox userTypeComboBox = new JComboBox( userTypes );
+        userTypeComboBox = new JComboBox( userTypes );
         comboHolder.add(userTypeComboBox);
 
         JPanel usernamePanel = new JPanel();
@@ -108,7 +111,7 @@ public class LoginPanelView extends JPanel {
         FlowLayout flowLayout = (FlowLayout) forgotPanel.getLayout();
         centerPanel.add(forgotPanel);
 
-        loginButton = new JButton("Login");
+        loginButton = new LoginButtonController(this);
         loginButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
             }
@@ -156,6 +159,10 @@ public class LoginPanelView extends JPanel {
      */
     public JButton getSignupButton() {
         return createAccButton;
+    }
+
+    public JComboBox getUserTypeComboBox() {
+        return userTypeComboBox;
     }
 
     public JTextField getUsernameTextField() {

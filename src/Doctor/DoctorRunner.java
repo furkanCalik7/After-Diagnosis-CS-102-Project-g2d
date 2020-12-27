@@ -9,12 +9,10 @@ import JDBC.MySQLAccess;
 import java.util.ArrayList;
 
 public class DoctorRunner {
-    public static void main(String[] args) {
 
-
-
+    public DoctorRunner(String username) {
         MySQLAccess mySQLAccess = new MySQLAccess();
-        Doctor doctor = mySQLAccess.getDoctorByUsername( "JuliaRoberts" );
+        Doctor doctor = mySQLAccess.getDoctorByUsername( username );
 
         DoctorMainFrameViewer doctorMainFrameViewer = new DoctorMainFrameViewer(doctor);
         MyPatientsLayeredPanelView myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor,doctorMainFrameViewer);
@@ -45,4 +43,5 @@ public class DoctorRunner {
         }
         doctor.addViewer(labTestsMainPanel);
     }
+
 }

@@ -41,28 +41,12 @@ public class PatientMainFrame extends JFrame {
     }
 
     /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    PatientMainFrame frame = new PatientMainFrame();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
-
-    /**
      * Create the frame.
      */
-    public PatientMainFrame() {
+    public PatientMainFrame(String username) {
 
         MySQLAccess access = new MySQLAccess();
-        Patient p = (Patient) access.getUser("AlanGreen");
+        Patient p = (Patient) access.getUser(username);
 
         //Initializing frame
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,6 +66,7 @@ public class PatientMainFrame extends JFrame {
         contentPane.add(buttonPanel, BorderLayout.WEST);
 
         //Creating panels which will be added to main frame
+        SettingsPanel = new SettingsPanel(p);
         HomePagePanel = new HomePagePanel(p);
         MyDrugsPanel = new MyDrugsPanel(p);
         AppointmentPanel = new AppointmentPanel();
@@ -186,7 +171,7 @@ public class PatientMainFrame extends JFrame {
         buttonPanel.add(bloodDonationButton);
         buttonPanel.add(medicalInfoButton);
 
-
+        setVisible(true);
     }
 
 }

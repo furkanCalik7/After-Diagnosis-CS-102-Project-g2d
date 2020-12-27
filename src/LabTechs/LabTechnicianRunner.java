@@ -11,10 +11,10 @@ import common.SettingsPanel;
 
 public class LabTechnicianRunner {
 
-    public static void main(String[] args) {
+    public LabTechnicianRunner(String username) {
 
         MySQLAccess mySQLAccess = new MySQLAccess();
-        LabTechnician labTechnician = (LabTechnician) mySQLAccess.getUser("PeterJackson");
+        LabTechnician labTechnician = (LabTechnician) mySQLAccess.getUser(username);
 
         LabTechnicianMainFrameViewer labTechnicianMainFrameViewer = new LabTechnicianMainFrameViewer(labTechnician);
         LabTechnicianTestsMainPanel labTestsMainPanel = new LabTechnicianTestsMainPanel(labTechnician);

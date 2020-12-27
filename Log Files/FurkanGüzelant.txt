@@ -5,7 +5,7 @@ Database connection is implemented.
 9.12.2020
 Database is connected to server.
 11.12.2020 
-LoginModel is implemented
+Login.LoginModel is implemented
 14.12.2020
 Admin and patient classes are partially implemented
 15.12.2020
