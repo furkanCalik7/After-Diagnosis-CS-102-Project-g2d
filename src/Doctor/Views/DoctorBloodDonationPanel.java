@@ -142,6 +142,7 @@ public class DoctorBloodDonationPanel extends JPanel implements IViewer {
         buttonPanel.add(sendMessageButton, BorderLayout.EAST);
         sendMessageButton.addActionListener(bloodMessageSendController);
 
+        //Struts
         Component verticalStrut_3 = Box.createVerticalStrut(20);
         buttonPanel.add(verticalStrut_3, BorderLayout.NORTH);
 
@@ -159,6 +160,9 @@ public class DoctorBloodDonationPanel extends JPanel implements IViewer {
 
         Component horizontalStrut_1 = Box.createHorizontalStrut(20);
         add(horizontalStrut_1, BorderLayout.EAST);
+
+        //Colors
+
 
     }
 

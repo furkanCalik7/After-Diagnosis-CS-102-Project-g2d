@@ -177,6 +177,18 @@ public class PatientInfoPanelView extends JPanel implements ActionListener, IVie
         Component verticalStrut = Box.createVerticalStrut(20);
         emptySouthPanel.add(verticalStrut);
 
+
+        //Color
+        northPanel.setBackground(new Color(101, 180, 206));
+        centerPanel.setBackground(new Color(101, 180, 206));
+        emptySouthPanel.setBackground(new Color(101, 180, 206));
+        this.setBackground(new Color(101, 180, 206));
+        centerInfoPanel.setBackground(new Color(101, 180, 206));
+        allergiesPanel.setBackground(new Color(101, 180, 206));
+        emptyPanel.setBackground(new Color(101, 180, 206));
+        allergiesLblPanel.setBackground(new Color(101, 180, 206));
+        southPanel.setBackground(SystemColor.activeCaption);
+
     }
 
     @Override

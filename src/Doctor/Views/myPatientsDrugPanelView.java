@@ -104,7 +104,7 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener, I
 
         JPanel drugInputPanel = new JPanel();
         inputPanel.add(drugInputPanel);
-        drugInputPanel.setLayout(new GridLayout(3, 0, 0, 5));
+        drugInputPanel.setLayout(new GridLayout(3, 0, 10, 15));
 
         JPanel drugNamePanel = new JPanel();
         drugNamePanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
@@ -201,7 +201,7 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener, I
 
         JPanel datePanel = new JPanel();
         inputPanel.add(datePanel);
-        datePanel.setLayout(new GridLayout(3, 0, 0, 0));
+        datePanel.setLayout(new GridLayout(3, 0, 0, 5 ));
         JPanel startDatePanel = new JPanel();
         JLabel dateStartPromptLabel = new JLabel("Start Date:");
         dateStartPromptLabel.setFont(new Font("Century", Font.PLAIN, 15));
