@@ -80,6 +80,12 @@ public class ForgotPasswordPanel extends JPanel {
         returnButton.setFont(new Font("Century", Font.PLAIN, 20));
         buttonPanel.add(returnButton);
 
+        //Colors
+        this.setBackground(new Color(101, 180, 206));
+        northPanel.setBackground(new Color(101, 180, 206));
+        mainPanel.setBackground(new Color(101, 180, 206));
+        panel.setBackground(new Color(101, 180, 206));
+
     }
 
 

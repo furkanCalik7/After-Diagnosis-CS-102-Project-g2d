@@ -164,6 +164,12 @@ public class SignupPanelView extends JPanel {
         returnButton.setFont(new Font("Century", Font.PLAIN, 20));
         createButtonHolderPanel.add(returnButton);
 
+        //Colors
+        this.setBackground(new Color(101, 180, 206));
+        northPanel.setBackground(new Color(101, 180, 206));
+        mainPanel.setBackground(new Color(101, 180, 206));
+        topLabelPanel.setBackground( new Color(101, 180, 206));
+
     }
 
     //Getters
