@@ -1,5 +1,8 @@
 package Login.LoginView;
 
+import Login.LoginButtonController;
+import Login.RegisterButtonController;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -186,7 +189,7 @@ public class SignupPanelView extends JPanel {
         JPanel createPanel = new JPanel();
         centerPanel.add(createPanel);
 
-        createButton = new JButton("Create");
+        createButton = new RegisterButtonController(this);
         createPanel.add(createButton);
         createButton.setFont(new Font("Century", Font.PLAIN, 20));
 

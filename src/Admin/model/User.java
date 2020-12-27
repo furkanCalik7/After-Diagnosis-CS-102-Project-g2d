@@ -156,6 +156,16 @@ public abstract class User implements MessageSender {
         }
     }
 
+    public int getUnreadMessageCount() {
+        int count = 0;
+        for(Message message: getInbox()) {
+            if(!message.is_read()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 
     @Override
     public String toString() {
