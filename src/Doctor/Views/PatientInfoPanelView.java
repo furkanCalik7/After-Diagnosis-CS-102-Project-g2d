@@ -136,9 +136,9 @@ public class PatientInfoPanelView extends JPanel implements ActionListener, IVie
         requestButton.setFont(new Font("Century", Font.PLAIN, 15));
         southPanel.add(requestButton);
 
-        JButton editButton = new JButton("Edit Patient Information");
-        editButton.setFont(new Font("Century", Font.PLAIN, 15));
-        southPanel.add(editButton);
+//        JButton editButton = new JButton("Edit Patient Information");
+//        editButton.setFont(new Font("Century", Font.PLAIN, 15));
+//        southPanel.add(editButton);
 
         drugButton = new JButton("Go to Drug Page of The Patient");
         drugButton.setFont(new Font("Century", Font.PLAIN, 15));
@@ -163,7 +163,6 @@ public class PatientInfoPanelView extends JPanel implements ActionListener, IVie
         allergiesPrsntLbl.setFont(new Font("Century", Font.PLAIN, 20));
         allergiesPrsntLbl.setHorizontalAlignment(SwingConstants.CENTER);
 
-        //TODO This label will take allergies.
         JLabel allergiesLabel = new JLabel(patientSlot.getPatientInfo().getAllergies());
         allergiesTopPanel.add(allergiesLabel);
         allergiesLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -190,7 +189,6 @@ public class PatientInfoPanelView extends JPanel implements ActionListener, IVie
     }
 
 
-    //TODO UPDATE METODUNU YAZ
     @Override
     public void update() {
 

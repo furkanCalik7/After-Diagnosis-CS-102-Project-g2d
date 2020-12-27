@@ -1,12 +1,14 @@
 package common;
 
+import Admin.model.IViewer;
 import Admin.model.User;
+
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class SettingsPanel extends JPanel {
+public class SettingsPanel extends JPanel implements IViewer {
 
     JTextField nameTextField;
     JTextField mailTextField;
@@ -144,4 +146,8 @@ public class SettingsPanel extends JPanel {
 
     }
 
+    @Override
+    public void update() {
+
+    }
 }

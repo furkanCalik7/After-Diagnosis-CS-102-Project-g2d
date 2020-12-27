@@ -202,7 +202,6 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener, I
         JPanel datePanel = new JPanel();
         inputPanel.add(datePanel);
         datePanel.setLayout(new GridLayout(3, 0, 0, 0));
-        //TODO TIKLAYINCA TEKRAR KAPATMASINI AYARLA
         JPanel startDatePanel = new JPanel();
         JLabel dateStartPromptLabel = new JLabel("Start Date:");
         dateStartPromptLabel.setFont(new Font("Century", Font.PLAIN, 15));
