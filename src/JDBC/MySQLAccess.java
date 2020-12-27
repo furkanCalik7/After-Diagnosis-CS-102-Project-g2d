@@ -297,6 +297,19 @@ public class MySQLAccess {
         return false;
     }
 
+    public void resetPassword(String email, String password) {
+        try {
+            connect = dbConnection.getConnection();
+            String sql = "UPDATE user SET password = ? WHERE email = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setString(1, password);
+            preparedStatement.setString(2, email);
+            preparedStatement.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public boolean changeEmail(String username, String email) {
         try {
             connect = dbConnection.getConnection();
@@ -1259,7 +1272,6 @@ public class MySQLAccess {
         }
         return null;
     }
-
 
     public void deleteUser(User u) {
         try {

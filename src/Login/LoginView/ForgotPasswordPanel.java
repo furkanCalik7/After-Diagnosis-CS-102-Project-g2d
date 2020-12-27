@@ -1,5 +1,7 @@
 package Login.LoginView;
 
+import Login.ResetButtonController;
+
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -72,7 +74,7 @@ public class ForgotPasswordPanel extends JPanel {
         flowLayout.setAlignment(FlowLayout.RIGHT);
         centerPanel.add(buttonPanel);
 
-        resetButton = new JButton("Reset");
+        resetButton = new ResetButtonController(this);
         resetButton.setFont(new Font("Century", Font.PLAIN, 20));
         buttonPanel.add(resetButton);
 
