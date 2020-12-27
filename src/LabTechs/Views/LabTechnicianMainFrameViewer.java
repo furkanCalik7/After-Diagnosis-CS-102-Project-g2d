@@ -85,7 +85,7 @@ public class LabTechnicianMainFrameViewer extends JFrame implements IColors {
         buttonPanel = new JPanel();
         buttonPanel.setBackground( lblue );
         buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
-        buttonPanel.setLayout(new GridLayout(8, 1, 15, 5));
+        buttonPanel.setLayout(new GridLayout(6, 1, 15, 5));
         contentPane.add(buttonPanel, BorderLayout.WEST);
 
         labTechHomepagePanelView = new LabTechnicianHomepagePanelView(labTechnician, this);
@@ -123,13 +123,6 @@ public class LabTechnicianMainFrameViewer extends JFrame implements IColors {
             }
         });
         buttonPanel.add(labTestsButton);
-
-        addTestsButton = new JButton("Add Tests");
-        addTestsButton.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-        buttonPanel.add(addTestsButton);
 
         JButton messagesButton = new JButton("Messages");
         messagesButton.addActionListener(new ActionListener() {

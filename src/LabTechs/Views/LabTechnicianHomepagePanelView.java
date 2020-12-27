@@ -52,7 +52,7 @@ public class LabTechnicianHomepagePanelView extends JPanel implements IColors {
         infoPanel.setLayout(new GridLayout(5, 1, 0, 0));
 
         JPanel nameHolderPanel = new JPanel();
-        nameHolderPanel.setBackground( lgreen );
+        nameHolderPanel.setBackground( lblue2 );
         infoPanel.add(nameHolderPanel);
         nameHolderPanel.setLayout(new BoxLayout(nameHolderPanel, BoxLayout.X_AXIS));
         JLabel labTechnicianPresenterLabel = new JLabel("Name: ");
@@ -63,7 +63,7 @@ public class LabTechnicianHomepagePanelView extends JPanel implements IColors {
         labTechnicianNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         JPanel idHolderPanel = new JPanel();
-        idHolderPanel.setBackground( lgreen );
+        idHolderPanel.setBackground( lblue2 );
         infoPanel.add(idHolderPanel);
         idHolderPanel.setLayout(new BoxLayout(idHolderPanel, BoxLayout.X_AXIS));
         JLabel idPresenterLabel = new JLabel( "Lab Technician ID: " );
@@ -74,7 +74,7 @@ public class LabTechnicianHomepagePanelView extends JPanel implements IColors {
         doctorIDLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         JPanel mailHolderPanel = new JPanel();
-        mailHolderPanel.setBackground( lgreen );
+        mailHolderPanel.setBackground( lblue2 );
         infoPanel.add(mailHolderPanel);
         mailHolderPanel.setLayout(new BoxLayout(mailHolderPanel, BoxLayout.X_AXIS));
         JLabel mailPresenterLabel = new JLabel("Mail Address: ");
@@ -83,6 +83,17 @@ public class LabTechnicianHomepagePanelView extends JPanel implements IColors {
         JLabel mailLabel = new JLabel(labTechnician.getEmail());
         mailHolderPanel.add(mailLabel);
         mailLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+
+        JPanel unReadMessagesPanel = new JPanel();
+        unReadMessagesPanel.setBackground( lblue2 );
+        infoPanel.add(unReadMessagesPanel);
+        unReadMessagesPanel.setLayout(new BoxLayout(unReadMessagesPanel, BoxLayout.X_AXIS));
+        JLabel unReadMessagePresenterLabel = new JLabel( "You have " );
+        unReadMessagesPanel.add(unReadMessagePresenterLabel);
+        unReadMessagePresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        JLabel unReadMessagesLabel = new JLabel( " x new messages!" );
+        unReadMessagesPanel.add(unReadMessagesLabel);
+        unReadMessagesLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         homePagePanel.add( infoGeneralPanel, BorderLayout.CENTER );
         //homePagePanel.add(infoGeneralPanel , BorderLayout.EAST);  //add General Info Panel
