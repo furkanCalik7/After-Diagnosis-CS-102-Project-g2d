@@ -75,6 +75,8 @@ public class MessagePanel extends JPanel {
      */
     public MessagePanel(User user) {
         this.user = user;
+        outbox = user.getOutbox();
+        inbox = user.getInbox();
         setLayout(new BorderLayout(0, 5));
         readMessagePanelView = new ReadMessagePanelView();
         layeredPane = new JLayeredPane();
@@ -274,7 +276,7 @@ public class MessagePanel extends JPanel {
 
 
         public SentTable() {
-            outbox = user.getOutbox();
+            ;
         }
 
         public int getColumnCount() {
@@ -342,7 +344,7 @@ public class MessagePanel extends JPanel {
 
 
         public InboxTable() {
-            inbox = user.getInbox();
+
         }
 
         public int getColumnCount() {

@@ -6,7 +6,7 @@ import java.awt.*;
 
 public class ReadMessagePanelView extends JPanel {
 
-    private JTextArea messageTxtArea;
+    private JLabel messageTxtArea;
     private JLabel subjectLabel;
     private JLabel senderLabel;
 
@@ -32,15 +32,15 @@ public class ReadMessagePanelView extends JPanel {
 
         JLabel senderPromptLabel = new JLabel("Sender:");
         SenderPanel.add(senderPromptLabel);
-        senderPromptLabel.setFont(new Font("Centaur", Font.PLAIN, 20));
+        senderPromptLabel.setFont(new Font("Centaur", Font.PLAIN, 18));
 
         senderLabel = new JLabel("ExampleName");
         SenderPanel.add(senderLabel);
-        senderLabel.setFont(new Font("Centaur", Font.PLAIN, 20));
+        senderLabel.setFont(new Font("Centaur", Font.PLAIN, 18));
 
         JPanel centerPanel = new JPanel();
         add(centerPanel, BorderLayout.CENTER);
-        centerPanel.setLayout(new BorderLayout(0, 10));
+        centerPanel.setLayout(new BorderLayout(0, 18));
 
         JPanel subjectLabelPanel = new JPanel();
         centerPanel.add(subjectLabelPanel, BorderLayout.NORTH);
@@ -52,21 +52,37 @@ public class ReadMessagePanelView extends JPanel {
         subjectLabelsPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 25, 5));
 
         JLabel subjectPromptLabel = new JLabel("Subject:");
-        subjectPromptLabel.setFont(new Font("Centaur", Font.PLAIN, 20));
+        subjectPromptLabel.setFont(new Font("Centaur", Font.PLAIN, 18));
         subjectLabelsPanel.add(subjectPromptLabel);
 
         subjectLabel = new JLabel("Example Subject");
-        subjectLabel.setFont(new Font("Centaur", Font.PLAIN, 20));
+        subjectLabel.setFont(new Font("Centaur", Font.PLAIN, 18));
         subjectLabelsPanel.add(subjectLabel);
 
         JPanel textAreaPanel = new JPanel();
         centerPanel.add(textAreaPanel, BorderLayout.CENTER);
-        textAreaPanel.setLayout(new BorderLayout(0, 0));
 
-        messageTxtArea = new JTextArea();
-        messageTxtArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
-        messageTxtArea.setText("Message.");
-        textAreaPanel.add(messageTxtArea);
+        textAreaPanel.setLayout(new GridBagLayout());
+        GridBagConstraints gc = new GridBagConstraints();
+
+        textAreaPanel.setBackground(Color.white);
+
+        gc.gridx = 0;
+        gc.gridy = 0;
+        gc.weightx = 1;
+        gc.anchor = GridBagConstraints.NORTHWEST;
+        gc.insets = new Insets(2, 0, 0, 2);
+
+
+//        messageTxtArea = new JLabel();
+//        messageTxtArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
+//        messageTxtArea.setVerticalTextPosition(JLabel.LEADING);
+//        messageTxtArea.setHorizontalTextPosition(JLabel.CENTER);
+//        textAreaPanel.add(messageTxtArea, gc);
+//
+//        messageTxtArea.setBorder(BorderFactory.createLineBorder(Color.RED));
+//        messageTxtArea.setText("Message.");
+//        textAreaPanel.add(messageTxtArea);
     }
 
 
