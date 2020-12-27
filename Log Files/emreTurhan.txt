@@ -1,1 +1,23 @@
+16.12.2020
 GUI components of administator added
+
+20.12.2020
+Some bugs are fixed about administrator
+
+22.12.2020
+Visual updates done on Administrator GUI
+
+23.12.2020
+GUI classes of patient are started to being worked on.
+
+24.12.2020
+Half of the GUI classes of doctor completed, some bugs are fixed.
+
+25.12.2020
+GUI classes of doctor almost completed, some visual changes are done.
+
+26.12.2020
+Choose birthday panel is added to Patient GUI, action listener is set.
+
+27.12.2020
+Colors of patient GUI classes are updated, action listeners are updated.
