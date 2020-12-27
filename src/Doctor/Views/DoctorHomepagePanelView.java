@@ -78,19 +78,6 @@ public class DoctorHomepagePanelView extends JPanel {
         idHolderPanel.add(doctorIDLabel);
         doctorIDLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        JPanel dateHolderPanel = new JPanel();
-        infoPanel.add(dateHolderPanel);
-        dateHolderPanel.setLayout(new BoxLayout(dateHolderPanel, BoxLayout.X_AXIS));
-
-        JLabel datePresenterLabel = new JLabel("Join Date:");
-        dateHolderPanel.add(datePresenterLabel);
-        datePresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
-        // TODO dateLabel will be doctor.getJoinDate()?;
-        JLabel dateLabel = new JLabel("MM/DD/YYYY");
-        dateHolderPanel.add(dateLabel);
-        dateLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
         JPanel mailHolderPanel = new JPanel();
         infoPanel.add(mailHolderPanel);
         mailHolderPanel.setLayout(new BoxLayout(mailHolderPanel, BoxLayout.X_AXIS));
@@ -103,6 +90,15 @@ public class DoctorHomepagePanelView extends JPanel {
         mailHolderPanel.add(mailLabel);
         mailLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
+        //Color
+        this.setBackground(new Color(101, 180, 206));
+        labelHolderPanel.setBackground(new Color(101, 180, 206));
+        infoGeneralPanel.setBackground(new Color(101, 180, 206));
+        placeHolderPanel.setBackground(new Color(101, 180, 206));
+        infoPanel.setBackground(new Color(101, 180, 206));
+        nameHolderPanel.setBackground(new Color(101, 180, 206));
+        idHolderPanel.setBackground(new Color(101, 180, 206));
+        mailHolderPanel.setBackground(new Color(101, 180, 206));
     }
 
 }
