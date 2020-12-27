@@ -30,7 +30,10 @@ public class FileChooserForUploadController {
                     Test test = Test.newTest( testRequest.getDoctor_username(), labTechnician.getUsername(), testRequest.getTest_name() , testRequest.getPatient() , selectedFile );
                     boolean isUploadSuccesfull = test.sendTest();
 
-                    if( isUploadSuccesfull ){ JOptionPane.showMessageDialog( panel , "The Test has been successfully Uploaded!" ); }
+                    if( isUploadSuccesfull ){
+
+                        JOptionPane.showMessageDialog( panel , "The Test has been successfully Uploaded!" );
+                    }
 
                     else{ JOptionPane.showMessageDialog( panel , "The test could not have been Uploaded!" ); }
 

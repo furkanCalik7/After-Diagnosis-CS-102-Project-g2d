@@ -63,7 +63,6 @@ public class WaitingTestsPanel extends JPanel implements IViewer , IColors{
             testRequests = labTechnician.getTestRequests();
         }
 
-
         public int getColumnCount() {
             return columnNames.length;
         }

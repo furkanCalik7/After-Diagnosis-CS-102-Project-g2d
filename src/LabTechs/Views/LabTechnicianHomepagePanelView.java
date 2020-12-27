@@ -93,7 +93,7 @@ public class LabTechnicianHomepagePanelView extends JPanel implements IColors {
         homePagePanel.add(actionsMainPanel , BorderLayout.WEST); //add Actions Main Panel
         actionsMainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        JButton waitingTestsButton = new JButton("x Waiting Tests");
+        JButton waitingTestsButton = new JButton( labTechnician.getTestRequests().size() + " Waiting Tests");
         waitingTestsButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         waitingTestsButton.addActionListener(new ActionListener() {
@@ -103,10 +103,10 @@ public class LabTechnicianHomepagePanelView extends JPanel implements IColors {
             }
         });
 
-        JLabel waitingTestsLabel = new JLabel("waitingTestIcon");
+        //JLabel waitingTestsLabel = new JLabel("waitingTestIcon");
 
         actionsMainPanel.add( waitingTestsButton );
-        actionsMainPanel.add( waitingTestsLabel );
+        //actionsMainPanel.add( waitingTestsLabel );
         homePagePanel.add(actionsMainPanel , BorderLayout.SOUTH);
 
     }
