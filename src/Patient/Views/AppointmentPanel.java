@@ -2,6 +2,7 @@ package Patient.Views;
 
 import Appointment.Appointment;
 import Doctor.Views.DatePickerPanel;
+import Patient.Controllers.TakeAppointmentButton;
 import Patient.Model.Patient;
 import com.github.lgooddatepicker.components.CalendarPanel;
 import com.github.lgooddatepicker.components.DatePickerSettings;
@@ -258,7 +259,7 @@ public class AppointmentPanel extends JPanel {
         endButtonPanel.setBackground(new Color(101, 180, 206));
         endButtonPanel.setLayout( new FlowLayout( FlowLayout.CENTER) );
 
-        JButton completeButton = new JButton("Complete");
+        JButton completeButton = new TakeAppointmentButton((Patient) user, this);
         endButtonPanel.add(completeButton);
 
         takeAppointmentPanell.add(endButtonPanel);
