@@ -144,6 +144,9 @@ public class SettingsPanel extends JPanel implements IViewer {
         saveYourChangesButton.setFont(new Font("Century", Font.PLAIN, 20));
         createPanel.add(saveYourChangesButton);
 
+        //Colors
+        this.setBackground(new Color(101, 180, 206));
+        topHeaderPanel.setBackground(new Color(101, 180, 206));
     }
 
     @Override

@@ -1,7 +1,5 @@
 package Login.LoginView;
 
-import Login.RegisterButtonController;
-
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -10,10 +8,13 @@ import java.awt.GridLayout;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import java.awt.FlowLayout;
+
+import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.border.LineBorder;
 import java.awt.Color;
 import javax.swing.border.MatteBorder;
+import javax.swing.JRadioButton;
 
 public class SignupPanelView extends JPanel {
     private JTextField nameTxtField;
@@ -46,7 +47,7 @@ public class SignupPanelView extends JPanel {
         JPanel centerPanel = new JPanel();
         centerPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         mainPanel.add(centerPanel);
-        centerPanel.setLayout(new GridLayout(7, 0, 0, 2));
+        centerPanel.setLayout(new GridLayout(8, 0, 0, 2));
 
         JPanel createPromptPanel = new JPanel();
         createPromptPanel.setBorder(new MatteBorder(0, 0, 1, 0, (Color) new Color(0, 0, 0)));
@@ -155,20 +156,48 @@ public class SignupPanelView extends JPanel {
 
         JPanel createButtonHolderPanel = new JPanel();
         centerPanel.add(createButtonHolderPanel);
+        createButtonHolderPanel.setLayout(new GridLayout(0, 2, 0, 5));
 
-        createButton = new RegisterButtonController(this);
+        JPanel genderLblPanel = new JPanel();
+        createButtonHolderPanel.add(genderLblPanel);
+
+        JLabel genderPromptLbl = new JLabel("Choose your gender:");
+        genderPromptLbl.setFont(new Font("Centaur", Font.PLAIN, 25));
+        genderLblPanel.add(genderPromptLbl);
+
+        JPanel genderChoosePanel = new JPanel();
+        createButtonHolderPanel.add(genderChoosePanel);
+
+        ButtonGroup buttonGroup = new ButtonGroup();
+
+        JRadioButton maleRadioButton = new JRadioButton("Male");
+        maleRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        genderChoosePanel.add(maleRadioButton);
+
+        JRadioButton femaleRadioButton = new JRadioButton("Female");
+        femaleRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
+        genderChoosePanel.add(femaleRadioButton);
+
+        buttonGroup.add(femaleRadioButton);
+        buttonGroup.add(maleRadioButton);
+
+        JPanel createPanel = new JPanel();
+        centerPanel.add(createPanel);
+
+        createButton = new JButton("Create");
+        createPanel.add(createButton);
         createButton.setFont(new Font("Century", Font.PLAIN, 20));
-        createButtonHolderPanel.add(createButton);
 
         returnButton = new JButton("Return");
+        createPanel.add(returnButton);
         returnButton.setFont(new Font("Century", Font.PLAIN, 20));
-        createButtonHolderPanel.add(returnButton);
 
         //Colors
         this.setBackground(new Color(101, 180, 206));
         northPanel.setBackground(new Color(101, 180, 206));
         mainPanel.setBackground(new Color(101, 180, 206));
         topLabelPanel.setBackground( new Color(101, 180, 206));
+
 
     }
 

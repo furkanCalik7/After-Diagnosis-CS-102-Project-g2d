@@ -3,6 +3,7 @@ package Doctor.Views;
 import Admin.model.IViewer;
 import Doctor.Model.Doctor;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
@@ -100,6 +101,16 @@ public class DoctorHomepagePanelView extends JPanel implements IViewer {
         nameHolderPanel.setBackground(new Color(101, 180, 206));
         idHolderPanel.setBackground(new Color(101, 180, 206));
         mailHolderPanel.setBackground(new Color(101, 180, 206));
+
+        //Icon
+        placeHolderPanel.setLayout(new BorderLayout(0, 0));
+
+//        JLabel iconLabel = new JLabel("" );
+//        iconLabel.setFont(new Font("Tahoma", Font.PLAIN, 29));
+//        iconLabel.setIcon( new ImageIcon("C:\\Users\\42ber\\OneDrive\\Masa\u00FCst\u00FC\\stet.png") );
+//        iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
+//        placeHolderPanel.add(iconLabel, BorderLayout.CENTER);
+
     }
 
     @Override
