@@ -6,6 +6,8 @@ import Patient.Views.MedInfoPanel;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.time.LocalDate;
 
 public class MedInfoControls extends JButton {
 
@@ -28,10 +30,18 @@ public class MedInfoControls extends JButton {
             String surgery = panel.getSurgeryTextField().getText();
             String bloodType = panel.getBloodTypecomboBox().getSelectedItem().toString();
             String rh = panel.getRhComboBox().getSelectedItem().toString();
+            String date = panel.getDatePickPanel().getSelectedDate();
+            String complaint = panel.getAdditionalInfoTextField().getText();
 
+            Date dob = Date.valueOf(date);
             bloodType += rh;
+            System.out.println(bloodType);
 
-            patient.setPatientInfo(null, bloodType, 0, allergie, surgery, ""); //TODO Date, age, complaint
+
+            int year = LocalDate.now().getYear();
+            int age = year - Integer.parseInt(date.substring(0, 4));
+
+            patient.setPatientInfo(dob, bloodType, age, allergie, surgery, complaint);
 
         }
     }

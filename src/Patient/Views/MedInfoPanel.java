@@ -40,6 +40,7 @@ public class MedInfoPanel extends JPanel {
     private JLayeredPane layeredPane;
     private JComboBox bloodTypecomboBox;
     private JComboBox rhComboBox;
+    private DatePickerPanel datePickPanel;
 
     /**
      * Create the panel.
@@ -71,6 +72,9 @@ public class MedInfoPanel extends JPanel {
         return additionalInfoTextField;
     }
 
+    public DatePickerPanel getDatePickPanel() {
+        return datePickPanel;
+    }
 
     public MedInfoPanel(Patient patient) {
 
@@ -215,7 +219,7 @@ public class MedInfoPanel extends JPanel {
         dateLabel.setFont(new Font("Century", Font.PLAIN, 15));
         dateLabelPanel.add(dateLabel);
 
-        JPanel datePickPanel = new DatePickerPanel();
+        datePickPanel = new DatePickerPanel();
         datePickPanel.setBackground(new Color(101, 180, 206));
         datePickContainer.add(datePickPanel);
 
