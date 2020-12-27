@@ -5,6 +5,7 @@ import Doctor.Model.*;
 import LabTechs.Model.*;
 
 import Patient.Model.*;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -134,6 +135,7 @@ public class MySQLAccess {
             e.printStackTrace();
         }
     }
+
     private int getID(String username) {
         try {
             int userID = 0;
@@ -432,7 +434,7 @@ public class MySQLAccess {
                     if (rset.next()) {
                         speciality = rset.getString("speciality");
                     }
-                    userList.add(new Doctor(id,username, password, email, name, surname, sex, speciality));
+                    userList.add(new Doctor(id, username, password, email, name, surname, sex, speciality));
                 }
             }
             return userList;
@@ -579,6 +581,48 @@ public class MySQLAccess {
         return null;
     }
 
+    public boolean readMessage(Message message) {
+        try {
+            connect = dbConnection.getConnection();
+            String sql = "UPDATE message SET is_read = ? WHERE sent_time = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setBoolean(1, true);
+            preparedStatement.setTime(2, message.getSent_time());
+            int i = preparedStatement.executeUpdate();
+
+            if(i >0){
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return false;
+    }
+
+    public boolean removeMessage(Time time) {
+        try {
+            connect = dbConnection.getConnection();
+            String sql = "DELETE FROM message WHERE sent_time = ?";
+            preparedStatement = connect.prepareStatement(sql);
+            preparedStatement.setTime(1, time);
+            int i = preparedStatement.executeUpdate();
+
+            if(i >0){
+                return true;
+            }
+            return false;
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            close();
+        }
+        return false;
+    }
+
+
     public void readPatientInfo(String username, Date dob, String bloodType, int age, String allergies, String surgeries, String complaint) {
         int user_id;
         try {
@@ -630,20 +674,19 @@ public class MySQLAccess {
         return false;
     }
 
-    public void removeTest(Time time){
-        try{
+    public void removeTest(Time time) {
+        try {
             connect = dbConnection.getConnection();
             String sql = "DELETE FROM test WHERE sent_time = ?";
             preparedStatement = connect.prepareStatement(sql);
             preparedStatement.setTime(1, time);
             preparedStatement.executeUpdate();
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close();
         }
     }
-
 
 
     public ArrayList<Test> getTestOfDoctor(String doc_username) {
@@ -679,6 +722,7 @@ public class MySQLAccess {
         return null;
 
     }
+
     public ArrayList<Test> getTestOfLabTech(String labTechUsername) {
         try {
             ArrayList<Test> tests = new ArrayList<>();
@@ -712,6 +756,7 @@ public class MySQLAccess {
         return null;
 
     }
+
     public void writeTestResult(Test test, Path path) {
         try {
             int i;
@@ -779,7 +824,7 @@ public class MySQLAccess {
                     if (rs.next()) {
                         speciality = rs.getString("speciality");
                     }
-                    docList.add(new DoctorInfoCard(doctorID,username, email, name, surname, sex, speciality));
+                    docList.add(new DoctorInfoCard(doctorID, username, email, name, surname, sex, speciality));
                 }
             }
             return docList;
@@ -803,13 +848,11 @@ public class MySQLAccess {
             resultSet = preparedStatement.executeQuery();
 
 
-
             while (resultSet.next()) {
                 patientID = resultSet.getInt("patient_id");
                 sql = "SELECT username FROM user WHERE user_id = ?";
                 preparedStatement = connect.prepareStatement(sql);
                 preparedStatement.setInt(1, patientID);
-
 
 
                 ResultSet rs = preparedStatement.executeQuery();
@@ -837,8 +880,8 @@ public class MySQLAccess {
             String code_id;
             connect = dbConnection.getConnection();
 
-            for(PatientInfoCard patientInfoCard: patientInfos){
-              // patient_id = getID(patientInfoCard.getUsername());
+            for (PatientInfoCard patientInfoCard : patientInfos) {
+                // patient_id = getID(patientInfoCard.getUsername());
                 patient_id = patientInfoCard.getUser_id();
                 String sql = "SELECT * FROM doctor_patient WHERE doctor_id = ? AND patient_id = ?";
                 preparedStatement = connect.prepareStatement(sql);
@@ -846,11 +889,11 @@ public class MySQLAccess {
                 preparedStatement.setInt(2, patient_id);
                 resultSet = preparedStatement.executeQuery();
 
-                while(resultSet.next()){
+                while (resultSet.next()) {
                     status = resultSet.getInt("status");
                     start_date = resultSet.getDate("start_date");
                     code_id = resultSet.getString("code");
-                    patientSlots.add(new PatientSlot(doctor.getUsername(), patientInfoCard,status,code_id,start_date));
+                    patientSlots.add(new PatientSlot(doctor.getUsername(), patientInfoCard, status, code_id, start_date));
                 }
             }
 
@@ -974,7 +1017,8 @@ public class MySQLAccess {
             close();
         }
     }
-    public boolean addTestRequest(TestRequest testRequest){
+
+    public boolean addTestRequest(TestRequest testRequest) {
         try {
             connect = dbConnection.getConnection();
             String sql = "INSERT INTO test_request VALUES(DEFAULT , ?, ?, ?)";
@@ -984,18 +1028,19 @@ public class MySQLAccess {
             preparedStatement.setString(3, testRequest.getDoctor_username());
 
             int i = preparedStatement.executeUpdate();
-            if(i > 0){
+            if (i > 0) {
                 return true;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close();
         }
         return false;
     }
-    public ArrayList<TestRequest> getTestRequest(){
+
+    public ArrayList<TestRequest> getTestRequest() {
         try {
             connect = dbConnection.getConnection();
             String sql = "SELECT * FROM test_request";
@@ -1007,23 +1052,23 @@ public class MySQLAccess {
             String doctor_username;
             ArrayList<TestRequest> testRequests = new ArrayList<>();
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 test_name = resultSet.getString("test_name");
                 patientInfoCard = resultSet.getString("patient_username");
                 doctor_username = resultSet.getString("doctor_username");
-                testRequests.add(new TestRequest(test_name,patientInfoCard,doctor_username));
+                testRequests.add(new TestRequest(test_name, patientInfoCard, doctor_username));
             }
             return testRequests;
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close();
         }
         return null;
     }
 
-    public boolean deleteTestRequest(TestRequest testRequest){
+    public boolean deleteTestRequest(TestRequest testRequest) {
         try {
             connect = dbConnection.getConnection();
             String sql = "DELETE FROM test_request WHERE test_name = ? AND patient_username = ?";
@@ -1032,13 +1077,13 @@ public class MySQLAccess {
             preparedStatement.setString(2, testRequest.getPatient());
 
             int i = preparedStatement.executeUpdate();
-            if(i > 0){
+            if (i > 0) {
                 return true;
             }
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {
+        } finally {
             close();
         }
         return false;
@@ -1070,7 +1115,7 @@ public class MySQLAccess {
             if (rs.next()) {
                 speciality = rs.getString("speciality");
             }
-            return new Doctor(user_id,doctorUserName, password, email, name, surname, sex, speciality);
+            return new Doctor(user_id, doctorUserName, password, email, name, surname, sex, speciality);
 
 
         } catch (Exception e) {
@@ -1098,7 +1143,7 @@ public class MySQLAccess {
             String sex = "";
             String password = "";
 
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 password = resultSet.getString("password");
                 user_id = resultSet.getInt("user_id");
                 userType = resultSet.getString("user_type");
@@ -1109,13 +1154,11 @@ public class MySQLAccess {
                 sex = resultSet.getString("sex");
             }
 
-            if(userType.equals("LabTechnician")) {
-                u = new LabTechnician(user_id, username, password, email,  name, surname, sex);
-            }
-            else if(userType.equals("Patient")) {
-                u = new Patient(user_id,username, email, password, name, surname, sex);
-            }
-            else {
+            if (userType.equals("LabTechnician")) {
+                u = new LabTechnician(user_id, username, password, email, name, surname, sex);
+            } else if (userType.equals("Patient")) {
+                u = new Patient(user_id, username, email, password, name, surname, sex);
+            } else {
                 u = new Admin(user_id, username, email, password, name, surname, sex);
             }
             return u;
@@ -1124,6 +1167,7 @@ public class MySQLAccess {
         }
         return null;
     }
+
     public ArrayList<DoctorInfoCard> getAllDoctors() {
         try {
             int doctorID = 0;
@@ -1144,7 +1188,7 @@ public class MySQLAccess {
                     String name = rs.getString("name");
                     String surname = rs.getString("surname");
                     String sex = rs.getString("sex");
-                    docList.add(new DoctorInfoCard(doctorID,username, email, name, surname, sex, speciality));
+                    docList.add(new DoctorInfoCard(doctorID, username, email, name, surname, sex, speciality));
                 }
             }
             return docList;
@@ -1193,25 +1237,24 @@ public class MySQLAccess {
                 String sex = resultSet.getString("sex");
                 String userType = resultSet.getString("user_type");
 
-                if(userType.equals("Doctor")) {
+                if (userType.equals("Doctor")) {
                     preparedStatement = connect.prepareStatement("SELECT speciality FROM doctor WHERE doctor_id = ?");
                     preparedStatement.setInt(1, userID);
                     ResultSet rs = preparedStatement.executeQuery();
-                    if(rs.next()) {
+                    if (rs.next()) {
                         String speciality = rs.getString("speciality");
                         UserInfoCard u = new DoctorInfoCard(userID, username, email, name, surname, sex, speciality);
                         workers.add(u);
                     }
-                }
-                else {
+                } else {
                     workers.add(new UserInfoCard(userID, userType, username, email, name, surname, sex));
                 }
             }
-            return  workers;
+            return workers;
         } catch (Exception e) {
             System.out.println(e);
         }
-        return  null;
+        return null;
     }
 
 

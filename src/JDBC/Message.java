@@ -37,6 +37,19 @@ public class Message {
         return mySQLAccess.addMessage(this);
     }
 
+    public boolean removeMessage(){
+        MySQLAccess mySQLAccess = new MySQLAccess();
+        return mySQLAccess.removeMessage(sent_time);
+    }
+    public boolean readMessage(){
+        MySQLAccess mySQLAccess = new MySQLAccess();
+        is_read = true;
+        return mySQLAccess.readMessage(this);
+    }
+
+
+
+
     public String getReceiver_username() {
         return receiver_username;
     }
@@ -59,15 +72,5 @@ public class Message {
         return is_read;
     }
 
-    @Override
-    public String toString() {
-        return "JDBC.Message{ receiver_user=" + receiver_username +
-                ", sender_user=" + sender_username+
-                ", subject='" + subject + '\'' +
-                ", content='" + content + '\'' +
-                ", sent_date=" + sent_date +
-                ", sent_time=" + sent_time +
-                ", is_read=" + is_read +
-                '}';
-    }
+
 }

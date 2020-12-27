@@ -12,6 +12,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.event.TableModelEvent;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
 import java.awt.event.ActionListener;
@@ -37,6 +38,7 @@ public class MessagePanel extends JPanel {
     private ReadMessagePanelView readMessagePanelView;
     private ArrayList<Message> inbox;
     private ArrayList<Message> outbox;
+    private final InboxTable dataModel;
 
     public void switchPanels(JPanel panel) {
         layeredPane.removeAll();
@@ -122,6 +124,7 @@ public class MessagePanel extends JPanel {
         sentJTable = new JTable();
         SentTable tableModel = new SentTable();
         sentJTable.setModel(tableModel);
+
         rs = new TableRowSorter<>(tableModel);
         sentJTable.setRowSorter(rs);
         sentMessagesScrollPane = new JScrollPane(sentJTable);
@@ -169,8 +172,15 @@ public class MessagePanel extends JPanel {
 
         //Initializing the table and scroll pane.
         inboxJTable = new JTable();
-        InboxTable dataModel = new InboxTable();
+
+
+        TableCellRenderer renderer = new IsSendRenderer();
+
+        inboxJTable.setDefaultRenderer(Object.class, renderer);
+
+        dataModel = new InboxTable();
         inboxJTable.setModel(dataModel);
+
         rowSorter = new TableRowSorter<>(dataModel);
         inboxJTable.setRowSorter(rowSorter);
         JScrollPane inboxMessagesScrollPane = new JScrollPane(inboxJTable);
@@ -268,6 +278,37 @@ public class MessagePanel extends JPanel {
         add(emptyPanel, BorderLayout.SOUTH);
     }
 
+    public class IsSendRenderer implements TableCellRenderer {
+
+        public final DefaultTableCellRenderer DEFAULT_RENDERER = new DefaultTableCellRenderer();
+
+        public Component getTableCellRendererComponent(JTable table, Object value,
+                                                       boolean isSelected, boolean hasFocus, int row, int column) {
+            DEFAULT_RENDERER.setHorizontalAlignment(JLabel.CENTER);
+            Component renderer = DEFAULT_RENDERER.getTableCellRendererComponent(
+                    table, value, isSelected, hasFocus, row, column);
+            ((JLabel) renderer).setOpaque(true);
+
+            Color foreground, background;
+            Color alternate = new Color(0xC0, 0xC0, 0xF0);
+            Color lightBlue = new Color(204, 204, 255);
+
+
+            if (inbox.get(inboxJTable.convertRowIndexToModel(row)).is_read()) {
+                foreground = Color.black;
+                background = Color.white;
+            } else {
+                foreground = Color.black;
+                background = lightBlue;
+            }
+
+            renderer.setForeground(foreground);
+            renderer.setBackground(background);
+            return renderer;
+        }
+
+    }
+
 
     //Outbox Table
     class SentTable extends AbstractTableModel {
@@ -276,7 +317,7 @@ public class MessagePanel extends JPanel {
 
 
         public SentTable() {
-            ;
+
         }
 
         public int getColumnCount() {
@@ -336,8 +377,6 @@ public class MessagePanel extends JPanel {
         rs.setRowFilter(rf);
     }
 
-
-    // Inbox Table
     class InboxTable extends AbstractTableModel {
         private String[] columnNames = new String[]{
                 "Subject", "Sender", "Date", "Status", "Read"};
@@ -378,6 +417,7 @@ public class MessagePanel extends JPanel {
             return "null";
         }
 
+
         public boolean isCellEditable(int row, int col) {
             return col > 3;
         }
@@ -391,6 +431,7 @@ public class MessagePanel extends JPanel {
         public void newRowsAdded(TableModelEvent event) {
             fireTableChanged(event);
         }
+
 
     }
 
@@ -453,6 +494,8 @@ public class MessagePanel extends JPanel {
                 readMessagePanelView.setSenderLabel(outbox.get(sentJTable.convertRowIndexToModel(i)).getReceiver_username());
                 readMessagePanelView.setSubjectLabel(outbox.get(sentJTable.convertRowIndexToModel(i)).getSubject());
                 switchPanels(readMessagePanelView);
+                System.out.println("A");
+                inboxJTable.setDefaultRenderer(Object.class,new IsSendRenderer());
 
             }
             isPushed = false;
@@ -500,10 +543,8 @@ public class MessagePanel extends JPanel {
 
         public Object getCellEditorValue() {
             if (isPushed) {
-                readMessagePanelView.setMessageTxtArea(inbox.get(inboxJTable.convertRowIndexToModel(i)).getContent());
-                readMessagePanelView.setSenderLabel(inbox.get(inboxJTable.convertRowIndexToModel(i)).getReceiver_username());
-                readMessagePanelView.setSubjectLabel(inbox.get(inboxJTable.convertRowIndexToModel(i)).getSubject());
-                switchPanels(readMessagePanelView);
+               MessageReadController messageReadController = new MessageReadController(MessagePanel.this);
+               messageReadController.readMessageFromInbox(i);
             }
             isPushed = false;
             return new String(label);
@@ -520,5 +561,23 @@ public class MessagePanel extends JPanel {
 
     }
 
+    public ReadMessagePanelView getReadMessagePanelView() {
+        return readMessagePanelView;
+    }
 
+    public ArrayList<Message> getInbox() {
+        return inbox;
+    }
+
+    public ArrayList<Message> getOutbox() {
+        return outbox;
+    }
+
+    public JTable getSentJTable() {
+        return sentJTable;
+    }
+
+    public JTable getInboxJTable() {
+        return inboxJTable;
+    }
 }

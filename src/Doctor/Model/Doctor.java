@@ -37,8 +37,6 @@ public class Doctor extends User {
         super(user_id, username, "Doctor", password, email, name, surname, sex);
         this.speciality = speciality;
         mySQLAccess = new MySQLAccess();
-        updateInbox();
-        updateOutbox();
         availableTimes = mySQLAccess.getAvailableDates(this);
         approvedAppointments = mySQLAccess.getApprovedAppointmentOfDoctor(this);
         waitingAppointments = mySQLAccess.getWaitingAppointmentOfDoctor(this);

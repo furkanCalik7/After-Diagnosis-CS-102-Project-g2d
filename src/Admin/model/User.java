@@ -118,6 +118,16 @@ public abstract class User implements MessageSender {
         message.sendMessage();
         updateOutbox();
     }
+
+    public boolean removeMessage(Message message){
+        updateViewers();
+        return message.removeMessage();
+    }
+    public boolean readMessage(Message message){
+        updateViewers();
+       return message.readMessage();
+    }
+
     public void updateInbox(){
         MySQLAccess access = new MySQLAccess();
         inbox = access.getIncomingMessage(getUsername());

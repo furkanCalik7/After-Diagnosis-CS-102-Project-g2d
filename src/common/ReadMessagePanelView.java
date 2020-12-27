@@ -1,5 +1,7 @@
 package common;
 
+
+
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
@@ -15,7 +17,7 @@ public class ReadMessagePanelView extends JPanel {
     }
 
     public void setSubjectLabel(String subjectLabel) {
-        this.subjectLabel.setText(subjectLabel);
+        this.subjectLabel.setText("<html>"+ subjectLabel + "</html>");
     }
 
     public void setSenderLabel(String senderLabel) {
@@ -59,31 +61,12 @@ public class ReadMessagePanelView extends JPanel {
         subjectLabel.setFont(new Font("Centaur", Font.PLAIN, 18));
         subjectLabelsPanel.add(subjectLabel);
 
-        JPanel textAreaPanel = new JPanel();
-        centerPanel.add(textAreaPanel, BorderLayout.CENTER);
+        messageTxtArea = new JLabel();
+        messageTxtArea.setFont(new Font("Monospaced", Font.PLAIN, 12));
+        messageTxtArea.setVerticalAlignment(JLabel.TOP);
+        messageTxtArea.setBackground(Color.white);
 
-        textAreaPanel.setLayout(new GridBagLayout());
-        GridBagConstraints gc = new GridBagConstraints();
-
-        textAreaPanel.setBackground(Color.white);
-
-        gc.gridx = 0;
-        gc.gridy = 0;
-        gc.weightx = 1;
-        gc.anchor = GridBagConstraints.NORTHWEST;
-        gc.insets = new Insets(2, 0, 0, 2);
-
-
-//        messageTxtArea = new JLabel();
-//        messageTxtArea.setFont(new Font("Monospaced", Font.PLAIN, 18));
-//        messageTxtArea.setVerticalTextPosition(JLabel.LEADING);
-//        messageTxtArea.setHorizontalTextPosition(JLabel.CENTER);
-//        textAreaPanel.add(messageTxtArea, gc);
-//
-//        messageTxtArea.setBorder(BorderFactory.createLineBorder(Color.RED));
-//        messageTxtArea.setText("Message.");
-//        textAreaPanel.add(messageTxtArea);
+        centerPanel.add(messageTxtArea, BorderLayout.CENTER);
+        messageTxtArea.setBorder(BorderFactory.createLineBorder(Color.RED));
     }
-
-
 }
