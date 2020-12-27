@@ -2,12 +2,11 @@ package Doctor.Views;
 
 import Doctor.Model.Doctor;
 
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.border.EmptyBorder;
-
-import java.awt.BorderLayout;
 
 import common.MessagePanel;
 import common.SettingsPanel;
@@ -16,7 +15,6 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import java.awt.GridLayout;
 
 public class DoctorMainFrameViewer extends JFrame {
 
@@ -137,6 +135,11 @@ public class DoctorMainFrameViewer extends JFrame {
         buttonPanel.add( settingsPanelButton );
         //
         setVisible(true);
+
+        //Colors
+        contentPane.setBackground(new Color(101, 180, 206));
+        buttonPanel.setBackground(new Color(69, 122, 177));
+        layeredPanePanel.setBackground(new Color(101, 180, 206));
     }
 
     public void setDoctorHomepagePanelView(JPanel doctorHomepagePanelView) {

@@ -90,6 +90,15 @@ public class LabTestsMainPanel extends JPanel implements IViewer {
 
         JScrollPane scrollPane = new JScrollPane(table);
         tablePanel.add(scrollPane);
+
+        //Colors
+//        centerInfoPanel.setBackground(new Color(101, 180, 206));
+//        buttonsPanel.setBackground(new Color(101, 180, 206));
+//        layeredPane.setBackground(new Color(101, 180, 206));
+//        createRequestPanel.setBackground(new Color(101, 180, 206));
+//        seeAvailableTestsPanel.setBackground(new Color(101, 180, 206));
+//        scrollPane.setBackground(new Color(101, 180, 206));
+//        panel.setBackground(new Color(101, 180, 206));
     }
 
     @Override
