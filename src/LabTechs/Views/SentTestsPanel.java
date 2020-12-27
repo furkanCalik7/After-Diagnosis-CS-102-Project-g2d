@@ -2,6 +2,7 @@ package LabTechs.Views;
 
 import Admin.model.IViewer;
 import LabTechs.Controller.FileChooserForDownloadController;
+import LabTechs.IColors;
 import LabTechs.Model.LabTechnician;
 import LabTechs.Model.Test;
 
@@ -16,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
-public class SentTestsPanel extends JPanel implements IViewer {
+public class SentTestsPanel extends JPanel implements IViewer , IColors {
 
     JTable sentTestsTable;
     private TableRowSorter<MyTableModel> rowSorter;
@@ -49,6 +50,7 @@ public class SentTestsPanel extends JPanel implements IViewer {
         sentTestsTable.getColumn("Download").setCellEditor(new AddDownloadButtonEditor(new JTextField()));
 
         JScrollPane sentTestsScrollPane = new JScrollPane( sentTestsTable );
+        sentTestsScrollPane.getViewport().setBackground( lblue2 );
         add( sentTestsScrollPane );
     }
 
@@ -87,7 +89,7 @@ public class SentTestsPanel extends JPanel implements IViewer {
                 case 2:
                     return data.getPatient_username();
                 case 3:
-                    return data.getSender_username();
+                    return data.getReceiver_username();
                 case 4:
                     return data.getSent_time() + "  " + data.getSent_date();
                 case 5:

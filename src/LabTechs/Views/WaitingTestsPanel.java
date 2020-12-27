@@ -2,6 +2,7 @@ package LabTechs.Views;
 
 import Admin.model.IViewer;
 import LabTechs.Controller.*;
+import LabTechs.IColors;
 import LabTechs.Model.LabTechnician;
 import LabTechs.Model.TestRequest;
 
@@ -15,7 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class WaitingTestsPanel extends JPanel implements IViewer {
+public class WaitingTestsPanel extends JPanel implements IViewer , IColors{
 
     JTable waitingTestsTable;
     private TableRowSorter<MyTableModel> rowSorter;
@@ -47,13 +48,14 @@ public class WaitingTestsPanel extends JPanel implements IViewer {
         waitingTestsTable.getColumn("Upload").setCellRenderer(new ButtonRenderer());
         waitingTestsTable.getColumn("Upload").setCellEditor(new AddUploadButtonEditor(new JTextField()));
 
-        JScrollPane sentTestsScrollPane = new JScrollPane( waitingTestsTable );
-        add( sentTestsScrollPane );
+        JScrollPane waitingTestsScrollPane = new JScrollPane( waitingTestsTable );
+        waitingTestsScrollPane.getViewport().setBackground( lblue2 );
+        add( waitingTestsScrollPane );
     }
 
     private class MyTableModel extends AbstractTableModel {
         private String[] columnNames = new String[]{
-                "Test ID", "Test Type", "Patient", "Doctor", "Date", "Upload"};
+                "Test ID", "Test Type", "Patient", "Doctor","Upload"};
 
         private ArrayList<TestRequest> testRequests;
 
@@ -88,8 +90,6 @@ public class WaitingTestsPanel extends JPanel implements IViewer {
                 case 3:
                     return data.getDoctor_username();
                 case 4:
-                    return "0.0.2000 00.00";//data.get() + "!!!" + data.getSent_time();
-                case 5:
                     return "Upload";
             }
             return "null";
@@ -97,7 +97,7 @@ public class WaitingTestsPanel extends JPanel implements IViewer {
 
 
         public boolean isCellEditable(int row, int col) {
-            if (col < 5) {
+            if (col < 4) {
                 return false;
             }
             return true;
@@ -123,7 +123,7 @@ public class WaitingTestsPanel extends JPanel implements IViewer {
         }
     }
 
-    class AddUploadButtonEditor extends DefaultCellEditor {
+    class AddUploadButtonEditor extends DefaultCellEditor implements IColors {
         protected JButton button;
         int i = 0;
         private String label;

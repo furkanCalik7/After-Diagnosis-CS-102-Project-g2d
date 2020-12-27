@@ -1,5 +1,6 @@
 package LabTechs.Views;
 
+import LabTechs.IColors;
 import LabTechs.Model.LabTechnician;
 
 import javax.swing.*;
@@ -7,8 +8,9 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class LabTechnicianHomepagePanelView extends JPanel {
+public class LabTechnicianHomepagePanelView extends JPanel implements IColors {
 
     /**
      * Create the panel.
@@ -24,119 +26,60 @@ public class LabTechnicianHomepagePanelView extends JPanel {
         JPanel welcomeLabelHolderPanel = new JPanel();
         welcomeLabelHolderPanel.setBorder(new EmptyBorder(25, 0, 25, 0));
         add(welcomeLabelHolderPanel, BorderLayout.NORTH);
-
         JLabel welcomeLabel = new JLabel("Welcome " + labTechnician.getName() + "!");
-        welcomeLabel.setOpaque(true);
+        //welcomeLabel.setOpaque(false);
         welcomeLabel.setHorizontalAlignment(SwingConstants.CENTER);
         welcomeLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         welcomeLabelHolderPanel.add(welcomeLabel, BorderLayout.NORTH);
+        welcomeLabelHolderPanel.setBackground( lblue2 );
 
         JPanel homePagePanel = new JPanel();
         homePagePanel.setLayout( new BorderLayout() );
         add(homePagePanel,BorderLayout.CENTER);
+        homePagePanel.setBackground( lblue2);
 
-        /*
-        JPanel actionsMainPanel = new JPanel();
-        homePagePanel.add(actionsMainPanel , BorderLayout.WEST); //add Actions Main Panel
-        actionsMainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-
-        JLabel lblNewLabel = new JLabel("Today You Have");
-        lblNewLabel.setOpaque(true);
-        lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-        lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 24));
-        actionsMainPanel.add(lblNewLabel);
-
-        JPanel actionsPanel = new JPanel();
-        actionsMainPanel.add(actionsPanel);
-        actionsPanel.setLayout(new GridLayout(3, 2, 20, 20));
-
-        JButton waitingTestsButton = new JButton( "x Ready Test Resuls");
-        waitingTestsButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        add(waitingTestsButton);
-        waitingTestsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        JLabel testResultsIcon = new JLabel("TestResultIcon");
-        actionsPanel.add(testResultsIcon);
-
-         */
-
-
-        /*
-        JButton messagesButton = new JButton("x New Messages");
-        messagesButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        actionsPanel.add(messagesButton);
-        waitingTestsButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
-
-        JLabel messageIconLabel = new JLabel("MessageIcon");
-        actionsPanel.add(messageIconLabel);
-
-
-         */
         JPanel infoGeneralPanel = new JPanel();
+        infoGeneralPanel.setBackground( lblue2 );
         infoGeneralPanel.setLayout(new GridLayout(0, 2, 0, 0));
 
         JPanel placeHolderPanel = new JPanel();
         infoGeneralPanel.add(placeHolderPanel);
+        placeHolderPanel.setBackground( lblue2 );
 
         JPanel infoPanel = new JPanel();
+        infoPanel.setBackground( lblue2 );
         infoGeneralPanel.add(infoPanel);
-        infoPanel.setLayout(new GridLayout(6, 1, 0, 0));
+        infoPanel.setLayout(new GridLayout(5, 1, 0, 0));
 
         JPanel nameHolderPanel = new JPanel();
+        nameHolderPanel.setBackground( lgreen );
         infoPanel.add(nameHolderPanel);
         nameHolderPanel.setLayout(new BoxLayout(nameHolderPanel, BoxLayout.X_AXIS));
-
         JLabel labTechnicianPresenterLabel = new JLabel("Name: ");
         nameHolderPanel.add(labTechnicianPresenterLabel);
         labTechnicianPresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
         JLabel labTechnicianNameLabel = new JLabel(labTechnician.getName() + " " + labTechnician.getSurname() );
         nameHolderPanel.add(labTechnicianNameLabel);
         labTechnicianNameLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
         JPanel idHolderPanel = new JPanel();
+        idHolderPanel.setBackground( lgreen );
         infoPanel.add(idHolderPanel);
         idHolderPanel.setLayout(new BoxLayout(idHolderPanel, BoxLayout.X_AXIS));
-
-        JLabel idPresenterLabel = new JLabel( "Doctor ID: " );
+        JLabel idPresenterLabel = new JLabel( "Lab Technician ID: " );
         idHolderPanel.add(idPresenterLabel);
         idPresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
         JLabel doctorIDLabel = new JLabel( String.valueOf( labTechnician.getId() ) );
         idHolderPanel.add(doctorIDLabel);
         doctorIDLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        JPanel dateHolderPanel = new JPanel();
-        infoPanel.add(dateHolderPanel);
-        dateHolderPanel.setLayout(new BoxLayout(dateHolderPanel, BoxLayout.X_AXIS));
-
-        JLabel datePresenterLabel = new JLabel("Join Date:");
-        dateHolderPanel.add(datePresenterLabel);
-        datePresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
-        // TODO dateLabel will be labTechnician.getJoinDate()?;
-        JLabel dateLabel = new JLabel("MM/DD/YYYY");
-        dateHolderPanel.add(dateLabel);
-        dateLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
         JPanel mailHolderPanel = new JPanel();
+        mailHolderPanel.setBackground( lgreen );
         infoPanel.add(mailHolderPanel);
         mailHolderPanel.setLayout(new BoxLayout(mailHolderPanel, BoxLayout.X_AXIS));
-
         JLabel mailPresenterLabel = new JLabel("Mail Address: ");
         mailHolderPanel.add(mailPresenterLabel);
         mailPresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
         JLabel mailLabel = new JLabel(labTechnician.getEmail());
         mailHolderPanel.add(mailLabel);
         mailLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -146,6 +89,7 @@ public class LabTechnicianHomepagePanelView extends JPanel {
 
         //Actions Main panel
         JPanel actionsMainPanel = new JPanel();
+        actionsMainPanel.setBackground( lblue2 );
         homePagePanel.add(actionsMainPanel , BorderLayout.WEST); //add Actions Main Panel
         actionsMainPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
@@ -164,5 +108,6 @@ public class LabTechnicianHomepagePanelView extends JPanel {
         actionsMainPanel.add( waitingTestsButton );
         actionsMainPanel.add( waitingTestsLabel );
         homePagePanel.add(actionsMainPanel , BorderLayout.SOUTH);
+
     }
 }

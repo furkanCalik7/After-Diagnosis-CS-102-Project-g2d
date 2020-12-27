@@ -1,5 +1,6 @@
 package LabTechs.Views;
 
+import LabTechs.IColors;
 import LabTechs.Model.LabTechnician;
 import common.MessagePanel;
 import common.SettingsPanel;
@@ -10,7 +11,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LabTechnicianMainFrameViewer extends JFrame {
+public class LabTechnicianMainFrameViewer extends JFrame implements IColors {
 
     private JPanel contentPane;
 
@@ -18,6 +19,9 @@ public class LabTechnicianMainFrameViewer extends JFrame {
     private JButton addTestsButton;
     private JButton myTestsButton;
     private JLayeredPane layeredPane;
+
+    JPanel buttonPanel = new JPanel();
+
 
     private JPanel messagePanel;
     private LabTechnicianHomepagePanelView labTechHomepagePanelView;
@@ -76,10 +80,12 @@ public class LabTechnicianMainFrameViewer extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(30, 0));
+        contentPane.setBackground( lblue2 );
 
-        JPanel buttonPanel = new JPanel();
-        buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 0));
-        buttonPanel.setLayout(new GridLayout(0, 1, 15, 5));
+        buttonPanel = new JPanel();
+        buttonPanel.setBackground( lblue );
+        buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+        buttonPanel.setLayout(new GridLayout(0, 1, 5, 5));
         contentPane.add(buttonPanel, BorderLayout.WEST);
 
         labTechHomepagePanelView = new LabTechnicianHomepagePanelView(labTechnician, this);
@@ -91,15 +97,14 @@ public class LabTechnicianMainFrameViewer extends JFrame {
         JPanel layeredPanePanel = new JPanel();
         contentPane.add(layeredPanePanel, BorderLayout.CENTER);
         layeredPanePanel.setLayout(new BorderLayout(0, 0));
+        layeredPanePanel.setBackground( Color.green );
 
         layeredPane = new JLayeredPane();
         layeredPanePanel.add(layeredPane);
         layeredPane.setLayout(new BorderLayout(0, 0));
+        //layeredPane.setBackground( lblue2 );
 
         //Panels need to be added in inverse order
-        layeredPane.add(labTestsMainPanel);
-        layeredPane.add(messagePanel);
-        layeredPane.add(labTechHomepagePanelView);
 
         //Button initializings
         JButton homepageButton = new JButton("Homepage");
@@ -146,14 +151,18 @@ public class LabTechnicianMainFrameViewer extends JFrame {
     }
 
     public void setLabTechHomepagePanelView(JPanel labTechHomepagePanelView) {
+
+        //labTechHomepagePanelView.setBackground( new Color(30, 144, 255) );
         this.labTechHomepagePanelView = (LabTechnicianHomepagePanelView) labTechHomepagePanelView;
     }
 
     public void setLabTestsMainPanel(JPanel labTestsMainPanel) {
+        //labTestsMainPanel.setBackground( new Color(30, 144, 255) );
         this.labTestsMainPanel = (LabTechnicianTestsMainPanel) labTestsMainPanel;
     }
 
     public void setSettingsPanel(JPanel settingsPanel) {
+        //settingsPanel.setBackground( new Color(30, 144, 255) );
         this.settingsPanel = (SettingsPanel) settingsPanel;
     }
 

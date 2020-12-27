@@ -25,5 +25,7 @@ public class LabTechnicianRunner {
         labTechnicianMainFrameViewer.setLabTestsMainPanel(labTestsMainPanel);
         labTechnicianMainFrameViewer.setLabTechHomepagePanelView(labTechnicianHomepagePanelView);
         labTechnicianMainFrameViewer.setSettingsPanel(settingsPanel);
+
+        labTechnicianMainFrameViewer.switchPanels( labTechnicianHomepagePanelView );
     }
 }

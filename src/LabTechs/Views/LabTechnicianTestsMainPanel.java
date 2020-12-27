@@ -2,6 +2,7 @@ package LabTechs.Views;
 
 import Doctor.Model.PatientSlot;
 import Doctor.Views.MyPatientsMainPanel;
+import LabTechs.IColors;
 import LabTechs.Model.LabTechnician;
 import LabTechs.Model.Test;
 
@@ -15,7 +16,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class LabTechnicianTestsMainPanel extends JPanel {
+public class LabTechnicianTestsMainPanel extends JPanel implements IColors {
     private JTable waitingTestsTable;
     private JTable sentTestsTable;
     private WaitingTestsPanel waitingTestsPanel;
