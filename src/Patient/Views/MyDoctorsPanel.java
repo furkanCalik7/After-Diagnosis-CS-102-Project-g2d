@@ -206,6 +206,10 @@ public class MyDoctorsPanel extends JPanel {
         rowSorter.setRowFilter(rf);
     }
 
+
+
+
+
     class ButtonRenderer extends JButton implements TableCellRenderer {
 
         public ButtonRenderer() {

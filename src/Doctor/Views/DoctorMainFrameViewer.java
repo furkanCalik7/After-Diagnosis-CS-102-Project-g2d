@@ -73,16 +73,14 @@ public class DoctorMainFrameViewer extends JFrame {
         layeredPanePanel.add(layeredPane);
         layeredPane.setLayout(new BorderLayout(0, 0));
 
-        //Panels need to be added in inverse order
         layeredPane.add( settingsPanel );
         layeredPane.add( labTestsMainPanel );
         layeredPane.add(appointmentPanel);
         layeredPane.add( myPatientsLayeredPanelView );
         layeredPane.add( doctorHomepagePanelView );
 
-//        //Button initializings
         JButton homepageButton = new JButton("Homepage");
-//        homepageButton.setIcon(new ImageIcon("C:\\Users\\42ber\\OneDrive\\Masa\u00FCst\u00FC\\homePage.png"));
+
         homepageButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 switchPanels( doctorHomepagePanelView );
