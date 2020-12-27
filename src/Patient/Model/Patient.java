@@ -7,13 +7,14 @@ import Doctor.Model.Drug;
 import JDBC.Message;
 import JDBC.MySQLAccess;
 import Admin.model.User;
+import common.HasAppointment;
 
 import java.sql.Date;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class Patient extends User {
+public class Patient extends User implements HasAppointment {
 
     private final int STATUS_GOOD = 1;
     private final int STATUS_OK = 2;

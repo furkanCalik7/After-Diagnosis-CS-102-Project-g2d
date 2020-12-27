@@ -75,7 +75,7 @@ public class PatientMainFrame extends JFrame {
         HomePagePanel.setBackground(new Color(101, 180, 206));
         MyDrugsPanel = new MyDrugsPanel(p);
         MyDrugsPanel.setBackground( new Color(101, 180, 206) );
-        AppointmentPanel = new AppointmentPanel();
+        AppointmentPanel = new AppointmentPanel(p);
         AppointmentPanel.setBackground( new Color(101, 180, 206) );
         BloodDonationPanel = new BloodDonationPanel();
         BloodDonationPanel.setBackground(new Color(101, 180, 206));

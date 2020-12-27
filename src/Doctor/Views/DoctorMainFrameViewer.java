@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.border.EmptyBorder;
 
+import Patient.Views.AppointmentPanel;
 import common.MessagePanel;
 import common.SettingsPanel;
 
@@ -28,6 +29,7 @@ public class DoctorMainFrameViewer extends JFrame {
     private SettingsPanel settingsPanel;
     private DoctorBloodDonationPanel doctorBloodDonationPanel;
     private MessagePanel messagePanel;
+    private AppointmentPanel appointmentPanel;
 
     /**
      * Internal method to change panels.
@@ -60,6 +62,8 @@ public class DoctorMainFrameViewer extends JFrame {
         myPatientsLayeredPanelView = new MyPatientsLayeredPanelView(doctor,this);
         settingsPanel = new SettingsPanel( doctor );
         doctorBloodDonationPanel = new DoctorBloodDonationPanel(doctor);
+        appointmentPanel = new AppointmentPanel(doctor);
+
 
         JPanel layeredPanePanel = new JPanel();
         contentPane.add(layeredPanePanel, BorderLayout.CENTER);
@@ -72,6 +76,7 @@ public class DoctorMainFrameViewer extends JFrame {
         //Panels need to be added in inverse order
         layeredPane.add( settingsPanel );
         layeredPane.add( labTestsMainPanel );
+        layeredPane.add(appointmentPanel);
         layeredPane.add( myPatientsLayeredPanelView );
         layeredPane.add( doctorHomepagePanelView );
 
@@ -98,6 +103,7 @@ public class DoctorMainFrameViewer extends JFrame {
         apptButton = new JButton("Appointment");
         apptButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                switchPanels(appointmentPanel);
             }
         });
         buttonPanel.add(apptButton);

@@ -10,52 +10,34 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$USER_HOME$/cs project/JPlanner.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$USER_HOME$/cs project/Yeni klasör/javamail-1.4.7/mail.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://C:/Program Files (x86)/MySQL/mysql-connector-java-8.0.22/mysql-connector-java-8.0.22/mysql-connector-java-8.0.22.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../mail.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../cs project/LGoodDatePicker-11.1.0.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../mysql-connector-java-8.0.22.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../cs project/JPlanner.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../JPlanner.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../cs project/Yeni klasör/javamail-1.4.7/mail.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

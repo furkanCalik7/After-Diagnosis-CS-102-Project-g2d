@@ -159,7 +159,7 @@ public class MySQLAccess {
         try {
             connect = dbConnection.getConnection();
             preparedStatement = connect
-                    .prepareStatement("SELECT * FROM appointment WHERE patient_username = ? AND is_approved = 1");
+                    .prepareStatement("SELECT * FROM appointment WHERE patient_username = ?");
             preparedStatement.setString(1, p.getUsername());
             resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {

@@ -1,6 +1,16 @@
 package Patient.Views;
 
-import javax.swing.JPanel;
+import Appointment.Appointment;
+import Doctor.Views.DatePickerPanel;
+import Patient.Model.Patient;
+import com.github.lgooddatepicker.components.CalendarPanel;
+import com.github.lgooddatepicker.components.DatePickerSettings;
+import com.github.lgooddatepicker.optionalusertools.DateHighlightPolicy;
+import com.github.lgooddatepicker.zinternaltools.HighlightInformation;
+import common.HasAppointment;
+import sun.util.calendar.JulianCalendar;
+
+import javax.swing.*;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
@@ -12,7 +22,11 @@ import javax.swing.JLayeredPane;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-
+import java.sql.Date;
+import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 
 public class AppointmentPanel extends JPanel {
@@ -21,6 +35,7 @@ public class AppointmentPanel extends JPanel {
     JLayeredPane layeredPane;
     JPanel takeAppointmentPanel;
     JPanel seeAppointmentPanel;
+    private HasAppointment user;
 
     public void switchPanels( JPanel panel ) {
         layeredPane.removeAll();
@@ -33,7 +48,8 @@ public class AppointmentPanel extends JPanel {
      * Create the panel.
      */
 
-    public AppointmentPanel() {
+    public AppointmentPanel(HasAppointment user) {
+        this.user = user;
         setLayout(new BorderLayout(0, 0));
 
         JPanel panel = new JPanel();
@@ -101,6 +117,25 @@ public class AppointmentPanel extends JPanel {
         takeAppointmentPanel.add(appointmentNorthPanel, BorderLayout.NORTH);
         appointmentNorthPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
+        DatePickerSettings settings = new DatePickerSettings();
+        CalendarPanel calendarPanel = new CalendarPanel(settings);
+        ArrayList<Appointment> appointments = user.getAppointmentDates();
+
+        DateHighlightPolicy highlightInformation = new DateHighlightPolicy() {
+            @Override
+            public HighlightInformation getHighlightInformationOrNull(LocalDate localDate) {
+                for(int i = 0; i < appointments.size(); i++) {
+                    if(localDate.compareTo(appointments.get(i).getDate().toLocalDate()) == 0) {
+                        return new HighlightInformation(Color.BLUE, null, appointments.get(i).getStart_time()
+                                + " " + appointments.get(i).getEnd_time());
+                    }
+                }
+                return null;
+            }
+        };
+
+        settings.setHighlightPolicy(highlightInformation);
+
         JLabel lblNewLabel = new JLabel("Table of doctors who wanted reappointment");
         lblNewLabel.setFont(new Font("Century", Font.PLAIN, 20));
         appointmentNorthPanel.add(lblNewLabel);
@@ -124,7 +159,7 @@ public class AppointmentPanel extends JPanel {
         seeAppointmentNorthPanel.setBackground(new Color(101, 180, 206));
         seeAppointmentPanel.add(seeAppointmentNorthPanel, BorderLayout.NORTH);
 
-        JLabel lblNewLabel_1 = new JLabel("Blue boxes are your available dates");
+        JLabel lblNewLabel_1 = new JLabel("Blue boxes are your appointment dates");
         lblNewLabel_1.setFont(new Font("Century", Font.PLAIN, 20));
         seeAppointmentNorthPanel.add(lblNewLabel_1);
 
@@ -133,6 +168,9 @@ public class AppointmentPanel extends JPanel {
         JPanel seeAppointmentCenterPanel = new JPanel();
         seeAppointmentCenterPanel.setBackground(new Color(101, 180, 206));
         seeAppointmentPanel.add(seeAppointmentCenterPanel, BorderLayout.CENTER);
+        seeAppointmentPanel.add(calendarPanel);
+
+
 
 
 

@@ -9,6 +9,7 @@ import LabTechs.Model.Test;
 import LabTechs.Model.TestRequest;
 import Patient.Model.Code;
 import Patient.Model.PatientInfoCard;
+import common.HasAppointment;
 
 import java.nio.file.Path;
 import java.sql.Date;
@@ -16,7 +17,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 
-public class Doctor extends User {
+public class Doctor extends User implements HasAppointment {
 
     private String speciality;
     //TODO private yap yeniden drug
@@ -112,7 +113,7 @@ public class Doctor extends User {
         return approvedAppointments;
     }
 
-    public ArrayList<Appointment> getWaitingAppointments() {
+    public ArrayList<Appointment> getAppointmentDates() {
         return waitingAppointments;
     }
 
