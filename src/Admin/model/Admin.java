@@ -53,6 +53,9 @@ public class Admin extends User {
         String password = code.getCode_id();
         Doctor d = new Doctor(name + surname, password, email, name, surname, sex, speciality);
         MySQLAccess access = new MySQLAccess();
+        EmailUtil emailUtil = new EmailUtil();
+        emailUtil.sendEmail(email, "Account created", "Your After Diagnosis account has been created." +
+                " Your password is " + password);
         try {
             access.addUser(d);
             updateViewers();
@@ -69,6 +72,9 @@ public class Admin extends User {
         String password = code.getCode_id();
         LabTechnician l = new LabTechnician(name + surname, password, email, name, surname, sex);
         MySQLAccess access = new MySQLAccess();
+        EmailUtil emailUtil = new EmailUtil();
+        emailUtil.sendEmail(email, "Account created", "Your After Diagnosis account has been created." +
+                " Your password is " + password);
         try {
             access.addUser(l);
             updateViewers();
