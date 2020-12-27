@@ -276,6 +276,11 @@ public class MessagePanel extends JPanel {
         //GUI related
         JPanel emptyPanel = new JPanel();
         add(emptyPanel, BorderLayout.SOUTH);
+
+        //Color
+        buttonPanel.setBackground(new Color(101, 180, 206));
+        this.setBackground(new Color(101, 180, 206));
+        layeredPane.setBackground(new Color(101, 180, 206));
     }
 
     public class IsSendRenderer implements TableCellRenderer {
