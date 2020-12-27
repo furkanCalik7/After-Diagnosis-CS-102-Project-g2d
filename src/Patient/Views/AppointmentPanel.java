@@ -269,13 +269,6 @@ public class AppointmentPanel extends JPanel {
         seeAppointmentPanel.add(seeAppointmentCenterPanel, BorderLayout.CENTER);
 
 
-
-
-
-
-
-
-
         //Adding Panels to layered pane
         layeredPane.add(seeAppointmentPanel, "name_106782643815700");
 
