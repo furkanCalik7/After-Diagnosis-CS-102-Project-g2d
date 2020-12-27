@@ -12,7 +12,7 @@ import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import Admin.model.*;
+import Admin.model.Admin;
 import JDBC.MySQLAccess;
 import common.MessagePanel;
 import common.SettingsPanel;

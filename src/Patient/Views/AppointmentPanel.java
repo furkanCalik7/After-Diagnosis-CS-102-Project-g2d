@@ -22,7 +22,10 @@ import javax.swing.JLayeredPane;
 import javax.swing.JLabel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 
@@ -36,6 +39,7 @@ public class AppointmentPanel extends JPanel {
     JTextField startDateTextfield;
     JTextField endDateTextField;
     private HasAppointment user;
+    private DatePickerPanel datePickPanel;
 
     public void switchPanels( JPanel panel ) {
         layeredPane.removeAll();
@@ -200,7 +204,7 @@ public class AppointmentPanel extends JPanel {
         panel_8.add(doctorUsernameTextField);
         doctorUsernameTextField.setColumns(10);
 
-        JPanel datePickPanel = new DatePickerPanel();
+        datePickPanel = new DatePickerPanel();
         datePickPanel.setBackground(new Color(101, 180, 206));
         takeAppointmentPanell.add(datePickPanel);
 
@@ -214,7 +218,7 @@ public class AppointmentPanel extends JPanel {
         panel_6.add(panel_5);
         panel_5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
-        JLabel lblNewLabel_3 = new JLabel("Enter start date of appointment");
+        JLabel lblNewLabel_3 = new JLabel("Enter start date with a  : (example 9:30)");
         lblNewLabel_3.setFont(new Font("Century", Font.PLAIN, 15));
         panel_5.add(lblNewLabel_3);
 
@@ -271,8 +275,28 @@ public class AppointmentPanel extends JPanel {
 
 
 
-        //layeredPane.add(takeAppointmentPanel, "name_106780883627700");
 
+
+
+        //layeredPane.add(takeAppointmentPanel, "name_106780883627700");
+    }
+
+
+    public JTextField getStartDateTextfield() {
+        return startDateTextfield;
+    }
+
+    public JTextField getDoctorUsernameTextField() {
+        return doctorUsernameTextField;
+    }
+
+
+    public JTextField getEndDateTextField() {
+        return endDateTextField;
+    }
+
+    public DatePickerPanel getDatePickPanel() {
+        return datePickPanel;
     }
 }
 

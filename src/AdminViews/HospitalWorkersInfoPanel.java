@@ -182,6 +182,7 @@ public class HospitalWorkersInfoPanel extends JPanel implements IViewer {
             fireTableChanged(event);
         }
 
+
     }
 
     private void newFilter() {
@@ -213,7 +214,7 @@ public class HospitalWorkersInfoPanel extends JPanel implements IViewer {
     }
 
     public void addRow() {
-        int rowIndex = admin.getWorkers().size();
+        int rowIndex = admin.getWorkers().size() - 1;
         dataModel.newRowsAdded(new TableModelEvent(
                 dataModel, rowIndex, rowIndex, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT)
         );

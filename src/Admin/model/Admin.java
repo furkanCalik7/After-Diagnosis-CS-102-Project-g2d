@@ -100,5 +100,15 @@ public class Admin extends User {
         doctors = access.getAllDoctors();
     }
 
+    public int getUnreadMessageCount() {
+        int count = 0;
+        for(Message message: getInbox()) {
+            if(!message.is_read()) {
+                count++;
+            }
+        }
+        return count;
+    }
+
 
 }
