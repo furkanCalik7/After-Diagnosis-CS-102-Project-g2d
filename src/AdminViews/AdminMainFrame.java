@@ -79,8 +79,8 @@ public class AdminMainFrame extends JFrame {
         contentPane.setLayout(new BorderLayout(30, 0));
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBackground(new Color(101, 180, 206));
-        buttonPanel.setBorder(new EmptyBorder(40, 5, 40, 0));
+        buttonPanel.setBackground(new Color(69, 122, 177) );
+        buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.add(buttonPanel,BorderLayout.WEST);
 
         HomePagePanel = new HomePage(admin);

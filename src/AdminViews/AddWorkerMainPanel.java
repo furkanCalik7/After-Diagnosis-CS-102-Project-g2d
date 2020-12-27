@@ -49,7 +49,6 @@ public class AddWorkerMainPanel extends JPanel {
         add(panel_2, BorderLayout.EAST);
 
         JPanel centerPanel = new JPanel();
-        centerPanel.setBackground(new Color(101, 180, 206));
         add(centerPanel, BorderLayout.CENTER);
         centerPanel.setLayout(new GridLayout(8, 0, 5, 10));
 
@@ -60,12 +59,10 @@ public class AddWorkerMainPanel extends JPanel {
 
         JLabel lblNewLabel_1 = new JLabel("Select A Hospital Worker Type");
         lblNewLabel_1.setFont(new Font("Century", Font.BOLD, 15));
-        lblNewLabel_1.setBackground(new Color(101, 180, 206));
         lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
         headerPanel.add(lblNewLabel_1);
 
         JPanel radioButtonPanel = new JPanel();
-        radioButtonPanel.setBackground(new Color(101, 180, 206));
         centerPanel.add(radioButtonPanel);
         radioButtonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -79,7 +76,6 @@ public class AddWorkerMainPanel extends JPanel {
         radioButtonPanel.add(labTechButton);
 
         JPanel panel_6 = new JPanel();
-        panel_6.setBackground(new Color(101, 180, 206));
         centerPanel.add(panel_6);
         panel_6.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -92,7 +88,6 @@ public class AddWorkerMainPanel extends JPanel {
         nameTextField.setColumns(10);
 
         JPanel panel_7 = new JPanel();
-        panel_7.setBackground(new Color(101, 180, 206));
         centerPanel.add(panel_7);
         panel_7.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -105,7 +100,6 @@ public class AddWorkerMainPanel extends JPanel {
         surnameTextField.setColumns(10);
 
         JPanel panel_8 = new JPanel();
-        panel_8.setBackground(new Color(101, 180, 206));
         centerPanel.add(panel_8);
         panel_8.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -118,7 +112,6 @@ public class AddWorkerMainPanel extends JPanel {
         panel_8.add(textField_2);
 
         JPanel panel_15 = new JPanel();
-        panel_15.setBackground(new Color(101, 180, 206));
         centerPanel.add(panel_15);
         panel_15.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -140,7 +133,6 @@ public class AddWorkerMainPanel extends JPanel {
 
 
         JPanel panel_9 = new JPanel();
-        panel_9.setBackground(new Color(101, 180, 206));
         centerPanel.add(panel_9);
         panel_9.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
@@ -157,7 +149,6 @@ public class AddWorkerMainPanel extends JPanel {
         panel_9.add(comboBox);
 
         Panel panel_10 = new Panel();
-        panel_10.setBackground(new Color(101, 180, 206));
         centerPanel.add(panel_10);
         panel_10.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
