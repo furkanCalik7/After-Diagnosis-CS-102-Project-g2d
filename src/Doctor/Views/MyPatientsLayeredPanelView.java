@@ -14,7 +14,7 @@ public class MyPatientsLayeredPanelView extends JPanel {
 
     private MyPatientsMainPanel myPatientsMainPanel;
     private JLayeredPane layeredPane;
-    private myPatientCreationPanelView patientCreationPanelView;
+    private MyPatientCreationPanelView patientCreationPanelView;
     private ArrayList<PatientInfoPanelView> patientInfoPanelViews;
     private ArrayList<myPatientsDrugPanelView> patientsDrugPanelViews;
     private Doctor doctor;
@@ -28,7 +28,8 @@ public class MyPatientsLayeredPanelView extends JPanel {
     public MyPatientsLayeredPanelView(Doctor doctor, DoctorMainFrameViewer doctorMainFrameViewer) {
 
         setLayout(new BorderLayout(0, 0));
-        patientCreationPanelView = new myPatientCreationPanelView(this);
+        patientCreationPanelView = new MyPatientCreationPanelView(this,doctor);
+        doctor.addViewer(patientCreationPanelView);
         this.doctorMainFrameViewer = doctorMainFrameViewer;
         patientsDrugPanelViews = new ArrayList<>();
         patientInfoPanelViews = new ArrayList<>();
@@ -69,7 +70,7 @@ public class MyPatientsLayeredPanelView extends JPanel {
         layeredPane.revalidate();
     }
 
-    public void setPatientCreationPanelView(myPatientCreationPanelView patientCreationPanelView) {
+    public void setPatientCreationPanelView(MyPatientCreationPanelView patientCreationPanelView) {
         this.patientCreationPanelView = patientCreationPanelView;
     }
 

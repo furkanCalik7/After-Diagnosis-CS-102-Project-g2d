@@ -313,7 +313,7 @@ public class MessagePanel extends JPanel {
     //Outbox Table
     class SentTable extends AbstractTableModel {
         private String[] columnNames = new String[]{
-                "Subject", "Receiver", "Date", "Status", "Read"};
+                "Subject", "Receiver", "Date", "Read"};
 
 
         public SentTable() {
@@ -344,8 +344,6 @@ public class MessagePanel extends JPanel {
                 case 2:
                     return data.getSent_date();
                 case 3:
-                    return data.is_read();
-                case 4:
                     return "Read";
             }
             return "null";

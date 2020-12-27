@@ -10,7 +10,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://C:/Program Files (x86)/MySQL/mysql-connector-java-8.0.22/mysql-connector-java-8.0.22/mysql-connector-java-8.0.22.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/mysql-connector-java-8.0.22.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -28,7 +28,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../cs project/JPlanner.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/JPlanner.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -37,7 +37,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../cs project/Yeni klasör/javamail-1.4.7/mail.jar!/" />
+          <root url="jar://$USER_HOME$/Desktop/mail.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

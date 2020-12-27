@@ -30,6 +30,9 @@ public class Patient extends User implements HasAppointment {
     private String complaint;
 
 
+    public void setComplaint(String complaint) {
+        this.complaint = complaint;
+    }
 
     // Patient constructor
     public Patient(String username, String password, String email, String name, String surname, String sex) {

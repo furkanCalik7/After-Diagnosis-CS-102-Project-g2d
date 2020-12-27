@@ -27,6 +27,7 @@ public class Doctor extends User implements HasAppointment {
     private ArrayList<Appointment> waitingAppointments;
     private ArrayList<Timestamp> availableTimes;
     private ArrayList<Test> tests;
+    private Code createdLastCode;
 
 
     public Doctor(String username, String password, String email, String name, String surname, String sex, String speciality) {
@@ -74,9 +75,11 @@ public class Doctor extends User implements HasAppointment {
         return mySQLAccess.readAvailableTimes(this, date, time);
     }
 
-    public Code createCodeForPatient() {
-        Code code = Code.newCode(this.getUsername());
+    public Code createCodeForPatient(String complaint) {
+        Code code = Code.newCode(this.getUsername(), complaint);
+        this.createdLastCode = code;
         mySQLAccess.addCode(code);
+        updateViewers();
         return code;
     }
 
@@ -134,5 +137,9 @@ public class Doctor extends User implements HasAppointment {
         tests.remove(index);
         mySQLAccess.removeTest(test.getSent_time());
         updateViewers();
+    }
+
+    public Code getCreatedLastCode() {
+        return createdLastCode;
     }
 }

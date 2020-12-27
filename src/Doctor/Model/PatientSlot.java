@@ -14,6 +14,7 @@ public class PatientSlot {
     private int status;
     private String code_id;
     private Date start_date;
+    private String complaint;
 
     public PatientSlot(String doctor_username, PatientInfoCard patient_info, int status, String code_id, Date start_date) {
         this.patientInfo = patient_info;
@@ -41,6 +42,14 @@ public class PatientSlot {
 
     public Date getStart_date() {
         return start_date;
+    }
+
+    public String getComplaint() {
+        return complaint;
+    }
+
+    public void setComplaint(String complaint) {
+        this.complaint = complaint;
     }
 
     @Override

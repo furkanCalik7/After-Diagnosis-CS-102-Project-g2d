@@ -374,12 +374,14 @@ public class MySQLAccess {
             int doctor_id;
             doctor_id = getID(code.getDoctor_username());
             connect = dbConnection.getConnection();
-            String sql = "INSERT INTO code_of_doctor VALUES(? , ?, ?)";
+            String sql = "INSERT INTO code_of_doctor VALUES(? , ?, ?, ?)";
 
             preparedStatement = connect.prepareStatement(sql);
             preparedStatement.setString(1, code.getCode_id());
             preparedStatement.setInt(2, doctor_id);
             preparedStatement.setBoolean(3, false);
+            preparedStatement.setString(4,code.getComplaint());
+            // preparedStatement.setString(4, code.getComplaint());
 
             int i = preparedStatement.executeUpdate();
             return true;
@@ -903,6 +905,7 @@ public class MySQLAccess {
         }
         return null;
     }
+
 
 
     public ArrayList<Appointment> getWaitingAppointmentOfDoctor(Doctor doctor) {
