@@ -933,9 +933,6 @@ public class MySQLAccess {
                     code_id = resultSet.getString("code");
                     patientSlot = new PatientSlot(doctor.getUsername(), patientInfoCard, status, code_id, start_date);
                     patientSlot.setComplaint(getComplaintByCode(code_id));
-
-                    //TODO sil
-                    System.out.println(patientSlot.getComplaint());
                     patientSlots.add(patientSlot);
                 }
             }

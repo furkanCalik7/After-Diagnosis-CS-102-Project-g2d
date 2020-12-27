@@ -1,5 +1,6 @@
 package common;
 
+import Admin.model.IViewer;
 import Admin.model.User;
 import Doctor.Views.HintTextField;
 import JDBC.Message;
@@ -19,7 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.util.ArrayList;
 
-public class MessagePanel extends JPanel {
+public class MessagePanel extends JPanel implements IViewer {
     private JTextField sentSearchField;
     private JLayeredPane layeredPane;
     private JScrollPane sentMessagesScrollPane;
@@ -89,7 +90,7 @@ public class MessagePanel extends JPanel {
         //This panel shows the sent messages.
         JPanel sentPanel = new JPanel();
         sentPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
-        layeredPane.add(sentPanel, "name_861411644361400");
+
         sentPanel.setLayout(new BorderLayout(0, 10));
 
         JPanel searchFieldPanel = new JPanel();
@@ -138,6 +139,7 @@ public class MessagePanel extends JPanel {
         JPanel inboxPanel = new JPanel();
         inboxPanel.setBorder(new LineBorder(new Color(0, 0, 0), 1, true));
         layeredPane.add(inboxPanel, "name_861414322704500");
+        layeredPane.add(sentPanel, "name_861411644361400");
         inboxPanel.setLayout(new BorderLayout(0, 10));
 
         JPanel searchFieldPanel_2 = new JPanel();
@@ -283,6 +285,11 @@ public class MessagePanel extends JPanel {
         layeredPane.setBackground(new Color(101, 180, 206));
     }
 
+    @Override
+    public void update() {
+
+    }
+
     public class IsSendRenderer implements TableCellRenderer {
 
         public final DefaultTableCellRenderer DEFAULT_RENDERER = new DefaultTableCellRenderer();
@@ -355,7 +362,7 @@ public class MessagePanel extends JPanel {
         }
 
         public boolean isCellEditable(int row, int col) {
-            return col > 3;
+            return col > 2;
         }
 
         @Override
@@ -413,7 +420,11 @@ public class MessagePanel extends JPanel {
                 case 2:
                     return data.getSent_date();
                 case 3:
-                    return data.is_read();
+                    if(data.is_read()){
+                        return "Read";
+                    }else{
+                        return "New Massage";
+                    }
                 case 4:
                     return "Read";
             }

@@ -1,4 +1,5 @@
 package Doctor.Views;
+import Admin.model.IViewer;
 import Doctor.Controller.BloodMessageSendController;
 import Doctor.Model.Doctor;
 
@@ -18,7 +19,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
 
-public class DoctorBloodDonationPanel extends JPanel {
+public class DoctorBloodDonationPanel extends JPanel implements IViewer {
 
     private final JCheckBox zeroPosCheckBox;
     private final JCheckBox zeroNegCheckBox;
@@ -161,4 +162,8 @@ public class DoctorBloodDonationPanel extends JPanel {
 
     }
 
+    @Override
+    public void update() {
+
+    }
 }

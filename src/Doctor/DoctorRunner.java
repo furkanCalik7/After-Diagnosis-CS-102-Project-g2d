@@ -42,6 +42,10 @@ public class DoctorRunner {
             doctor.addViewer(patientInfoCard);
         }
         doctor.addViewer(labTestsMainPanel);
+        doctor.addViewer(settingsPanel);
+        doctor.addViewer(messagePanel);
+        doctor.addViewer(donationPanel);
+        doctor.addViewer(homepagePanelView);
     }
 
 }

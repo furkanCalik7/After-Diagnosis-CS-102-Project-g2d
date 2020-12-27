@@ -31,7 +31,7 @@ public class RegisterButtonController extends JButton {
             String username = name + surname;
 
             if(password.equals(confirm)) {
-                if(registerModel.register(username, password, email, name, surname, "M")) { //TODO username, gender
+                if(registerModel.register(username, password, email, name, surname, "M")) {
                     PatientMainFrame patient = new PatientMainFrame(username);
                 }
             }

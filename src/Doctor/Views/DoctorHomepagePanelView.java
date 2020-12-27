@@ -1,5 +1,6 @@
 package Doctor.Views;
 
+import Admin.model.IViewer;
 import Doctor.Model.Doctor;
 
 import javax.swing.JPanel;
@@ -19,7 +20,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 
-public class DoctorHomepagePanelView extends JPanel {
+public class DoctorHomepagePanelView extends JPanel implements IViewer {
     JLabel doctorPresenterLabel;
     JLabel doctorNameLabel;
     private JLabel doctorNameLabel_1;
@@ -101,4 +102,8 @@ public class DoctorHomepagePanelView extends JPanel {
         mailHolderPanel.setBackground(new Color(101, 180, 206));
     }
 
+    @Override
+    public void update() {
+
+    }
 }

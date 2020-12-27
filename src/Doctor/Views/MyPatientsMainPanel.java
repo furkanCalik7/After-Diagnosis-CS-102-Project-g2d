@@ -1,5 +1,6 @@
 package Doctor.Views;
 
+import Admin.model.IViewer;
 import Doctor.Controller.DischargedPatientController;
 import Doctor.Model.Doctor;
 import Doctor.Model.PatientSlot;
@@ -18,7 +19,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class MyPatientsMainPanel extends JPanel {
+public class MyPatientsMainPanel extends JPanel implements IViewer {
     private JTable table;
     private HintTextField txtSearchPatientBy;
     private Doctor doctor;
@@ -123,11 +124,10 @@ public class MyPatientsMainPanel extends JPanel {
             }
         });
         addPatientPanel.add(patientAddButton);
+    }
 
-        //TODO MAKE A CONTROLLER
-        JButton removeButton = new JButton("Remove Patient");
-        addPatientPanel.add(removeButton);
-        removeButton.addActionListener(new DischargedPatientController(table.getSelectedRowCount(),doctor,this));
+    @Override
+    public void update() {
 
     }
 
