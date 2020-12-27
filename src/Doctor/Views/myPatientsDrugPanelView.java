@@ -99,7 +99,7 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener, I
 
         JPanel inputPanel = new JPanel();
         centerPanel.add(inputPanel);
-        inputPanel.setLayout(new GridLayout(0, 3, 5, 0));
+        inputPanel.setLayout(new GridLayout(0, 3, 5, 15));
 
 
         JPanel drugInputPanel = new JPanel();
@@ -260,6 +260,29 @@ public class myPatientsDrugPanelView extends JPanel implements ActionListener, I
         fl_nextButtonPanel.setAlignment(FlowLayout.RIGHT);
         add(nextButtonPanel, BorderLayout.SOUTH);
 
+        JPanel colorPanel = new JPanel();
+        tablePanel.add(colorPanel, BorderLayout.WEST);
+
+        JPanel colorPanel_1 = new JPanel();
+        tablePanel.add(colorPanel_1, BorderLayout.EAST);
+
+        //color
+        inputPanel.setBackground(new Color(237, 241, 254));
+        choicePanel.setBackground(Color.WHITE);
+        drugNamePanel.setBackground(Color.WHITE);
+        dosePanel.setBackground(Color.WHITE);
+        statusPanel.setBackground(Color.WHITE);
+        startDatePanel.setBackground(Color.WHITE);
+        endDatePanel.setBackground(Color.WHITE);
+        datePanel.setBackground(new Color(237, 241, 254));
+        panel_3.setBackground(new Color(237, 241, 254));
+        welcomePanel.setBackground(new Color(101, 180, 206));
+        nextButtonPanel.setBackground(new Color(101, 180, 206));
+        tablePanel.setBackground(new Color(101, 180, 206));
+        this.setBackground(new Color(101, 180, 206));
+        centerPanel.setBackground(new Color(101, 180, 206));
+        colorPanel.setBackground(new Color(101, 180, 206));
+        colorPanel_1.setBackground(new Color(101, 180, 206));
     }
 
     @Override

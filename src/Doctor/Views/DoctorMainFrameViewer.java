@@ -54,7 +54,7 @@ public class DoctorMainFrameViewer extends JFrame {
         contentPane.setLayout(new BorderLayout(30, 0));
 
         JPanel buttonPanel = new JPanel();
-        buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 0));
+        buttonPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.add( buttonPanel, BorderLayout.WEST );
 
         doctorHomepagePanelView = new DoctorHomepagePanelView( doctor );
