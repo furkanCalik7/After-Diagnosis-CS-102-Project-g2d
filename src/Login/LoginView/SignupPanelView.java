@@ -24,6 +24,8 @@ public class SignupPanelView extends JPanel {
     private JTextField mailTxtField;
     private JButton returnButton;
     private JButton createButton;
+    private JRadioButton maleRadioButton;
+    private JRadioButton femaleRadioButton;
     /**
      * Create the panel.
      */
@@ -170,11 +172,11 @@ public class SignupPanelView extends JPanel {
 
         ButtonGroup buttonGroup = new ButtonGroup();
 
-        JRadioButton maleRadioButton = new JRadioButton("Male");
+        maleRadioButton = new JRadioButton("Male");
         maleRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
         genderChoosePanel.add(maleRadioButton);
 
-        JRadioButton femaleRadioButton = new JRadioButton("Female");
+        femaleRadioButton = new JRadioButton("Female");
         femaleRadioButton.setFont(new Font("Tahoma", Font.PLAIN, 15));
         genderChoosePanel.add(femaleRadioButton);
 
@@ -231,4 +233,11 @@ public class SignupPanelView extends JPanel {
         return mailTxtField;
     }
 
+    public JRadioButton getFemaleRadioButton() {
+        return femaleRadioButton;
+    }
+
+    public JRadioButton getMaleRadioButton() {
+        return maleRadioButton;
+    }
 }

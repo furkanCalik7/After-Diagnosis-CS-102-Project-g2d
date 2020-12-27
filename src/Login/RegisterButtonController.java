@@ -29,9 +29,17 @@ public class RegisterButtonController extends JButton {
             String password = panel.getPasswordField().getText();
             String confirm = panel.getConfirmPasswordField().getText();
             String username = name + surname;
+            String sex;
+
+            if(panel.getFemaleRadioButton().isSelected()) {
+                sex = "F";
+            }
+            else {
+                sex = "M";
+            }
 
             if(password.equals(confirm)) {
-                if(registerModel.register(username, password, email, name, surname, "M")) {
+                if(registerModel.register(username, password, email, name, surname, sex)) {
                     PatientMainFrame patient = new PatientMainFrame(username);
                 }
             }
