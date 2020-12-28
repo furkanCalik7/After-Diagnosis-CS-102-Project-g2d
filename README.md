@@ -9,7 +9,7 @@ Modal classes are mostly build and near complete. GUI design is planned and is b
 - Furkan Güzelant: Is working on the half of the model class.Some model classes such as Patient, Admin, Drug, Login.LoginModel, JDBC.RegisterModel, DoctorInfoCard and some methods of MySQLA access class. After model class is finished fully, I will transition into coding GUI.
 - Berkay Çalmaz: Worked on the Appointment classes. Build some views in the Doctor class. Is working on the GUI design of the Doctor and the Lab Technician classes.
 - Emre Turhan: Is working on the GUI design of Patient and Administrator classes. BUild some views in the Patient class.
-- Bilgehan: Is working on the GUI of the Lab Technician class. Worked on some basic methods for User, Patient and Doctor classes.
+- Bilgehan: Worked on the GUI design of the Lab Technician class. Build wiews and controllers of the Lab Technician class. Implemented Upload and Download controllers for Lab Technicians.
 
 
 # Group Members Information
