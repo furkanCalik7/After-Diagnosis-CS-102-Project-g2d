@@ -43,6 +43,7 @@ public class Doctor extends User implements HasAppointment {
         waitingAppointments = mySQLAccess.getWaitingAppointmentOfDoctor(this);
         patientSlots = mySQLAccess.getPatientsOfDoctor(this);
         tests = mySQLAccess.getTestOfDoctor(getUsername());
+        createdLastCode = new Code("",getUsername(),false);
     }
 
     public ArrayList<Timestamp> getAvailableTimes() {
