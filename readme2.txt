@@ -42,6 +42,10 @@ I have integrated the necessary codes to switch between panels.
 In GUI, I was responsible for the Doctor frame and panels where every user use such as messages, settings and button panels. 
 Additionally I constructed the login page's both GUI and its implementation to a certain extent.
 
+Emre Turhan: At first, I have tried to implement the messages class of the program but after reassigning the work, I started
+to work on the patient and administrator user interfaces. After completing the design of the patient and administrator interfaces
+I helped to connect model and view classes of patient.
+
 
 Bilgehan Sandıkcı: At the beginning I intended to create some model classes such as Doctor and Lab technician classes.
 Due to the need for the database access and knowledge about inner codes of it.
