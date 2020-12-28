@@ -1,6 +1,6 @@
 Berkay Çalmaz
-7.12
 
+7.12
 UML Diagram for the appointment part is constructed
 Estimated Time: 1-2 Hours
 
@@ -13,26 +13,28 @@ Month, Year and Calendar classes are finished.
 Estimated time: 2 Hours
 
 15.11
-GUI is planned. Eclipse IDE GUI Builder is learned and discussed with Emre.
+GUI is planned. Eclipse IDE GUI Builder is learned and discussed with Emre Turhan.
 Estimated Time: 4 Hours
 
 17.11
-Created the main frame for the Doctor class. Created the homepage panel.
+Created the main frame for the Doctor class. Created the homepage panel. Established the code of frame and panel switches
 Estimated Time: 3 Hours
 
 19.12
-MVC design is researched. 30 min
 Progressed in GUI designs with Emre Turhan.
-4 Hours
+4.5 Hours.
 
 20.12
-GUI and modal classes are merged. 
+GUI and modal classes are merged together as a team. 
 Some panels are implemented.
 4 Hours.
 
+21.12
+Fixed some GUI panels and created more parts.
+2 Hours.
 
 23.12
-Some GUI panels are created.
+More of GUI panels are created.
 5 Hours
 
 25.12
@@ -40,6 +42,14 @@ Some GUI panels are fixed and created.
 3-4 Hours
 
 26.12
-Login panels are finished and more GUI classes are implemented.
+Implemented the login panels and their functionality. More GUI classes are implemented.
+5 Hours
 
-4 Hours
+27.12
+Debugged some parts of the program. Checked and fixed most of the GUI panels.
+Created the demo video as a  group.
+6 Hours.
+
+
+
+--Time estimations may vary at most 1 hours yet they are true and can be seen in commits in the github.

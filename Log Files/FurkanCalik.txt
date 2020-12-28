@@ -33,3 +33,17 @@ SO FAR
 -UML diagram is created with new classes with Furkan Guzelant
 13.23 17.12.2020
 -Helped to draw database and model UML and write detailed design raport
+18:23 18.12.2020
+-Wrote some methods of doctor class and created new class and interfaces.
+
+01:43 20.12.2020
+-Wrote the main component of the doctor classes.
+-Started to entegrate the gui and model.
+12:27 21.12.2020
+
+01:09 23.12.2020
+-JTable class and click buttons is organized. 
+04:25 26.12.2020
+-Made a really huge progress on the program. Nearly finish all doctor and mvc of doctor.
+05:25 28.12.2020 
+-Finished the demo, prepared the video and fixed the bugs. 
