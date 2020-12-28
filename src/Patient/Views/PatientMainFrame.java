@@ -110,7 +110,7 @@ public class PatientMainFrame extends JFrame {
         layeredPane.add(myDoctorsPanel, "name_944915062377900");
         layeredPane.add(MyDrugsPanel, "name_944915089517800");
         layeredPane.add(AppointmentPanel, "name_944915113895900");
-        layeredPane.add(BloodDonationPanel, "name_944915165083100");
+        //layeredPane.add(BloodDonationPanel, "name_944915165083100");
         layeredPane.add(MessagesPanel, "name_944915191691800");
         layeredPane.add(MedInfoPanel);
         //layeredPane.add(SettingsPanel);
