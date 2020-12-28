@@ -120,6 +120,8 @@ public class Patient extends User implements HasAppointment {
         if(!access.isCodeUsed(code)) {
             if(access.connectToDoctor(getUsername(), code)) {
                 updateDoctors();
+                System.out.println(doctors.size());
+                updateViewers();
                 return true;
             }
         }

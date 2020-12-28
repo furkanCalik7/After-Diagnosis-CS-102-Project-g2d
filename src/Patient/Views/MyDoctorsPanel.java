@@ -1,5 +1,6 @@
 package Patient.Views;
 
+import Admin.model.IViewer;
 import Doctor.Model.DoctorInfoCard;
 import Doctor.Model.Drug;
 import Doctor.Views.MyPatientsLayeredPanelView;
@@ -24,7 +25,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class MyDoctorsPanel extends JPanel {
+public class MyDoctorsPanel extends JPanel implements IViewer {
     private JTextField searchTextField;
     private JTable table;
     public JTextField codeField;
@@ -34,6 +35,7 @@ public class MyDoctorsPanel extends JPanel {
     private MessagePanel messagePanel;
     protected ArrayList<DoctorInfoCard> doctors;
     private PatientMainFrame mainFrame;
+    private final MyTableModel myTableModel;
 
     /**
      * Create the panel.
@@ -84,7 +86,7 @@ public class MyDoctorsPanel extends JPanel {
                 });
 
         table = new JTable();
-        MyTableModel myTableModel = new MyTableModel();
+        myTableModel = new MyTableModel();
         table.setModel(myTableModel);
         rowSorter = new TableRowSorter<>(myTableModel);
         table.setRowSorter(rowSorter);
@@ -137,6 +139,11 @@ public class MyDoctorsPanel extends JPanel {
         JButton codeButton = new AddDoctorButtonControls(patient, this);
         codePanel.add(codeButton);
 
+    }
+
+    @Override
+    public void update() {
+        addRow();
     }
 
     class MyTableModel extends AbstractTableModel {
@@ -206,8 +213,13 @@ public class MyDoctorsPanel extends JPanel {
         rowSorter.setRowFilter(rf);
     }
 
-
-
+    public void addRow() {
+        int rowIndex = doctors.size() - 1;
+        System.out.println(doctors.size());
+        myTableModel.newRowsAdded(new TableModelEvent(
+                myTableModel, rowIndex, rowIndex, TableModelEvent.ALL_COLUMNS, TableModelEvent.INSERT)
+        );
+    }
 
 
     class ButtonRenderer extends JButton implements TableCellRenderer {

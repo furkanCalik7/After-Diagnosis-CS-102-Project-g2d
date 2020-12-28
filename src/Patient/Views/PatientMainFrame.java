@@ -16,7 +16,7 @@ public class PatientMainFrame extends JFrame {
     private JPanel contentPane;
     private JLayeredPane layeredPane;
     private JPanel HomePagePanel;
-    private JPanel MyDoctorsPanel;
+    private MyDoctorsPanel myDoctorsPanel;
     private JPanel MyDrugsPanel;
     private JPanel AppointmentPanel;
     private JPanel BloodDonationPanel;
@@ -81,11 +81,13 @@ public class PatientMainFrame extends JFrame {
         BloodDonationPanel.setBackground(new Color(101, 180, 206));
         MessagesPanel = new MessagePanel(p);
         MessagesPanel.setBackground(new Color(101, 180, 206));
-        MyDoctorsPanel = new MyDoctorsPanel(p, MessagesPanel, this);
-        MyDoctorsPanel.setBackground(new Color(101, 180, 206));
+        myDoctorsPanel = new MyDoctorsPanel(p, MessagesPanel, this);
+        myDoctorsPanel.setBackground(new Color(101, 180, 206));
+
         MedInfoPanel = new MedInfoPanel(p);
         MedInfoPanel.setBackground(new Color(101, 180, 206));
 
+        p.addViewer(myDoctorsPanel);
         //Some bugs about settingspanel
 
         //SettingsPanel = new SettingsPanel(p);
@@ -103,7 +105,7 @@ public class PatientMainFrame extends JFrame {
         //Adding panels to layered pane
         layeredPanePanel.setBackground(new Color(101, 180, 206));
         layeredPane.add(HomePagePanel, "name_944915029693400");
-        layeredPane.add(MyDoctorsPanel, "name_944915062377900");
+        layeredPane.add(myDoctorsPanel, "name_944915062377900");
         layeredPane.add(MyDrugsPanel, "name_944915089517800");
         layeredPane.add(AppointmentPanel, "name_944915113895900");
         layeredPane.add(BloodDonationPanel, "name_944915165083100");
@@ -116,7 +118,7 @@ public class PatientMainFrame extends JFrame {
         JButton myDoctorsButton = new JButton("My Doctors");
         myDoctorsButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                switchPanels(MyDoctorsPanel);
+                switchPanels(myDoctorsPanel);
             }
         });
 
