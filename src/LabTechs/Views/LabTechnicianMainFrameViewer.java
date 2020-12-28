@@ -50,26 +50,7 @@ public class LabTechnicianMainFrameViewer extends JFrame implements IColors {
         layeredPane.repaint();
         layeredPane.revalidate();
     }
-
-    /**
-     * Launch the application.
-     * /
-     * public static void main(String[] args) {
-     * EventQueue.invokeLater(new Runnable() {
-     * public void run() {
-     * try {
-     * LabTechnicianMainFrameViewer frame = new LabTechnicianMainFrameViewer(  );
-     * frame.setVisible(true);
-     * } catch (Exception e) {
-     * e.printStackTrace();
-     * }
-     * }
-     * });
-     * }
-     * <p>
-     * /**
-     * Create the frame.
-     */
+    
     public LabTechnicianMainFrameViewer(LabTechnician labTechnician) {
         //MySQLAccess mySQLAccess = new MySQLAccess();
         //labTechnician = ( LabTechnician ) mySQLAccess.getUser( "PeterJackson" );
