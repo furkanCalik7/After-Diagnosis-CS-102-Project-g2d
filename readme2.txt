@@ -20,7 +20,7 @@ which we found from github student pack. In order to create the GUI part, we use
 Setup instructions : To run our program, the four external libraries I stated above are required to add the classpath. 
 Then to run the program, it is enough to run "Runner" class.
 	
-
+	
 Furkan Çalik: I worked on connection and creation of database and wrote the model classes with Furkan Güzelant. 
 I designed the tables in the database and wrote the methods in java application to connect database and get and store information from database. 
 I designed and wrote the mainly doctor and lab technician model classes. 
@@ -35,7 +35,6 @@ Additionally, I wrote some of the methods of MySQLAccess class which gets inform
 I also implemented some controller classes, especially for Admin and Patient.
 I worked on the integration of gui and model classes of admin and patients and some other dependency classes such as EmailUtil.
 
-
 Berkay Çalmaz: Even though I intended to build modal classes, I switched to building GUI part of the project.
 I have researched multiple platforms and found the Eclipse IDE to get the most organized code from a window-builder. 
 I have integrated the necessary codes to switch between panels. 
@@ -45,7 +44,6 @@ Additionally I constructed the login page's both GUI and its implementation to a
 Emre Turhan: At first, I have tried to implement the messages class of the program but after reassigning the work, I started
 to work on the patient and administrator user interfaces. After completing the design of the patient and administrator interfaces
 I helped to connect model and view classes of patient.
-
 
 Bilgehan Sandıkcı: At the beginning I intended to create some model classes such as Doctor and Lab technician classes.
 Due to the need for the database access and knowledge about inner codes of it.
