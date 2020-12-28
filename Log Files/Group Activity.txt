@@ -3,7 +3,7 @@
 -Designed and created database -Furkan Calik and Furkan Güzelalt-
 00:12 15.12.2020
 -Furkan Guzeltant and Furkan Calik discussed the model of the program
--Berkay Calmaz and Emre Turhan discussed GUI design.
 00:52 17.12.2020
--UML diagram is drawn bu Furkan Calik and Furkan Guzelant.
--Berkay Calmaz and Emre Turhan build some view classes.
+-UML diagram is drawned bu Furkan Calik and Furkan Guzelant.
+01:09 23.12.2020
+-Made the entegretion of the MVC together
