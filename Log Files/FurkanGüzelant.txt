@@ -21,3 +21,15 @@ Add worker and Add doctor button controls are implemented.
 SettingButtonControls is implemented.
 24.12.2020
 HospitalWorkersPanel is implemented.
+
+25.12.2020
+EmailUtil is added to the program
+26.12.2020
+Login and Register Button controllers are implemented.
+27.12.2020
+Appointment panel is updated
+AppointmenControl button is implemented
+28.12.2020
+Some bugs fixed. 
+
+
