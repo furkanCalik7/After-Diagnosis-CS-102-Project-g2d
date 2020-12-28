@@ -22,7 +22,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class HospitalWorkersInfoPanel extends JPanel implements IViewer {
+public class    HospitalWorkersInfoPanel extends JPanel implements IViewer {
     private JTextField searchField;
     private JTable table;
     private TableRowSorter<MyTableModel> rowSorter;

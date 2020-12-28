@@ -66,13 +66,17 @@ public class AddWorkerMainPanel extends JPanel {
         centerPanel.add(radioButtonPanel);
         radioButtonPanel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 
+        ButtonGroup buttonGroup = new ButtonGroup();
+
         doctorButton = new JRadioButton("Doctor");
         doctorButton.setFont(new Font("Century", Font.PLAIN, 15));
         doctorButton.setHorizontalAlignment(SwingConstants.LEFT);
+        buttonGroup.add(doctorButton);
         radioButtonPanel.add(doctorButton);
 
         JRadioButton labTechButton = new JRadioButton("Lab Technician");
         labTechButton.setFont(new Font("Century", Font.PLAIN, 15));
+        buttonGroup.add(labTechButton);
         radioButtonPanel.add(labTechButton);
 
         JPanel panel_6 = new JPanel();

@@ -26,6 +26,8 @@ public class AddDoctorButtonControls extends JButton {
            System.out.println(panel.codeField.getText());
            patient.addDoctor(code);
            panel.codeField.setText("");
+           JOptionPane.showMessageDialog(panel, "Your doctor is added to your list.");
+
         }
     }
 }

@@ -4,9 +4,22 @@ import Admin.model.IViewer;
 import Doctor.Model.Doctor;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
+import javax.swing.JPanel;
+import java.awt.BorderLayout;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import java.awt.*;
+import javax.swing.BoxLayout;
+import java.awt.Component;
+import javax.swing.JInternalFrame;
+import javax.swing.ImageIcon;
+import java.awt.Color;
+import javax.swing.UIManager;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
+import java.awt.FlowLayout;
 
 public class DoctorHomepagePanelView extends JPanel implements IViewer {
     JLabel doctorPresenterLabel;
@@ -16,7 +29,7 @@ public class DoctorHomepagePanelView extends JPanel implements IViewer {
     /**
      * Create the panel.
      */
-    public DoctorHomepagePanelView(Doctor doctor) {
+    public DoctorHomepagePanelView( Doctor doctor ) {
         setBackground(UIManager.getColor("Button.background"));
         setLayout(new BorderLayout(0, 0));
 
@@ -28,7 +41,7 @@ public class DoctorHomepagePanelView extends JPanel implements IViewer {
         doctorGreetingLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         labelHolderPanel.add(doctorGreetingLabel);
 
-        doctorNameLabel = new JLabel(doctor.getName());
+        doctorNameLabel = new JLabel( doctor.getName() );
         doctorNameLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
         labelHolderPanel.add(doctorNameLabel);
 
@@ -37,8 +50,6 @@ public class DoctorHomepagePanelView extends JPanel implements IViewer {
         infoGeneralPanel.setLayout(new GridLayout(0, 2, 0, 0));
 
         JPanel placeHolderPanel = new JPanel();
-        placeHolderPanel.setBackground(Color.black);
-
         infoGeneralPanel.add(placeHolderPanel);
 
         JPanel infoPanel = new JPanel();
@@ -53,7 +64,7 @@ public class DoctorHomepagePanelView extends JPanel implements IViewer {
         nameHolderPanel.add(doctorPresenterLabel);
         doctorPresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        doctorNameLabel_1 = new JLabel(doctor.getName());
+        doctorNameLabel_1 = new JLabel(doctor.getName() );
         nameHolderPanel.add(doctorNameLabel_1);
         doctorNameLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
@@ -61,11 +72,11 @@ public class DoctorHomepagePanelView extends JPanel implements IViewer {
         infoPanel.add(idHolderPanel);
         idHolderPanel.setLayout(new BoxLayout(idHolderPanel, BoxLayout.X_AXIS));
 
-        JLabel idPresenterLabel = new JLabel("Doctor ID: ");
+        JLabel idPresenterLabel = new JLabel( "Doctor ID: " );
         idHolderPanel.add(idPresenterLabel);
         idPresenterLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
-        JLabel doctorIDLabel = new JLabel(String.valueOf(doctor.getId()));
+        JLabel doctorIDLabel = new JLabel( String.valueOf( doctor.getId() ) );
         idHolderPanel.add(doctorIDLabel);
         doctorIDLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
 
@@ -96,7 +107,7 @@ public class DoctorHomepagePanelView extends JPanel implements IViewer {
 
 //        JLabel iconLabel = new JLabel("" );
 //        iconLabel.setFont(new Font("Tahoma", Font.PLAIN, 29));
-//        iconLabel.setIcon( new ImageIcon("C:\\Users\\42ber\\OneDrive\\Masa\u00FCst\u00FC\\stet.jpg") );
+//        iconLabel.setIcon( new ImageIcon("C:\\Users\\42ber\\OneDrive\\Masa\u00FCst\u00FC\\stet.png") );
 //        iconLabel.setHorizontalAlignment(SwingConstants.CENTER);
 //        placeHolderPanel.add(iconLabel, BorderLayout.CENTER);
 
