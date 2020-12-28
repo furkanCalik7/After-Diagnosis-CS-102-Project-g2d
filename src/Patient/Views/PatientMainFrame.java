@@ -77,8 +77,10 @@ public class PatientMainFrame extends JFrame {
         MyDrugsPanel.setBackground( new Color(101, 180, 206) );
         AppointmentPanel = new AppointmentPanel(p);
         AppointmentPanel.setBackground( new Color(101, 180, 206) );
-        BloodDonationPanel = new BloodDonationPanel();
-        BloodDonationPanel.setBackground(new Color(101, 180, 206));
+
+        //BloodDonationPanel = new BloodDonationPanel();
+        //BloodDonationPanel.setBackground(new Color(101, 180, 206));
+
         MessagesPanel = new MessagePanel(p);
         MessagesPanel.setBackground(new Color(101, 180, 206));
         myDoctorsPanel = new MyDoctorsPanel(p, MessagesPanel, this);
@@ -183,7 +185,7 @@ public class PatientMainFrame extends JFrame {
         buttonPanel.add(myDrugsButton);
         buttonPanel.add(messageButton);
         buttonPanel.add(appointmentButton);
-        buttonPanel.add(bloodDonationButton);
+        //buttonPanel.add(bloodDonationButton);
         buttonPanel.add(medicalInfoButton);
 
         setVisible(true);
