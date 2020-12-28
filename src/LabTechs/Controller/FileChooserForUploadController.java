@@ -31,7 +31,7 @@ public class FileChooserForUploadController {
                     boolean isUploadSuccesfull = test.sendTest();
 
                     if( isUploadSuccesfull ){
-
+                        labTechnician.deleteTestRequest( testRequest );
                         JOptionPane.showMessageDialog( panel , "The Test has been successfully Uploaded!" );
                     }
 
