@@ -5,7 +5,7 @@ Getter, setter, constructor and some basic methods of User, Doctor and Lab Techn
 11:48 18.12.2020
 Getter and setter and some basic methods of Drug class added, some small changes in other classes.
 
-Note: Due to the need for the database acces and knowledge about inner codes of it. I stopped implementing Model classes of User , Doctor and Lab Technician and started 
+Note: Due to the need for the database access and knowledge about inner codes of it. I stopped implementing Model classes of User , Doctor and Lab Technician and started 
 to work on the GUI design and view/controller implementation of the Lab Technician.
 
 18.11.2020
