@@ -29,4 +29,4 @@ waiting and sent test tables improved and filechooser classes are implemented fo
 Upload and download functionalities completed.
 
 28.12.2020
-Lab Technician GUI colored and polished. Some bugs are fixed. 
+Lab Technician GUI colored and polished. Some bugs are fixed. TestRequest deletion added.
