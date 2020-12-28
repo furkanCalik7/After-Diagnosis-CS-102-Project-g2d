@@ -17,6 +17,10 @@ import javax.swing.JFrame;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
+/**
+ * This frame is the main frame which is used in the doctor user.
+ * It includes and arranges every other panel in the doctor views.
+ */
 public class DoctorMainFrameViewer extends JFrame {
 
     private JPanel contentPane;

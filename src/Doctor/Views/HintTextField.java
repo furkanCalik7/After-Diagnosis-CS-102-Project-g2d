@@ -6,7 +6,9 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import javax.swing.JTextField;
 
-
+/**
+ * Modified JTextField to remove the text when it is clicked.
+ */
 public class HintTextField extends JTextField {
     private Font gainFont = new Font("Tahoma", Font.PLAIN, 11);
     private Font lostFont = new Font("Tahoma", Font.ITALIC, 11);

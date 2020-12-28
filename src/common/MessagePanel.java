@@ -4,9 +4,7 @@ import Admin.model.IViewer;
 import Admin.model.User;
 import Doctor.Views.HintTextField;
 import JDBC.Message;
-
 import javax.swing.*;
-import java.awt.*;
 import javax.swing.border.LineBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.event.DocumentEvent;
@@ -16,8 +14,9 @@ import javax.swing.table.AbstractTableModel;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableRowSorter;
-import java.awt.event.ActionListener;
+import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class MessagePanel extends JPanel implements IViewer {
@@ -74,7 +73,7 @@ public class MessagePanel extends JPanel implements IViewer {
     }
 
     /**
-     * Create the panel.
+     * A common view called MessagePanel.
      */
     public MessagePanel(User user) {
         this.user = user;
@@ -101,7 +100,6 @@ public class MessagePanel extends JPanel implements IViewer {
         sentSearchField = new HintTextField("Search");
         searchFieldPanel.add(sentSearchField);
         sentSearchField.setColumns(10);
-
         sentSearchField.getDocument().addDocumentListener(
                 new DocumentListener() {
                     public void changedUpdate(DocumentEvent e) {

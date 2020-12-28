@@ -17,7 +17,7 @@ public class SettingsPanel extends JPanel implements IViewer {
     User user;
 
     /**
-     * Create the panel.
+     * SettingsPanel which is a common view class.
      */
     public SettingsPanel(User user) {
         this.user = user;
@@ -138,7 +138,7 @@ public class SettingsPanel extends JPanel implements IViewer {
         JPanel createPanel = new JPanel();
         createPanel.setBorder(new LineBorder(new Color(0, 0, 0), 2));
         add(createPanel);
-        createPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        createPanel.setLayout( new FlowLayout( FlowLayout.CENTER, 5, 5 ) );
 
         JButton saveYourChangesButton = new SettingsButtonController(user, this);
         saveYourChangesButton.setFont(new Font("Century", Font.PLAIN, 20));

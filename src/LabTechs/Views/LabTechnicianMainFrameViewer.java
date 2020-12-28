@@ -124,6 +124,13 @@ public class LabTechnicianMainFrameViewer extends JFrame implements IColors {
         });
         buttonPanel.add(labTestsButton);
 
+        addTestsButton = new JButton("Add Tests");
+        addTestsButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        buttonPanel.add(addTestsButton);
+
         JButton messagesButton = new JButton("Messages");
         messagesButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
