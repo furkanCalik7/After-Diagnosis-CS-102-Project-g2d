@@ -4,12 +4,9 @@ import AdminViews.AddWorkerMainPanel;
 import Doctor.Model.*;
 import JDBC.*;
 import LabTechs.Model.LabTechnician;
-import LabTechs.Model.Test;
-import LabTechs.Model.*;
 import Patient.Model.Code;
 
 import javax.swing.*;
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class Admin extends User {

@@ -225,7 +225,7 @@ public class MedInfoPanel extends JPanel {
         enterInfoPanel.add(completeButtonPanel);
         completeButtonPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
-        JButton completeButton = new JButton("Complete ");
+        JButton completeButton = new MedInfoControls(patient, this);
         completeButton.setFont(new Font("Century", Font.PLAIN, 15));
         completeButtonPanel.add(completeButton);
 
